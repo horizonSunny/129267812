@@ -4,9 +4,9 @@
  */
 import { extend } from 'umi-request';
 import { notification } from 'antd';
-import { routerRedux } from 'dva/router';
+import { throttle } from '@/utils/throttle';
+
 const initLoginToken = 'Basic c3lzdGVtOnN5c3RlbQ==';
-const initLogoutToken = 'bearer eyJhbGciOiJIUzI1NiIsI';
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -38,10 +38,10 @@ const errorHandler = (error: { response: Response }): Response => {
       description: errorText,
     });
   } else if (!response) {
-    notification.error({
-      description: '您的网络发生异常，无法连接服务器',
-      message: '网络异常',
-    });
+    // notification.error({
+    //   description: '您的网络发生异常，无法连接服务器',
+    //   message: '网络异常',
+    // });
   }
   return response;
 };
@@ -76,10 +76,13 @@ request.interceptors.request.use((url, options) => {
 request.interceptors.response.use(async response => {
   const data = await response.clone().json();
   if (data && data.code === 2) {
-    notification.error({
-      description: '登陆过期,请重新登陆',
-      message: '登陆超时,请重新登陆',
-    });
+    throttle(function a() {
+      notification.error({
+        description: '登陆过期,请重新登陆',
+        message: '登陆超时,请重新登陆',
+      });
+    }, 300)();
+    // eslint-disable-next-line no-underscore-dangle
     window.g_app._store.dispatch({
       type: 'login/logout',
     });

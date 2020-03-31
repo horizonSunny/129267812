@@ -29,7 +29,6 @@ export interface LoginModelType {
 
 const Model: LoginModelType = {
   namespace: 'login',
-
   state: {
     status: undefined,
   },
@@ -44,7 +43,7 @@ const Model: LoginModelType = {
       console.log('response:', response);
       // Login successfully
       if (response && response.code === 1) {
-        const token = 'bearer ' + response.data.access_token;
+        const token = `bearer ${response.data.access_token}`;
         sessionStorage.setItem('token', token);
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
@@ -52,7 +51,7 @@ const Model: LoginModelType = {
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
           if (redirectUrlParams.origin === urlParams.origin) {
-            const urlInfo = urlParams.origin + '/jiyi';
+            const urlInfo = `${urlParams.origin}/jiyi`;
             redirect = redirect.substr(urlInfo.length);
             if (redirect.match(/^\/.*#/)) {
               redirect = redirect.substr(redirect.indexOf('#') + 1);

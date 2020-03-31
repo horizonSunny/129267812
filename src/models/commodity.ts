@@ -1,6 +1,3 @@
-import { Effect } from 'dva';
-import { Reducer } from 'redux';
-
 import {
   productList,
   product,
@@ -22,7 +19,7 @@ const CommodityModel = {
   },
   effects: {
     // 获取商品列表
-    *getList({ payload, callback }, { call, put }) {
+    *getList({ payload }, { call, put }) {
       console.log('in_getList');
       const response = yield call(productList, payload);
       yield put({
@@ -30,14 +27,13 @@ const CommodityModel = {
         payload: response.data,
       });
       if (response.code === 1) {
-        //接口调用成功
+        // 接口调用成功
         // do something...
         return response.data; //  通过return给dispatch返回回调结果！
-      } else {
-        //接口调用失败
-        // do something...
-        return false;
       }
+      // 接口调用失败
+      // do something...
+      return false;
     },
     // 依据id获取单个商品列表
     *getProduct({ payload }, { call, put }) {
@@ -73,18 +69,17 @@ const CommodityModel = {
       });
     },
     // 上下架产品
-    *shelveProduct({ payload }, { call, put }) {
+    *shelveProduct({ payload }, { call }) {
       console.log('in_shelveProduct');
       const response = yield call(shelve, payload);
       if (response.code === 1) {
-        //接口调用成功
+        // 接口调用成功
         // do something...
         return true; //  通过return给dispatch返回回调结果！
-      } else {
-        //接口调用失败
-        // do something...
-        return false;
       }
+      // 接口调用失败
+      // do something...
+      return false;
     },
   },
 
@@ -135,7 +130,7 @@ const CommodityModel = {
         ...action.payload,
       };
     },
-    //重置commidityList列表
+    // 重置commidityList列表
     resetList(state, action) {
       state.productList.pageList = action.payload;
       return {
