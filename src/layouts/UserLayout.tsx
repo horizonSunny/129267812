@@ -1,11 +1,9 @@
-import { DefaultFooter, MenuDataItem, getMenuData, getPageTitle } from '@ant-design/pro-layout';
+import { MenuDataItem, getMenuData, getPageTitle } from '@ant-design/pro-layout';
 import { Helmet } from 'react-helmet';
-import Link from 'umi/link';
 import React from 'react';
 import { connect } from 'dva';
-import SelectLang from '@/components/SelectLang';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import logo from '../assets/logo.svg';
+import logo from '../assets/login/Icon.png';
 import styles from './UserLayout.less';
 
 export interface UserLayoutProps extends ConnectProps {
@@ -43,14 +41,8 @@ const UserLayout: React.SFC<UserLayoutProps> = props => {
 
       <div className={styles.container}>
         <div className={styles.content}>
-          <div className={styles.top}>
-            <div className={styles.header}>
-              <div>
-                <img alt="logo" className={styles.logo} src={logo} />
-                <span className={styles.title}>药利多管理系统</span>
-              </div>
-            </div>
-            <div className={styles.desc}>药理多平台企业管理系统</div>
+          <div className={styles.leftImg}>
+            <img alt="logo" className={styles.logo} src={logo} />
           </div>
           {children}
         </div>
