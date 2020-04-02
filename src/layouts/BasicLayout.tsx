@@ -7,19 +7,17 @@ import ProLayout, {
   MenuDataItem,
   BasicLayoutProps as ProLayoutProps,
   Settings,
-  DefaultFooter,
 } from '@ant-design/pro-layout';
 import React, { useEffect } from 'react';
 import Link from 'umi/link';
 import { Dispatch } from 'redux';
 import { connect } from 'dva';
-import { Icon, Result, Button } from 'antd';
+import { Result, Button } from 'antd';
 
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
-import { isAntDesignPro, getAuthorityFromRouter } from '@/utils/utils';
-import logo from '../assets/logo.svg';
+import { getAuthorityFromRouter } from '@/utils/utils';
 // 做面包屑的动态配置
 import classfyB from '../utils/classfyBreadcrumb';
 
@@ -150,7 +148,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   };
   return (
     <ProLayout
-      logo={logo}
+      // logo={logo}
       // menuHeaderRender={(logoDom, titleDom) => (
       //   <span>
       //     {logoDom}
@@ -170,9 +168,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         const crumbName = classfyB(toPath, location.query.id);
         return first ? (
           // 前面必须加上'/'
-          <Link to={'/' + paths[paths.length - 1]}>{route.breadcrumbName}</Link>
+          <Link to={`/${paths[paths.length - 1]}`}>{route.breadcrumbName}</Link>
         ) : (
-          <span>{crumbName ? crumbName : route.breadcrumbName}</span>
+          <span>{crumbName || route.breadcrumbName}</span>
         );
       }}
       // 取消脚部展示信息
