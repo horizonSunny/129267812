@@ -1,10 +1,10 @@
 import React from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Card, Typography, Alert } from 'antd';
-import styles from './CommodityAdm.less';
 import { connect } from 'dva';
+import styles from './CommodityAdm.less';
 
-//传入组件
+// 传入组件
 import SearchForm from './component/CommodityAdm/SearchForm';
 import TableList from './component/CommodityAdm/TableList';
 
@@ -25,6 +25,7 @@ export default class CommodityAdm extends React.Component {
       },
     });
   }
+
   // componentWillReceiveProps() {
   //   const { dispatch } = this.props;
   //   dispatch({
@@ -35,12 +36,14 @@ export default class CommodityAdm extends React.Component {
   state = {
     searchInfo: {},
   };
+
   resetSearch(info) {
     console.log('info_', info);
     this.setState({
       searchInfo: info,
     });
   }
+
   render() {
     return (
       <PageHeaderWrapper>

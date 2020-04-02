@@ -97,7 +97,7 @@ class AdvancedSearchForm extends React.Component {
     return (
       <Form className={styles['ant-advanced-search-form']} onSubmit={this.handleSearch}>
         <Row gutter={24}>
-          <Col span={10} style={{}}>
+          <Col span={11} style={{}}>
             <Form.Item label="创建时间">
               {getFieldDecorator(
                 'range-picker',
@@ -105,7 +105,23 @@ class AdvancedSearchForm extends React.Component {
               )(<RangePicker showTime={{ format: 'HH:mm' }} format="YYYY-MM-DD HH:mm" />)}
             </Form.Item>
           </Col>
+          <Col span={7} style={{}}>
+            <Form.Item label="商品名">
+              {getFieldDecorator('keyword', {
+                rules: [],
+              })(<Input placeholder="输入商品名" />)}
+            </Form.Item>
+          </Col>
           <Col span={6} style={{}}>
+            <Form.Item label="批准文号">
+              {getFieldDecorator('approvalNumber', {
+                rules: [],
+              })(<Input placeholder="输入批准文号" />)}
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={24}>
+          <Col span={8} style={{}}>
             <Form.Item label="售卖状态">
               {getFieldDecorator('sellStatus', {
                 rules: [],
@@ -119,7 +135,7 @@ class AdvancedSearchForm extends React.Component {
               )}
             </Form.Item>
           </Col>
-          <Col span={6} style={{}}>
+          <Col span={8} style={{}}>
             <Form.Item label="类别">
               {getFieldDecorator('status', {
                 rules: [],
@@ -143,22 +159,6 @@ class AdvancedSearchForm extends React.Component {
                 //   <Option value="7">美容护肤</Option>
                 // </Select>,
               )}
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={24}>
-          <Col span={8} style={{}}>
-            <Form.Item label="关键字">
-              {getFieldDecorator('keyword', {
-                rules: [],
-              })(<Input placeholder="关键字输入" />)}
-            </Form.Item>
-          </Col>
-          <Col span={8} style={{}}>
-            <Form.Item label="批准文号">
-              {getFieldDecorator('approvalNumber', {
-                rules: [],
-              })(<Input placeholder="批准文号输入" />)}
             </Form.Item>
           </Col>
           <Col
