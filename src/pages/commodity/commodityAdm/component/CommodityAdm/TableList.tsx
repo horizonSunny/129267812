@@ -34,7 +34,7 @@ export default class TableList extends React.Component {
         title: '类别',
         key: 'productType',
         render: record =>
-          record['productType'].map(item => {
+          record.productType.map(item => {
             return <div>{filterStatus(item, this.props.commodity.allProductType)}</div>;
           }),
       },
@@ -59,19 +59,25 @@ export default class TableList extends React.Component {
         key: 'isShelf',
         render: record => (
           <Switch
-            checked={record.isShelf === 0 ? false : true}
+            checked={record.isShelf !== 0}
             onChange={this.onSwitchChange.bind(this, record)}
           />
         ),
       },
       {
-        title: 'Action',
+        title: '操作',
         key: 'action',
+        fixed: 'right',
+        width: 300,
         render: (text, record) => (
           <span>
             <a onClick={this.goToNextPage.bind(this, record, 'detail')}>查看</a>
             <Divider type="vertical" />
             <a onClick={this.goToNextPage.bind(this, record, 'editor')}>编辑</a>
+            <Divider type="vertical" />
+            <a onClick={this.goToNextPage.bind(this, record, 'detail')}>生成二维码</a>
+            <Divider type="vertical" />
+            <a onClick={this.goToNextPage.bind(this, record, 'editor')}>删除</a>
           </span>
         ),
       },
@@ -79,6 +85,7 @@ export default class TableList extends React.Component {
     visible: false,
     switchRecord: {},
   };
+
   onChange = e => {
     console.log('触发', this.props.searchInfo);
     const { dispatch } = this.props;
@@ -95,6 +102,7 @@ export default class TableList extends React.Component {
     });
     return false;
   };
+
   // 切换按钮
   onSwitchChange = record => {
     this.setState(
@@ -106,6 +114,7 @@ export default class TableList extends React.Component {
       },
     );
   };
+
   // 请求数据跳转详情页面
   goToNextPage = (params, operate) => {
     const { dispatch } = this.props;
@@ -125,6 +134,7 @@ export default class TableList extends React.Component {
       });
     });
   };
+
   // 弹窗
   showModal = () => {
     this.setState({
@@ -136,20 +146,20 @@ export default class TableList extends React.Component {
     const { dispatch } = this.props;
     const dataInfo = this.props.commodity.productList.pageList;
     for (let item = 0; item < dataInfo.length; item++) {
-      if (dataInfo[item]['productId'] === this.state.switchRecord['productId']) {
+      if (dataInfo[item].productId === this.state.switchRecord.productId) {
         // dataInfo[item]['isShelf'] = this.state.switchRecord['isShelf'] === 0 ? 1 : 0;
-        const info = this.state.switchRecord['isShelf'] === 0 ? 1 : 0;
+        const info = this.state.switchRecord.isShelf === 0 ? 1 : 0;
         dispatch({
           type: 'commodity/shelveProduct',
           payload: {
-            productId: this.state.switchRecord['productId'],
+            productId: this.state.switchRecord.productId,
             status: info,
           },
         }).then(res => {
           console.log('res_', res);
           if (res) {
             // 这边好像dispatch什么都可以;
-            dataInfo[item]['isShelf'] = this.state.switchRecord['isShelf'] === 0 ? 1 : 0;
+            dataInfo[item].isShelf = this.state.switchRecord.isShelf === 0 ? 1 : 0;
             dispatch({
               type: 'commodity/resetList',
               payload: dataInfo,
@@ -170,13 +180,14 @@ export default class TableList extends React.Component {
       visible: false,
     });
   };
+
   render() {
     const { state } = this;
     return (
       <div>
         <Table
           {...this.state}
-          className={styles['main']}
+          className={styles.main}
           columns={state.columns}
           dataSource={this.props.commodity.productList.pageList}
           onChange={this.onChange}
@@ -186,6 +197,7 @@ export default class TableList extends React.Component {
             pageSize: 10,
             total: this.props.commodity.productList.totalElements,
           }}
+          scroll={{ x: 1200 }}
         />
         <Modal
           title="产品上下架"
@@ -193,7 +205,7 @@ export default class TableList extends React.Component {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
-          <h3>确定{this.state.switchRecord['isShelf'] === 0 ? '上架' : '下架'}该产品</h3>
+          <h3>确定{this.state.switchRecord.isShelf === 0 ? '上架' : '下架'}该产品</h3>
         </Modal>
       </div>
     );

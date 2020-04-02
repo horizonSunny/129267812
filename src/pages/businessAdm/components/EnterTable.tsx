@@ -2,9 +2,10 @@ import { Table, Switch, Button, Modal, message } from 'antd';
 import React, { Component } from 'react';
 import router from 'umi/router';
 import { connect } from 'dva';
+
 const { confirm } = Modal;
 @connect(({ businessAdm }) => ({
-  businessAdm: businessAdm,
+  businessAdm,
 }))
 class EnterTable extends Component {
   columns = [
@@ -39,7 +40,8 @@ class EnterTable extends Component {
       key: 'address',
       render: (text, record) => (
         <span>
-          {record.province}{record.city}
+          {record.province}
+          {record.city}
         </span>
       ),
     },
@@ -56,8 +58,8 @@ class EnterTable extends Component {
         <span>
           {text ? '启售' : '禁售'}{' '}
           <Switch
-            checked={text ? true : false}
-            defaultChecked={text ? true : false}
+            checked={!!text}
+            defaultChecked={!!text}
             onChange={() => this.handleSwitchChange(text, record)}
           />
         </span>
@@ -84,6 +86,7 @@ class EnterTable extends Component {
       ),
     },
   ];
+
   handleSwitchChange = (text, record) => {
     console.log('switch切换:', text, record);
     const { dispatch } = this.props;
@@ -93,26 +96,25 @@ class EnterTable extends Component {
       cancelText: '取消',
       onOk() {
         console.log('OK');
-        let tempParam = {
+        const tempParam = {
           tenantId: record.tenantId,
           status: text ? 0 : 1,
         };
         dispatch({
           type: 'businessAdm/switchStatus',
           payload: tempParam,
-        }).then(
-          (data) => {
-            if (data.code === 1) {
-              message.success('修改成功!')
-            }
+        }).then(data => {
+          if (data.code === 1) {
+            message.success('修改成功!');
           }
-        )
+        });
       },
       onCancel() {
         console.log('Cancel');
       },
     });
   };
+
   handleView = (text, record) => {
     console.log('当前行的数据为:', text, record);
     const { dispatch } = this.props;
@@ -126,13 +128,14 @@ class EnterTable extends Component {
       type: 'businessAdm/getOperationRecord',
       payload: {
         ...recordPagenation,
-        'tenantId': record.tenantId,
-        'pageNumber': 0,
-        'totalElements': 0
-      }
+        tenantId: record.tenantId,
+        pageNumber: 0,
+        totalElements: 0,
+      },
     });
     router.push('/businessAdm/enter/particulars');
   };
+
   handleUpdate = (text, record) => {
     console.log('当前行的数据为:', text, record);
     const { dispatch } = this.props;
@@ -142,6 +145,7 @@ class EnterTable extends Component {
     });
     router.push('/businessAdm/enter/edit');
   };
+
   onChange = (pagination, filters, sorter) => {
     const { dispatch } = this.props;
     dispatch({
@@ -149,7 +153,7 @@ class EnterTable extends Component {
       payload: { ...pagination },
     }).then(() => {
       const { queryForm, pagenation } = this.props.businessAdm;
-      let params = {
+      const params = {
         ...queryForm,
         ...pagenation,
       };
@@ -160,6 +164,7 @@ class EnterTable extends Component {
       });
     });
   };
+
   render() {
     const { businessAdm } = this.props;
     return (
