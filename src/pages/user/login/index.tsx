@@ -126,14 +126,15 @@ class Login extends Component<LoginProps, LoginState> {
             this.loginForm = form;
           }}
         >
-          <Tab key="account" tab="账户密码登录">
+          <Tab key="account" tab="线上商城后台管理">
             {status === 'error' &&
               loginType === 'account' &&
               !submitting &&
-              this.renderMessage('账户或密码错误（admin/ant.design）')}
+              this.renderMessage('账户或密码错误')}
             <UserName
               name="userName"
-              placeholder={`${'用户名'}: admin or user`}
+              // placeholder={`${'用户名'}: admin or user`}
+              placeholder="用户名"
               rules={[
                 {
                   required: true,
@@ -143,7 +144,7 @@ class Login extends Component<LoginProps, LoginState> {
             />
             <Password
               name="password"
-              placeholder={`${'密码'}: xxx`}
+              placeholder="密码"
               rules={[
                 {
                   required: true,
