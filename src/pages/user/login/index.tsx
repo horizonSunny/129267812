@@ -11,6 +11,7 @@ import styles from './style.less';
 import { LoginParamsType } from '@/services/login';
 import { ConnectState } from '@/models/connect';
 import { RSAencrypt } from '@/utils/rsa.js';
+
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginComponents;
 interface LoginProps {
   dispatch: Dispatch<AnyAction>;
@@ -46,7 +47,7 @@ class Login extends Component<LoginProps, LoginState> {
 
     if (!err) {
       const { dispatch } = this.props;
-      let params = {
+      const params = {
         username: values.userName,
         password: RSAencrypt(values.password),
         grant_type: 'password',
@@ -212,7 +213,8 @@ class Login extends Component<LoginProps, LoginState> {
             其他登录方式
             <Icon type="alipay-circle" className={styles.icon} theme="outlined" />
             <Icon type="taobao-circle" className={styles.icon} theme="outlined" />
-            <Icon type="weibo-circle" className={styles.icon} theme="outlined" />
+            <Icon type="weib
+            o-circle" className={styles.icon} theme="outlined" />
             <Link className={styles.register} to="/user/register">
               注册账户
             </Link>
