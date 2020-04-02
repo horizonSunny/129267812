@@ -97,7 +97,12 @@ class AdvancedSearchForm extends React.Component {
     return (
       <Form className={styles['ant-advanced-search-form']} onSubmit={this.handleSearch}>
         <Row gutter={24}>
-          <Col span={11} style={{}}>
+          <Col
+            span={11}
+            style={{
+              maxWidth: '500px',
+            }}
+          >
             <Form.Item label="创建时间">
               {getFieldDecorator(
                 'range-picker',
@@ -121,49 +126,44 @@ class AdvancedSearchForm extends React.Component {
           </Col>
         </Row>
         <Row gutter={24}>
-          <Col span={8} style={{}}>
-            <Form.Item label="售卖状态">
+          <Col
+            span={11}
+            style={{
+              maxWidth: '500px',
+            }}
+          >
+            <Form.Item label="商品分类">
+              {getFieldDecorator('status', {
+                rules: [],
+                initialValue: '',
+              })(
+                <TreeSelect treeData={productType} treeDefaultExpandAll onChange={this.onChange} />,
+              )}
+            </Form.Item>
+          </Col>
+          <Col span={6}>
+            <Form.Item label="是否推荐商品">
               {getFieldDecorator('sellStatus', {
                 rules: [],
                 initialValue: 3,
               })(
                 <Select style={{ width: 120 }}>
                   <Option value={3}>全部</Option>
-                  <Option value={1}>上架</Option>
-                  <Option value={0}>下架</Option>
+                  <Option value={1}>推荐商品</Option>
+                  <Option value={0}>非推荐商品</Option>
                 </Select>,
               )}
             </Form.Item>
           </Col>
-          <Col span={8} style={{}}>
-            <Form.Item label="类别">
-              {getFieldDecorator('status', {
-                rules: [],
-                initialValue: '',
-              })(
-                <TreeSelect
-                  style={{ width: '100%' }}
-                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                  treeData={productType}
-                  placeholder="Please select"
-                  treeDefaultExpandAll
-                  onChange={this.onChange}
-                />,
-                // <Select style={{ width: 120 }} onChange={this.handleSelectChange}>
-                //   <Option value="1">全部</Option>
-                //   <Option value="2">中西药品</Option>
-                //   <Option value="3">养生保健</Option>
-                //   <Option value="4">医疗器械</Option>
-                //   <Option value="5">计生用品</Option>
-                //   <Option value="6">中药饮品</Option>
-                //   <Option value="7">美容护肤</Option>
-                // </Select>,
-              )}
-            </Form.Item>
-          </Col>
           <Col
-            span={8}
-            style={{ textAlign: 'right', position: 'relative', top: '15px', left: '-20px' }}
+            span={6}
+            style={{
+              textAlign: 'right',
+              position: 'relative',
+              top: '5px',
+              left: '-20px',
+              float: 'right',
+            }}
           >
             <Button type="primary" htmlType="submit">
               搜索
@@ -171,8 +171,8 @@ class AdvancedSearchForm extends React.Component {
             <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>
               重置
             </Button>
-            <Button style={{ marginLeft: 8 }} onClick={this.handleNew}>
-              新增
+            <Button style={{ marginLeft: 8, background: '#F5AB1C' }} onClick={this.handleNew}>
+              + 添加
             </Button>
           </Col>
         </Row>
