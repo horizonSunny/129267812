@@ -127,7 +127,7 @@ class AdvancedSearchForm extends React.Component {
         </Row>
         <Row gutter={24}>
           <Col
-            span={11}
+            span={8}
             style={{
               maxWidth: '500px',
             }}
@@ -141,7 +141,7 @@ class AdvancedSearchForm extends React.Component {
               )}
             </Form.Item>
           </Col>
-          <Col span={6}>
+          <Col span={8}>
             <Form.Item label="是否推荐商品">
               {getFieldDecorator('sellStatus', {
                 rules: [],
@@ -156,7 +156,7 @@ class AdvancedSearchForm extends React.Component {
             </Form.Item>
           </Col>
           <Col
-            span={6}
+            span={8}
             style={{
               textAlign: 'right',
               position: 'relative',

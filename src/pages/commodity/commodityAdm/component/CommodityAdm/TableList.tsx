@@ -1,4 +1,4 @@
-import { Table, Divider, Tag, Switch, Modal } from 'antd';
+import { Table, Divider, Tabs, Switch, Modal } from 'antd';
 import React from 'react';
 import Link from 'umi/link';
 import router from 'umi/router';
@@ -7,7 +7,7 @@ import { connect } from 'dva';
 import { filterStatus } from '@/utils/filterProperty';
 
 const pagination = { position: 'bottom', pageSize: 10 };
-
+const { TabPane } = Tabs;
 @connect(({ commodity }) => ({ commodity }))
 export default class TableList extends React.Component {
   state = {
@@ -181,11 +181,62 @@ export default class TableList extends React.Component {
     });
   };
 
+  callback = e => {
+    console.log(e);
+  };
+
   render() {
     const { state } = this;
     return (
-      <div>
-        <Table
+      <Tabs defaultActiveKey="1" onChange={this.callback} className={styles.main}>
+        <TabPane tab="出售中" key="1">
+          <Table
+            {...this.state}
+            columns={state.columns}
+            dataSource={this.props.commodity.productList.pageList}
+            onChange={this.onChange}
+            pagination={{
+              current: this.props.commodity.productList.pageNumber + 1,
+              position: 'bottom',
+              pageSize: 10,
+              total: this.props.commodity.productList.totalElements,
+            }}
+            scroll={{ x: 1200 }}
+          />
+        </TabPane>
+        <TabPane tab="已售罄" key="2">
+          <Table
+            {...this.state}
+            className={styles.main}
+            columns={state.columns}
+            dataSource={this.props.commodity.productList.pageList}
+            onChange={this.onChange}
+            pagination={{
+              current: this.props.commodity.productList.pageNumber + 1,
+              position: 'bottom',
+              pageSize: 10,
+              total: this.props.commodity.productList.totalElements,
+            }}
+            scroll={{ x: 1200 }}
+          />
+        </TabPane>
+        <TabPane tab="已下架" key="3">
+          <Table
+            {...this.state}
+            className={styles.main}
+            columns={state.columns}
+            dataSource={this.props.commodity.productList.pageList}
+            onChange={this.onChange}
+            pagination={{
+              current: this.props.commodity.productList.pageNumber + 1,
+              position: 'bottom',
+              pageSize: 10,
+              total: this.props.commodity.productList.totalElements,
+            }}
+            scroll={{ x: 1200 }}
+          />
+        </TabPane>
+        {/* <Table
           {...this.state}
           className={styles.main}
           columns={state.columns}
@@ -198,7 +249,7 @@ export default class TableList extends React.Component {
             total: this.props.commodity.productList.totalElements,
           }}
           scroll={{ x: 1200 }}
-        />
+        /> */}
         <Modal
           title="产品上下架"
           visible={this.state.visible}
@@ -207,7 +258,7 @@ export default class TableList extends React.Component {
         >
           <h3>确定{this.state.switchRecord.isShelf === 0 ? '上架' : '下架'}该产品</h3>
         </Modal>
-      </div>
+      </Tabs>
     );
   }
 }
