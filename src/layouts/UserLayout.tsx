@@ -1,9 +1,10 @@
 import { MenuDataItem, getMenuData, getPageTitle } from '@ant-design/pro-layout';
+import { Form, Row, Col, Input, Button, DatePicker, Select, TreeSelect } from 'antd';
 import { Helmet } from 'react-helmet';
 import React from 'react';
 import { connect } from 'dva';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import logo from '../assets/login/Icon.png';
+import logo from '../assets/login/icon.svg';
 import styles from './UserLayout.less';
 
 export interface UserLayoutProps extends ConnectProps {
@@ -41,10 +42,14 @@ const UserLayout: React.SFC<UserLayoutProps> = props => {
 
       <div className={styles.container}>
         <div className={styles.content}>
-          <div className={styles.leftImg}>
-            <img alt="logo" className={styles.logo} src={logo} />
-          </div>
-          {children}
+          <Col span={10} style={{}}>
+            <div className={styles.leftImg}>
+              <img alt="logo" className={styles.logo} src={logo} />
+            </div>
+          </Col>
+          <Col span={5} style={{}}>
+            {children}
+          </Col>
         </div>
       </div>
     </>

@@ -17,6 +17,7 @@ class AdvancedSearchForm extends React.Component {
     sellingStatus: null,
     productType: this.props.commodity.allProductType,
   };
+
   // 查询
   handleSearch = e => {
     const { dispatch } = this.props;
@@ -36,10 +37,10 @@ class AdvancedSearchForm extends React.Component {
       const searchParams = {
         startTime: values['range-picker'][0],
         endTime: values['range-picker'][1],
-        isShelf: values['sellStatus'] == 3 ? undefined : values['sellStatus'],
-        productType: values['status'],
-        productCommonName: values['keyword'],
-        approvalNumber: values['approvalNumber'],
+        isShelf: values.sellStatus == 3 ? undefined : values.sellStatus,
+        productType: values.status,
+        productCommonName: values.keyword,
+        approvalNumber: values.approvalNumber,
       };
       const searchInfo = filterProperty(searchParams);
       dispatch({
@@ -61,6 +62,7 @@ class AdvancedSearchForm extends React.Component {
     this.props.saveSearchInfo({});
     this.props.form.resetFields();
   };
+
   // 新增产品
   handleNew = () => {
     const { dispatch } = this.props;
@@ -85,6 +87,7 @@ class AdvancedSearchForm extends React.Component {
     });
     router.push('/commodityAdm/management/edit');
   };
+
   render() {
     const { getFieldDecorator } = this.props.form;
     const rangeConfig = {
