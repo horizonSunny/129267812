@@ -55,7 +55,7 @@ export default {
   menu: {
     locale: true,
   },
-  title: '药利多后台管理',
+  title: '线上商城管理系统',
   pwa: false,
   iconfontUrl: '',
 } as DefaultSettings;
