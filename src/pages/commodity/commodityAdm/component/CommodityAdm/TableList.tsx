@@ -201,6 +201,7 @@ export default class TableList extends React.Component {
               pageSize: 10,
               total: this.props.commodity.productList.totalElements,
             }}
+            // rowSelection={rowSelection}
             scroll={{ x: 1200 }}
           />
         </TabPane>

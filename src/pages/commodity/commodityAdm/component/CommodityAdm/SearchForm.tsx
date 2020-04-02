@@ -16,6 +16,7 @@ class AdvancedSearchForm extends React.Component {
     expand: false,
     sellingStatus: null,
     productType: this.props.commodity.allProductType,
+    selectedRowKeys: [],
   };
 
   // 查询
