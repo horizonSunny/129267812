@@ -10,13 +10,13 @@ class CommodityAdm extends React.Component {
   componentDidMount() {}
 
   state = {
-    searchInfo: {},
+    searchInfo: '',
     columns: [
       {
         title: '编号',
         dataIndex: 'number',
         key: 'number',
-        render: (text, record, index) => `${index + 1}`,
+        render: (text, record, index) => `${index + 1 + this.state.currentPageNumber * 10}`,
       },
       {
         title: '商品图',
@@ -28,7 +28,7 @@ class CommodityAdm extends React.Component {
               <img
                 src={record.productImage[0]}
                 alt="暂无图片"
-                style={{ height: '100%', width: '100%' }}
+                style={{ height: '60px', width: '60px' }}
               />
             </div>
           );
@@ -72,33 +72,68 @@ class CommodityAdm extends React.Component {
       },
     ],
     dataSource: [],
+    currentPageNumber: 0,
+    totalElements: 0,
   };
 
   // 查询
   handleSearch = e => {
     const { dispatch } = this.props;
     e.preventDefault();
-    // dispatch({
-    //   type: 'commodity/productTemplateList',
-    //   payload: { code: 'productType' },
-    // });
+    this.props.form.validateFields((err, fieldsValue) => {
+      const { searchInfo } = fieldsValue;
+      this.setState({
+        searchInfo,
+      });
+      dispatch({
+        type: 'commodity/productTemplateList',
+        payload: { pageNumber: 0, pageSize: 10, keyword: searchInfo },
+      }).then(res => {
+        this.setState({
+          dataSource: res.pageList,
+          currentPageNumber: res.pageNumber,
+          totalElements: res.totalElements,
+        });
+      });
+    });
   };
 
-  inputValue = value => {
-    console.log('inputValue_', value);
-    this.setState({
-      searchInfo: value,
+  // 分页器
+  onChange = e => {
+    console.log('触发', this.props.searchInfo);
+    const { dispatch } = this.props;
+    const currentPage = e.current - 1;
+    console.log('触发currentPage_', currentPage);
+    dispatch({
+      type: 'commodity/getList',
+      payload: {
+        pageNumber: currentPage,
+        pageSize: 10,
+        keyword: this.state.searchInfo,
+      },
+    }).then(res => {
+      this.setState({
+        dataSource: res.pageList,
+        currentPageNumber: res.pageNumber,
+        totalElements: res.totalElements,
+      });
     });
+    return false;
   };
 
   render() {
     const { state } = this;
+    const { getFieldDecorator } = this.props.form;
     return (
       <PageHeaderWrapper className={styles.main}>
         <Form onSubmit={this.handleSearch}>
           <Row gutter={24} justify="space-around">
             <Col span={10} offset={4} className={styles.searchInput}>
-              <Input placeholder="请输入商品名、通用名、批准文号" onChange={this.inputValue} />
+              <Form.Item>
+                {getFieldDecorator('searchInfo', {
+                  rules: [],
+                })(<Input placeholder="请输入商品名、通用名、批准文号" />)}
+              </Form.Item>
               &nbsp;&nbsp;&nbsp;
               <span className={styles.searchInfo}>若未搜索到商品，则该商品不支持搜索添加</span>
             </Col>
@@ -115,7 +150,13 @@ class CommodityAdm extends React.Component {
         <Table
           columns={state.columns}
           className={styles.table}
-          pagination={{ position: 'bottom' }}
+          pagination={{
+            position: 'bottom',
+            current: state.currentPageNumber + 1,
+            pageSize: 10,
+            total: state.totalElements,
+          }}
+          onChange={this.onChange}
           dataSource={state.dataSource}
         />
       </PageHeaderWrapper>

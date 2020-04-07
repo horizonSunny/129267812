@@ -2,17 +2,18 @@ import React, { Component, Fragment } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import router from 'umi/router';
 import { connect } from 'dva';
+import { Form, Select, Input, Cascader, Radio, Button, Upload, Icon, Modal, message } from 'antd';
+import { thisExpression } from '@babel/types';
 import styles from './businessEdit.less';
 import { newArea } from '../../utils/area.js';
-import { Form, Select, Input, Cascader, Radio, Button, Upload, Icon, Modal, message } from 'antd';
+import { serverUrl } from '@/utils/request';
+
 const { Option } = Select;
 const options = newArea();
-import { serverUrl } from '@/utils/request';
-import { thisExpression } from '@babel/types';
 
 const { Search } = Input;
 @connect(({ businessAdm }) => ({
-  businessAdm: businessAdm,
+  businessAdm,
 }))
 class BusinessEdit extends Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class BusinessEdit extends Component {
       tempAdminUrl = this.props.businessAdm.currentRecord.adminCard;
     }
     this.state = {
-      uploadUrl: serverUrl + '/admin/v1/uploadFile',
+      uploadUrl: `${serverUrl}/admin/v1/uploadFile`,
       previewVisible: false,
       previewImage: '',
       storeLiveFileList: tempStoreLive || [],
@@ -58,15 +59,20 @@ class BusinessEdit extends Component {
       adminUrl: tempAdminUrl,
     };
   }
+
   phoneValidator = (rule, value, callback) => {
-    let reg = /^1(3[0-9]|4[5,7]|5[0,1,2,3,5,6,7,8,9]|6[2,5,6,7]|7[0,1,7,8]|8[0-9]|9[1,8,9])\d{8}$/;
+    const reg = /^1(3[0-9]|4[5,7]|5[0,1,2,3,5,6,7,8,9]|6[2,5,6,7]|7[0,1,7,8]|8[0-9]|9[1,8,9])\d{8}$/;
     if (value && value.length > 10 && !reg.test(value)) {
       callback('手机号格式错误!');
     }
     callback();
   };
+
   handleSave = () => {
-    const { dispatch, form: { validateFields } } = this.props;
+    const {
+      dispatch,
+      form: { validateFields },
+    } = this.props;
     validateFields((err, values) => {
       if (this.state.qualificationFileList.length > 0) {
         this.props.form.setFieldsValue({
@@ -74,7 +80,7 @@ class BusinessEdit extends Component {
         });
       }
       if (!err) {
-        let params = {
+        const params = {
           ...values,
           tenantLogo: this.state.logoUrl,
           adminCard: this.state.adminUrl,
@@ -99,31 +105,34 @@ class BusinessEdit extends Component {
       }
     });
   };
+
   handleBack = () => {
     router.push('/businessAdm/enter');
   };
+
   editQualificationName = (type, value, editValue) => {
-    const {qualificationFileList} = this.state
+    const { qualificationFileList } = this.state;
     if (type === 'save') {
       qualificationFileList.map(item => {
         if (item.uid === value.uid) {
-          item.name = editValue
-          value.edit = false
+          item.name = editValue;
+          value.edit = false;
         }
-        return item
+        return item;
       });
     } else {
       qualificationFileList.map(item => {
         if (item.uid === value.uid) {
-          value.edit = true
+          value.edit = true;
         }
-        return item
+        return item;
       });
     }
     this.setState({
-      qualificationFileList: qualificationFileList
-    })
-  }
+      qualificationFileList,
+    });
+  };
+
   handleCancel = () => this.setState({ previewVisible: false });
 
   handleQualificationChange = ({ fileList }) => this.setState({ qualificationFileList: fileList });
@@ -193,7 +202,7 @@ class BusinessEdit extends Component {
       labelCol: { span: 6 },
       wrapperCol: { span: 12 },
     };
-    const currentRecord = businessAdm.currentRecord;
+    const { currentRecord } = businessAdm;
     return (
       <PageHeaderWrapper>
         <div className={styles.container}>
@@ -344,21 +353,35 @@ class BusinessEdit extends Component {
                       {qualificationFileList.length >= 10 ? null : uploadButton}
                     </Upload>
                     <span className={`${styles.editContent}`}>
-                      {
-                        qualificationFileList.map(item => {
-                          return (
-                            <Fragment>
-                              <div className={`${styles.editName}`}>
-                                {!item.edit?
-                                  <span key={item.uid} onClick={(e) => this.editQualificationName('edit', item, '')}>{item.name}<Icon type="edit" /></span>:
-                                  <Search key={item.uid} enterButton="保存" defaultValue={item.name} size="small" onSearch={value => this.editQualificationName('save', item, value) } />
-                                // <Input key={item.uid} maxLength={20} addonAfter={<Button size="small" type="primary" onClick={(e) => this.editQualificationName(e,defaultName)} icon="save" />} defaultValue={defaultName} />}
-                                }
-                              </div>
-                            </Fragment>
-                          )
-                        })
-                      }
+                      {qualificationFileList.map(item => {
+                        return (
+                          <Fragment>
+                            <div className={`${styles.editName}`}>
+                              {!item.edit ? (
+                                <span
+                                  key={item.uid}
+                                  onClick={e => this.editQualificationName('edit', item, '')}
+                                >
+                                  {item.name}
+                                  <Icon type="edit" />
+                                </span>
+                              ) : (
+                                <Search
+                                  key={item.uid}
+                                  enterButton="保存"
+                                  defaultValue={item.name}
+                                  size="small"
+                                  onSearch={value =>
+                                    this.editQualificationName('save', item, value)
+                                  }
+                                />
+                              )
+                              // <Input key={item.uid} maxLength={20} addonAfter={<Button size="small" type="primary" onClick={(e) => this.editQualificationName(e,defaultName)} icon="save" />} defaultValue={defaultName} />}
+                              }
+                            </div>
+                          </Fragment>
+                        );
+                      })}
                     </span>
                     <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
                       <img alt="example" style={{ width: '100%' }} src={previewImage} />

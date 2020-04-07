@@ -94,7 +94,7 @@ const CommodityModel = {
       if (response.code === 1) {
         // 接口调用成功
         // do something...
-        return true; //  通过return给dispatch返回回调结果！
+        return response.data; //  通过return给dispatch返回回调结果！
       }
       // 接口调用失败
       // do something...
