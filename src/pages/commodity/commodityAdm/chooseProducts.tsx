@@ -7,28 +7,8 @@ import styles from './chooseProducts.less';
 // 请求
 @connect(({ commodity }) => ({ commodity }))
 class CommodityAdm extends React.Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    // const searchParams = filterProperty(this.props.commodity.searchInfo);
-    // dispatch({
-    //   type: 'commodity/getProductType',
-    // });
-    // dispatch({
-    //   type: 'commodity/getList',
-    //   payload: {
-    //     pageNumber: 0,
-    //     pageSize: 10,
-    //   },
-    // });
-  }
+  componentDidMount() {}
 
-  // componentWillReceiveProps() {
-  //   const { dispatch } = this.props;
-  //   dispatch({
-  //     type: 'commodity/getProductType',
-  //     payload: { code: 'productType' },
-  //   });
-  // }
   state = {
     searchInfo: {},
     columns: [
@@ -40,44 +20,49 @@ class CommodityAdm extends React.Component {
       },
       {
         title: '商品图',
-        dataIndex: 'name',
-        key: 'name',
+        dataIndex: 'productImage',
+        key: 'productImage',
         render: (text, record, index) => {
-          return `${index + 1}`;
-          // <div>
-          //   <img src={item} alt="暂无图片" style={{ height: '100%', width: '100%' }} />
-          // </div>
+          return (
+            <div>
+              <img
+                src={record.productImage[0]}
+                alt="暂无图片"
+                style={{ height: '100%', width: '100%' }}
+              />
+            </div>
+          );
         },
       },
       {
         title: '商品名',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text, record, index) => `${index + 1}`,
+        dataIndex: 'productCommonName',
+        key: 'productCommonName',
+        render: text => text,
       },
       {
         title: '批准文号',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text, record, index) => `${index + 1}`,
+        dataIndex: 'approvalNumber',
+        key: 'approvalNumber',
+        render: text => text,
       },
       {
         title: '包装规格',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text, record, index) => `${index + 1}`,
+        dataIndex: 'productSpecif',
+        key: 'productSpecif',
+        render: text => text,
       },
       {
         title: '价格',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text, record, index) => `${index + 1}`,
+        dataIndex: 'price',
+        key: 'price',
+        render: text => text,
       },
       {
         title: '状态',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text, record, index) => `${index + 1}`,
+        dataIndex: 'status',
+        key: 'status',
+        render: text => (status === 1 ? '未添加' : '添加'),
       },
       {
         title: '操作',
@@ -86,58 +71,23 @@ class CommodityAdm extends React.Component {
         render: (text, record, index) => `${index + 1}`,
       },
     ],
-    dataSource: [
-      {
-        key: '1',
-        name: '胡彦斌',
-        age: 32,
-        address: '西湖区湖底公园1号',
-      },
-      {
-        key: '2',
-        name: '胡彦祖',
-        age: 42,
-        address: '西湖区湖底公园1号',
-      },
-    ],
+    dataSource: [],
   };
 
   // 查询
   handleSearch = e => {
     const { dispatch } = this.props;
     e.preventDefault();
-    this.props.form.validateFields((err, fieldsValue) => {
-      if (err) {
-        return;
-      }
-      const rangeValue = fieldsValue['range-picker'];
-      const values = {
-        ...fieldsValue,
-        'range-picker': [
-          rangeValue ? Date.parse(rangeValue[0].format('YYYY-MM-DD HH:mm')) : undefined,
-          rangeValue ? Date.parse(rangeValue[1].format('YYYY-MM-DD HH:mm')) : undefined,
-        ],
-      };
-      const searchParams = {
-        startTime: values['range-picker'][0],
-        endTime: values['range-picker'][1],
-        isShelf: values.sellStatus == 3 ? undefined : values.sellStatus,
-        productType: values.status,
-        productCommonName: values.keyword,
-        approvalNumber: values.approvalNumber,
-      };
-      const searchInfo = filterProperty(searchParams);
-      dispatch({
-        type: 'commodity/getList',
-        payload: Object.assign(
-          {
-            pageNumber: 0,
-            pageSize: 10,
-          },
-          searchInfo,
-        ),
-      });
-      this.props.saveSearchInfo(searchInfo);
+    // dispatch({
+    //   type: 'commodity/productTemplateList',
+    //   payload: { code: 'productType' },
+    // });
+  };
+
+  inputValue = value => {
+    console.log('inputValue_', value);
+    this.setState({
+      searchInfo: value,
     });
   };
 
@@ -148,7 +98,7 @@ class CommodityAdm extends React.Component {
         <Form onSubmit={this.handleSearch}>
           <Row gutter={24} justify="space-around">
             <Col span={10} offset={4} className={styles.searchInput}>
-              <Input placeholder="请输入商品名、通用名、批准文号" />
+              <Input placeholder="请输入商品名、通用名、批准文号" onChange={this.inputValue} />
               &nbsp;&nbsp;&nbsp;
               <span className={styles.searchInfo}>若未搜索到商品，则该商品不支持搜索添加</span>
             </Col>

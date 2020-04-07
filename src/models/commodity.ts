@@ -76,7 +76,7 @@ const CommodityModel = {
     // 上下架产品
     *shelveProduct({ payload }, { call }) {
       console.log('in_shelveProduct');
-      const response = yield call(productTemplateList, payload);
+      const response = yield call(shelve, payload);
       if (response.code === 1) {
         // 接口调用成功
         // do something...
@@ -90,7 +90,7 @@ const CommodityModel = {
     // H5后台管理系统二期，获取模版拉取的商品信息
     *productTemplateList({ payload }, { call }) {
       console.log('in_productTemplateList');
-      const response = yield call(shelve, payload);
+      const response = yield call(productTemplateList, payload);
       if (response.code === 1) {
         // 接口调用成功
         // do something...
