@@ -44,14 +44,12 @@ export default class TableList extends React.Component {
         title: '库存',
         key: 'stock',
         dataIndex: 'stock',
-        sorter: true,
         render: text => <a>{text}</a>,
       },
       {
         title: '销量',
         key: 'sales',
         dataIndex: 'sales',
-        sorter: true,
         render: text => <a>{text}</a>,
       },
       {
@@ -90,6 +88,7 @@ export default class TableList extends React.Component {
     console.log('触发', this.props.searchInfo);
     const { dispatch } = this.props;
     const currentPage = e.current - 1;
+    console.log('触发currentPage_', currentPage);
     dispatch({
       type: 'commodity/getList',
       payload: Object.assign(
@@ -181,8 +180,35 @@ export default class TableList extends React.Component {
     });
   };
 
+  // 切换位置
   callback = e => {
     console.log(e);
+    const { dispatch } = this.props;
+    let stauts;
+    switch (e) {
+      case 1:
+        stauts = 0;
+        break;
+      case 2:
+        stauts = 1;
+        break;
+      case 3:
+        stauts = 2;
+        break;
+      default:
+        break;
+    }
+    dispatch({
+      type: 'commodity/getList',
+      payload: Object.assign(
+        {
+          pageNumber: 0,
+          pageSize: 10,
+          stauts,
+        },
+        this.props.searchInfo,
+      ),
+    });
   };
 
   render() {
