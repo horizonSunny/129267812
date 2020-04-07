@@ -29,14 +29,20 @@ const route = [
             icon: 'shop',
             routes: [
               {
-                path: '/commodityAdm/management',
+                path: 'management',
                 name: '商品列表',
                 component: './commodity/commodityAdm/CommodityAdm.tsx',
               },
               {
-                path: '/commodityAdm/classification',
+                path: 'classification',
                 name: '商品分类',
                 component: './commodity/commodityClassify/commodityCas.tsx',
+              },
+              {
+                path: 'management/chooseProducts',
+                name: '选择商品',
+                component: './commodity/commodityAdm/CommodityDet.tsx',
+                hideInMenu: true,
               },
               {
                 path: 'management/particulars',
@@ -45,7 +51,7 @@ const route = [
                 hideInMenu: true,
               },
               {
-                path: '/commodityAdm/management/edit',
+                path: 'management/edit',
                 name: '新建产品',
                 component: './commodity/commodityAdm/CommodityEdit.tsx',
                 hideInMenu: true,
