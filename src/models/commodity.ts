@@ -17,12 +17,16 @@ const CommodityModel = {
     allProductType: {},
     // 查询商品列别的时候需要筛选的字段,只是searchInfo表单里面含有的字段
     // searchInfo: {},
+    // 代表商品是出售中
+    productListStatus: 0,
   },
   effects: {
     // 获取商品列表
-    *getList({ payload }, { call, put }) {
-      console.log('in_getList');
-      const response = yield call(productList, payload);
+    *getList({ payload }, { call, put, select }) {
+      const status = yield select(state => state.commodity.productListStatus);
+      const params = Object.assign(payload, { status });
+      console.log('in_getList_params', params);
+      const response = yield call(productList, params);
       yield put({
         type: 'list',
         payload: response.data,
@@ -148,6 +152,14 @@ const CommodityModel = {
     // 重置commidityList列表
     resetList(state, action) {
       state.productList.pageList = action.payload;
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
+    // 重置当前商品是出售中还是
+    resetStatus(state, action) {
+      console.log('in_resetStatus', action.payload);
       return {
         ...state,
         ...action.payload,

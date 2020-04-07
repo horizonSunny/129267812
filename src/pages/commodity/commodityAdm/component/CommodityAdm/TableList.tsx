@@ -3,9 +3,7 @@ import React from 'react';
 import router from 'umi/router';
 import { connect } from 'dva';
 import styles from './TableList.less';
-// import { filterStatus } from '@/utils/filterProperty';
 
-// const pagination = { position: 'bottom', pageSize: 10 };
 const { TabPane } = Tabs;
 @connect(({ commodity }) => ({ commodity }))
 export default class TableList extends React.Component {
@@ -186,29 +184,36 @@ export default class TableList extends React.Component {
     const { dispatch } = this.props;
     let stauts;
     switch (e) {
-      case 1:
+      case '1':
         stauts = 0;
         break;
-      case 2:
+      case '2':
         stauts = 1;
         break;
-      case 3:
+      case '3':
         stauts = 2;
         break;
       default:
         break;
     }
+    console.log('stauts_', stauts);
     dispatch({
-      type: 'commodity/getList',
-      payload: Object.assign(
-        {
-          pageNumber: 0,
-          pageSize: 10,
-          stauts,
-        },
-        this.props.searchInfo,
-      ),
+      type: 'commodity/resetStatus',
+      payload: {
+        productListStatus: stauts,
+      },
     });
+    // dispatch({
+    //   type: 'commodity/getList',
+    //   payload: Object.assign(
+    //     {
+    //       pageNumber: 0,
+    //       pageSize: 10,
+    //       stauts: this.props.productListStatus,
+    //     },
+    //     this.props.searchInfo,
+    //   ),
+    // });
   };
 
   render() {
