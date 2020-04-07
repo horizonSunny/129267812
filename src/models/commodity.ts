@@ -5,6 +5,7 @@ import {
   newProduct,
   productype,
   shelve,
+  productTemplateList,
 } from '@/services/commodity';
 
 const CommodityModel = {
@@ -71,6 +72,20 @@ const CommodityModel = {
     // 上下架产品
     *shelveProduct({ payload }, { call }) {
       console.log('in_shelveProduct');
+      const response = yield call(productTemplateList, payload);
+      if (response.code === 1) {
+        // 接口调用成功
+        // do something...
+        return true; //  通过return给dispatch返回回调结果！
+      }
+      // 接口调用失败
+      // do something...
+      return false;
+    },
+
+    // H5后台管理系统二期，获取模版拉取的商品信息
+    *productTemplateList({ payload }, { call }) {
+      console.log('in_productTemplateList');
       const response = yield call(shelve, payload);
       if (response.code === 1) {
         // 接口调用成功

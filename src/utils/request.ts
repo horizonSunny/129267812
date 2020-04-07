@@ -50,12 +50,12 @@ const errorHandler = (error: { response: Response }): Response => {
  * 配置request请求时的默认参数
  */
 const request = extend({
-  prefix: 'http://47.103.158.133',
+  prefix: 'http://47.103.158.133:8088',
   // prefix: 'http://192.168.10.234:9000',
   errorHandler, // 默认错误处理
   // credentials: 'include', // 默认请求是否带上cookie
 });
-export const serverUrl = 'http://47.103.158.133';
+export const serverUrl = 'http://47.103.158.133:8088';
 // export const serverUrl = 'http://192.168.10.234:9000';
 
 request.interceptors.request.use((url, options) => {
