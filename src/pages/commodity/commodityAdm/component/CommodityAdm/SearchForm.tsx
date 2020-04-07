@@ -36,7 +36,7 @@ class AdvancedSearchForm extends React.Component {
       const searchParams = {
         startTime: values['range-picker'][0],
         endTime: values['range-picker'][1],
-        isShelf: values.sellStatus == 3 ? undefined : values.sellStatus,
+        recommandStatus: values.recommandStatus == 3 ? undefined : values.recommandStatus,
         productType: values.status,
         productCommonName: values.keyword,
         approvalNumber: values.approvalNumber,
@@ -142,7 +142,7 @@ class AdvancedSearchForm extends React.Component {
           </Col>
           <Col span={8}>
             <Form.Item label="是否推荐商品">
-              {getFieldDecorator('sellStatus', {
+              {getFieldDecorator('recommandStatus', {
                 rules: [],
                 initialValue: 3,
               })(

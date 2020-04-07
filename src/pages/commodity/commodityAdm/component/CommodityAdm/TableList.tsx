@@ -1,12 +1,11 @@
 import { Table, Divider, Tabs, Switch, Modal } from 'antd';
 import React from 'react';
-import Link from 'umi/link';
 import router from 'umi/router';
-import styles from './TableList.less';
 import { connect } from 'dva';
-import { filterStatus } from '@/utils/filterProperty';
+import styles from './TableList.less';
+// import { filterStatus } from '@/utils/filterProperty';
 
-const pagination = { position: 'bottom', pageSize: 10 };
+// const pagination = { position: 'bottom', pageSize: 10 };
 const { TabPane } = Tabs;
 @connect(({ commodity }) => ({ commodity }))
 export default class TableList extends React.Component {
@@ -31,31 +30,32 @@ export default class TableList extends React.Component {
         key: 'approvalNumber',
       },
       {
-        title: '类别',
-        key: 'productType',
-        render: record =>
-          record.productType.map(item => {
-            return <div>{filterStatus(item, this.props.commodity.allProductType)}</div>;
-          }),
-      },
-      {
         title: '包装规格',
         key: 'productSpecif',
         dataIndex: 'productSpecif',
       },
       {
-        title: '报价数',
-        key: 'offer',
-        dataIndex: 'offer',
+        title: '价格',
+        key: 'price',
+        dataIndex: 'price',
         render: text => <a>{text}</a>,
       },
       {
-        title: '均价',
-        key: 'average',
-        dataIndex: 'average',
+        title: '库存',
+        key: 'stock',
+        dataIndex: 'stock',
+        sorter: true,
+        render: text => <a>{text}</a>,
       },
       {
-        title: '售卖状态',
+        title: '销量',
+        key: 'sales',
+        dataIndex: 'sales',
+        sorter: true,
+        render: text => <a>{text}</a>,
+      },
+      {
+        title: '上下架',
         key: 'isShelf',
         render: record => (
           <Switch
@@ -237,20 +237,6 @@ export default class TableList extends React.Component {
             scroll={{ x: 1200 }}
           />
         </TabPane>
-        {/* <Table
-          {...this.state}
-          className={styles.main}
-          columns={state.columns}
-          dataSource={this.props.commodity.productList.pageList}
-          onChange={this.onChange}
-          pagination={{
-            current: this.props.commodity.productList.pageNumber + 1,
-            position: 'bottom',
-            pageSize: 10,
-            total: this.props.commodity.productList.totalElements,
-          }}
-          scroll={{ x: 1200 }}
-        /> */}
         <Modal
           title="产品上下架"
           visible={this.state.visible}
