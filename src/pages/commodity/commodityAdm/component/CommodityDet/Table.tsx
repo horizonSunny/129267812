@@ -7,6 +7,7 @@ import filterData from './filter';
 import { connect } from 'dva';
 import LabelInfo from '../../../../../components/Label/label';
 import { filterStatus } from '@/utils/filterProperty';
+
 const isMapClass = {
   width: '40px',
   borderRadius: '15px',
@@ -40,8 +41,10 @@ export default class TableList extends React.Component {
                 </Carousel>
               </Carousel>
             );
-          } else if (record.name === '是否处方药') {
-            let styleInfo, textInfo;
+          }
+          if (record.name === '是否处方药') {
+            let styleInfo;
+            let textInfo;
             switch (text) {
               case 0:
                 textInfo = 'otc';
@@ -86,23 +89,24 @@ export default class TableList extends React.Component {
               default:
                 break;
             }
-            return <LabelInfo text={textInfo} classInfo={styleInfo}></LabelInfo>;
-          } else if (record.name === '商品类别') {
+            return <LabelInfo text={textInfo} classInfo={styleInfo} />;
+          }
+          if (record.name === '商品类别') {
             return record.value.map(item => {
               return <div>{filterStatus(item, this.props.commodity.allProductType)}</div>;
             });
-          } else {
-            return text;
           }
+          return text;
         },
       },
     ],
   };
+
   // 获取处理后的数据
   dataReverse(data) {
     const arr = [];
     let i = 0;
-    for (let item in data) {
+    for (const item in data) {
       // this.state.tabelArr.push(obj);
       if (filterData.hasOwnProperty(item)) {
         const obj = new Object();
@@ -118,6 +122,7 @@ export default class TableList extends React.Component {
       tabelArr: arr,
     });
   }
+
   // 生命周期
   componentDidMount() {
     this.dataReverse(this.props.commodity.productWithId);

@@ -1,6 +1,9 @@
 @import '~antd/lib/style/themes/default.less';
 
 .main {
+  display: flex;
+  flex-direction: column;
+
   .searchInput {
     border-radius: 10px;
     // background-color: yellow;
@@ -13,10 +16,25 @@
     font-weight: 400;
     color: rgba(231, 163, 16, 1);
   }
-}
 
-:global {
-  .ant-input {
-    border-radius: 20px;
+  .table {
+    background-color: #fff;
+    border-radius: 14px;
+    flex: 1;
+  }
+
+  :global {
+    .ant-input {
+      border-radius: 20px;
+    }
+
+    .ant-table-thead>tr>th {
+      background-color: #fff;
+    }
+
+    .ant-pagination {
+      float: none;
+      text-align: center;
+    }
   }
 }

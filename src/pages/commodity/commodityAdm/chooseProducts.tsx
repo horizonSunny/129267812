@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Form, Row, Col, Input, Button } from 'antd';
+import { Form, Row, Col, Input, Button, Table, Tag } from 'antd';
 import { connect } from 'dva';
 import styles from './chooseProducts.less';
 
@@ -31,6 +31,75 @@ class CommodityAdm extends React.Component {
   // }
   state = {
     searchInfo: {},
+    columns: [
+      {
+        title: '编号',
+        dataIndex: 'number',
+        key: 'number',
+        render: (text, record, index) => `${index + 1}`,
+      },
+      {
+        title: '商品图',
+        dataIndex: 'name',
+        key: 'name',
+        render: (text, record, index) => {
+          return `${index + 1}`;
+          // <div>
+          //   <img src={item} alt="暂无图片" style={{ height: '100%', width: '100%' }} />
+          // </div>
+        },
+      },
+      {
+        title: '商品名',
+        dataIndex: 'name',
+        key: 'name',
+        render: (text, record, index) => `${index + 1}`,
+      },
+      {
+        title: '批准文号',
+        dataIndex: 'name',
+        key: 'name',
+        render: (text, record, index) => `${index + 1}`,
+      },
+      {
+        title: '包装规格',
+        dataIndex: 'name',
+        key: 'name',
+        render: (text, record, index) => `${index + 1}`,
+      },
+      {
+        title: '价格',
+        dataIndex: 'name',
+        key: 'name',
+        render: (text, record, index) => `${index + 1}`,
+      },
+      {
+        title: '状态',
+        dataIndex: 'name',
+        key: 'name',
+        render: (text, record, index) => `${index + 1}`,
+      },
+      {
+        title: '操作',
+        dataIndex: 'name',
+        key: 'name',
+        render: (text, record, index) => `${index + 1}`,
+      },
+    ],
+    dataSource: [
+      {
+        key: '1',
+        name: '胡彦斌',
+        age: 32,
+        address: '西湖区湖底公园1号',
+      },
+      {
+        key: '2',
+        name: '胡彦祖',
+        age: 42,
+        address: '西湖区湖底公园1号',
+      },
+    ],
   };
 
   // 查询
@@ -73,9 +142,10 @@ class CommodityAdm extends React.Component {
   };
 
   render() {
+    const { state } = this;
     return (
-      <PageHeaderWrapper>
-        <Form onSubmit={this.handleSearch} className={styles.main}>
+      <PageHeaderWrapper className={styles.main}>
+        <Form onSubmit={this.handleSearch}>
           <Row gutter={24} justify="space-around">
             <Col span={10} offset={4} className={styles.searchInput}>
               <Input placeholder="请输入商品名、通用名、批准文号" />
@@ -92,6 +162,12 @@ class CommodityAdm extends React.Component {
             </Col>
           </Row>
         </Form>
+        <Table
+          columns={state.columns}
+          className={styles.table}
+          pagination={{ position: 'bottom' }}
+          dataSource={state.dataSource}
+        />
       </PageHeaderWrapper>
     );
   }
