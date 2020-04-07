@@ -62,13 +62,23 @@ class CommodityAdm extends React.Component {
         title: '状态',
         dataIndex: 'status',
         key: 'status',
-        render: text => (status === 1 ? '未添加' : '添加'),
+        render: text => (text === 1 ? '未添加' : '已添加'),
       },
       {
         title: '操作',
         dataIndex: 'name',
         key: 'name',
-        render: (text, record, index) => `${index + 1}`,
+        render: (text, record) => {
+          return record.status === 1 ? (
+            <Button style={{ background: '#F5AB1C' }} onClick={this.handleNew}>
+              添加
+            </Button>
+          ) : (
+            <Button style={{ background: '#BDBBBB' }} disabled>
+              添加
+            </Button>
+          );
+        },
       },
     ],
     dataSource: [],
