@@ -2,9 +2,9 @@
 
 import { Table, Carousel } from 'antd';
 import React from 'react';
+import { connect } from 'dva';
 import styles from './Record.less';
 import filterData from './filter';
-import { connect } from 'dva';
 
 const columns = [
   {
@@ -34,15 +34,17 @@ const columns = [
 @connect(({ commodity }) => ({ commodity }))
 export default class TableList extends React.Component {
   componentDidMount() {}
+
   state = {
     data: this.props.commodity.productLog,
   };
+
   render() {
     const { state } = this;
     const dataInfo = state.data.map(item => {
       return {
-        operation: item['operation'],
-        operateInfo: item['optTime'] + '  ' + item['operator'],
+        operation: item.operation,
+        operateInfo: `${item.optTime}  ${item.operator}`,
       };
     });
     return (

@@ -8,8 +8,6 @@ import filterProperty from '@/utils/filterProperty';
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
-// 测试数据
-
 @connect(({ commodity }) => ({ commodity }))
 class AdvancedSearchForm extends React.Component {
   state = {
@@ -67,26 +65,26 @@ class AdvancedSearchForm extends React.Component {
   // 新增产品
   handleNew = () => {
     const { dispatch } = this.props;
-    dispatch({
-      type: 'commodity/resetProduct',
-      payload: {
-        approvalNumber: '',
-        englishName: '',
-        isMp: '',
-        manufacturer: '',
-        pinyin: '',
-        productBrand: '',
-        productDesc: '',
-        productExpire: '',
-        productImage: [],
-        productModel: '',
-        productCommonName: '',
-        productSpec: '',
-        productSpecif: '',
-        productType: '',
-      },
-    });
-    router.push('/commodityAdm/management/edit');
+    // dispatch({
+    //   type: 'commodity/resetProduct',
+    //   payload: {
+    //     approvalNumber: '',
+    //     englishName: '',
+    //     isMp: '',
+    //     manufacturer: '',
+    //     pinyin: '',
+    //     productBrand: '',
+    //     productDesc: '',
+    //     productExpire: '',
+    //     productImage: [],
+    //     productModel: '',
+    //     productCommonName: '',
+    //     productSpec: '',
+    //     productSpecif: '',
+    //     productType: '',
+    //   },
+    // });
+    router.push('/commodityAdm/management/chooseProducts');
   };
 
   render() {

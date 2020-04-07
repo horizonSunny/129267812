@@ -41,7 +41,7 @@ const route = [
               {
                 path: 'management/chooseProducts',
                 name: '选择商品',
-                component: './commodity/commodityAdm/CommodityDet.tsx',
+                component: './commodity/commodityAdm/chooseProducts.tsx',
                 hideInMenu: true,
               },
               {
