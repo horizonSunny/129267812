@@ -2,6 +2,7 @@ import React from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Form, Row, Col, Input, Button, Table, Tag } from 'antd';
 import { connect } from 'dva';
+import router from 'umi/router';
 import styles from './chooseProducts.less';
 
 // 请求
@@ -129,6 +130,31 @@ class CommodityAdm extends React.Component {
       });
     });
     return false;
+  };
+
+  // 新增产品
+  handleNew = () => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'commodity/resetProduct',
+      payload: {
+        approvalNumber: '',
+        englishName: '',
+        isMp: '',
+        manufacturer: '',
+        pinyin: '',
+        productBrand: '',
+        productDesc: '',
+        productExpire: '',
+        productImage: [],
+        productModel: '',
+        productCommonName: '',
+        productSpec: '',
+        productSpecif: '',
+        productType: '',
+      },
+    });
+    router.push('/commodityAdm/management/edit');
   };
 
   render() {

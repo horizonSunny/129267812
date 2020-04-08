@@ -64,7 +64,7 @@ class AdvancedSearchForm extends React.Component {
 
   // 新增产品
   handleNew = () => {
-    const { dispatch } = this.props;
+    // const { dispatch } = this.props;
     // dispatch({
     //   type: 'commodity/resetProduct',
     //   payload: {
