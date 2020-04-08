@@ -46,12 +46,13 @@ class QueryForm extends Component {
         endTime = new Date(values.time[1]).getTime();
       }
       const params = {
-        adminName: values.adminName,
+        orderNo: values.orderNo,
+        logisticCode: values.logisticCode,
         endTime,
         startTime,
         status: values.status,
         channel: values.channel,
-        tenantName: values.tenantName,
+        productCommonName: values.productCommonName,
         province: values.province || [],
       };
       console.log('查询参数: ', params);
@@ -69,12 +70,12 @@ class QueryForm extends Component {
     const { dispatch } = this.props;
     this.props.form.resetFields();
     const params = {
-      adminName: '',
+      orderNo: '',
       endTime: '',
       startTime: '',
       status: '',
       channel: '',
-      tenantName: '',
+      productCommonName: '',
     };
     dispatch({
       type: 'businessAdm/queryFormChange',
@@ -192,22 +193,22 @@ class QueryForm extends Component {
         <Row gutter={24}>
           <Col span={8}>
             <Form.Item {...formItemLayout} label="商品名称">
-              {getFieldDecorator('tenantName', {
-                initialValue: queryForm.tenantName,
+              {getFieldDecorator('productCommonName', {
+                initialValue: queryForm.productCommonName,
               })(<Input placeholder="商品名称查询" />)}
             </Form.Item>
           </Col>
           <Col span={8}>
             <Form.Item {...formItemLayout} label="订单号">
-              {getFieldDecorator('adminName', {
-                initialValue: queryForm.adminName,
+              {getFieldDecorator('orderNo', {
+                initialValue: queryForm.orderNo,
               })(<Input placeholder="订单号码查询" />)}
             </Form.Item>
           </Col>
           <Col span={8}>
             <Form.Item {...formItemLayout} label="退货物流">
-              {getFieldDecorator('adminName', {
-                initialValue: queryForm.adminName,
+              {getFieldDecorator('logisticCode', {
+                initialValue: queryForm.logisticCode,
               })(<Input placeholder="物流单号查询" />)}
             </Form.Item>
           </Col>
