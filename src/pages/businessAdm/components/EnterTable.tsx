@@ -137,21 +137,21 @@ class EnterTable extends Component {
   handleView = (text, record) => {
     console.log('当前行的数据为:', text, record);
     const { dispatch } = this.props;
-    const { recordPagenation } = this.props.businessAdm;
+    // const { recordPagenation } = this.props.businessAdm;
     dispatch({
       type: 'businessAdm/currentRecord',
       payload: { ...record },
     });
     // 获取操作日志
-    dispatch({
-      type: 'businessAdm/getOperationRecord',
-      payload: {
-        ...recordPagenation,
-        tenantId: record.tenantId,
-        pageNumber: 0,
-        totalElements: 0,
-      },
-    });
+    // dispatch({
+    //   type: 'businessAdm/getOperationRecord',
+    //   payload: {
+    //     ...recordPagenation,
+    //     tenantId: record.tenantId,
+    //     pageNumber: 0,
+    //     totalElements: 0,
+    //   },
+    // });
     router.push('/businessAdm/enter/particulars');
   };
 
