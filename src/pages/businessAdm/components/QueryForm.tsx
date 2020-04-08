@@ -128,8 +128,8 @@ class QueryForm extends Component {
     return (
       <Form className={styles.searchform} onSubmit={this.handleSearch}>
         <Row gutter={24}>
-          <Col span={8}>
-            <Form.Item {...formItemLayout} label="入住时间">
+          <Col span={7}>
+            <Form.Item {...formItemLayout} label="创建时间">
               {getFieldDecorator('time', {
                 // initialValue: [queryForm.startTime,queryForm.endTime]
               })(
@@ -141,33 +141,49 @@ class QueryForm extends Component {
               )}
             </Form.Item>
           </Col>
-          <Col span={8}>
-            <Form.Item {...formItemLayout} label="企业状态">
+          <Col span={7}>
+            <Form.Item {...formItemLayout} label="订单状态">
               {getFieldDecorator('status', {
-                initialValue: queryForm.status,
+                initialValue: '1',
               })(
                 <Select>
-                  <Option value="">全部</Option>
-                  <Option value="1">启售</Option>
-                  <Option value="0">禁售</Option>
+                  <Option value="1">全部</Option>
+                  <Option value="2">付款</Option>
+                  <Option value="3">审核</Option>
+                  <Option value="4">代发货</Option>
+                  <Option value="5">代收货</Option>
+                  <Option value="6">退款中</Option>
+                  <Option value="7">交易成功</Option>
+                  <Option value="8">交易失败</Option>
+                  <Option value="9">交易取消</Option>
                 </Select>,
               )}
             </Form.Item>
           </Col>
-          <Col span={8}>
-            <Form.Item {...formItemLayout} label="所属渠道">
-              {getFieldDecorator('channel', {
-                initialValue: queryForm.channel,
+          <Col span={7}>
+            <Form.Item {...formItemLayout} label="配送方式">
+              {getFieldDecorator('distribution', {
+                initialValue: '0',
               })(
                 <Select>
-                  <Option value="">全部</Option>
-                  {channel.map((item, index) => {
-                    return (
-                      <Option value={item} key={index}>
-                        {item}
-                      </Option>
-                    );
-                  })}
+                  <Option value="0">全部</Option>
+                  <Option value="1">普通配送</Option>
+                  <Option value="2">加急配送</Option>
+                  <Option value="3">到店自提</Option>
+                </Select>,
+              )}
+            </Form.Item>
+          </Col>
+          <Col span={3}>
+            <Form.Item {...formItemLayout} label="来源">
+              {getFieldDecorator('channel', {
+                // initialValue: queryForm.channel,
+                initialValue: '0',
+              })(
+                <Select>
+                  <Option value="0">全部</Option>
+                  <Option value="1">全部</Option>
+                  <Option value="2">即医</Option>
                 </Select>,
               )}
             </Form.Item>
@@ -175,24 +191,24 @@ class QueryForm extends Component {
         </Row>
         <Row gutter={24}>
           <Col span={8}>
-            <Form.Item {...formItemLayout} label="地区">
-              {getFieldDecorator('province', {
-                initialValue: queryForm.province,
-              })(<Cascader options={options} changeOnSelect placeholder="省市区" />)}
-            </Form.Item>
-          </Col>
-          <Col span={8}>
-            <Form.Item {...formItemLayout} label="企业名称">
+            <Form.Item {...formItemLayout} label="商品名称">
               {getFieldDecorator('tenantName', {
                 initialValue: queryForm.tenantName,
-              })(<Input placeholder="企业名称" />)}
+              })(<Input placeholder="商品名称查询" />)}
             </Form.Item>
           </Col>
           <Col span={8}>
-            <Form.Item {...formItemLayout} label="管理员">
+            <Form.Item {...formItemLayout} label="订单号">
               {getFieldDecorator('adminName', {
                 initialValue: queryForm.adminName,
-              })(<Input placeholder="管理员" />)}
+              })(<Input placeholder="订单号码查询" />)}
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item {...formItemLayout} label="退货物流">
+              {getFieldDecorator('adminName', {
+                initialValue: queryForm.adminName,
+              })(<Input placeholder="物流单号查询" />)}
             </Form.Item>
           </Col>
         </Row>
