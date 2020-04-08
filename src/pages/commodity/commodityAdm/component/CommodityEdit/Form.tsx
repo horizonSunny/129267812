@@ -26,9 +26,11 @@ class EditForm extends React.Component {
     editorState: null,
     productType: this.props.commodity.allProductType,
   };
+
   onRef = ref => {
     this.child = ref;
   };
+
   handleSubmit = e => {
     e.preventDefault();
     const { dispatch } = this.props;
@@ -38,15 +40,14 @@ class EditForm extends React.Component {
     const list = imgList.map(item => {
       if (item.hasOwnProperty('url')) {
         return item.url;
-      } else {
-        return item.response.data;
       }
+      return item.response.data;
     });
     this.props.form.setFieldsValue({
       productImage: list,
     });
     this.props.form.validateFieldsAndScroll((err, values) => {
-      console.log('values[productImage]_', values['productImage']);
+      console.log('values[productImage]_', values.productImage);
       if (!err) {
         validateValue = true;
       }
@@ -54,12 +55,12 @@ class EditForm extends React.Component {
     if (validateValue) {
       console.log('location_', routerParams(location.search));
       const params = routerParams(location.search);
-      let typeInfo = params.id ? 'commodity/editProduct' : 'commodity/newProduct';
+      const typeInfo = params.id ? 'commodity/editProduct' : 'commodity/newProduct';
       // 判断是不是编辑
       const value = this.props.form.getFieldsValue();
-      value['productSpec'] = value['productSpec'].toHTML();
+      value.productSpec = value.productSpec.toHTML();
       if (params.id) {
-        value['productId'] = this.props.commodity.productWithId.productId;
+        value.productId = this.props.commodity.productWithId.productId;
       }
       value.productType = [value.productType];
       dispatch({
@@ -70,18 +71,22 @@ class EditForm extends React.Component {
       });
     }
   };
+
   onChange = e => {};
+
   // 判断
   validatorImg = (rule, value, callback) => {
     console.log('validatorImg_', value);
     callback();
   };
+
   handleEditorChange = editorState => {
     this.setState({ editorState });
   };
+
   render() {
     const { getFieldDecorator } = this.props.form;
-    const formInit = this.state.formInit;
+    const { formInit } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -97,7 +102,7 @@ class EditForm extends React.Component {
     const excludeControls = ['media', 'emoji'];
     const { productType } = this.state;
     return (
-      <Form className={styles['main']} {...formItemLayout} onSubmit={this.handleSubmit}>
+      <Form className={styles.main} {...formItemLayout} onSubmit={this.handleSubmit}>
         <Form.Item label="商品图">
           {getFieldDecorator('productImage', {
             rules: [
@@ -106,7 +111,7 @@ class EditForm extends React.Component {
                 message: '请填写你的商品图片',
               },
             ],
-            initialValue: formInit['productImage'],
+            initialValue: formInit.productImage,
           })(<CommodityImg onRef={this.onRef} />)}
         </Form.Item>
         <Form.Item label="通用名">
@@ -117,7 +122,7 @@ class EditForm extends React.Component {
                 message: '请填写你的商品名称',
               },
             ],
-            initialValue: formInit['productCommonName'],
+            initialValue: formInit.productCommonName,
           })(<Input />)}
         </Form.Item>
         <Form.Item label="商品类别">
@@ -128,7 +133,7 @@ class EditForm extends React.Component {
                 message: '请选择商品类别',
               },
             ],
-            initialValue: formInit['productType'][0],
+            initialValue: formInit.productType[0],
           })(
             <TreeSelect
               style={{ width: '100%' }}
@@ -146,7 +151,7 @@ class EditForm extends React.Component {
                 message: '请确认药品类别',
               },
             ],
-            initialValue: formInit['isMp'],
+            initialValue: formInit.isMp,
           })(
             <Radio.Group>
               <Radio value={0}>
@@ -159,7 +164,7 @@ class EditForm extends React.Component {
                     },
                     isMapClass,
                   )}
-                ></LabelInfo>
+                />
               </Radio>
               <Radio value={1}>
                 <LabelInfo
@@ -171,7 +176,7 @@ class EditForm extends React.Component {
                     },
                     isMapClass,
                   )}
-                ></LabelInfo>
+                />
               </Radio>
               <Radio value={2}>
                 <LabelInfo
@@ -183,7 +188,7 @@ class EditForm extends React.Component {
                     },
                     isMapClass,
                   )}
-                ></LabelInfo>
+                />
               </Radio>
               <Radio value={3}>
                 <LabelInfo
@@ -195,7 +200,7 @@ class EditForm extends React.Component {
                     },
                     isMapClass,
                   )}
-                ></LabelInfo>
+                />
               </Radio>
             </Radio.Group>,
           )}
@@ -208,7 +213,7 @@ class EditForm extends React.Component {
                 message: '请填写你的商品品牌',
               },
             ],
-            initialValue: formInit['productBrand'],
+            initialValue: formInit.productBrand,
           })(<Input />)}
         </Form.Item>
         <Form.Item label="商品简介">
@@ -219,7 +224,7 @@ class EditForm extends React.Component {
                 message: '请填写你的商品简介',
               },
             ],
-            initialValue: formInit['productDesc'],
+            initialValue: formInit.productDesc,
           })(<Input.TextArea />)}
         </Form.Item>
         <Form.Item label="批准文号">
@@ -230,7 +235,7 @@ class EditForm extends React.Component {
                 message: '请填写你的批准文号',
               },
             ],
-            initialValue: formInit['approvalNumber'],
+            initialValue: formInit.approvalNumber,
           })(<Input />)}
         </Form.Item>
         <Form.Item label="产品规格">
@@ -241,7 +246,7 @@ class EditForm extends React.Component {
                 message: '请填写你的产品规格',
               },
             ],
-            initialValue: formInit['productSpecif'],
+            initialValue: formInit.productSpecif,
           })(<Input />)}
         </Form.Item>
         <Form.Item label="剂型/型号">
@@ -252,19 +257,19 @@ class EditForm extends React.Component {
                 message: '请填写你的剂型/型号',
               },
             ],
-            initialValue: formInit['productModel'],
+            initialValue: formInit.productModel,
           })(<Input />)}
         </Form.Item>
         <Form.Item label="英文名">
           {getFieldDecorator('englishName', {
             rules: [],
-            initialValue: formInit['englishName'] ? formInit['englishName'] : '',
+            initialValue: formInit.englishName ? formInit.englishName : '',
           })(<Input />)}
         </Form.Item>
         <Form.Item label="汉语拼音">
           {getFieldDecorator('pinyin', {
             rules: [],
-            initialValue: formInit['pinyin'] ? formInit['pinyin'] : '',
+            initialValue: formInit.pinyin ? formInit.pinyin : '',
           })(<Input />)}
         </Form.Item>
         <Form.Item label="产品有效期">
@@ -275,7 +280,7 @@ class EditForm extends React.Component {
                 message: '请填写你的产品有效期',
               },
             ],
-            initialValue: formInit['productExpire'],
+            initialValue: formInit.productExpire,
           })(<Input />)}
         </Form.Item>
         <Form.Item label="生产企业">
@@ -286,7 +291,7 @@ class EditForm extends React.Component {
                 message: '请填写你的生产企业',
               },
             ],
-            initialValue: formInit['manufacturer'],
+            initialValue: formInit.manufacturer,
           })(<Input />)}
         </Form.Item>
         <Form.Item label="说明书">
@@ -304,7 +309,7 @@ class EditForm extends React.Component {
                 },
               },
             ],
-            initialValue: BraftEditor.createEditorState(formInit['productSpec']),
+            initialValue: BraftEditor.createEditorState(formInit.productSpec),
           })(
             <BraftEditor
               style={{ border: '1px solid #d1d1d1', borderRadius: 5 }}
