@@ -4,6 +4,7 @@ import { connect } from 'dva';
 import { Button } from 'antd';
 import router from 'umi/router';
 import styles from './particulars.less';
+// import { ReceivingInfo, Prescription CommodityInfo,OrderTime,Refund} from './particularsComponents/index';
 import {
   Title,
   BaseInfo,
