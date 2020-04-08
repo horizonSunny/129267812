@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import styles from './index.less';
 import { connect } from 'dva';
+import styles from './index.less';
+
 @connect(({ businessAdm }) => ({
-  businessAdm: businessAdm,
+  businessAdm,
 }))
 class Qualification extends Component {
   render() {

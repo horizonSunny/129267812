@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
-import styles from './index.less';
 import { connect } from 'dva';
+import styles from './index.less';
+
 @connect(({ businessAdm }) => ({
-  businessAdm: businessAdm,
+  businessAdm,
 }))
 class BaseInfo extends Component {
   transTenantType = value => {
     if (value === 0) {
       return '单体药店';
-    } else if (value === 1) {
+    }
+    if (value === 1) {
       return '连锁药店';
-    } else if (value === 2) {
+    }
+    if (value === 2) {
       return '批发企业';
     }
   };
+
   render() {
     const { currentRecord } = this.props.businessAdm;
     return (
