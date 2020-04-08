@@ -111,17 +111,13 @@ class CommodityAdm extends React.Component {
 
   // 分页器
   onChange = e => {
-    console.log('触发', this.props.searchInfo);
+    console.log('触发', this.searchInfo);
     const { dispatch } = this.props;
     const currentPage = e.current - 1;
     console.log('触发currentPage_', currentPage);
     dispatch({
-      type: 'commodity/getList',
-      payload: {
-        pageNumber: currentPage,
-        pageSize: 10,
-        keyword: this.state.searchInfo,
-      },
+      type: 'commodity/productTemplateList',
+      payload: { pageNumber: currentPage, pageSize: 10, keyword: this.state.searchInfo },
     }).then(res => {
       this.setState({
         dataSource: res.pageList,

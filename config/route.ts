@@ -60,12 +60,12 @@ const route = [
           },
           {
             path: '/businessAdm',
-            name: '企业管理',
+            name: '订单管理',
             icon: 'home',
             routes: [
               {
                 path: '/businessAdm/enter',
-                name: '入驻企业',
+                name: '订单管理 ',
                 component: './businessAdm/businessEnter',
               },
               // {

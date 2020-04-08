@@ -1,37 +1,38 @@
 import React, { Component } from 'react';
 import { Card, Typography, Alert } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import { connect } from 'dva';
 import styles from './businessEnter.less';
 import QueryForm from './components/QueryForm';
 import EnterTable from './components/EnterTable';
-import { connect } from 'dva';
 
 @connect(({ businessAdm }) => ({
-  businessAdm: businessAdm
+  businessAdm,
 }))
 class BusinessEnter extends Component {
-  componentDidMount () {
+  componentDidMount() {
     const { dispatch } = this.props;
-    const { queryForm, pagenation } = this.props.businessAdm
-    let params = {
+    const { queryForm, pagenation } = this.props.businessAdm;
+    const params = {
       ...queryForm,
-      ...pagenation
-    }
+      ...pagenation,
+    };
     // 查询列表
     dispatch({
       type: 'businessAdm/queryList',
-      payload: { ...params }
+      payload: { ...params },
     });
   }
+
   render() {
     return (
       <PageHeaderWrapper>
         <div className={styles.container}>
           <div className={styles.containerForm}>
-            <QueryForm></QueryForm>
+            <QueryForm />
           </div>
           <div className={styles.containerTable}>
-            <EnterTable></EnterTable>
+            <EnterTable />
           </div>
         </div>
       </PageHeaderWrapper>
