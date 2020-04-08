@@ -10,60 +10,86 @@ const { confirm } = Modal;
 class EnterTable extends Component {
   columns = [
     {
-      title: '企业编码',
-      dataIndex: 'tenantCode',
-      key: 'tenantCode',
+      title: '订单号',
+      dataIndex: 'orderNo',
+      key: 'orderNo ',
     },
     {
-      title: '入驻时间',
+      title: '创建时间',
       dataIndex: 'createTime',
       key: 'createTime',
     },
     {
-      title: '企业名称',
-      dataIndex: 'tenantName',
-      key: 'tenantName',
+      title: '买家ID',
+      dataIndex: 'userId',
+      key: 'userId',
     },
     {
-      title: '管理员',
-      dataIndex: 'adminName',
-      key: 'adminName',
+      title: '收货人姓名',
+      dataIndex: 'fullName',
+      key: 'fullName',
+      render: (text, record) => <span>{record.deliveryAddress.fullName}</span>,
     },
     {
-      title: '管理员手机号',
-      dataIndex: 'adminTel',
-      key: 'adminTel',
+      title: '收货人手机号',
+      dataIndex: 'phone',
+      key: 'phone',
+      render: (text, record) => <span>{record.deliveryAddress.phone}</span>,
     },
-    {
-      title: '地区',
-      dataIndex: 'address',
-      key: 'address',
-      render: (text, record) => (
-        <span>
-          {record.province}
-          {record.city}
-        </span>
-      ),
-    },
-    {
-      title: '渠道',
-      dataIndex: 'channel',
-      key: 'channel',
-    },
+    // {
+    //   title: '地区',
+    //   dataIndex: 'address',
+    //   key: 'address',
+    //   render: (text, record) => (
+    //     <span>
+    //       {record.province}
+    //       {record.city}
+    //     </span>
+    //   ),
+    // },
     {
       title: '状态',
-      dataIndex: 'status',
-      key: 'status',
-      render: (text, record) => (
-        <span>
-          {text ? '启售' : '禁售'}{' '}
-          <Switch
-            checked={!!text}
-            defaultChecked={!!text}
-            onChange={() => this.handleSwitchChange(text, record)}
-          />
-        </span>
-      ),
+      dataIndex: 'orderStatus',
+      key: 'orderStatus',
+      render: text => {
+        switch (text) {
+          case -1:
+            return <span>申请退款</span>;
+          case -2:
+            return <span>已退款</span>;
+          case 0:
+            return <span>待付款</span>;
+          case 1:
+            return <span>待审核</span>;
+          case 2:
+            return <span>待发货</span>;
+          case 3:
+            return <span>待收货</span>;
+          case 4:
+            return <span>待评价</span>;
+          case 5:
+            return <span>已取消</span>;
+          case 6:
+            return <span>已评价</span>;
+          default:
+            break;
+        }
+      },
+    },
+    {
+      title: '来源',
+      dataIndex: 'orderSource',
+      key: 'orderSource',
+      render: text => {
+        switch (text) {
+          case 0:
+            return <span>商城</span>;
+          case 1:
+            return <span>即医</span>;
+          default:
+            return <span>全部</span>;
+        }
+      },
     },
     {
       title: '操作',
@@ -74,13 +100,6 @@ class EnterTable extends Component {
         <div>
           <Button type="primary" onClick={() => this.handleView(text, record)}>
             查看
-          </Button>
-          <Button
-            style={{ marginLeft: '8px' }}
-            type="primary"
-            onClick={() => this.handleUpdate(text, record)}
-          >
-            编辑
           </Button>
         </div>
       ),

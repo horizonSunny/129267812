@@ -2,9 +2,9 @@ import request from '@/utils/request';
 
 export async function queryBusiness(params) {
   console.log('列表最终参数为:', params);
-  return request('/admin/v1/tenant', {
+  return request('/order/sysOrder/orderList', {
     method: 'get',
-    params: params,
+    params,
   });
 }
 
@@ -31,13 +31,13 @@ export async function switchStatus(params) {
 
 export async function queryChannel() {
   return request('/admin/v1/tenant/channel', {
-    method: 'get'
+    method: 'get',
   });
 }
 
 export async function queryOperation(params) {
   return request('/admin/v1/log', {
     method: 'get',
-    params: params
+    params,
   });
 }

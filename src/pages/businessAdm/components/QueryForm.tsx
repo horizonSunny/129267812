@@ -50,10 +50,10 @@ class QueryForm extends Component {
         logisticCode: values.logisticCode,
         endTime,
         startTime,
-        status: values.status,
-        channel: values.channel,
+        orderStatus: values.status,
+        orderSource: values.channel,
         productCommonName: values.productCommonName,
-        province: values.province || [],
+        shipperTypeId: values.shipperTypeId,
       };
       console.log('查询参数: ', params);
       // 查询列表
@@ -71,11 +71,11 @@ class QueryForm extends Component {
     this.props.form.resetFields();
     const params = {
       orderNo: '',
-      endTime: '',
-      startTime: '',
-      status: '',
-      channel: '',
+      logisticCode: '',
+      orderStatus: 1,
+      orderSource: 0,
       productCommonName: '',
+      shipperTypeId: 0,
     };
     dispatch({
       type: 'businessAdm/queryFormChange',
@@ -163,7 +163,7 @@ class QueryForm extends Component {
           </Col>
           <Col span={7}>
             <Form.Item {...formItemLayout} label="配送方式">
-              {getFieldDecorator('distribution', {
+              {getFieldDecorator('shipperTypeId', {
                 initialValue: '0',
               })(
                 <Select>
@@ -183,7 +183,7 @@ class QueryForm extends Component {
               })(
                 <Select>
                   <Option value="0">全部</Option>
-                  <Option value="1">全部</Option>
+                  <Option value="1">商城</Option>
                   <Option value="2">即医</Option>
                 </Select>,
               )}

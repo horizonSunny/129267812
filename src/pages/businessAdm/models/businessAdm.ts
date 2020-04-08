@@ -1,29 +1,38 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
-import { queryBusiness, insertBusiness, saveBusiness, switchStatus, queryChannel, queryOperation } from '@/services/businessAdm';
+import {
+  queryBusiness,
+  insertBusiness,
+  saveBusiness,
+  switchStatus,
+  queryChannel,
+  queryOperation,
+} from '@/services/businessAdm';
+
 const businessAdm = {
   namespace: 'businessAdm',
 
   state: {
     businessData: [],
     queryForm: {
-      adminName: '',
+      productCommonName: '',
       endTime: '',
       startTime: '',
-      status: '',
-      channel: '',
-      tenantName: '',
-      province: [],
+      logisticCode: '',
+      orderSource: 0,
+      orderNo: '',
+      orderStatus: 1,
+      shipperTypeId: 0,
     },
     pagenation: {
       pageNumber: 0,
       pageSize: 10,
-      total: 0,
-      showSizeChanger: true,
-      showQuickJumper: true,
-      showTotal: total => {
-        return `共 ${total} 条`;
-      },
+      // total: 0,
+      // showSizeChanger: true,
+      // showQuickJumper: true,
+      // showTotal: total => {
+      //   return `共 ${total} 条`;
+      // },
     },
     currentRecord: {},
     channel: [],
@@ -31,15 +40,15 @@ const businessAdm = {
     recordPagenation: {
       pageNumber: 0,
       pageSize: 10,
-      totalElements: 0
-    }
+      totalElements: 0,
+    },
   },
 
   effects: {
     *queryList({ payload }, { call, put }) {
-      if (payload.province && payload.province.length > 0) {
-        payload.province = payload.province.join(',');
-      }
+      // if (payload.province && payload.province.length > 0) {
+      //   payload.province = payload.province.join(',');
+      // }
       const response = yield call(queryBusiness, payload);
       if (response && response.code === 1) {
         yield put({
@@ -52,28 +61,28 @@ const businessAdm = {
     *queryFormChange({ payload }, { call, put }) {
       yield put({
         type: 'formChange',
-        payload: payload,
+        payload,
       });
       return payload;
     },
     *queryPagenationChange({ payload }, { call, put }) {
       yield put({
         type: 'pageNationChange',
-        payload: payload,
+        payload,
       });
       return payload;
     },
     *currentRecord({ payload }, { call, put }) {
       yield put({
         type: 'record',
-        payload: payload,
+        payload,
       });
       return payload;
     },
     *saveBusiness({ payload }, { call, put, select }) {
       const data = yield select(state => state.businessAdm.currentRecord);
       let response = {};
-      let tempenterpriseQualification = [];
+      const tempenterpriseQualification = [];
       if (payload.enterpriseQualification.length > 0) {
         payload.enterpriseQualification.forEach(item => {
           if (!item.url) {
@@ -86,7 +95,7 @@ const businessAdm = {
         });
         payload.enterpriseQualification = tempenterpriseQualification;
       }
-      let tempstoreLive = [];
+      const tempstoreLive = [];
       if (payload.storeLive.length > 0) {
         payload.storeLive.forEach(item => {
           if (!item.url) {
@@ -96,7 +105,7 @@ const businessAdm = {
         });
         payload.storeLive = tempstoreLive;
       }
-      let tempParam = Object.assign({}, data, payload);
+      const tempParam = Object.assign({}, data, payload);
       if (data && data.tenantId) {
         // 更新
         response = yield call(saveBusiness, tempParam);
@@ -118,12 +127,12 @@ const businessAdm = {
       if (response && response.code === 1) {
         yield put({
           type: 'switchSave',
-          payload: payload,
+          payload,
         });
       }
       return response;
     },
-    *initChannel(_, { call, put }){
+    *initChannel(_, { call, put }) {
       const response = yield call(queryChannel);
       if (response && response.code === 1) {
         yield put({
@@ -133,7 +142,7 @@ const businessAdm = {
       }
       return response;
     },
-    *getOperationRecord({ payload }, { call, put }){
+    *getOperationRecord({ payload }, { call, put }) {
       yield put({
         type: 'operaRecord',
         payload: [],
@@ -149,16 +158,17 @@ const businessAdm = {
           payload: {
             pageNumber: response.data.pageNumber,
             pageSize: response.data.pageSize,
-            totalElements: response.data.totalElements
+            totalElements: response.data.totalElements,
           },
         });
       }
-    }
+    },
   },
 
   reducers: {
+    // 设置订单list集合
     queryData(state, action) {
-      let pagenation = {
+      const pagenation = {
         pageNumber: action.payload.pageNumber,
         pageSize: action.payload.pageSize,
         total: action.payload.totalElements,
@@ -176,7 +186,7 @@ const businessAdm = {
       };
     },
     pageNationChange(state, action) {
-      let tempPagenation = {
+      const tempPagenation = {
         ...state.pagenation,
         ...action.payload,
       };
@@ -198,8 +208,8 @@ const businessAdm = {
       };
     },
     switchSave(state, action) {
-      let tempbusinessData = state.businessData;
-      let result = action.payload;
+      const tempbusinessData = state.businessData;
+      const result = action.payload;
       tempbusinessData.map(item => {
         if (item.tenantId === result.tenantId) {
           item.status = result.status;
