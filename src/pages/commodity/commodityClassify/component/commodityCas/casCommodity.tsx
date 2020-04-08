@@ -1,22 +1,25 @@
 import React from 'react';
 import { Table, Input, Button } from 'antd';
+import { connect } from 'dva';
 import { commodityItem } from './commodityItem';
-const { Search } = Input;
 import styles from './casCommodity.less';
 import AddCommodity from '../../modelComponent/addCommodity';
 import SortTo from '../../modelComponent/sortTo';
-import { connect } from 'dva';
+
+const { Search } = Input;
 
 @connect(({ commodityClassify }) => ({
   commodityClassify,
 }))
 export default class CasCommodity extends React.Component {
   state = {};
+
   components = {
     body: {
       row: commodityItem,
     },
   };
+
   onSelectChange = selectedRowKeys => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
     // this.setState({ selectedRowKeys });
@@ -28,6 +31,7 @@ export default class CasCommodity extends React.Component {
       });
     }
   };
+
   downSelect = () => {
     return (
       <div className="buttonContain">
@@ -38,6 +42,7 @@ export default class CasCommodity extends React.Component {
       </div>
     );
   };
+
   search = e => {
     const { dispatch } = this.props;
     if (dispatch) {
@@ -47,6 +52,7 @@ export default class CasCommodity extends React.Component {
       });
     }
   };
+
   onSearch = e => {
     console.log('onSearch_', e);
     const { dispatch } = this.props;
@@ -56,6 +62,7 @@ export default class CasCommodity extends React.Component {
       });
     }
   };
+
   // 移除选中的药物
   removeCom() {
     const { dispatch } = this.props;
@@ -65,20 +72,25 @@ export default class CasCommodity extends React.Component {
       });
     }
   }
+
   //  为此分类下添加商品
   onRef = ref => {
     this.child = ref;
   };
+
   clickModal() {
     this.child.showModal();
   }
+
   // 分类至弹窗
   onSortTo = ref => {
     this.childSortTo = ref;
   };
+
   clickSortModal() {
     this.childSortTo.showModal();
   }
+
   render() {
     const columns = [
       {
@@ -94,7 +106,7 @@ export default class CasCommodity extends React.Component {
       onChange: this.onSelectChange,
     };
     return (
-      <div className={styles['main']}>
+      <div className={styles.main}>
         <div
           style={{
             textAlign: 'center',
@@ -114,7 +126,7 @@ export default class CasCommodity extends React.Component {
                 color: 'red',
               }}
             >
-              {this.props.commodityClassify.commodityInfo['totalElements']}
+              {this.props.commodityClassify.commodityInfo.totalElements}
             </span>
             件商品
           </div>
@@ -149,8 +161,8 @@ export default class CasCommodity extends React.Component {
             total: this.props.commodityClassify.commodityInfo.pageList.length,
           }}
         />
-        <AddCommodity onRef={this.onRef}></AddCommodity>
-        <SortTo onRef={this.onSortTo}></SortTo>
+        <AddCommodity onRef={this.onRef} />
+        <SortTo onRef={this.onSortTo} />
       </div>
     );
   }

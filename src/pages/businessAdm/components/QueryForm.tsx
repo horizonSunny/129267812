@@ -222,12 +222,15 @@ class QueryForm extends Component {
               重置
             </Button>
             <Button
-              type="danger"
-              icon="plus"
-              style={{ marginLeft: 16 }}
+              style={{
+                marginLeft: 16,
+                borderRadius: '4px',
+                border: '1px solid rgba(72,116,239,1)',
+                color: 'rgba(72,116,239,1)',
+              }}
               onClick={this.handleInsert}
             >
-              添加
+              导出
             </Button>
           </Col>
         </Row>

@@ -155,6 +155,18 @@ class EnterTable extends Component {
     router.push('/businessAdm/enter/particulars');
   };
 
+  onSelectChange = selectedRowKeys => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    // this.setState({ selectedRowKeys });
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'businessAdm/modifyCommodity',
+        payload: selectedRowKeys,
+      });
+    }
+  };
+
   handleUpdate = (text, record) => {
     console.log('当前行的数据为:', text, record);
     const { dispatch } = this.props;
@@ -186,12 +198,19 @@ class EnterTable extends Component {
 
   render() {
     const { businessAdm } = this.props;
+    // 这里必须用状态管理中的数据,要是this.state会留存上一次的数据
+    const { selectedRowKeys } = businessAdm;
+    const rowSelection = {
+      selectedRowKeys,
+      onChange: this.onSelectChange,
+    };
     return (
       <Table
         style={{ paddingLeft: '10px', paddingRight: '10px' }}
         rowKey="tenantId"
         dataSource={businessAdm.businessData}
         columns={this.columns}
+        rowSelection={rowSelection}
         pagination={businessAdm.pagenation}
         onChange={this.onChange}
         scroll={{ x: 1200 }}

@@ -42,6 +42,7 @@ const businessAdm = {
       pageSize: 10,
       totalElements: 0,
     },
+    selectedRowKeys: [],
   },
 
   effects: {
@@ -237,6 +238,14 @@ const businessAdm = {
       return {
         ...state,
         recordPagenation: action.payload,
+      };
+    },
+    // 修改清空选中商品数据
+    modifyCommodity(state, action) {
+      console.log('action_modifyCommodity_', action.payload);
+      return {
+        ...state,
+        selectedRowKeys: action.payload,
       };
     },
   },
