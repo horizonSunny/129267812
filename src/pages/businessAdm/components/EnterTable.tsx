@@ -28,13 +28,17 @@ class EnterTable extends Component {
       title: '收货人姓名',
       dataIndex: 'fullName',
       key: 'fullName',
-      render: (text, record) => <span>{record.deliveryAddress.fullName}</span>,
+      render: (text, record) => (
+        <span>{record.deliveryAddress ? record.deliveryAddress.fullName : '自提'}</span>
+      ),
     },
     {
       title: '收货人手机号',
       dataIndex: 'phone',
       key: 'phone',
-      render: (text, record) => <span>{record.deliveryAddress.phone}</span>,
+      render: (text, record) => (
+        <span>{record.deliveryAddress ? record.deliveryAddress.phone : '自提'}</span>
+      ),
     },
     // {
     //   title: '地区',

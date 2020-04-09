@@ -1,8 +1,9 @@
 export default {
   theme: {
-    'title-size': '14px',
+    'title-font-size': '14px',
     'title-line-height': '22px',
-    'content-size': '13px',
+    'title-font-weight': 500,
+    'content-font-size': '13px',
     'content-line-height': '21px',
   },
 };

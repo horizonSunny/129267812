@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import styles from './index.less';
+import { orderStatus } from '@/utils/configInfo';
 
 @connect(({ businessAdm }) => ({
   businessAdm,
@@ -8,14 +9,7 @@ import styles from './index.less';
 class Title extends Component {
   render() {
     const { currentRecord } = this.props.businessAdm;
-    return (
-      <div className={`${styles.infopart} ${styles.company}`}>
-        {/* <img src="../../../assets/banner.png" alt="" /> */}
-        <span className={`${styles.companyName}`}>
-          {currentRecord.tenantName}({currentRecord.tenantCode})
-        </span>
-      </div>
-    );
+    return <div className={`${styles.infopart}`}>{orderStatus(currentRecord.orderStatus)}</div>;
   }
 }
 
