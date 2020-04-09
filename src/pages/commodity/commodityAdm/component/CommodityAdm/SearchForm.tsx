@@ -129,6 +129,7 @@ class AdvancedSearchForm extends React.Component {
             span={8}
             style={{
               maxWidth: '500px',
+              background: '@title-background',
             }}
           >
             <Form.Item label="商品分类">

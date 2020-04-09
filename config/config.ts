@@ -2,6 +2,7 @@ import { IConfig, IPlugin } from 'umi-types';
 import defaultSettings from './defaultSettings'; // https://umijs.org/config/
 import slash from 'slash2';
 import themePluginConfig from './themePluginConfig';
+import customPluginConfig from './customPluginConfig';
 // route 单独配置，为了扩展之后的动态或者模块配置
 import route from './route';
 const { pwa } = defaultSettings;
@@ -78,9 +79,8 @@ export default {
   // umi routes: https://umijs.org/zh/guide/router.html
   routes: route,
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
-  theme: {
-    // ...darkTheme,
-  },
+  theme: customPluginConfig.theme,
+  // theme: './customPluginConfig',
   define: {
     ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION:
       ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION || '', // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
