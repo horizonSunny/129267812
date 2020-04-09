@@ -28,22 +28,23 @@ export default class Table extends React.Component {
       });
     }
   }
+
   render() {
     return (
       <PageHeaderWrapper>
         <DndProvider backend={HTML5Backend}>
-          <Row className={styles['main']}>
+          <Row className={styles.main}>
             <Col span={5}>
-              <CasTable levelInfo="One"></CasTable>
+              <CasTable levelInfo="One" />
             </Col>
             <Col span={5}>
-              <CasTable levelInfo="Two"></CasTable>
+              <CasTable levelInfo="Two" />
             </Col>
             <Col span={5}>
-              <CasTable levelInfo="Three"></CasTable>
+              <CasTable levelInfo="Three" />
             </Col>
             <Col span={9}>
-              <CasCommodity></CasCommodity>
+              <CasCommodity />
             </Col>
           </Row>
         </DndProvider>

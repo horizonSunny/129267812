@@ -33,74 +33,44 @@
   }
 }
 
-.company {
-  border-bottom: 1px solid #efefef;
-}
-
-.companyName {
-  font-size: 18px;
-  font-weight: 600;
-  display: inline-block;
-  margin-left: 20px;
-}
-
-.title {
-  font-size: 14px;
-  color: #3a7aff;
-  margin-left: 10px;
-  font-weight: 500;
-  margin-bottom: 10px;
-}
-
 .table {
-  table {
-    width: 100%;
-    border-collapse: collapse;
+  margin-top: 10px;
+
+  .titleInfo {
+    height: 40px;
+    line-height: 40px;
+    font-size: @title-font-size;
+    font-weight: @title-font-weight;
+    color: rgba(27, 27, 27, 1);
+    border: 1px solid rgba(232, 232, 232, 1);
+    border-bottom: 0px;
+    padding: 0px 16px;
   }
 
-  table td {
-    border: 1px solid #c9d1f8;
-    color: #666;
-    height: 30px;
-    padding: 8px 20px;
-  }
+  .tableContent {
+    border: 1px solid rgba(232, 232, 232, 1);
+    padding: 15px 31px;
 
-  .tableleft {
-    width: 280px;
-  }
-
-  .operater {
-    display: inline-block;
-    margin-left: 30px;
-  }
-}
-
-.picList {
-  display: flex;
-  flex-flow: row wrap;
-
-  .picItem {
-    width: 200px;
-    height: 280px;
-    margin-right: 20px;
-    text-align: center;
-    box-sizing: border-box;
-    // border: 1px solid #ccc;
-    margin-top: 10px;
-
-    img {
-      height: 240px;
-      width: 200px;
+    .label {
+      font-size: @title-font-size;
+      font-weight: @content-font-weight;
+      color: rgba(27, 27, 27, 1);
     }
 
-    .picName {
-      margin-top: 10px;
-      font-size: 16px;
-      font-weight: 500;
+    .message {
+      font-size: @content-font-size;
+      font-weight: @content-font-weight;
+      color: rgba(27, 27, 27, 1);
+    }
+
+    .lineInfo {
+      margin-bottom: 10px;
+    }
+
+    .prescribImg {
+      width: 140px;
+      height: 140px;
+      margin: 0px 24px 24px 0px;
     }
   }
-}
-
-.page {
-  margin-top: 5px;
 }

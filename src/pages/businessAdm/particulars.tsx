@@ -5,13 +5,7 @@ import { Button } from 'antd';
 import router from 'umi/router';
 import styles from './particulars.less';
 // import { ReceivingInfo, Prescription CommodityInfo,OrderTime,Refund} from './particularsComponents/index';
-import {
-  Title,
-  BaseInfo,
-  Qualification,
-  Shopscene,
-  Operationrecord,
-} from './particularsComponents/index';
+import { Title, Delivery, Prescription } from './particularsComponents/index';
 
 class Particulars extends Component {
   handleEdit = () => {
@@ -28,6 +22,8 @@ class Particulars extends Component {
         <div className={styles.container}>
           <div className={`${styles.content}`}>
             <Title />
+            <Delivery />
+            <Prescription />
           </div>
         </div>
       </PageHeaderWrapper>
