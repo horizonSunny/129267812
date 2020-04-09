@@ -17,10 +17,13 @@ class DeliverModal extends Component {
   };
 
   handleCancel = e => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'businessAdm/resetDeliverModal',
+        payload: false,
+      });
+    }
   };
 
   render() {
@@ -29,8 +32,7 @@ class DeliverModal extends Component {
       <Modal
         title="Basic Modal"
         visible={deliverModalStatus}
-        // onOk={this.handleOk}
-        // onCancel={this.handleCancel}
+        onCancel={this.handleCancel}
         footer={null}
       >
         <p>Some contents...</p>

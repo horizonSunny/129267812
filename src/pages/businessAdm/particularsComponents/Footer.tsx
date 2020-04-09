@@ -9,11 +9,23 @@ import tipsIcon from '@/assets/order/Tips-icon.svg';
   businessAdm,
 }))
 class Footer extends Component {
+  openModal = () => {
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'businessAdm/resetDeliverModal',
+        payload: true,
+      });
+    }
+  };
+
   render() {
     const { currentRecord } = this.props.businessAdm;
     return (
       <div className={`${styles.footer}`}>
-        <Button style={{ background: '#F5AB1C' }}>发货</Button>
+        <Button onClick={this.openModal} style={{ background: '#F5AB1C' }}>
+          发货
+        </Button>
         <Button style={{ background: '#4874EF' }}>取货码核销</Button>
       </div>
     );
