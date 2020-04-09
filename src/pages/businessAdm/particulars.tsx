@@ -12,6 +12,7 @@ import {
   PurchaseInfo,
   Rest,
   Footer,
+  DeliverModal,
 } from './particularsComponents/index';
 
 class Particulars extends Component {
@@ -34,6 +35,7 @@ class Particulars extends Component {
             <PurchaseInfo />
             <Rest />
             <Footer />
+            <DeliverModal />
           </div>
         </div>
       </PageHeaderWrapper>

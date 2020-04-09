@@ -43,6 +43,8 @@ const businessAdm = {
       totalElements: 0,
     },
     selectedRowKeys: [],
+    // 发货弹窗，初始关闭
+    deliverModalStatus: false,
   },
 
   effects: {
@@ -246,6 +248,13 @@ const businessAdm = {
       return {
         ...state,
         selectedRowKeys: action.payload,
+      };
+    },
+    // 订单详情页面打开或者发货弹窗
+    resetDeliverModal(state, action) {
+      return {
+        ...state,
+        deliverModalStatus: action.payload,
       };
     },
   },
