@@ -9,7 +9,15 @@ import { orderStatus } from '@/utils/configInfo';
 class Title extends Component {
   render() {
     const { currentRecord } = this.props.businessAdm;
-    return <div className={`${styles.infopart}`}>{orderStatus(currentRecord.orderStatus)}</div>;
+    return (
+      <div className={`${styles.title}`}>
+        <div className={`${styles.infopart}`}>
+          <span>{orderStatus(currentRecord.orderStatus)}</span>
+          <span className={`${styles.timeRemaining}`}>剩余23小时56分59秒自动关闭</span>
+        </div>
+        <div>1</div>
+      </div>
+    );
   }
 }
 

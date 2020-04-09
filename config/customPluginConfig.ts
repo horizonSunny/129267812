@@ -4,6 +4,7 @@ export default {
     'title-line-height': '22px',
     'title-font-weight': 500,
     'content-font-size': '13px',
+    'content-font-weight': 400,
     'content-line-height': '21px',
   },
 };

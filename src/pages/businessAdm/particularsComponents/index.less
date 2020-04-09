@@ -1,9 +1,22 @@
 @import '~antd/es/style/themes/default.less';
 
-.infopart {
-  font-size: @title-font-size;
-  font-weight: @title-font-weight;
-  color: #1B1B1B
+.title {
+  display: flex;
+  justify-content: space-between;
+
+  .infopart {
+    font-size: @title-font-size;
+    font-weight: @title-font-weight;
+    color: #1B1B1B;
+
+    .timeRemaining {
+      margin-left: 10px;
+      font-size: @content-font-size;
+      font-weight: @content-font-weight;
+      color: rgba(137, 137, 137, 1);
+      line-height: @content-line-height;
+    }
+  }
 }
 
 .company {
