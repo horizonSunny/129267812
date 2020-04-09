@@ -1,0 +1,52 @@
+@import '~antd/es/style/themes/default.less';
+
+.main {
+  height: 88px;
+  width: 100%;
+
+  .leftInfo {
+    display: flex;
+    align-items: center;
+
+    .leftMessage {
+      padding-top: 5px;
+      padding-left: 5px;
+      height: 83px;
+
+      .productName {
+        font-size: @title-font-size;
+        font-weight: @content-font-weight;
+        color: rgba(27, 27, 27, 1);
+      }
+
+      .productSpecif {
+        font-size: @content-font-size;
+        font-weight: @content-font-weight;
+        color: #898989;
+      }
+    }
+
+    img {
+      width: 60px;
+      height: 58px;
+    }
+  }
+
+  .rightInfo {
+    padding-top: 5px;
+    height: 83px;
+
+    .price {
+      font-size: @content-font-size;
+      font-weight: @content-font-weight;
+      color: rgba(27, 27, 27, 1);
+    }
+
+    .cartNum {
+      font-size: @content-font-size;
+      font-weight: @content-font-weight;
+      color: rgba(137, 137, 137, 1);
+      float: right;
+    }
+  }
+}
