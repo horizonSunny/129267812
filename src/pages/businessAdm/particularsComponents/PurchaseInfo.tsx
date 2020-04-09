@@ -11,7 +11,7 @@ class PurchaseInfo extends Component {
     const { currentRecord } = this.props.businessAdm;
     return (
       <div className={`${styles.table}`}>
-        <div className={`${styles.titleInfo}  `}>商品购买信息</div>
+        <div className={`${styles.titleInfo}`}>商品购买信息</div>
         <div className={`${styles.tableContent}`}>
           <div className={`${'flex-between'} ${styles.lineInfo}`}>
             {currentRecord.orderItems &&
@@ -30,6 +30,12 @@ class PurchaseInfo extends Component {
           <div className={`${'flex-between'} `}>
             <div className={`${styles.label}`}>配送方式 普通快递</div>
             <div className={`${styles.message}`}>￥0.00</div>
+          </div>
+        </div>
+        <div className={`${styles.footers} ${'flex-between'}`}>
+          <div />
+          <div>
+            订单总价 <span className={`${styles.price}`}> ¥464.00</span>
           </div>
         </div>
       </div>

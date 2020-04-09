@@ -73,4 +73,37 @@
       margin: 0px 24px 24px 0px;
     }
   }
+
+  .footers {
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid rgba(232, 232, 232, 1);
+    border-top: 0px;
+    padding: 0px 31px;
+    font-size: @content-font-size;
+    font-weight: @content-font-weight;
+    font-weight: 600;
+
+    .price {
+      color: #FA4949
+    }
+  }
+}
+
+.footer {
+  float: right;
+  margin-top: 39px;
+
+  :global {
+    .ant-btn {
+      width: 120px;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 4px;
+      font-size: @title-font-size;
+      font-weight: @title-font-weight;
+      margin-left: 40px;
+      color: #fff;
+    }
+  }
 }
