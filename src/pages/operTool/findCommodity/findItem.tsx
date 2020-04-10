@@ -53,6 +53,19 @@ class FindItem extends React.Component {
     if (dispatch) {
       dispatch({
         type: 'operTool/categoryTree',
+      }).then(() => {
+        // 同时使得已经选过的tree及其子类隐藏
+        const tag = this.state.tags.map(item => {
+          return item[item.length - 1].categoryId;
+        });
+        console.log('this.tags_', tag[0]);
+        dispatch({
+          type: 'operTool/changTreeDis',
+          payload: {
+            status: true,
+            id: tag[0],
+          },
+        });
       });
     }
   }
