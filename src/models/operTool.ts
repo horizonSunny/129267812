@@ -8,7 +8,7 @@ import {
   editorCategoryItem,
 } from '@/services/operTool';
 import { categoryType } from '@/services/comdClassify';
-import { filterStatusTree } from '@/utils/filterProperty';
+import { filterStatusTree, changeDisaStatus } from '@/utils/filterProperty';
 
 const CommodityModel = {
   namespace: 'operTool',
@@ -116,6 +116,15 @@ const CommodityModel = {
       return {
         ...state,
         categoryTree: result,
+      };
+    },
+    // 2.0 改变产品分类数据中disabled的状态
+    changTreeDis(state, action) {
+      const result = changeDisaStatus(action.payload, state.categoryTree);
+      console.log('changTreeDis_', result);
+      return {
+        ...state,
+        categoryTree: [...result],
       };
     },
   },

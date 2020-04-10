@@ -7,12 +7,6 @@ import router from 'umi/router';
 import { serverUrl } from '@/utils/request';
 import { filterTreeStatus, comparisonObject } from '@/utils/filterProperty';
 
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
-
 function beforeUpload(file) {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
   if (!isJpgOrPng) {
@@ -123,13 +117,13 @@ class FindItem extends React.Component {
 
   //  关闭标签
   handleClose(tag) {
-    console.log('tag_', this.state.tags);
     const newTags = this.state.tags.filter(item => {
       const compare = comparisonObject(item, tag);
       if (!compare) {
         return item;
       }
     });
+    console.log('newTags_', newTags);
     this.setState({
       tags: newTags,
     });
@@ -138,9 +132,21 @@ class FindItem extends React.Component {
   // 树状选择
   treeSelectChange(value) {
     console.log('value_', value);
+    console.log('this.props.operTool.categoryTree_', this.props.operTool.categoryTree);
     this.setState({ value });
     const newArr = value.split('_');
     const filterArr = filterTreeStatus(this.props.operTool.categoryTree, newArr, 0);
+    // changTreeDis
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'operTool/changTreeDis',
+        payload: {
+          value,
+          status: true,
+        },
+      });
+    }
     this.state.tags.push(filterArr);
   }
 

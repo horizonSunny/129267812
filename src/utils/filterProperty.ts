@@ -22,6 +22,28 @@ export function filterStatus(status, obj) {
   return result;
 }
 
+// 改变商品的disabled属性，取反
+export function changeDisaStatus(info, obj) {
+  obj.forEach(data => {
+    if (data.value === info.value) {
+      data.disabled = info.status;
+      data.children && data.children.length !== 0 && changeChildrenDisa(data.children, info.status);
+    } else {
+      data.children && data.children.length !== 0 && changeDisaStatus(status, data.children);
+    }
+    // data.children && data.children.length !== 0 && filterStatus(status, [], data.children);
+  });
+  return obj;
+}
+// 对传入的数组及其children属性进行遍历，确定disabled都修改
+function changeChildrenDisa(arr, status) {
+  arr.forEach(data => {
+    data.disabled = status;
+    data.children && data.children.length !== 0 && changeChildrenDisa(data.children, status);
+    // data.children && data.children.length !== 0 && filterStatus(status, [], data.children);
+  });
+}
+
 // 商品分类模块对三级分类做一个过滤
 const resultClassify = {
   one: [],
@@ -133,7 +155,7 @@ export function comparisonObject(sourceObj, compareObj) {
   return true;
 }
 
-// 对商品分类做过滤生成带有key和value对分类 同时对父节点设置disabled
+// 对商品分类做过滤生成带有key和value对分类 同时对父节点设置disabled属性
 // 商品类别过滤器
 export function filterStatusDiabTree(obj, key = '', level = 0) {
   const levelInfo = level + 1;
