@@ -123,7 +123,18 @@ class FindItem extends React.Component {
         return item;
       }
     });
-    console.log('newTags_', newTags);
+    console.log('newTags_', tag);
+    const treeItemId = tag[tag.length - 1].categoryId;
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'operTool/changTreeDis',
+        payload: {
+          status: false,
+          id: treeItemId,
+        },
+      });
+    }
     this.setState({
       tags: newTags,
     });

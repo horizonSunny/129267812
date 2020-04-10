@@ -25,11 +25,11 @@ export function filterStatus(status, obj) {
 // 改变商品的disabled属性，取反
 export function changeDisaStatus(info, obj) {
   obj.forEach(data => {
-    if (data.value === info.value) {
+    if (data.value === info.value || data.id === info.id) {
       data.disabled = info.status;
       data.children && data.children.length !== 0 && changeChildrenDisa(data.children, info.status);
     } else {
-      data.children && data.children.length !== 0 && changeDisaStatus(status, data.children);
+      data.children && data.children.length !== 0 && changeDisaStatus(info, data.children);
     }
     // data.children && data.children.length !== 0 && filterStatus(status, [], data.children);
   });

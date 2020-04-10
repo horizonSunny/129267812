@@ -9,6 +9,7 @@ import {
 } from '@/services/operTool';
 import { categoryType } from '@/services/comdClassify';
 import { filterStatusTree, changeDisaStatus } from '@/utils/filterProperty';
+import deepCopy from '@/utils/deepCopy';
 
 const CommodityModel = {
   namespace: 'operTool',
@@ -121,10 +122,10 @@ const CommodityModel = {
     // 2.0 改变产品分类数据中disabled的状态
     changTreeDis(state, action) {
       const result = changeDisaStatus(action.payload, state.categoryTree);
-      console.log('changTreeDis_', result);
+      console.log('changTreeDis_', deepCopy(result));
       return {
         ...state,
-        categoryTree: [...result],
+        categoryTree: deepCopy(result),
       };
     },
   },
