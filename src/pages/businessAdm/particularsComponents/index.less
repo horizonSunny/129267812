@@ -107,3 +107,38 @@
     }
   }
 }
+
+.modal {
+  .labelInfo {
+    font-size: @title-font-size;
+    font-weight: @title-font-weight;
+    color: rgba(27, 27, 27, 1);
+    margin-right: 32px;
+  }
+
+  .contentInfo {
+    font-size: @content-font-size;
+    font-weight: @content-font-weight;
+    color: #1B1B1B;
+    margin-bottom: 12px;
+
+    span {
+      margin-right: 18px;
+    }
+  }
+
+  .deliver {
+    margin-top: 35px;
+    text-align: center;
+
+    :global {
+      .ant-btn {
+        width: 100px;
+        height: 34px;
+        background: rgba(72, 116, 239, 1);
+        border-radius: 4px;
+        color: #fff;
+      }
+    }
+  }
+}

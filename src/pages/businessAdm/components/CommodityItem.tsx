@@ -8,11 +8,9 @@ import styles from './CommodityItem.less';
 class CommodityItem extends Component {
   render() {
     // const { currentRecord } = this.props.businessAdm;
-    const { message } = this.props;
-    console.log('message_', message);
-
+    const { message, styleInfo } = this.props;
     return (
-      <div className={`${styles.main} ${'flex-between'}`}>
+      <div className={`${styles.main} ${'flex-between'}`} style={styleInfo}>
         <div className={`${styles.leftInfo}`}>
           <img src={message.productImage[0]} alt="加载图片失败" />
           <div className={`${styles.leftMessage}`}>
