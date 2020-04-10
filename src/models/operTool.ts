@@ -9,6 +9,7 @@ import {
 } from '@/services/operTool';
 import { categoryType } from '@/services/comdClassify';
 import { filterStatusTree } from '@/utils/filterProperty';
+
 const CommodityModel = {
   namespace: 'operTool',
   state: {
@@ -48,7 +49,7 @@ const CommodityModel = {
       let response;
       console.log('in_newCategoryItem_', payload);
       if (payload.quickCategoryId) {
-        //编辑
+        // 编辑
         response = yield call(editorCategoryItem, payload);
       } else {
         response = yield call(newCategoryItem, payload);

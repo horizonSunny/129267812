@@ -1,9 +1,9 @@
 import React from 'react';
 import { Table, Button, Divider, Icon } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import styles from './findList.less';
 import router from 'umi/router';
 import { connect } from 'dva';
+import styles from './findList.less';
 import dataInfo from '../../../../mock/quick';
 
 @connect(({ operTool }) => ({
@@ -24,6 +24,7 @@ export default class FindList extends React.Component {
       });
     }
   }
+
   state = {
     columns: [
       {
@@ -56,9 +57,7 @@ export default class FindList extends React.Component {
               value.length !== 0 &&
               value.map(item => {
                 return item.map((info, index) => {
-                  return index + 1 !== item.length
-                    ? info['cateName'] + '/'
-                    : info['cateName'] + ', ';
+                  return index + 1 !== item.length ? `${info.cateName}/` : `${info.cateName}, `;
                 });
               })}
           </span>
@@ -125,6 +124,7 @@ export default class FindList extends React.Component {
       },
     ],
   };
+
   deleteCategory(record) {
     console.log('record_', record.quickCategoryId);
     const { dispatch } = this.props;
@@ -137,8 +137,9 @@ export default class FindList extends React.Component {
       });
     }
   }
+
   editorCategory(record?) {
-    let obj = {
+    const obj = {
       pathname: '/operTool/findCommodity/newCategory',
     };
     console.log('record_', record);
@@ -148,10 +149,10 @@ export default class FindList extends React.Component {
       // 编辑
       console.log('in 摆埃及');
       recordInfo = {
-        categorys: record['categorys'],
-        image: record['image'],
-        quickCategoryName: record['categoryName'],
-        quickCategoryId: record['quickCategoryId'],
+        categorys: record.categorys,
+        image: record.image,
+        quickCategoryName: record.categoryName,
+        quickCategoryId: record.quickCategoryId,
       };
     } else {
       // 新建
@@ -167,17 +168,18 @@ export default class FindList extends React.Component {
     });
     router.push(obj);
   }
+
   // reverse排序
   reverseCategoryList(index, direction) {
     console.log('index_', index, '_direction_', direction);
-    let startId = this.props.operTool.categoryList[index]['quickCategoryId'];
+    const startId = this.props.operTool.categoryList[index].quickCategoryId;
     let endId;
     switch (direction) {
       case 'up':
-        endId = this.props.operTool.categoryList[index - 1]['quickCategoryId'];
+        endId = this.props.operTool.categoryList[index - 1].quickCategoryId;
         break;
       case 'down':
-        endId = this.props.operTool.categoryList[index + 1]['quickCategoryId'];
+        endId = this.props.operTool.categoryList[index + 1].quickCategoryId;
         break;
       default:
         break;
@@ -192,10 +194,11 @@ export default class FindList extends React.Component {
       });
     }
   }
+
   render() {
     const { columns } = this.state;
     return (
-      <PageHeaderWrapper className={styles['main']}>
+      <PageHeaderWrapper className={styles.main}>
         {/* <Title level={4}>商品编辑</Title> */}
         <Button
           type="danger"
@@ -209,7 +212,7 @@ export default class FindList extends React.Component {
           style={{
             clear: 'both',
           }}
-        ></div>
+        />
         <Table columns={columns} dataSource={this.props.operTool.categoryList} pagination={false} />
       </PageHeaderWrapper>
     );

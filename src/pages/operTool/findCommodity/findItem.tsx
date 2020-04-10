@@ -36,7 +36,7 @@ function Tags(props) {
         }}
       >
         {item.map((info, index) => {
-          return index + 1 !== item.length ? info['cateName'] + '/' : info['cateName'];
+          return index + 1 !== item.length ? `${info.cateName}/` : info.cateName;
         })}
       </Tag>
     );
@@ -49,10 +49,11 @@ function Tags(props) {
 class FindItem extends React.Component {
   state = {
     loading: false,
-    tags: this.props.operTool.categoryItem['categorys'],
-    imageUrl: this.props.operTool.categoryItem['image'],
+    tags: this.props.operTool.categoryItem.categorys,
+    imageUrl: this.props.operTool.categoryItem.image,
     value: '',
   };
+
   componentDidMount() {
     const { dispatch } = this.props;
     if (dispatch) {
@@ -61,25 +62,28 @@ class FindItem extends React.Component {
       });
     }
   }
+
   // 上传图片变化
   handleChange = ({ fileList, file, event }) => {
     console.log('file_', file);
     console.log('fileList_', fileList);
     this.setState({
-      imageUrl: file['response'] ? file['response']['data'] : '',
+      imageUrl: file.response ? file.response.data : '',
     });
     // this.props.onChange(fileList);
   };
+
   getPdfURL = () => {
     const props = {
       name: 'file',
-      action: serverUrl + '/admin/v1/uploadFile',
+      action: `${serverUrl}/admin/v1/uploadFile`,
       headers: {
         authorization: sessionStorage.getItem('token'),
       },
     };
     return props;
   };
+
   // 提交
   handleSubmit = e => {
     e.preventDefault();
@@ -93,8 +97,8 @@ class FindItem extends React.Component {
         const { dispatch } = this.props;
         const ids = [];
         this.state.tags.forEach(element => {
-          let length = element.length - 1;
-          ids.push(element[length]['categoryId']);
+          const length = element.length - 1;
+          ids.push(element[length].categoryId);
         });
         console.log('ids123_', this.state.tags);
         console.log('ids_', ids);
@@ -104,10 +108,10 @@ class FindItem extends React.Component {
             payload: {
               categoryIds: ids,
               image: this.state.imageUrl,
-              quickCategoryId: this.props.operTool.categoryItem['quickCategoryId']
-                ? this.props.operTool.categoryItem['quickCategoryId']
+              quickCategoryId: this.props.operTool.categoryItem.quickCategoryId
+                ? this.props.operTool.categoryItem.quickCategoryId
                 : undefined,
-              quickCategoryName: values['cateName'],
+              quickCategoryName: values.cateName,
             },
           }).then(res => {
             router.push('/operTool/findCommodity');
@@ -116,6 +120,7 @@ class FindItem extends React.Component {
       }
     });
   };
+
   //  关闭标签
   handleClose(tag) {
     console.log('tag_', this.state.tags);
@@ -129,14 +134,16 @@ class FindItem extends React.Component {
       tags: newTags,
     });
   }
+
   // 树状选择
   treeSelectChange(value) {
-    // console.log('value_', value);
+    console.log('value_', value);
     this.setState({ value });
     const newArr = value.split('_');
     const filterArr = filterTreeStatus(this.props.operTool.categoryTree, newArr, 0);
     this.state.tags.push(filterArr);
   }
+
   render() {
     // 上传图片
     const uploadButton = (
@@ -160,7 +167,7 @@ class FindItem extends React.Component {
     };
     const { tags } = this.state;
     return (
-      <PageHeaderWrapper className={styles['main']}>
+      <PageHeaderWrapper className={styles.main}>
         <Form {...formItemLayout} onSubmit={this.handleSubmit}>
           <Form.Item label="分类Icon">
             {getFieldDecorator('img', {
@@ -189,7 +196,7 @@ class FindItem extends React.Component {
           </Form.Item>
           <Form.Item label="分类名称">
             {getFieldDecorator('cateName', {
-              initialValue: this.props.operTool.categoryItem['quickCategoryName'],
+              initialValue: this.props.operTool.categoryItem.quickCategoryName,
               rules: [
                 {
                   required: true,
@@ -200,7 +207,7 @@ class FindItem extends React.Component {
           </Form.Item>
           <Form.Item label="关联商品分类">
             {getFieldDecorator('cateClassify', {
-              initialValue: this.props.operTool.categoryItem['quickCategoryName'],
+              initialValue: this.props.operTool.categoryItem.quickCategoryName,
               rules: [
                 {
                   required: true,
@@ -209,7 +216,7 @@ class FindItem extends React.Component {
               ],
             })(
               <div>
-                <Tags tags={tags} handleClose={this.handleClose.bind(this)}></Tags>
+                <Tags tags={tags} handleClose={this.handleClose.bind(this)} />
                 <TreeSelect
                   style={{ width: '70%' }}
                   label="请选择分类"
