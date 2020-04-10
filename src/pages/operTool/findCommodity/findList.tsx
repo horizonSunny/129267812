@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button, Divider, Icon } from 'antd';
+import { Table, Button, Divider, Icon, Switch } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import router from 'umi/router';
 import { connect } from 'dva';
@@ -73,7 +73,7 @@ export default class FindList extends React.Component {
         title: '状态',
         dataIndex: 'status',
         key: 'status',
-        render: text => <a>{text}</a>,
+        render: text => <Switch defaultChecked={text === 1} />,
       },
       {
         title: '调整排序',
