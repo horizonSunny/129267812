@@ -6,6 +6,7 @@ import {
   deleteCategoryItem,
   newCategoryItem,
   editorCategoryItem,
+  changeCategoryItem,
 } from '@/services/operTool';
 import { categoryType } from '@/services/comdClassify';
 import { filterStatusTree, changeDisaStatus } from '@/utils/filterProperty';
@@ -44,7 +45,11 @@ const CommodityModel = {
         payload: payload.quickCategoryId,
       });
     },
-    // 新增快速照耀
+    // 开启或者关闭快速找药
+    *resetCategoryItem({ payload }, { call, put }) {
+      yield call(changeCategoryItem, payload);
+    },
+    // 新增快速找药
     *newCategoryItem({ payload }, { call, put }) {
       // const response = yield call(newCategoryItem, payload);
       let response;

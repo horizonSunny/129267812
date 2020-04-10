@@ -74,7 +74,10 @@ export default class FindList extends React.Component {
         dataIndex: 'status',
         key: 'status',
         render: (text, record) => (
-          <Switch defaultChecked={text === 1} onChange={this.statusChange.bind(this, record)} />
+          <Switch
+            defaultChecked={text === 1}
+            onChange={value => this.statusChange(value, record)}
+          />
         ),
       },
       {
@@ -127,8 +130,23 @@ export default class FindList extends React.Component {
     ],
   };
 
-  statusChange(record) {
-    console.log('statusChange_', record.quickCategoryId);
+  statusChange(checked, record) {
+    let status;
+    if (checked) {
+      status = 1;
+    } else {
+      status = 2;
+    }
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'operTool/resetCategoryItem',
+        payload: {
+          quickCategoryId: record.quickCategoryId,
+          status,
+        },
+      });
+    }
   }
 
   deleteCategory(record) {
