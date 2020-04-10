@@ -1,6 +1,6 @@
 export default function filterProperty(obj) {
-  let newObj = new Object();
-  for (let key in obj) {
+  const newObj = new Object();
+  for (const key in obj) {
     if (obj[key] !== null && obj[key] !== undefined) {
       newObj[key] = obj[key];
     }
@@ -23,26 +23,26 @@ export function filterStatus(status, obj) {
 }
 
 // 商品分类模块对三级分类做一个过滤
-let resultClassify = {
+const resultClassify = {
   one: [],
   two: [],
   three: [],
 };
 export function filterClassify(obj, level = 0) {
-  let levelInfo = level + 1;
+  const levelInfo = level + 1;
   obj.forEach(data => {
     switch (levelInfo) {
       case 1:
-        data['classify'] = 1;
-        resultClassify['one'].push(data);
+        data.classify = 1;
+        resultClassify.one.push(data);
         break;
       case 2:
-        data['classify'] = 2;
-        resultClassify['two'].push(data);
+        data.classify = 2;
+        resultClassify.two.push(data);
         break;
       case 3:
-        data['classify'] = 3;
-        resultClassify['three'].push(data);
+        data.classify = 3;
+        resultClassify.three.push(data);
         break;
       default:
         break;
@@ -58,9 +58,10 @@ export function filterClassify(obj, level = 0) {
 // 商品类别过滤器
 export function filterStatusTree(obj, key = '') {
   obj.forEach(data => {
-    data.value = key === '' ? data.id + '' : key + '_' + data.id;
-    data.key = data.id + '';
+    data.value = key === '' ? `${data.id}` : `${key}_${data.id}`;
+    data.key = `${data.id}`;
     data.title = data.cateName;
+    data.disabled = false;
     data.children && data.children.length !== 0 && filterStatusTree(data.children, data.value);
   });
   return obj;
@@ -76,7 +77,7 @@ export function filterTreeStatus(obj, array, index = 0, resultTree?) {
         cateName: data.cateName,
         categoryId: data.id,
       });
-      let newIndex = index + 1;
+      const newIndex = index + 1;
       array.length >= newIndex && filterTreeStatus(data.children, array, newIndex, resultTree);
     }
   });
@@ -92,7 +93,7 @@ function getType(data) {
 }
 export function comparisonObject(sourceObj, compareObj) {
   if (arguments.length < 2) throw 'Incorrect number of parameters';
-  let sourceType = getType(sourceObj);
+  const sourceType = getType(sourceObj);
   if (sourceType !== getType(compareObj)) return false;
   // Not objects and arrays
   if (
@@ -108,15 +109,16 @@ export function comparisonObject(sourceObj, compareObj) {
       return sourceObj.toString() === compareObj.toString();
     }
     return sourceObj === compareObj;
-  } else if (sourceType === 'Array') {
+  }
+  if (sourceType === 'Array') {
     if (sourceObj.length !== compareObj.length) return false;
     if (sourceObj.length === 0) return true;
     for (let i = 0; i < sourceObj.length; i++) {
       if (!comparisonObject(sourceObj[i], compareObj[i])) return false;
     }
   } else if (sourceType === 'Object') {
-    let sourceKeyList = Reflect.ownKeys(sourceObj);
-    let compareKeyList = Reflect.ownKeys(compareObj);
+    const sourceKeyList = Reflect.ownKeys(sourceObj);
+    const compareKeyList = Reflect.ownKeys(compareObj);
     let key;
     if (sourceKeyList.length !== compareKeyList.length) return false;
     for (let i = 0; i < sourceKeyList.length; i++) {
@@ -134,25 +136,25 @@ export function comparisonObject(sourceObj, compareObj) {
 // 对商品分类做过滤生成带有key和value对分类 同时对父节点设置disabled
 // 商品类别过滤器
 export function filterStatusDiabTree(obj, key = '', level = 0) {
-  let levelInfo = level + 1;
+  const levelInfo = level + 1;
   obj.forEach(data => {
     switch (levelInfo) {
       case 1:
-        data['classify'] = 1;
+        data.classify = 1;
         break;
       case 2:
-        data['classify'] = 2;
+        data.classify = 2;
         break;
       case 3:
-        data['classify'] = 3;
+        data.classify = 3;
         break;
       default:
         break;
     }
-    data.value = key === '' ? data.id + '' : key + '_' + data.id;
-    data.key = data.id + '';
+    data.value = key === '' ? `${data.id}` : `${key}_${data.id}`;
+    data.key = `${data.id}`;
     data.title = data.cateName;
-    data.disabled = data['classify'] === 3 ? false : true;
+    data.disabled = data.classify !== 3;
     if (data.children && data.children.length !== 0) {
       data.disabled = true;
       filterStatusDiabTree(data.children, data.value, levelInfo);
