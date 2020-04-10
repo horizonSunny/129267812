@@ -73,7 +73,9 @@ export default class FindList extends React.Component {
         title: '状态',
         dataIndex: 'status',
         key: 'status',
-        render: text => <Switch defaultChecked={text === 1} />,
+        render: (text, record) => (
+          <Switch defaultChecked={text === 1} onChange={this.statusChange.bind(this, record)} />
+        ),
       },
       {
         title: '调整排序',
@@ -124,6 +126,10 @@ export default class FindList extends React.Component {
       },
     ],
   };
+
+  statusChange(record) {
+    console.log('statusChange_', record.quickCategoryId);
+  }
 
   deleteCategory(record) {
     console.log('record_', record.quickCategoryId);
