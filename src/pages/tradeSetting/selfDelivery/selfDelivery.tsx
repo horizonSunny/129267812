@@ -3,6 +3,7 @@ import { Row, Col, Button, Switch } from 'antd';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // 外部引入
+import { router } from 'umi';
 import styles from './selfDelivery.less';
 import noSelfDelivery from '@/assets/tradeSetting/noSelfDelivery.svg';
 import selfDelivery from '@/assets/tradeSetting/selfDelivery.svg';
@@ -31,6 +32,10 @@ export default class SelfDelivery extends React.Component {
     console.log('onChange');
   };
 
+  toSelfDelivery = () => {
+    router.push('/tradeSetting/selfDelivery/newSelfDelivery');
+  };
+
   render() {
     const { hasSelfDelivery, selfDeliveryInfo } = this.props.tradeSetting;
     return (
@@ -40,17 +45,17 @@ export default class SelfDelivery extends React.Component {
           <div className={`${styles.title}`}>
             到店自提说明
             {/* 没有自提信息的时候 */}
-            {!hasSelfDelivery && (
+            {hasSelfDelivery && (
               <div className={`${styles.noSelfDelivery}`}>
                 <img src={noSelfDelivery} alt="" />
                 <span>开通到店自提，方便买家自提点取货</span>
-                <Button type="primary" className={`${styles.button}`}>
+                <Button type="primary" className={`${styles.button}`} onClick={this.toSelfDelivery}>
                   去开通 &gt;
                 </Button>
               </div>
             )}
             {/* 有自提信息的时候 */}
-            {hasSelfDelivery && (
+            {!hasSelfDelivery && (
               <Row className={styles.selfDelivery}>
                 <Col span={20} className={styles.selfDeliveryInfo}>
                   <img src={selfDelivery} alt="" />
@@ -96,7 +101,9 @@ export default class SelfDelivery extends React.Component {
                   <Switch defaultChecked onChange={this.onChange} />
                 </Col>
                 <Col span={1}>
-                  <Button className={`${styles.editorButton}`}>编辑</Button>
+                  <Button className={`${styles.editorButton}`} onClick={this.toSelfDelivery}>
+                    编辑
+                  </Button>
                 </Col>
               </Row>
             )}
