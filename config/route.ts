@@ -121,7 +121,7 @@ const route = [
           {
             path: '/tradeSetting',
             name: '交易设置',
-            icon: 'tool',
+            icon: 'car',
             routes: [
               {
                 path: '/tradeSetting/selfDelivery',
@@ -135,10 +135,21 @@ const route = [
                 hideInMenu: true,
               },
               {
-                path: '/operTool/findCommodity/newCategory',
-                name: '运费设置',
-                component: './operTool/findCommodity/findItem.tsx',
+                path: '/tradeSetting/noDistribute',
+                name: '不可配送区域',
+                component: './tradeSetting/noDistribute/noDistribute.tsx',
                 // hideInMenu: true,
+              },
+              {
+                path: '/tradeSetting/freight',
+                name: '运费设置',
+                component: './tradeSetting/freight/freight.tsx',
+              },
+              {
+                path: '/tradeSetting/freight/newFreight',
+                name: '新增运费模版',
+                component: './tradeSetting/freight/newFreigth.tsx',
+                hideInMenu: true,
               },
             ],
           },
