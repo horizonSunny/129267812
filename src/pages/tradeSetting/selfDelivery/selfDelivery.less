@@ -1,0 +1,77 @@
+.main {
+  height: 400px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 10px 0px rgba(60, 76, 118, 0.11);
+  border-radius: 14px;
+  padding: 16px 21px;
+
+  // 到店自提list
+  .title {
+    font-size: @title-font-size;
+    font-weight: @content-font-weight;
+    color: rgba(27, 27, 27, 1);
+  }
+
+  .noSelfDelivery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .button {
+      margin-left: 18px;
+    }
+  }
+
+  .selfDelivery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .selfDeliveryInfo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .tableInfo {
+        border: 1px solid rgba(232, 232, 232, 1);
+        width: 100%;
+
+        tr {
+          td {
+            border: 1px solid rgba(232, 232, 232, 1);
+            font-size: @title-font-size;
+            font-weight: @content-font-weight;
+            color: rgba(37, 37, 37, 1);
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+          }
+
+          // td:nth-child(1) {
+          //   width: 144px;
+          // }
+
+          // td:nth-child(2) {
+          //   width: 50%;
+          // }
+        }
+
+        tr:nth-child(1) {
+          width: 144px;
+        }
+
+        tr:nth-child(2) {
+          width: 100%;
+        }
+      }
+    }
+
+    .switch {
+      margin-left: 18px;
+    }
+
+    .editorButton {
+      margin-left: 18px;
+    }
+  }
+}
