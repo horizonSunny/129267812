@@ -37,3 +37,10 @@ export const getAuthorityFromRouter = <T extends { path: string }>(
   if (authority) return authority;
   return undefined;
 };
+
+export function CompareDate(t1, t2) {
+  const date = new Date();
+  const a = t1.split(':');
+  const b = t2.split(':');
+  return date.setHours(a[0], a[1], a[2]) > date.setHours(b[0], b[1], b[2]);
+}

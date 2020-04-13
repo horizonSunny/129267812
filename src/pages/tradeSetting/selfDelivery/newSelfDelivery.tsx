@@ -3,8 +3,10 @@ import { Form, Button, Input, Cascader, TimePicker } from 'antd';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // 外部引入
+import moment from 'moment';
 import styles from './newSelfDelivery.less';
 import { newArea } from '@/utils/area.js';
+import { CompareDate } from '@/utils/utils.ts';
 // const { Search } = Input;
 const options = newArea();
 @connect(({ tradeSetting }) => ({
@@ -30,10 +32,46 @@ class FormSelfDelivery extends React.Component {
     // formInit: this.props.commodity.productWithId,
     // editorState: null,
     // productType: this.props.commodity.allProductType,
+    startTime: '00:00:00',
+    endTime: '00:00:00',
   };
 
   handleSubmit = () => {
     console.log('sss');
+  };
+
+  startTimeChange = (time, timeString) => {
+    this.setState({
+      startTime: timeString,
+    });
+  };
+
+  endTimeChange = (time, timeString) => {
+    console.log('onChange_', timeString);
+    this.setState({
+      endTime: timeString,
+    });
+  };
+
+  onOpenChange = info => {
+    // console.log('onOpenChange_', info);
+    if (!info) {
+      const { startTime, endTime } = this.state;
+      const test = CompareDate(startTime, endTime);
+      console.log('info_', test);
+      const oldEndTime = endTime;
+      const oldStartTime = startTime;
+      console.log('oldEndTime_', oldEndTime);
+      console.log('oldStartTime_', oldStartTime);
+      if (test) {
+        this.setState({
+          endTime: oldStartTime,
+        });
+        this.setState({
+          startTime: oldEndTime,
+        });
+      }
+    }
   };
 
   render() {
@@ -48,7 +86,7 @@ class FormSelfDelivery extends React.Component {
         sm: { span: 16 },
       },
     };
-    // const { formInit } = this.state;
+    const { startTime, endTime } = this.state;
     return (
       <PageHeaderWrapper>
         <Form className={styles.main} {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -107,19 +145,25 @@ class FormSelfDelivery extends React.Component {
             })(<Input />)}
           </Form.Item>
           <Form.Item label="营业时间">
-            {getFieldDecorator('tenantName', {
+            {getFieldDecorator('tenantStartTime', {
               rules: [
                 {
                   required: true,
                   message: '',
                 },
               ],
-              // initialValue: '231',
-            })(
-              <div>
-                <RangePicker />
-              </div>,
-            )}
+              initialValue: moment(startTime, 'HH:mm:ss'),
+            })(<TimePicker onChange={this.startTimeChange} onOpenChange={this.onOpenChange} />)}
+            &nbsp; — &nbsp;
+            {getFieldDecorator('tenantEndTime', {
+              rules: [
+                {
+                  required: true,
+                  message: '',
+                },
+              ],
+              initialValue: moment(endTime, 'HH:mm:ss'),
+            })(<TimePicker onChange={this.endTimeChange} onOpenChange={this.onOpenChange} />)}
           </Form.Item>
 
           <Form.Item
