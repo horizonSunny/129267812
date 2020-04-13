@@ -117,6 +117,31 @@ const route = [
               },
             ],
           },
+          // 交易设置模块
+          {
+            path: '/tradeSetting',
+            name: '交易设置',
+            icon: 'tool',
+            routes: [
+              {
+                path: '/tradeSetting/selfDelivery',
+                name: '到店自提',
+                component: './tradeSetting/selfDelivery/selfDelivery.tsx',
+              },
+              {
+                path: '/tradeSetting/selfDelivery/newSelfDelivery',
+                name: '开通到店自提',
+                component: './tradeSetting/selfDelivery/newSelfDelivery.tsx',
+                hideInMenu: true,
+              },
+              {
+                path: '/operTool/findCommodity/newCategory',
+                name: '运费设置',
+                component: './operTool/findCommodity/findItem.tsx',
+                // hideInMenu: true,
+              },
+            ],
+          },
           // 用户
           // {
           //   path: '/admin',
