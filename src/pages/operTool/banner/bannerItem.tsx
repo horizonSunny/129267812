@@ -199,6 +199,27 @@ class BannerItem extends React.Component {
     return (
       <PageHeaderWrapper className={styles.main}>
         <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+          <Form.Item label="名称">
+            {getFieldDecorator('cateName', {
+              initialValue: this.props.operTool.categoryItem.quickCategoryName,
+              rules: [
+                {
+                  required: true,
+                  message: '请填写分类名称!',
+                },
+              ],
+            })(<Input />)}
+          </Form.Item>
+          <Form.Item label="跳转链接">
+            {getFieldDecorator('cateName', {
+              initialValue: this.props.operTool.categoryItem.quickCategoryName,
+              rules: [
+                {
+                  message: '请输入跳转链接!',
+                },
+              ],
+            })(<Input />)}
+          </Form.Item>
           <Form.Item label="分类Icon">
             {getFieldDecorator('img', {
               rules: [
@@ -224,18 +245,7 @@ class BannerItem extends React.Component {
               </Upload>,
             )}
           </Form.Item>
-          <Form.Item label="分类名称">
-            {getFieldDecorator('cateName', {
-              initialValue: this.props.operTool.categoryItem.quickCategoryName,
-              rules: [
-                {
-                  required: true,
-                  message: '请填写分类名称!',
-                },
-              ],
-            })(<Input />)}
-          </Form.Item>
-          <Form.Item label="关联商品分类">
+          {/* <Form.Item label="关联商品分类">
             {getFieldDecorator('cateClassify', {
               initialValue: this.props.operTool.categoryItem.quickCategoryName,
               rules: [
@@ -265,15 +275,10 @@ class BannerItem extends React.Component {
                   }
                 />
 
-                {/* <Button
-                  style={{ marginLeft: '10px' }}
-                  type="primary"
-                  icon="plus-circle"
-                  size="small"
-                /> */}
+
               </div>,
             )}
-          </Form.Item>
+          </Form.Item>     */}
           <Form.Item
             wrapperCol={{
               xs: { span: 24, offset: 0 },
