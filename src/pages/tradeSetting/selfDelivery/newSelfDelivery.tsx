@@ -1,10 +1,12 @@
 import React from 'react';
-import { Form, Button, Input } from 'antd';
+import { Form, Button, Input, Cascader, TimePicker } from 'antd';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // 外部引入
 import styles from './newSelfDelivery.less';
+import { newArea } from '@/utils/area.js';
 // const { Search } = Input;
+const options = newArea();
 @connect(({ tradeSetting }) => ({
   tradeSetting,
 }))
@@ -46,7 +48,7 @@ class FormSelfDelivery extends React.Component {
         sm: { span: 16 },
       },
     };
-    const { formInit } = this.state;
+    // const { formInit } = this.state;
     return (
       <PageHeaderWrapper>
         <Form className={styles.main} {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -62,15 +64,14 @@ class FormSelfDelivery extends React.Component {
             })(<Input />)}
           </Form.Item>
           <Form.Item label="所在区域">
-            {getFieldDecorator('tenantName', {
-              rules: [
-                {
-                  required: true,
-                  message: '店铺名称',
-                },
-              ],
-              initialValue: '231',
-            })(<Input />)}
+            {getFieldDecorator('areaData', {
+              // initialValue: [
+              //   currentRecord.provinceCode,
+              //   currentRecord.cityCode,
+              //   currentRecord.areaCode,
+              // ],
+              rules: [{ required: true, message: '请选择店铺所在地!' }],
+            })(<Cascader options={options} changeOnSelect placeholder="省市区" />)}
           </Form.Item>
           <Form.Item label="详细地址">
             {getFieldDecorator('tenantName', {
@@ -110,11 +111,15 @@ class FormSelfDelivery extends React.Component {
               rules: [
                 {
                   required: true,
-                  message: '店铺名称',
+                  message: '',
                 },
               ],
-              initialValue: '231',
-            })(<Input />)}
+              // initialValue: '231',
+            })(
+              <div>
+                <RangePicker />
+              </div>,
+            )}
           </Form.Item>
 
           <Form.Item
