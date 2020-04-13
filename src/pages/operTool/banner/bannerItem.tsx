@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tag, Form, Input, Upload, Icon, message, Button, TreeSelect } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import styles from './findItem.less';
+import styles from './bannerItem.less';
 import { connect } from 'dva';
 import router from 'umi/router';
 import { serverUrl } from '@/utils/request';
@@ -40,7 +40,7 @@ function Tags(props) {
 @connect(({ operTool }) => ({
   operTool,
 }))
-class FindItem extends React.Component {
+class BannerItem extends React.Component {
   state = {
     loading: false,
     tags: this.props.operTool.categoryItem.categorys,
@@ -289,6 +289,6 @@ class FindItem extends React.Component {
     );
   }
 }
-const WrappedEditForm = Form.create({ name: 'findItem' })(FindItem);
+const WrappedEditForm = Form.create({ name: 'bannerItem' })(BannerItem);
 
 export default WrappedEditForm;
