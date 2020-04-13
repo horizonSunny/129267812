@@ -104,6 +104,17 @@ const route = [
                 component: './operTool/findCommodity/findItem.tsx',
                 hideInMenu: true,
               },
+              {
+                path: '/operTool/banner',
+                name: 'banner管理',
+                component: './operTool/banner/bannerList.tsx',
+              },
+              {
+                path: '/operTool/banner/newBanner',
+                name: '新增banner',
+                component: './operTool/banner/bannerItem.tsx',
+                hideInMenu: true,
+              },
             ],
           },
           // 用户

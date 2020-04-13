@@ -28,7 +28,7 @@ export default class BannerList extends React.Component {
   state = {
     columns: [
       {
-        title: 'icon',
+        title: 'banner',
         dataIndex: 'image',
         key: 'quickCategoryId',
         render: text => (
@@ -46,22 +46,6 @@ export default class BannerList extends React.Component {
         dataIndex: 'categoryName',
         key: 'categoryName',
         render: text => <a>{text}</a>,
-      },
-      {
-        title: '关联分类',
-        dataIndex: 'categorys',
-        key: 'categorys',
-        render: value => (
-          <span>
-            {value &&
-              value.length !== 0 &&
-              value.map(item => {
-                return item.map((info, index) => {
-                  return index + 1 !== item.length ? `${info.cateName}/` : `${info.cateName}, `;
-                });
-              })}
-          </span>
-        ),
       },
       {
         title: '创建时间',
@@ -164,7 +148,8 @@ export default class BannerList extends React.Component {
 
   editorCategory(record?) {
     const obj = {
-      pathname: '/operTool/findCommodity/newCategory',
+      // pathname: '/operTool/findCommodity/newCategory',
+      pathname: '/operTool/banner/newBanner',
     };
     console.log('record_', record);
     let recordInfo;
