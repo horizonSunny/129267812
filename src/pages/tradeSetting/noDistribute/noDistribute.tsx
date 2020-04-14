@@ -1,9 +1,10 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Button } from 'antd';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import mapImg from '@/assets/tradeSetting/map-da.svg';
 // 外部引入
-import styles from './commodityCas.less';
+import styles from './noDistribute.less';
 // const { Search } = Input;
 // @connect(({ commodityClassify }) => ({
 //   commodityClassify,
@@ -24,10 +25,19 @@ export default class NoDistribute extends React.Component {
     // }
   }
 
+  // 弹窗配置不可配送区域
+  noDistribute = () => {};
+
   render() {
     return (
       <PageHeaderWrapper>
-        <div>不可配送区域</div>
+        <div className={`${styles.main}`}>
+          <img src={mapImg} alt="" />
+          <span>你还未配置不可配送区域</span>
+          <Button type="primary" className={`${styles.button}`} onClick={this.noDistribute}>
+            去配置 &gt;
+          </Button>
+        </div>
       </PageHeaderWrapper>
     );
   }
