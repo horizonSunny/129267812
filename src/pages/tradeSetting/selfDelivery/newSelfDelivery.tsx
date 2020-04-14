@@ -34,6 +34,7 @@ class FormSelfDelivery extends React.Component {
     // productType: this.props.commodity.allProductType,
     startTime: '00:00:00',
     endTime: '00:00:00',
+    hebdomad: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
   };
 
   handleSubmit = () => {
@@ -96,7 +97,7 @@ class FormSelfDelivery extends React.Component {
         sm: { span: 16 },
       },
     };
-    const { startTime, endTime } = this.state;
+    const { startTime, endTime, hebdomad } = this.state;
     return (
       <PageHeaderWrapper>
         <Form className={styles.main} {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -144,7 +145,7 @@ class FormSelfDelivery extends React.Component {
             })(<Input />)}
           </Form.Item>
           <Form.Item label="营业日期">
-            {getFieldDecorator('tenantName', {
+            {/* {getFieldDecorator('tenantName', {
               rules: [
                 {
                   required: true,
@@ -152,7 +153,11 @@ class FormSelfDelivery extends React.Component {
                 },
               ],
               initialValue: '231',
-            })(<Input />)}
+            })( */}
+            {hebdomad.map(item => {
+              return <Button className={`${styles.hebdomad}`}>{item}</Button>;
+            })}
+            {/* )} */}
           </Form.Item>
           <Form.Item label="营业时间">
             {getFieldDecorator('tenantStartTime', {
@@ -183,7 +188,7 @@ class FormSelfDelivery extends React.Component {
             }}
           >
             <Button type="primary" htmlType="submit">
-              提交
+              开通
             </Button>
           </Form.Item>
         </Form>
