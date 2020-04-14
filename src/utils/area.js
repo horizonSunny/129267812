@@ -1,11 +1,11 @@
 /* eslint-disable */
 const Area = [
   {
-    provinceCode: '110000',
+    provinceCode: '11',
     provinceName: '北京市',
     mallCityList: [
       {
-        cityCode: '110100',
+        cityCode: '1101',
         cityName: '北京市',
         mallAreaList: [
           {
@@ -67,7 +67,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '110200',
+        cityCode: '1102',
         cityName: '北京市辖县',
         mallAreaList: [
           {
@@ -83,11 +83,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '120000',
+    provinceCode: '12',
     provinceName: '天津市',
     mallCityList: [
       {
-        cityCode: '120100',
+        cityCode: '1201',
         cityName: '天津市',
         mallAreaList: [
           {
@@ -145,7 +145,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '120200',
+        cityCode: '1202',
         cityName: '天津市辖县',
         mallAreaList: [
           {
@@ -165,11 +165,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '130000',
+    provinceCode: '13',
     provinceName: '河北省',
     mallCityList: [
       {
-        cityCode: '130100',
+        cityCode: '1301',
         cityName: '石家庄市',
         mallAreaList: [
           {
@@ -263,7 +263,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '130200',
+        cityCode: '1302',
         cityName: '唐山市',
         mallAreaList: [
           {
@@ -325,7 +325,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '130300',
+        cityCode: '1303',
         cityName: '秦皇岛市',
         mallAreaList: [
           {
@@ -359,7 +359,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '130400',
+        cityCode: '1304',
         cityName: '邯郸市',
         mallAreaList: [
           {
@@ -441,7 +441,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '130500',
+        cityCode: '1305',
         cityName: '邢台市',
         mallAreaList: [
           {
@@ -523,7 +523,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '130600',
+        cityCode: '1306',
         cityName: '保定市',
         mallAreaList: [
           {
@@ -629,7 +629,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '130700',
+        cityCode: '1307',
         cityName: '张家口市',
         mallAreaList: [
           {
@@ -703,7 +703,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '130800',
+        cityCode: '1308',
         cityName: '承德市',
         mallAreaList: [
           {
@@ -753,7 +753,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '130900',
+        cityCode: '1309',
         cityName: '沧州市',
         mallAreaList: [
           {
@@ -823,7 +823,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '131000',
+        cityCode: '1310',
         cityName: '廊坊市',
         mallAreaList: [
           {
@@ -869,7 +869,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '131100',
+        cityCode: '1311',
         cityName: '衡水市',
         mallAreaList: [
           {
@@ -921,11 +921,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '140000',
+    provinceCode: '14',
     provinceName: '山西省',
     mallCityList: [
       {
-        cityCode: '140100',
+        cityCode: '1401',
         cityName: '太原市',
         mallAreaList: [
           {
@@ -971,7 +971,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '140200',
+        cityCode: '1402',
         cityName: '大同市',
         mallAreaList: [
           {
@@ -1021,7 +1021,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '140300',
+        cityCode: '1403',
         cityName: '阳泉市',
         mallAreaList: [
           {
@@ -1047,7 +1047,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '140400',
+        cityCode: '1404',
         cityName: '长治市',
         mallAreaList: [
           {
@@ -1105,7 +1105,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '140500',
+        cityCode: '1405',
         cityName: '晋城市',
         mallAreaList: [
           {
@@ -1135,7 +1135,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '140600',
+        cityCode: '1406',
         cityName: '朔州市',
         mallAreaList: [
           {
@@ -1165,7 +1165,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '140700',
+        cityCode: '1407',
         cityName: '晋中市',
         mallAreaList: [
           {
@@ -1215,7 +1215,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '140800',
+        cityCode: '1408',
         cityName: '运城市',
         mallAreaList: [
           {
@@ -1273,7 +1273,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '140900',
+        cityCode: '1409',
         cityName: '忻州市',
         mallAreaList: [
           {
@@ -1335,7 +1335,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '141000',
+        cityCode: '1410',
         cityName: '临汾市',
         mallAreaList: [
           {
@@ -1409,7 +1409,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '141100',
+        cityCode: '1411',
         cityName: '吕梁市',
         mallAreaList: [
           {
@@ -1469,11 +1469,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '150000',
+    provinceCode: '15',
     provinceName: '内蒙古自治区',
     mallCityList: [
       {
-        cityCode: '150100',
+        cityCode: '1501',
         cityName: '呼和浩特市',
         mallAreaList: [
           {
@@ -1515,7 +1515,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '150200',
+        cityCode: '1502',
         cityName: '包头市',
         mallAreaList: [
           {
@@ -1557,7 +1557,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '150300',
+        cityCode: '1503',
         cityName: '乌海市',
         mallAreaList: [
           {
@@ -1575,7 +1575,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '150400',
+        cityCode: '1504',
         cityName: '赤峰市',
         mallAreaList: [
           {
@@ -1629,7 +1629,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '150500',
+        cityCode: '1505',
         cityName: '通辽市',
         mallAreaList: [
           {
@@ -1667,7 +1667,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '150600',
+        cityCode: '1506',
         cityName: '鄂尔多斯市',
         mallAreaList: [
           {
@@ -1705,7 +1705,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '150700',
+        cityCode: '1507',
         cityName: '呼伦贝尔市',
         mallAreaList: [
           {
@@ -1767,7 +1767,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '150800',
+        cityCode: '1508',
         cityName: '巴彦淖尔市',
         mallAreaList: [
           {
@@ -1801,7 +1801,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '150900',
+        cityCode: '1509',
         cityName: '乌兰察布市',
         mallAreaList: [
           {
@@ -1851,7 +1851,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '152200',
+        cityCode: '1522',
         cityName: '兴安盟',
         mallAreaList: [
           {
@@ -1881,7 +1881,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '152500',
+        cityCode: '1525',
         cityName: '锡林郭勒盟',
         mallAreaList: [
           {
@@ -1935,7 +1935,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '152900',
+        cityCode: '1529',
         cityName: '阿拉善盟',
         mallAreaList: [
           {
@@ -1955,11 +1955,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '210000',
+    provinceCode: '21',
     provinceName: '辽宁省',
     mallCityList: [
       {
-        cityCode: '210100',
+        cityCode: '2101',
         cityName: '沈阳市',
         mallAreaList: [
           {
@@ -2017,7 +2017,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '210200',
+        cityCode: '2102',
         cityName: '大连市',
         mallAreaList: [
           {
@@ -2063,7 +2063,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '210300',
+        cityCode: '2103',
         cityName: '鞍山市',
         mallAreaList: [
           {
@@ -2097,7 +2097,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '210400',
+        cityCode: '2104',
         cityName: '抚顺市',
         mallAreaList: [
           {
@@ -2131,7 +2131,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '210500',
+        cityCode: '2105',
         cityName: '本溪市',
         mallAreaList: [
           {
@@ -2161,7 +2161,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '210600',
+        cityCode: '2106',
         cityName: '丹东市',
         mallAreaList: [
           {
@@ -2191,7 +2191,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '210700',
+        cityCode: '2107',
         cityName: '锦州市',
         mallAreaList: [
           {
@@ -2225,7 +2225,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '210800',
+        cityCode: '2108',
         cityName: '营口市',
         mallAreaList: [
           {
@@ -2255,7 +2255,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '210900',
+        cityCode: '2109',
         cityName: '阜新市',
         mallAreaList: [
           {
@@ -2289,7 +2289,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '211000',
+        cityCode: '2110',
         cityName: '辽阳市',
         mallAreaList: [
           {
@@ -2323,7 +2323,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '211100',
+        cityCode: '2111',
         cityName: '盘锦市',
         mallAreaList: [
           {
@@ -2345,7 +2345,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '211200',
+        cityCode: '2112',
         cityName: '铁岭市',
         mallAreaList: [
           {
@@ -2379,7 +2379,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '211300',
+        cityCode: '2113',
         cityName: '朝阳市',
         mallAreaList: [
           {
@@ -2413,7 +2413,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '211400',
+        cityCode: '2114',
         cityName: '葫芦岛市',
         mallAreaList: [
           {
@@ -2445,11 +2445,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '220000',
+    provinceCode: '22',
     provinceName: '吉林省',
     mallCityList: [
       {
-        cityCode: '220100',
+        cityCode: '2201',
         cityName: '长春市',
         mallAreaList: [
           {
@@ -2495,7 +2495,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '220200',
+        cityCode: '2202',
         cityName: '吉林市',
         mallAreaList: [
           {
@@ -2537,7 +2537,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '220300',
+        cityCode: '2203',
         cityName: '四平市',
         mallAreaList: [
           {
@@ -2567,7 +2567,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '220400',
+        cityCode: '2204',
         cityName: '辽源市',
         mallAreaList: [
           {
@@ -2589,7 +2589,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '220500',
+        cityCode: '2205',
         cityName: '通化市',
         mallAreaList: [
           {
@@ -2623,7 +2623,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '220600',
+        cityCode: '2206',
         cityName: '白山市',
         mallAreaList: [
           {
@@ -2653,7 +2653,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '220700',
+        cityCode: '2207',
         cityName: '松原市',
         mallAreaList: [
           {
@@ -2679,7 +2679,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '220800',
+        cityCode: '2208',
         cityName: '白城市',
         mallAreaList: [
           {
@@ -2705,7 +2705,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '222400',
+        cityCode: '2224',
         cityName: '延边朝鲜族自治州',
         mallAreaList: [
           {
@@ -2745,11 +2745,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '230000',
+    provinceCode: '23',
     provinceName: '黑龙江省',
     mallCityList: [
       {
-        cityCode: '230100',
+        cityCode: '2301',
         cityName: '哈尔滨市',
         mallAreaList: [
           {
@@ -2827,7 +2827,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '230200',
+        cityCode: '2302',
         cityName: '齐齐哈尔市',
         mallAreaList: [
           {
@@ -2897,7 +2897,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '230300',
+        cityCode: '2303',
         cityName: '鸡西市',
         mallAreaList: [
           {
@@ -2939,7 +2939,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '230400',
+        cityCode: '2304',
         cityName: '鹤岗市',
         mallAreaList: [
           {
@@ -2977,7 +2977,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '230500',
+        cityCode: '2305',
         cityName: '双鸭山市',
         mallAreaList: [
           {
@@ -3015,7 +3015,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '230600',
+        cityCode: '2306',
         cityName: '大庆市',
         mallAreaList: [
           {
@@ -3057,7 +3057,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '230700',
+        cityCode: '2307',
         cityName: '伊春市',
         mallAreaList: [
           {
@@ -3131,7 +3131,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '230800',
+        cityCode: '2308',
         cityName: '佳木斯市',
         mallAreaList: [
           {
@@ -3177,7 +3177,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '230900',
+        cityCode: '2309',
         cityName: '七台河市',
         mallAreaList: [
           {
@@ -3199,7 +3199,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '231000',
+        cityCode: '2310',
         cityName: '牡丹江市',
         mallAreaList: [
           {
@@ -3245,7 +3245,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '231100',
+        cityCode: '2311',
         cityName: '黑河市',
         mallAreaList: [
           {
@@ -3275,7 +3275,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '231200',
+        cityCode: '2312',
         cityName: '绥化市',
         mallAreaList: [
           {
@@ -3321,7 +3321,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '232700',
+        cityCode: '2327',
         cityName: '大兴安岭地区',
         mallAreaList: [
           {
@@ -3341,11 +3341,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '310000',
+    provinceCode: '31',
     provinceName: '上海市',
     mallCityList: [
       {
-        cityCode: '310100',
+        cityCode: '3101',
         cityName: '上海市',
         mallAreaList: [
           {
@@ -3415,7 +3415,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '310200',
+        cityCode: '3102',
         cityName: '上海市辖县',
         mallAreaList: [
           {
@@ -3427,11 +3427,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '320000',
+    provinceCode: '32',
     provinceName: '江苏省',
     mallCityList: [
       {
-        cityCode: '320100',
+        cityCode: '3201',
         cityName: '南京市',
         mallAreaList: [
           {
@@ -3481,7 +3481,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '320200',
+        cityCode: '3202',
         cityName: '无锡市',
         mallAreaList: [
           {
@@ -3519,7 +3519,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '320300',
+        cityCode: '3203',
         cityName: '徐州市',
         mallAreaList: [
           {
@@ -3565,7 +3565,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '320400',
+        cityCode: '3204',
         cityName: '常州市',
         mallAreaList: [
           {
@@ -3599,7 +3599,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '320500',
+        cityCode: '3205',
         cityName: '苏州市',
         mallAreaList: [
           {
@@ -3641,7 +3641,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '320600',
+        cityCode: '3206',
         cityName: '南通市',
         mallAreaList: [
           {
@@ -3679,7 +3679,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '320700',
+        cityCode: '3207',
         cityName: '连云港市',
         mallAreaList: [
           {
@@ -3713,7 +3713,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '320800',
+        cityCode: '3208',
         cityName: '淮安市',
         mallAreaList: [
           {
@@ -3751,7 +3751,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '320900',
+        cityCode: '3209',
         cityName: '盐城市',
         mallAreaList: [
           {
@@ -3793,7 +3793,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '321000',
+        cityCode: '3210',
         cityName: '扬州市',
         mallAreaList: [
           {
@@ -3823,7 +3823,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '321100',
+        cityCode: '3211',
         cityName: '镇江市',
         mallAreaList: [
           {
@@ -3853,7 +3853,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '321200',
+        cityCode: '3212',
         cityName: '泰州市',
         mallAreaList: [
           {
@@ -3883,7 +3883,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '321300',
+        cityCode: '3213',
         cityName: '宿迁市',
         mallAreaList: [
           {
@@ -3911,11 +3911,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '330000',
+    provinceCode: '33',
     provinceName: '浙江省',
     mallCityList: [
       {
-        cityCode: '330100',
+        cityCode: '3301',
         cityName: '杭州市',
         mallAreaList: [
           {
@@ -3973,7 +3973,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '330200',
+        cityCode: '3302',
         cityName: '宁波市',
         mallAreaList: [
           {
@@ -4023,7 +4023,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '330300',
+        cityCode: '3303',
         cityName: '温州市',
         mallAreaList: [
           {
@@ -4073,7 +4073,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '330400',
+        cityCode: '3304',
         cityName: '嘉兴市',
         mallAreaList: [
           {
@@ -4107,7 +4107,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '330500',
+        cityCode: '3305',
         cityName: '湖州市',
         mallAreaList: [
           {
@@ -4133,7 +4133,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '330600',
+        cityCode: '3306',
         cityName: '绍兴市',
         mallAreaList: [
           {
@@ -4163,7 +4163,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '330700',
+        cityCode: '3307',
         cityName: '金华市',
         mallAreaList: [
           {
@@ -4205,7 +4205,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '330800',
+        cityCode: '3308',
         cityName: '衢州市',
         mallAreaList: [
           {
@@ -4235,7 +4235,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '330900',
+        cityCode: '3309',
         cityName: '舟山市',
         mallAreaList: [
           {
@@ -4257,7 +4257,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '331000',
+        cityCode: '3310',
         cityName: '台州市',
         mallAreaList: [
           {
@@ -4299,7 +4299,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '331100',
+        cityCode: '3311',
         cityName: '丽水市',
         mallAreaList: [
           {
@@ -4343,11 +4343,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '340000',
+    provinceCode: '34',
     provinceName: '安徽省',
     mallCityList: [
       {
-        cityCode: '340100',
+        cityCode: '3401',
         cityName: '合肥市',
         mallAreaList: [
           {
@@ -4389,7 +4389,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '340200',
+        cityCode: '3402',
         cityName: '芜湖市',
         mallAreaList: [
           {
@@ -4427,7 +4427,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '340300',
+        cityCode: '3403',
         cityName: '蚌埠市',
         mallAreaList: [
           {
@@ -4461,7 +4461,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '340400',
+        cityCode: '3404',
         cityName: '淮南市',
         mallAreaList: [
           {
@@ -4491,7 +4491,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '340500',
+        cityCode: '3405',
         cityName: '马鞍山市',
         mallAreaList: [
           {
@@ -4521,7 +4521,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '340600',
+        cityCode: '3406',
         cityName: '淮北市',
         mallAreaList: [
           {
@@ -4543,7 +4543,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '340700',
+        cityCode: '3407',
         cityName: '铜陵市',
         mallAreaList: [
           {
@@ -4565,7 +4565,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '340800',
+        cityCode: '3408',
         cityName: '安庆市',
         mallAreaList: [
           {
@@ -4615,7 +4615,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '341000',
+        cityCode: '3410',
         cityName: '黄山市',
         mallAreaList: [
           {
@@ -4649,7 +4649,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '341100',
+        cityCode: '3411',
         cityName: '滁州市',
         mallAreaList: [
           {
@@ -4687,7 +4687,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '341200',
+        cityCode: '3412',
         cityName: '阜阳市',
         mallAreaList: [
           {
@@ -4725,7 +4725,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '341300',
+        cityCode: '3413',
         cityName: '宿州市',
         mallAreaList: [
           {
@@ -4751,7 +4751,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '341400',
+        cityCode: '3414',
         cityName: '巢湖市',
         mallAreaList: [
           {
@@ -4761,7 +4761,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '341500',
+        cityCode: '3415',
         cityName: '六安市',
         mallAreaList: [
           {
@@ -4795,7 +4795,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '341600',
+        cityCode: '3416',
         cityName: '亳州市',
         mallAreaList: [
           {
@@ -4817,7 +4817,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '341700',
+        cityCode: '3417',
         cityName: '池州市',
         mallAreaList: [
           {
@@ -4839,7 +4839,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '341800',
+        cityCode: '3418',
         cityName: '宣城市',
         mallAreaList: [
           {
@@ -4875,11 +4875,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '350000',
+    provinceCode: '35',
     provinceName: '福建省',
     mallCityList: [
       {
-        cityCode: '350100',
+        cityCode: '3501',
         cityName: '福州市',
         mallAreaList: [
           {
@@ -4937,7 +4937,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '350200',
+        cityCode: '3502',
         cityName: '厦门市',
         mallAreaList: [
           {
@@ -4967,7 +4967,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '350300',
+        cityCode: '3503',
         cityName: '莆田市',
         mallAreaList: [
           {
@@ -4993,7 +4993,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '350400',
+        cityCode: '3504',
         cityName: '三明市',
         mallAreaList: [
           {
@@ -5047,7 +5047,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '350500',
+        cityCode: '3505',
         cityName: '泉州市',
         mallAreaList: [
           {
@@ -5101,7 +5101,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '350600',
+        cityCode: '3506',
         cityName: '漳州市',
         mallAreaList: [
           {
@@ -5151,7 +5151,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '350700',
+        cityCode: '3507',
         cityName: '南平市',
         mallAreaList: [
           {
@@ -5197,7 +5197,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '350800',
+        cityCode: '3508',
         cityName: '龙岩市',
         mallAreaList: [
           {
@@ -5231,7 +5231,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '350900',
+        cityCode: '3509',
         cityName: '宁德市',
         mallAreaList: [
           {
@@ -5275,11 +5275,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '360000',
+    provinceCode: '36',
     provinceName: '江西省',
     mallCityList: [
       {
-        cityCode: '360100',
+        cityCode: '3601',
         cityName: '南昌市',
         mallAreaList: [
           {
@@ -5321,7 +5321,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '360200',
+        cityCode: '3602',
         cityName: '景德镇市',
         mallAreaList: [
           {
@@ -5343,7 +5343,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '360300',
+        cityCode: '3603',
         cityName: '萍乡市',
         mallAreaList: [
           {
@@ -5369,7 +5369,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '360400',
+        cityCode: '3604',
         cityName: '九江市',
         mallAreaList: [
           {
@@ -5427,7 +5427,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '360500',
+        cityCode: '3605',
         cityName: '新余市',
         mallAreaList: [
           {
@@ -5441,7 +5441,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '360600',
+        cityCode: '3606',
         cityName: '鹰潭市',
         mallAreaList: [
           {
@@ -5459,7 +5459,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '360700',
+        cityCode: '3607',
         cityName: '赣州市',
         mallAreaList: [
           {
@@ -5537,7 +5537,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '360800',
+        cityCode: '3608',
         cityName: '吉安市',
         mallAreaList: [
           {
@@ -5595,7 +5595,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '360900',
+        cityCode: '3609',
         cityName: '宜春市',
         mallAreaList: [
           {
@@ -5641,7 +5641,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '361000',
+        cityCode: '3610',
         cityName: '抚州市',
         mallAreaList: [
           {
@@ -5691,7 +5691,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '361100',
+        cityCode: '3611',
         cityName: '上饶市',
         mallAreaList: [
           {
@@ -5747,11 +5747,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '370000',
+    provinceCode: '37',
     provinceName: '山东省',
     mallCityList: [
       {
-        cityCode: '370100',
+        cityCode: '3701',
         cityName: '济南市',
         mallAreaList: [
           {
@@ -5797,7 +5797,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '370200',
+        cityCode: '3702',
         cityName: '青岛市',
         mallAreaList: [
           {
@@ -5843,7 +5843,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '370300',
+        cityCode: '3703',
         cityName: '淄博市',
         mallAreaList: [
           {
@@ -5881,7 +5881,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '370400',
+        cityCode: '3704',
         cityName: '枣庄市',
         mallAreaList: [
           {
@@ -5911,7 +5911,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '370500',
+        cityCode: '3705',
         cityName: '东营市',
         mallAreaList: [
           {
@@ -5937,7 +5937,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '370600',
+        cityCode: '3706',
         cityName: '烟台市',
         mallAreaList: [
           {
@@ -5991,7 +5991,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '370700',
+        cityCode: '3707',
         cityName: '潍坊市',
         mallAreaList: [
           {
@@ -6045,7 +6045,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '370800',
+        cityCode: '3708',
         cityName: '济宁市',
         mallAreaList: [
           {
@@ -6099,7 +6099,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '370900',
+        cityCode: '3709',
         cityName: '泰安市',
         mallAreaList: [
           {
@@ -6129,7 +6129,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '371000',
+        cityCode: '3710',
         cityName: '威海市',
         mallAreaList: [
           {
@@ -6151,7 +6151,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '371100',
+        cityCode: '3711',
         cityName: '日照市',
         mallAreaList: [
           {
@@ -6173,7 +6173,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '371200',
+        cityCode: '3712',
         cityName: '莱芜市',
         mallAreaList: [
           {
@@ -6187,7 +6187,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '371300',
+        cityCode: '3713',
         cityName: '临沂市',
         mallAreaList: [
           {
@@ -6241,7 +6241,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '371400',
+        cityCode: '3714',
         cityName: '德州市',
         mallAreaList: [
           {
@@ -6291,7 +6291,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '371500',
+        cityCode: '3715',
         cityName: '聊城市',
         mallAreaList: [
           {
@@ -6329,7 +6329,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '371600',
+        cityCode: '3716',
         cityName: '滨州市',
         mallAreaList: [
           {
@@ -6363,7 +6363,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '371700',
+        cityCode: '3717',
         cityName: '菏泽市',
         mallAreaList: [
           {
@@ -6407,11 +6407,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '410000',
+    provinceCode: '41',
     provinceName: '河南省',
     mallCityList: [
       {
-        cityCode: '410100',
+        cityCode: '4101',
         cityName: '郑州市',
         mallAreaList: [
           {
@@ -6465,7 +6465,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '410200',
+        cityCode: '4102',
         cityName: '开封市',
         mallAreaList: [
           {
@@ -6511,7 +6511,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '410300',
+        cityCode: '4103',
         cityName: '洛阳市',
         mallAreaList: [
           {
@@ -6577,7 +6577,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '410400',
+        cityCode: '4104',
         cityName: '平顶山市',
         mallAreaList: [
           {
@@ -6623,7 +6623,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '410500',
+        cityCode: '4105',
         cityName: '安阳市',
         mallAreaList: [
           {
@@ -6665,7 +6665,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '410600',
+        cityCode: '4106',
         cityName: '鹤壁市',
         mallAreaList: [
           {
@@ -6691,7 +6691,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '410700',
+        cityCode: '4107',
         cityName: '新乡市',
         mallAreaList: [
           {
@@ -6745,7 +6745,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '410800',
+        cityCode: '4108',
         cityName: '焦作市',
         mallAreaList: [
           {
@@ -6791,7 +6791,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '410900',
+        cityCode: '4109',
         cityName: '濮阳市',
         mallAreaList: [
           {
@@ -6821,7 +6821,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '411000',
+        cityCode: '4110',
         cityName: '许昌市',
         mallAreaList: [
           {
@@ -6851,7 +6851,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '411100',
+        cityCode: '4111',
         cityName: '漯河市',
         mallAreaList: [
           {
@@ -6877,7 +6877,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '411200',
+        cityCode: '4112',
         cityName: '三门峡市',
         mallAreaList: [
           {
@@ -6907,7 +6907,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '411300',
+        cityCode: '4113',
         cityName: '南阳市',
         mallAreaList: [
           {
@@ -6965,7 +6965,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '411400',
+        cityCode: '4114',
         cityName: '商丘市',
         mallAreaList: [
           {
@@ -7007,7 +7007,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '411500',
+        cityCode: '4115',
         cityName: '信阳市',
         mallAreaList: [
           {
@@ -7053,7 +7053,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '411600',
+        cityCode: '4116',
         cityName: '周口市',
         mallAreaList: [
           {
@@ -7099,7 +7099,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '411700',
+        cityCode: '4117',
         cityName: '驻马店市',
         mallAreaList: [
           {
@@ -7145,7 +7145,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '419000',
+        cityCode: '4190',
         cityName: '河南省直辖县级行政区划',
         mallAreaList: [
           {
@@ -7157,11 +7157,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '420000',
+    provinceCode: '42',
     provinceName: '湖北省',
     mallCityList: [
       {
-        cityCode: '420100',
+        cityCode: '4201',
         cityName: '武汉市',
         mallAreaList: [
           {
@@ -7219,7 +7219,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '420200',
+        cityCode: '4202',
         cityName: '黄石市',
         mallAreaList: [
           {
@@ -7249,7 +7249,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '420300',
+        cityCode: '4203',
         cityName: '十堰市',
         mallAreaList: [
           {
@@ -7287,7 +7287,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '420500',
+        cityCode: '4205',
         cityName: '宜昌市',
         mallAreaList: [
           {
@@ -7345,7 +7345,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '420600',
+        cityCode: '4206',
         cityName: '襄樊市',
         mallAreaList: [
           {
@@ -7387,7 +7387,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '420700',
+        cityCode: '4207',
         cityName: '鄂州市',
         mallAreaList: [
           {
@@ -7405,7 +7405,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '420800',
+        cityCode: '4208',
         cityName: '荆门市',
         mallAreaList: [
           {
@@ -7431,7 +7431,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '420900',
+        cityCode: '4209',
         cityName: '孝感市',
         mallAreaList: [
           {
@@ -7465,7 +7465,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '421000',
+        cityCode: '4210',
         cityName: '荆州市',
         mallAreaList: [
           {
@@ -7503,7 +7503,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '421100',
+        cityCode: '4211',
         cityName: '黄冈市',
         mallAreaList: [
           {
@@ -7549,7 +7549,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '421200',
+        cityCode: '4212',
         cityName: '咸宁市',
         mallAreaList: [
           {
@@ -7579,7 +7579,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '421300',
+        cityCode: '4213',
         cityName: '随州市',
         mallAreaList: [
           {
@@ -7597,7 +7597,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '422800',
+        cityCode: '4228',
         cityName: '恩施土家族苗族自治州',
         mallAreaList: [
           {
@@ -7635,7 +7635,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '429000',
+        cityCode: '4290',
         cityName: '省直辖行政单位',
         mallAreaList: [
           {
@@ -7659,11 +7659,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '430000',
+    provinceCode: '43',
     provinceName: '湖南省',
     mallCityList: [
       {
-        cityCode: '430100',
+        cityCode: '4301',
         cityName: '长沙市',
         mallAreaList: [
           {
@@ -7705,7 +7705,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '430200',
+        cityCode: '4302',
         cityName: '株洲市',
         mallAreaList: [
           {
@@ -7747,7 +7747,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '430300',
+        cityCode: '4303',
         cityName: '湘潭市',
         mallAreaList: [
           {
@@ -7773,7 +7773,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '430400',
+        cityCode: '4304',
         cityName: '衡阳市',
         mallAreaList: [
           {
@@ -7827,7 +7827,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '430500',
+        cityCode: '4305',
         cityName: '邵阳市',
         mallAreaList: [
           {
@@ -7881,7 +7881,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '430600',
+        cityCode: '4306',
         cityName: '岳阳市',
         mallAreaList: [
           {
@@ -7923,7 +7923,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '430700',
+        cityCode: '4307',
         cityName: '常德市',
         mallAreaList: [
           {
@@ -7965,7 +7965,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '430800',
+        cityCode: '4308',
         cityName: '张家界市',
         mallAreaList: [
           {
@@ -7987,7 +7987,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '430900',
+        cityCode: '4309',
         cityName: '益阳市',
         mallAreaList: [
           {
@@ -8017,7 +8017,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '431000',
+        cityCode: '4310',
         cityName: '郴州市',
         mallAreaList: [
           {
@@ -8067,7 +8067,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '431100',
+        cityCode: '4311',
         cityName: '永州市',
         mallAreaList: [
           {
@@ -8117,7 +8117,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '431200',
+        cityCode: '4312',
         cityName: '怀化市',
         mallAreaList: [
           {
@@ -8171,7 +8171,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '431300',
+        cityCode: '4313',
         cityName: '娄底市',
         mallAreaList: [
           {
@@ -8197,7 +8197,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '433100',
+        cityCode: '4331',
         cityName: '湘西土家族苗族自治州',
         mallAreaList: [
           {
@@ -8237,11 +8237,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '440000',
+    provinceCode: '44',
     provinceName: '广东省',
     mallCityList: [
       {
-        cityCode: '440100',
+        cityCode: '4401',
         cityName: '广州市',
         mallAreaList: [
           {
@@ -8295,7 +8295,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '440200',
+        cityCode: '4402',
         cityName: '韶关市',
         mallAreaList: [
           {
@@ -8341,7 +8341,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '440300',
+        cityCode: '4403',
         cityName: '深圳市',
         mallAreaList: [
           {
@@ -8371,7 +8371,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '440400',
+        cityCode: '4404',
         cityName: '珠海市',
         mallAreaList: [
           {
@@ -8389,7 +8389,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '440500',
+        cityCode: '4405',
         cityName: '汕头市',
         mallAreaList: [
           {
@@ -8423,7 +8423,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '440600',
+        cityCode: '4406',
         cityName: '佛山市',
         mallAreaList: [
           {
@@ -8449,7 +8449,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '440700',
+        cityCode: '4407',
         cityName: '江门市',
         mallAreaList: [
           {
@@ -8483,7 +8483,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '440800',
+        cityCode: '4408',
         cityName: '湛江市',
         mallAreaList: [
           {
@@ -8525,7 +8525,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '440900',
+        cityCode: '4409',
         cityName: '茂名市',
         mallAreaList: [
           {
@@ -8551,7 +8551,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '441200',
+        cityCode: '4412',
         cityName: '肇庆市',
         mallAreaList: [
           {
@@ -8589,7 +8589,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '441300',
+        cityCode: '4413',
         cityName: '惠州市',
         mallAreaList: [
           {
@@ -8615,7 +8615,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '441400',
+        cityCode: '4414',
         cityName: '梅州市',
         mallAreaList: [
           {
@@ -8653,7 +8653,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '441500',
+        cityCode: '4415',
         cityName: '汕尾市',
         mallAreaList: [
           {
@@ -8675,7 +8675,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '441600',
+        cityCode: '4416',
         cityName: '河源市',
         mallAreaList: [
           {
@@ -8705,7 +8705,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '441700',
+        cityCode: '4417',
         cityName: '阳江市',
         mallAreaList: [
           {
@@ -8727,7 +8727,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '441800',
+        cityCode: '4418',
         cityName: '清远市',
         mallAreaList: [
           {
@@ -8765,7 +8765,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '441900',
+        cityCode: '4419',
         cityName: '东莞市',
         mallAreaList: [
           {
@@ -8775,7 +8775,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '442000',
+        cityCode: '4420',
         cityName: '中山市',
         mallAreaList: [
           {
@@ -8785,7 +8785,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '445100',
+        cityCode: '4451',
         cityName: '潮州市',
         mallAreaList: [
           {
@@ -8803,7 +8803,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '445200',
+        cityCode: '4452',
         cityName: '揭阳市',
         mallAreaList: [
           {
@@ -8829,7 +8829,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '445300',
+        cityCode: '4453',
         cityName: '云浮市',
         mallAreaList: [
           {
@@ -8857,11 +8857,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '450000',
+    provinceCode: '45',
     provinceName: '广西壮族自治区',
     mallCityList: [
       {
-        cityCode: '450100',
+        cityCode: '4501',
         cityName: '南宁市',
         mallAreaList: [
           {
@@ -8915,7 +8915,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '450200',
+        cityCode: '4502',
         cityName: '柳州市',
         mallAreaList: [
           {
@@ -8961,7 +8961,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '450300',
+        cityCode: '4503',
         cityName: '桂林市',
         mallAreaList: [
           {
@@ -9035,7 +9035,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '450400',
+        cityCode: '4504',
         cityName: '梧州市',
         mallAreaList: [
           {
@@ -9069,7 +9069,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '450500',
+        cityCode: '4505',
         cityName: '北海市',
         mallAreaList: [
           {
@@ -9091,7 +9091,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '450600',
+        cityCode: '4506',
         cityName: '防城港市',
         mallAreaList: [
           {
@@ -9113,7 +9113,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '450700',
+        cityCode: '4507',
         cityName: '钦州市',
         mallAreaList: [
           {
@@ -9135,7 +9135,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '450800',
+        cityCode: '4508',
         cityName: '贵港市',
         mallAreaList: [
           {
@@ -9161,7 +9161,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '450900',
+        cityCode: '4509',
         cityName: '玉林市',
         mallAreaList: [
           {
@@ -9195,7 +9195,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '451000',
+        cityCode: '4510',
         cityName: '百色市',
         mallAreaList: [
           {
@@ -9249,7 +9249,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '451100',
+        cityCode: '4511',
         cityName: '贺州市',
         mallAreaList: [
           {
@@ -9271,7 +9271,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '451200',
+        cityCode: '4512',
         cityName: '河池市',
         mallAreaList: [
           {
@@ -9321,7 +9321,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '451300',
+        cityCode: '4513',
         cityName: '来宾市',
         mallAreaList: [
           {
@@ -9351,7 +9351,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '451400',
+        cityCode: '4514',
         cityName: '崇左市',
         mallAreaList: [
           {
@@ -9387,11 +9387,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '460000',
+    provinceCode: '46',
     provinceName: '海南省',
     mallCityList: [
       {
-        cityCode: '460100',
+        cityCode: '4601',
         cityName: '海口市',
         mallAreaList: [
           {
@@ -9413,7 +9413,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '460200',
+        cityCode: '4602',
         cityName: '三亚市',
         mallAreaList: [
           {
@@ -9435,7 +9435,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '469000',
+        cityCode: '4690',
         cityName: '省直辖县级行政单位',
         mallAreaList: [
           {
@@ -9507,11 +9507,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '500000',
+    provinceCode: '50',
     provinceName: '重庆市',
     mallCityList: [
       {
-        cityCode: '500100',
+        cityCode: '5001',
         cityName: '重庆市',
         mallAreaList: [
           {
@@ -9601,7 +9601,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '500200',
+        cityCode: '5002',
         cityName: '重庆市辖县',
         mallAreaList: [
           {
@@ -9677,11 +9677,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '510000',
+    provinceCode: '51',
     provinceName: '四川省',
     mallCityList: [
       {
-        cityCode: '510100',
+        cityCode: '5101',
         cityName: '成都市',
         mallAreaList: [
           {
@@ -9763,7 +9763,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '510300',
+        cityCode: '5103',
         cityName: '自贡市',
         mallAreaList: [
           {
@@ -9793,7 +9793,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '510400',
+        cityCode: '5104',
         cityName: '攀枝花市',
         mallAreaList: [
           {
@@ -9819,7 +9819,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '510500',
+        cityCode: '5105',
         cityName: '泸州市',
         mallAreaList: [
           {
@@ -9853,7 +9853,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '510600',
+        cityCode: '5106',
         cityName: '德阳市',
         mallAreaList: [
           {
@@ -9883,7 +9883,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '510700',
+        cityCode: '5107',
         cityName: '绵阳市',
         mallAreaList: [
           {
@@ -9925,7 +9925,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '510800',
+        cityCode: '5108',
         cityName: '广元市',
         mallAreaList: [
           {
@@ -9959,7 +9959,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '510900',
+        cityCode: '5109',
         cityName: '遂宁市',
         mallAreaList: [
           {
@@ -9985,7 +9985,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '511000',
+        cityCode: '5110',
         cityName: '内江市',
         mallAreaList: [
           {
@@ -10011,7 +10011,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '511100',
+        cityCode: '5111',
         cityName: '乐山市',
         mallAreaList: [
           {
@@ -10061,7 +10061,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '511300',
+        cityCode: '5113',
         cityName: '南充市',
         mallAreaList: [
           {
@@ -10103,7 +10103,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '511400',
+        cityCode: '5114',
         cityName: '眉山市',
         mallAreaList: [
           {
@@ -10133,7 +10133,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '511500',
+        cityCode: '5115',
         cityName: '宜宾市',
         mallAreaList: [
           {
@@ -10179,7 +10179,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '511600',
+        cityCode: '5116',
         cityName: '广安市',
         mallAreaList: [
           {
@@ -10209,7 +10209,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '511700',
+        cityCode: '5117',
         cityName: '达州市',
         mallAreaList: [
           {
@@ -10243,7 +10243,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '511800',
+        cityCode: '5118',
         cityName: '雅安市',
         mallAreaList: [
           {
@@ -10281,7 +10281,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '511900',
+        cityCode: '5119',
         cityName: '巴中市',
         mallAreaList: [
           {
@@ -10307,7 +10307,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '512000',
+        cityCode: '5120',
         cityName: '资阳市',
         mallAreaList: [
           {
@@ -10329,7 +10329,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '513200',
+        cityCode: '5132',
         cityName: '阿坝藏族羌族自治州',
         mallAreaList: [
           {
@@ -10387,7 +10387,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '513300',
+        cityCode: '5133',
         cityName: '甘孜藏族自治州',
         mallAreaList: [
           {
@@ -10465,7 +10465,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '513400',
+        cityCode: '5134',
         cityName: '凉山彝族自治州',
         mallAreaList: [
           {
@@ -10541,11 +10541,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '520000',
+    provinceCode: '52',
     provinceName: '贵州省',
     mallCityList: [
       {
-        cityCode: '520100',
+        cityCode: '5201',
         cityName: '贵阳市',
         mallAreaList: [
           {
@@ -10591,7 +10591,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '520200',
+        cityCode: '5202',
         cityName: '六盘水市',
         mallAreaList: [
           {
@@ -10613,7 +10613,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '520300',
+        cityCode: '5203',
         cityName: '遵义市',
         mallAreaList: [
           {
@@ -10675,7 +10675,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '520400',
+        cityCode: '5204',
         cityName: '安顺市',
         mallAreaList: [
           {
@@ -10705,7 +10705,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '522200',
+        cityCode: '5222',
         cityName: '铜仁地区',
         mallAreaList: [
           {
@@ -10755,7 +10755,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '522300',
+        cityCode: '5223',
         cityName: '黔西南布依族苗族自治州',
         mallAreaList: [
           {
@@ -10793,7 +10793,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '522400',
+        cityCode: '5224',
         cityName: '毕节地区',
         mallAreaList: [
           {
@@ -10835,7 +10835,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '522600',
+        cityCode: '5226',
         cityName: '黔东南苗族侗族自治州',
         mallAreaList: [
           {
@@ -10905,7 +10905,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '522700',
+        cityCode: '5227',
         cityName: '黔南布依族苗族自治州',
         mallAreaList: [
           {
@@ -10961,11 +10961,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '530000',
+    provinceCode: '53',
     provinceName: '云南省',
     mallCityList: [
       {
-        cityCode: '530100',
+        cityCode: '5301',
         cityName: '昆明市',
         mallAreaList: [
           {
@@ -11027,7 +11027,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '530300',
+        cityCode: '5303',
         cityName: '曲靖市',
         mallAreaList: [
           {
@@ -11069,7 +11069,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '530400',
+        cityCode: '5304',
         cityName: '玉溪市',
         mallAreaList: [
           {
@@ -11111,7 +11111,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '530500',
+        cityCode: '5305',
         cityName: '保山市',
         mallAreaList: [
           {
@@ -11137,7 +11137,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '530600',
+        cityCode: '5306',
         cityName: '昭通市',
         mallAreaList: [
           {
@@ -11187,7 +11187,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '530700',
+        cityCode: '5307',
         cityName: '丽江市',
         mallAreaList: [
           {
@@ -11213,7 +11213,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '530800',
+        cityCode: '5308',
         cityName: '思茅市',
         mallAreaList: [
           {
@@ -11259,7 +11259,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '530900',
+        cityCode: '5309',
         cityName: '临沧市',
         mallAreaList: [
           {
@@ -11297,7 +11297,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '532300',
+        cityCode: '5323',
         cityName: '楚雄彝族自治州',
         mallAreaList: [
           {
@@ -11343,7 +11343,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '532500',
+        cityCode: '5325',
         cityName: '红河哈尼族彝族自治州',
         mallAreaList: [
           {
@@ -11401,7 +11401,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '532600',
+        cityCode: '5326',
         cityName: '文山壮族苗族自治州',
         mallAreaList: [
           {
@@ -11439,7 +11439,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '532800',
+        cityCode: '5328',
         cityName: '西双版纳傣族自治州',
         mallAreaList: [
           {
@@ -11457,7 +11457,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '532900',
+        cityCode: '5329',
         cityName: '大理白族自治州',
         mallAreaList: [
           {
@@ -11511,7 +11511,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '533100',
+        cityCode: '5331',
         cityName: '德宏傣族景颇族自治州',
         mallAreaList: [
           {
@@ -11537,7 +11537,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '533300',
+        cityCode: '5333',
         cityName: '怒江傈僳族自治州',
         mallAreaList: [
           {
@@ -11559,7 +11559,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '533400',
+        cityCode: '5334',
         cityName: '迪庆藏族自治州',
         mallAreaList: [
           {
@@ -11579,11 +11579,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '540000',
+    provinceCode: '54',
     provinceName: '西藏自治区',
     mallCityList: [
       {
-        cityCode: '540100',
+        cityCode: '5401',
         cityName: '拉萨市',
         mallAreaList: [
           {
@@ -11621,7 +11621,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '542100',
+        cityCode: '5421',
         cityName: '昌都地区',
         mallAreaList: [
           {
@@ -11671,7 +11671,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '542200',
+        cityCode: '5422',
         cityName: '山南地区',
         mallAreaList: [
           {
@@ -11725,7 +11725,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '542300',
+        cityCode: '5423',
         cityName: '日喀则地区',
         mallAreaList: [
           {
@@ -11807,7 +11807,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '542400',
+        cityCode: '5424',
         cityName: '那曲地区',
         mallAreaList: [
           {
@@ -11857,7 +11857,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '542500',
+        cityCode: '5425',
         cityName: '阿里地区',
         mallAreaList: [
           {
@@ -11891,7 +11891,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '542600',
+        cityCode: '5426',
         cityName: '林芝地区',
         mallAreaList: [
           {
@@ -11927,11 +11927,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '610000',
+    provinceCode: '61',
     provinceName: '陕西省',
     mallCityList: [
       {
-        cityCode: '610100',
+        cityCode: '6101',
         cityName: '西安市',
         mallAreaList: [
           {
@@ -11989,7 +11989,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '610200',
+        cityCode: '6102',
         cityName: '铜川市',
         mallAreaList: [
           {
@@ -12011,7 +12011,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '610300',
+        cityCode: '6103',
         cityName: '宝鸡市',
         mallAreaList: [
           {
@@ -12065,7 +12065,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '610400',
+        cityCode: '6104',
         cityName: '咸阳市',
         mallAreaList: [
           {
@@ -12127,7 +12127,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '610500',
+        cityCode: '6105',
         cityName: '渭南市',
         mallAreaList: [
           {
@@ -12177,7 +12177,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '610600',
+        cityCode: '6106',
         cityName: '延安市',
         mallAreaList: [
           {
@@ -12235,7 +12235,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '610700',
+        cityCode: '6107',
         cityName: '汉中市',
         mallAreaList: [
           {
@@ -12285,7 +12285,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '610800',
+        cityCode: '6108',
         cityName: '榆林市',
         mallAreaList: [
           {
@@ -12339,7 +12339,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '610900',
+        cityCode: '6109',
         cityName: '安康市',
         mallAreaList: [
           {
@@ -12385,7 +12385,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '611000',
+        cityCode: '6110',
         cityName: '商洛市',
         mallAreaList: [
           {
@@ -12421,11 +12421,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '620000',
+    provinceCode: '62',
     provinceName: '甘肃省',
     mallCityList: [
       {
-        cityCode: '620100',
+        cityCode: '6201',
         cityName: '兰州市',
         mallAreaList: [
           {
@@ -12463,7 +12463,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '620200',
+        cityCode: '6202',
         cityName: '嘉峪关市',
         mallAreaList: [
           {
@@ -12473,7 +12473,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '620300',
+        cityCode: '6203',
         cityName: '金昌市',
         mallAreaList: [
           {
@@ -12487,7 +12487,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '620400',
+        cityCode: '6204',
         cityName: '白银市',
         mallAreaList: [
           {
@@ -12513,7 +12513,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '620500',
+        cityCode: '6205',
         cityName: '天水市',
         mallAreaList: [
           {
@@ -12547,7 +12547,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '620600',
+        cityCode: '6206',
         cityName: '武威市',
         mallAreaList: [
           {
@@ -12569,7 +12569,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '620700',
+        cityCode: '6207',
         cityName: '张掖市',
         mallAreaList: [
           {
@@ -12599,7 +12599,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '620800',
+        cityCode: '6208',
         cityName: '平凉市',
         mallAreaList: [
           {
@@ -12633,7 +12633,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '620900',
+        cityCode: '6209',
         cityName: '酒泉市',
         mallAreaList: [
           {
@@ -12667,7 +12667,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '621000',
+        cityCode: '6210',
         cityName: '庆阳市',
         mallAreaList: [
           {
@@ -12705,7 +12705,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '621100',
+        cityCode: '6211',
         cityName: '定西市',
         mallAreaList: [
           {
@@ -12739,7 +12739,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '621200',
+        cityCode: '6212',
         cityName: '陇南市',
         mallAreaList: [
           {
@@ -12781,7 +12781,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '622900',
+        cityCode: '6229',
         cityName: '临夏回族自治州',
         mallAreaList: [
           {
@@ -12819,7 +12819,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '623000',
+        cityCode: '6230',
         cityName: '甘南藏族自治州',
         mallAreaList: [
           {
@@ -12859,11 +12859,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '630000',
+    provinceCode: '63',
     provinceName: '青海省',
     mallCityList: [
       {
-        cityCode: '630100',
+        cityCode: '6301',
         cityName: '西宁市',
         mallAreaList: [
           {
@@ -12897,7 +12897,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '632100',
+        cityCode: '6321',
         cityName: '海东地区',
         mallAreaList: [
           {
@@ -12931,7 +12931,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '632200',
+        cityCode: '6322',
         cityName: '海北藏族自治州',
         mallAreaList: [
           {
@@ -12953,7 +12953,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '632300',
+        cityCode: '6323',
         cityName: '黄南藏族自治州',
         mallAreaList: [
           {
@@ -12975,7 +12975,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '632500',
+        cityCode: '6325',
         cityName: '海南藏族自治州',
         mallAreaList: [
           {
@@ -13001,7 +13001,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '632600',
+        cityCode: '6326',
         cityName: '果洛藏族自治州',
         mallAreaList: [
           {
@@ -13031,7 +13031,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '632700',
+        cityCode: '6327',
         cityName: '玉树藏族自治州',
         mallAreaList: [
           {
@@ -13061,7 +13061,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '632800',
+        cityCode: '6328',
         cityName: '海西蒙古族藏族自治州',
         mallAreaList: [
           {
@@ -13089,11 +13089,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '640000',
+    provinceCode: '64',
     provinceName: '宁夏回族自治区',
     mallCityList: [
       {
-        cityCode: '640100',
+        cityCode: '6401',
         cityName: '银川市',
         mallAreaList: [
           {
@@ -13123,7 +13123,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '640200',
+        cityCode: '6402',
         cityName: '石嘴山市',
         mallAreaList: [
           {
@@ -13141,7 +13141,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '640300',
+        cityCode: '6403',
         cityName: '吴忠市',
         mallAreaList: [
           {
@@ -13167,7 +13167,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '640400',
+        cityCode: '6404',
         cityName: '固原市',
         mallAreaList: [
           {
@@ -13193,7 +13193,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '640500',
+        cityCode: '6405',
         cityName: '中卫市',
         mallAreaList: [
           {
@@ -13213,11 +13213,11 @@ const Area = [
     ],
   },
   {
-    provinceCode: '650000',
+    provinceCode: '65',
     provinceName: '新疆维吾尔自治区',
     mallCityList: [
       {
-        cityCode: '650100',
+        cityCode: '6501',
         cityName: '乌鲁木齐市',
         mallAreaList: [
           {
@@ -13255,7 +13255,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '650200',
+        cityCode: '6502',
         cityName: '克拉玛依市',
         mallAreaList: [
           {
@@ -13277,7 +13277,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '652100',
+        cityCode: '6521',
         cityName: '吐鲁番地区',
         mallAreaList: [
           {
@@ -13295,7 +13295,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '652200',
+        cityCode: '6522',
         cityName: '哈密地区',
         mallAreaList: [
           {
@@ -13313,7 +13313,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '652300',
+        cityCode: '6523',
         cityName: '昌吉回族自治州',
         mallAreaList: [
           {
@@ -13347,7 +13347,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '652700',
+        cityCode: '6527',
         cityName: '博尔塔拉蒙古自治州',
         mallAreaList: [
           {
@@ -13369,7 +13369,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '652800',
+        cityCode: '6528',
         cityName: '巴音郭楞蒙古自治州',
         mallAreaList: [
           {
@@ -13411,7 +13411,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '652900',
+        cityCode: '6529',
         cityName: '阿克苏地区',
         mallAreaList: [
           {
@@ -13453,7 +13453,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '653000',
+        cityCode: '6530',
         cityName: '克孜勒苏柯尔克孜自治州',
         mallAreaList: [
           {
@@ -13475,7 +13475,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '653100',
+        cityCode: '6531',
         cityName: '喀什地区',
         mallAreaList: [
           {
@@ -13529,7 +13529,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '653200',
+        cityCode: '6532',
         cityName: '和田地区',
         mallAreaList: [
           {
@@ -13567,7 +13567,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '654000',
+        cityCode: '6540',
         cityName: '伊犁哈萨克自治州',
         mallAreaList: [
           {
@@ -13613,7 +13613,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '654200',
+        cityCode: '6542',
         cityName: '塔城地区',
         mallAreaList: [
           {
@@ -13647,7 +13647,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '654300',
+        cityCode: '6543',
         cityName: '阿勒泰地区',
         mallAreaList: [
           {
@@ -13681,7 +13681,7 @@ const Area = [
         ],
       },
       {
-        cityCode: '659000',
+        cityCode: '6590',
         cityName: '省直辖行政单位',
         mallAreaList: [
           {
@@ -13701,7 +13701,7 @@ const Area = [
     ],
   },
   {
-    provinceCode: '710000',
+    provinceCode: '71',
     provinceName: '台湾省',
     mallCityList: [
       {
@@ -13712,7 +13712,7 @@ const Area = [
     ],
   },
   {
-    provinceCode: '810000',
+    provinceCode: '81',
     provinceName: '香港特别行政区',
     mallCityList: [
       {
@@ -13723,7 +13723,7 @@ const Area = [
     ],
   },
   {
-    provinceCode: '820000',
+    provinceCode: '82',
     provinceName: '澳门特别行政区',
     mallCityList: [
       {
