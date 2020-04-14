@@ -13,7 +13,6 @@ const { TreeNode } = Tree;
 // }))
 export default class areaSelect extends React.Component {
   componentDidMount() {
-    console.log('areaInfo_', options);
     const { dispatch } = this.props;
     // if (dispatch) {
     //   dispatch({
@@ -31,6 +30,7 @@ export default class areaSelect extends React.Component {
   state = {
     checkedKeys: [],
     selectedKeys: [],
+    expandedKeys: [],
   };
 
   // 弹窗配置不可配送区域
@@ -61,7 +61,21 @@ export default class areaSelect extends React.Component {
       return <TreeNode key={item.key} {...item} />;
     });
 
+  onExpand = expandedKeys => {
+    console.log('expandedKeys_', expandedKeys);
+    const item = expandedKeys[expandedKeys.length - 1];
+    // 先关闭所有
+    this.setState({
+      expandedKeys: [],
+    });
+    // 再打开最后一个
+    this.setState({
+      expandedKeys: [item],
+    });
+  };
+
   render() {
+    const { expandedKeys } = this.state;
     return (
       // <div className={`${styles.area}`}>
       <Modal
@@ -76,7 +90,9 @@ export default class areaSelect extends React.Component {
           onCheck={this.onCheck}
           checkedKeys={this.state.checkedKeys}
           onSelect={this.onSelect}
+          expandedKeys={expandedKeys}
           selectedKeys={this.state.selectedKeys}
+          onExpand={this.onExpand}
           className="areaTree"
         >
           {this.renderTreeNodes(options)}
