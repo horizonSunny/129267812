@@ -6,6 +6,13 @@ export async function getPickUp(params: Object) {
     params,
   });
 }
+
+// 获取运费模版列表数据
+export async function freightList(params: Object) {
+  return request('/admin/v1/freight/list', {
+    params,
+  });
+}
 // // 快速分类顺序调整
 // export async function reverseCategoryList(params: Object) {
 //   return request('/admin/v1/quickCategory/update/order', {
