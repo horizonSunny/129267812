@@ -61,15 +61,25 @@ class FormSelfDelivery extends React.Component {
       console.log('info_', test);
       const oldEndTime = endTime;
       const oldStartTime = startTime;
-      console.log('oldEndTime_', oldEndTime);
-      console.log('oldStartTime_', oldStartTime);
+      const _this = this;
       if (test) {
+        console.log('oldEndTime_', oldEndTime);
+        console.log('oldStartTime_', oldStartTime);
         this.setState({
           endTime: oldStartTime,
-        });
-        this.setState({
           startTime: oldEndTime,
         });
+        // this.setState({
+        //   startTime: oldEndTime,
+        // });
+        // setTimeout(() => {
+        //   _this.setState({
+        //     endTime: oldStartTime,
+        //   });
+        //   _this.setState({
+        //     startTime: oldEndTime,
+        //   });
+        // }, 1000);
       }
     }
   };
