@@ -86,7 +86,8 @@ export default class areaSelect extends React.Component {
     const { expandedKeys, visible } = this.state;
     return (
       // <div className={`${styles.area}`}>
-      <div>
+      <div className={`${styles.main}`}>
+        {/* modal里面的样式是全局的 */}
         <Modal
           title="不可配送区域选择"
           visible={visible}
@@ -106,6 +107,11 @@ export default class areaSelect extends React.Component {
           >
             {this.renderTreeNodes(options)}
           </Tree>
+
+          <div className="submit">
+            <Button>取消</Button>
+            <Button type="primary">保存</Button>
+          </div>
         </Modal>
       </div>
     );
