@@ -13776,15 +13776,6 @@ export function newAreaTree() {
         let tempCity = {};
         tempCity.key = ele.cityCode;
         tempCity.title = ele.cityName;
-        if (ele.mallAreaList.length > 0) {
-          tempCity.children = [];
-          ele.mallAreaList.forEach(res => {
-            let tempArea = {};
-            tempArea.key = res.areaCode;
-            tempArea.title = res.areaName;
-            tempCity.children.push(tempArea);
-          });
-        }
         tempData.children.push(tempCity);
       });
     }
