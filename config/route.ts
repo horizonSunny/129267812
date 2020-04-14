@@ -148,7 +148,7 @@ const route = [
               {
                 path: '/tradeSetting/freight/newFreight',
                 name: '新增运费模版',
-                component: './tradeSetting/freight/newFreigth.tsx',
+                component: './tradeSetting/freight/newFreight.tsx',
                 hideInMenu: true,
               },
             ],

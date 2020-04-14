@@ -82,7 +82,7 @@ class AdvancedSearchForm extends React.Component {
     //     productType: '',
     //   },
     // });
-    router.push('/commodityAdm/management/chooseProducts');
+    router.push('/tradeSetting/freight/newFreight');
   };
 
   render() {
