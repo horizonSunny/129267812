@@ -27,8 +27,8 @@ export default class TemplateFreight extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className={`${styles.main}`}>
+        <div className={`${styles.defaultFreight}`}>
           <span>默认运费</span>
           <span>(全国包邮，除指定地区)</span>
         </div>
