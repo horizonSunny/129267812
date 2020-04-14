@@ -3,14 +3,18 @@ import { Row, Col, Button } from 'antd';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import mapImg from '@/assets/tradeSetting/map-da.svg';
+import { newAreaTree } from '@/utils/area.js';
 // 外部引入
 import styles from './noDistribute.less';
+
+const options = newAreaTree();
 // const { Search } = Input;
 // @connect(({ commodityClassify }) => ({
 //   commodityClassify,
 // }))
 export default class NoDistribute extends React.Component {
   componentDidMount() {
+    console.log('areaInfo_', options);
     const { dispatch } = this.props;
     // if (dispatch) {
     //   dispatch({

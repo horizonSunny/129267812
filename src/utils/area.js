@@ -13763,3 +13763,32 @@ export function newArea() {
   });
   return newAreaData;
 }
+
+export function newAreaTree() {
+  let newAreaData = [];
+  Area.forEach(item => {
+    let tempData = {};
+    tempData.key = item.provinceCode;
+    tempData.title = item.provinceName;
+    if (item.mallCityList.length > 0) {
+      tempData.children = [];
+      item.mallCityList.forEach(ele => {
+        let tempCity = {};
+        tempCity.key = ele.cityCode;
+        tempCity.title = ele.cityName;
+        if (ele.mallAreaList.length > 0) {
+          tempCity.children = [];
+          ele.mallAreaList.forEach(res => {
+            let tempArea = {};
+            tempArea.key = res.areaCode;
+            tempArea.title = res.areaName;
+            tempCity.children.push(tempArea);
+          });
+        }
+        tempData.children.push(tempCity);
+      });
+    }
+    newAreaData.push(tempData);
+  });
+  return newAreaData;
+}
