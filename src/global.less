@@ -1,4 +1,6 @@
 @import '~antd/es/style/themes/default.less';
+// 设置交易设置中的tree排序
+@import '../src/pages/tradeSetting/components/areaSelect.less';
 
 html,
 body,
@@ -82,55 +84,55 @@ body {
     }
   }
 
-  // 设置交易设置中的tree排序
-  .areaTreeModal {
-    width: 700px;
+  // // 设置交易设置中的tree排序
+  // .areaTreeModal {
+  //   width: 700px;
 
-    .ant-modal-content {
-      width: auto;
+  //   .ant-modal-content {
+  //     width: auto;
 
-      .ant-modal-body {
+  //     .ant-modal-body {
 
-        // min-width: 700px;
-        .ant-tree li ul {
-          position: absolute;
-          background-color: #fff;
-          z-index: 999;
-          display: flex;
-          flex-wrap: wrap;
-          border: 1px solid #ddd;
-          border-radius: 3px;
-          min-width: 400px;
-        }
+  //       // min-width: 700px;
+  //       .ant-tree li ul {
+  //         position: absolute;
+  //         background-color: #fff;
+  //         z-index: 999;
+  //         display: flex;
+  //         flex-wrap: wrap;
+  //         border: 1px solid #ddd;
+  //         border-radius: 3px;
+  //         min-width: 400px;
+  //       }
 
-        .areaTree {
-          display: flex;
-          flex-wrap: wrap;
+  //       .areaTree {
+  //         display: flex;
+  //         flex-wrap: wrap;
 
-          li {
-            width: 155px;
-          }
+  //         li {
+  //           width: 155px;
+  //         }
 
-          .ant-tree-treenode-switcher-open {
-            position: relative;
+  //         .ant-tree-treenode-switcher-open {
+  //           position: relative;
 
-            // .ant-tree-child-tree-open {
-            //   position: absolute;
-            //   z-index: 999;
-            //   background-color: #fff;
-            // }
+  //           // .ant-tree-child-tree-open {
+  //           //   position: absolute;
+  //           //   z-index: 999;
+  //           //   background-color: #fff;
+  //           // }
 
-            // .ant-tree-child-tree {
-            //   position: absolute;
-            //   z-index: 999;
-            //   // background-color: red;
-            //   background-color: #fff;
-            // }
-          }
-        }
-      }
-    }
-  }
+  //           // .ant-tree-child-tree {
+  //           //   position: absolute;
+  //           //   z-index: 999;
+  //           //   // background-color: red;
+  //           //   background-color: #fff;
+  //           // }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
 
 }
