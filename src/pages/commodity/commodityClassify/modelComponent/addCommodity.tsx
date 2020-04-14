@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, Modal, Table, Input } from 'antd';
-import styles from './addCommodity.less';
 import { connect } from 'dva';
+import styles from './addCommodity.less';
 import { commodityItem } from './commodityItem';
+
 const { Search } = Input;
 @connect(({ commodityClassify }) => ({
   commodityClassify,
@@ -11,12 +12,15 @@ export default class AddCommodityModal extends React.Component {
   componentDidMount() {
     this.props.onRef(this);
   }
+
   state = { visible: false };
+
   components = {
     body: {
       row: commodityItem,
     },
   };
+
   showModal = () => {
     const { dispatch } = this.props;
     console.log('this.props.commodityClassify_', this.props.commodityClassify.selectedProductKeys);
@@ -57,6 +61,7 @@ export default class AddCommodityModal extends React.Component {
       });
     }
   };
+
   // 搜索
   onSearch(e) {
     console.log('e_', e);
@@ -68,11 +73,12 @@ export default class AddCommodityModal extends React.Component {
       });
     }
   }
+
   // 搜索弹框
   downSelect = () => {
     return (
       <div
-        className={styles['main']}
+        className={styles.main}
         style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -100,6 +106,7 @@ export default class AddCommodityModal extends React.Component {
       </div>
     );
   };
+
   // 选中添加项
   onSelectChange = selectedRowKeys => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
@@ -112,6 +119,7 @@ export default class AddCommodityModal extends React.Component {
       });
     }
   };
+
   render() {
     const columns = [
       {

@@ -31,8 +31,18 @@ export default class NoDistribute extends React.Component {
     // }
   }
 
+  // 调用子组件方法
+  onRefInfo = ref => {
+    this.child = ref;
+    console.log('onRefInfo_', ref);
+  };
+
   // 弹窗配置不可配送区域
-  noDistribute = () => {};
+  showArea = () => {
+    console.log('this.child_', this.child);
+
+    this.child.openModal();
+  };
 
   render() {
     return (
@@ -40,13 +50,11 @@ export default class NoDistribute extends React.Component {
         <div className={`${styles.main}`}>
           <img src={mapImg} alt="" />
           <span>你还未配置不可配送区域</span>
-          <Button type="primary" className={`${styles.button}`} onClick={this.noDistribute}>
+          <Button type="primary" className={`${styles.button}`} onClick={this.showArea}>
             去配置 &gt;
           </Button>
         </div>
-        <div>
-          <AreaSelect />
-        </div>
+        <AreaSelect onRef={this.onRefInfo} />
       </PageHeaderWrapper>
     );
   }

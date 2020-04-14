@@ -14,6 +14,7 @@ const { TreeNode } = Tree;
 export default class areaSelect extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
+    this.props.onRef(this);
     // if (dispatch) {
     //   dispatch({
     //     type: 'commodityClassify/classification',
@@ -28,6 +29,7 @@ export default class areaSelect extends React.Component {
   }
 
   state = {
+    visible: true,
     checkedKeys: [],
     selectedKeys: [],
     expandedKeys: [],
@@ -47,7 +49,13 @@ export default class areaSelect extends React.Component {
     this.setState({ selectedKeys });
   };
 
-  handleCancel = () => {};
+  handleCancel = () => {
+    this.setState({ visible: false });
+  };
+
+  openModal = () => {
+    this.setState({ visible: true, expandedKeys: [] });
+  };
 
   renderTreeNodes = data =>
     data.map(item => {
@@ -75,30 +83,31 @@ export default class areaSelect extends React.Component {
   };
 
   render() {
-    const { expandedKeys } = this.state;
+    const { expandedKeys, visible } = this.state;
     return (
       // <div className={`${styles.area}`}>
-      <Modal
-        title="不可配送区域选择"
-        visible
-        footer={null}
-        onCancel={this.handleCancel}
-        className="areaTreeModal"
-      >
-        <Tree
-          checkable
-          onCheck={this.onCheck}
-          checkedKeys={this.state.checkedKeys}
-          onSelect={this.onSelect}
-          expandedKeys={expandedKeys}
-          selectedKeys={this.state.selectedKeys}
-          onExpand={this.onExpand}
-          className="areaTree"
+      <div>
+        <Modal
+          title="不可配送区域选择"
+          visible={visible}
+          footer={null}
+          onCancel={this.handleCancel}
+          className="areaTreeModal"
         >
-          {this.renderTreeNodes(options)}
-        </Tree>
-      </Modal>
-      // </div>
+          <Tree
+            checkable
+            onCheck={this.onCheck}
+            checkedKeys={this.state.checkedKeys}
+            onSelect={this.onSelect}
+            expandedKeys={expandedKeys}
+            selectedKeys={this.state.selectedKeys}
+            onExpand={this.onExpand}
+            className="areaTree"
+          >
+            {this.renderTreeNodes(options)}
+          </Tree>
+        </Modal>
+      </div>
     );
   }
 }
