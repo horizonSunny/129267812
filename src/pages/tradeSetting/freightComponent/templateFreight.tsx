@@ -99,7 +99,8 @@ export default class TemplateFreight extends React.Component {
                   <tr key={index} className={`${styles.templateContent}`}>
                     <td className={`${styles.templateArea}`}>
                       <span className={`${styles.templateAreaItem}`}>
-                        {filterAreaName(item.areas)}
+                        {item.areas.length !== 0 && filterAreaName(item.areas)}
+                        {item.areas.length === 0 && '未添加地区'}
                       </span>
                       <span className={`${styles.templateAreaEditor}`}>
                         <Button onClick={this.showArea.bind(this, item.areas, index)}>编辑</Button>

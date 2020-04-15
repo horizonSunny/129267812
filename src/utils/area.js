@@ -13701,34 +13701,139 @@ const Area = [
     ],
   },
   {
-    provinceCode: '71',
+    provinceCode: '66',
     provinceName: '台湾省',
     mallCityList: [
       {
-        cityCode: '71',
-        cityName: '台湾省',
+        cityName: '台北',
+        cityCode: '6601',
+        mallAreaList: [],
+      },
+      {
+        cityName: '高雄',
+        cityCode: '6602',
+        mallAreaList: [],
+      },
+      {
+        cityName: '基隆',
+        cityCode: '6603',
+        mallAreaList: [],
+      },
+      {
+        cityName: '台中',
+        cityCode: '6604',
+        mallAreaList: [],
+      },
+      {
+        cityName: '台南',
+        cityCode: '6605',
+        mallAreaList: [],
+      },
+      {
+        cityName: '新竹',
+        cityCode: '6606',
+        mallAreaList: [],
+      },
+      {
+        cityName: '嘉义',
+        cityCode: '6607',
+        mallAreaList: [],
+      },
+      {
+        cityName: '宜兰',
+        cityCode: '6608',
+        mallAreaList: [],
+      },
+      {
+        cityName: '桃园',
+        cityCode: '6609',
+        mallAreaList: [],
+      },
+      {
+        cityName: '苗栗',
+        cityCode: '6610',
+        mallAreaList: [],
+      },
+      {
+        cityName: '彰化',
+        cityCode: '6611',
+        mallAreaList: [],
+      },
+      {
+        cityName: '南投',
+        cityCode: '6612',
+        mallAreaList: [],
+      },
+      {
+        cityName: '云林',
+        cityCode: '6613',
+        mallAreaList: [],
+      },
+      {
+        cityName: '屏东',
+        cityCode: '6614',
+        mallAreaList: [],
+      },
+      {
+        cityName: '台东',
+        cityCode: '6615',
+        mallAreaList: [],
+      },
+      {
+        cityName: '花莲',
+        cityCode: '6616',
+        mallAreaList: [],
+      },
+      {
+        cityName: '澎湖',
+        cityCode: '6617',
         mallAreaList: [],
       },
     ],
   },
   {
-    provinceCode: '81',
+    provinceCode: '67',
     provinceName: '香港特别行政区',
     mallCityList: [
       {
-        cityCode: '81',
-        cityName: '香港特别行政区',
+        cityName: '香港岛',
+        cityCode: '6701',
+        mallAreaList: [],
+      },
+      {
+        cityName: '九龙',
+        cityCode: '6702',
+        mallAreaList: [],
+      },
+      {
+        cityName: '新界',
+        cityCode: '6703',
         mallAreaList: [],
       },
     ],
   },
   {
-    provinceCode: '82',
+    provinceCode: '68',
     provinceName: '澳门特别行政区',
     mallCityList: [
       {
-        cityCode: '82',
-        cityName: '澳门特别行政区',
+        cityName: '澳门半岛',
+        cityCode: '6801',
+        mallAreaList: [],
+      },
+      {
+        cityName: '氹仔岛',
+        cityCode: '6802',
+        mallAreaList: [],
+      },
+      {
+        cityName: '路环岛',
+        cityCode: '6803',
+        mallAreaList: [],
+      },
+      {
+        cityName: '路氹城',
+        cityCode: '6804',
         mallAreaList: [],
       },
     ],
