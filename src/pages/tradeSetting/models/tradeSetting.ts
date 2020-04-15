@@ -1,13 +1,32 @@
 // import { Effect } from 'dva';
 // import { Reducer } from 'redux';
 import { getPickUp } from '@/services/tradeSetting';
-
+// 运费模版初始化
+const freightTemplateInfo = {
+  // 区域运费
+  areaFreights: [],
+  // 默认运费
+  continuePrice: '',
+  firstNum: '',
+  firstPrice: '',
+  templateName: '',
+  templateType: 1,
+};
+// 区域运费初始化
+const areaFreight = {
+  areas: [],
+  continuePrice: '',
+  firstNum: '',
+  firstPrice: '',
+};
 const tradeSetting = {
   namespace: 'tradeSetting',
 
   state: {
     hasSelfDelivery: false,
     selfDeliveryInfo: {},
+    // 运费模版配置信息
+    freightTemplateInfo,
   },
 
   effects: {
@@ -37,6 +56,7 @@ const tradeSetting = {
         hasSelfDelivery,
       };
     },
+    // 新增运费模版初始化
   },
 };
 
