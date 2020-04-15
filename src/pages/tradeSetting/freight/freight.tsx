@@ -5,6 +5,7 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // 外部引入
 import styles from './commodityCas.less';
 import FreightSearch from '../freightComponent/freightSearch';
+import FrightTemplate from '../freightComponent/frightTemplate';
 // const { Search } = Input;
 @connect(({ tradeSetting }) => ({
   tradeSetting,
@@ -29,6 +30,7 @@ export default class Freight extends React.Component {
     return (
       <PageHeaderWrapper>
         <FreightSearch />
+        <FrightTemplate />
       </PageHeaderWrapper>
     );
   }

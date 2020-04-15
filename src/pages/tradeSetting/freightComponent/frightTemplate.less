@@ -1,0 +1,64 @@
+@import '~antd/es/style/themes/default.less';
+
+.main {
+  .table {
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 1);
+
+    :global {
+      .ant-table-title {
+        background: #E7E9ED;
+      }
+    }
+  }
+}
+
+.main {
+  .table:nth-child(1) {
+    :global {
+      .ant-table-title {
+        background: #CAD5E6;
+      }
+    }
+  }
+
+  .table {
+    .tableHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .tableHeaderSpan {
+        margin-right: 20px;
+      }
+
+      .tableHeaderButton {
+        margin-left: 20px;
+      }
+
+      @media (min-width: @screen-xxl) {
+        .tableHeaderSpan {
+          margin-right: 50px;
+        }
+
+        .tableHeaderButton {
+          margin-left: 50px;
+        }
+      }
+
+      // @media (max-width: @screen-xs) {
+      //   .tableHeaderSpan {
+      //     margin-right: 20px;
+      //   }
+
+      //   .tableHeaderButton {
+      //     margin-left: 20px;
+      //   }
+      // }
+
+    }
+  }
+
+  // :global {
+  // }
+}
