@@ -7,10 +7,23 @@ import styles from './areaSelect.less';
 
 const options = newAreaTree();
 const { TreeNode } = Tree;
-// const { Search } = Input;
-// @connect(({ commodityClassify }) => ({
-//   commodityClassify,
-// }))
+// 假如全选的话 需要将省下的市摘除掉
+function filterProvince(areaInfo) {
+  const province = areaInfo.filter(item => {
+    if (item.length === 2) {
+      return item;
+    }
+  });
+  const newArea = areaInfo.filter(item => {
+    // 该省市是否已经存在省级id
+    const cityProvince = item.slice(0, 2);
+    if (province.indexOf(cityProvince) > -1) {
+      return false;
+    }
+    return true;
+  });
+  return [...province, ...newArea];
+}
 export default class areaSelect extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -19,7 +32,6 @@ export default class areaSelect extends React.Component {
 
   state = {
     visible: false,
-    // checkedKeys: ['50', '44', '11'],
     checkedKeys: [],
     expandedKeys: [],
   };
@@ -72,14 +84,15 @@ export default class areaSelect extends React.Component {
   };
 
   confrim = () => {
-    this.props.confirmArea(this.state.checkedKeys);
-    this.handleCancel();
+    // this.props.confirmArea(this.state.checkedKeys);
+    // this.handleCancel();
+    console.log('checkedKeys_', this.state.checkedKeys);
+    console.log('checkedKeys_', filterProvince(this.state.checkedKeys));
   };
 
   render() {
     const { expandedKeys, visible } = this.state;
     return (
-      // <div className={`${styles.area}`}>
       <div className={`${styles.main}`}>
         {/* modal里面的样式是全局的 */}
         <Modal
