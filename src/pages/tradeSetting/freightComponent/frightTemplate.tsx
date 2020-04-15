@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button } from 'antd';
+import { Table, Button, Pagination } from 'antd';
 import { connect } from 'dva';
 // 外部引入
 import styles from './frightTemplate.less';
@@ -100,6 +100,7 @@ export default class Freight extends React.Component {
             />
           );
         })}
+        <Pagination defaultCurrent={1} total={50} />
       </div>
     );
   }
