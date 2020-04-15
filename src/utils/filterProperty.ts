@@ -189,8 +189,8 @@ export function filterStatusDiabTree(obj, key = '', level = 0) {
 export function findItem(arr, fn, result) {
   arr.some(item => {
     if (fn(item)) {
+      console.log('findItem_', item);
       result.push(item);
-      return true;
     }
     if (item.children) {
       findItem(item.children, fn, result);
