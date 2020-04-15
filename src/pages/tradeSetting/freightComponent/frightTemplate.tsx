@@ -3,12 +3,12 @@ import { Row, Col } from 'antd';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // 外部引入
-import styles from './commodityCas.less';
-import FreightSearch from './freightSearch';
+import styles from './frightTemplate.less';
 // const { Search } = Input;
 @connect(({ tradeSetting }) => ({
   tradeSetting,
 }))
+// 运费list，运费模版展示
 export default class Freight extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -26,10 +26,6 @@ export default class Freight extends React.Component {
   }
 
   render() {
-    return (
-      <PageHeaderWrapper>
-        <FreightSearch />
-      </PageHeaderWrapper>
-    );
+    return <div />;
   }
 }

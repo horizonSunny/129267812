@@ -29,7 +29,8 @@ export default class areaSelect extends React.Component {
   }
 
   state = {
-    visible: true,
+    visible: false,
+    // checkedKeys: ['50', '44', '11'],
     checkedKeys: [],
     selectedKeys: [],
     expandedKeys: [],
