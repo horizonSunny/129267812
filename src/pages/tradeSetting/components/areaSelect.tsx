@@ -84,10 +84,8 @@ export default class areaSelect extends React.Component {
   };
 
   confrim = () => {
-    // this.props.confirmArea(this.state.checkedKeys);
-    // this.handleCancel();
-    console.log('checkedKeys_', this.state.checkedKeys);
-    console.log('checkedKeys_', filterProvince(this.state.checkedKeys));
+    this.props.confirmArea(filterProvince(this.state.checkedKeys));
+    this.handleCancel();
   };
 
   render() {
