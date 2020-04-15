@@ -50,11 +50,11 @@ class FormSelfDelivery extends React.Component {
     const formItemLayout = {
       labelCol: {
         sm: { span: 2 },
-        xl: { span: 4 },
+        xxl: { span: 4 },
       },
       wrapperCol: {
         sm: { span: 18 },
-        xl: { span: 15 },
+        xxl: { span: 15 },
       },
     };
     const { value } = this.state;
