@@ -8,7 +8,7 @@ const freightTemplateInfo = {
   // 区域运费
   areaFreights: [
     {
-      areas: ['13', '1101', '1201', '1401', '1501'],
+      areas: [],
       firstNum: 10,
       firstPrice: 10,
       continuePrice: 10,
