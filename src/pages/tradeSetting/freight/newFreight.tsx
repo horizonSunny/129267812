@@ -49,12 +49,12 @@ class FormSelfDelivery extends React.Component {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: {
-        xl: { span: 4 },
         sm: { span: 2 },
+        xl: { span: 4 },
       },
       wrapperCol: {
-        xl: { span: 15 },
         sm: { span: 18 },
+        xl: { span: 15 },
       },
     };
     const { value } = this.state;
