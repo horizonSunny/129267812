@@ -15,24 +15,12 @@ export default class areaSelect extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     this.props.onRef(this);
-    // if (dispatch) {
-    //   dispatch({
-    //     type: 'commodityClassify/classification',
-    //   }).then(() => {
-    //     // 查询单个分类的商品
-    //     dispatch({
-    //       type: 'commodityClassify/selectCas',
-    //       payload: this.props.commodityClassify.casInfoOne[0],
-    //     });
-    //   });
-    // }
   }
 
   state = {
     visible: false,
     // checkedKeys: ['50', '44', '11'],
-    checkedKeys: [],
-    selectedKeys: [],
+    checkedKeys: this.props.selectArea,
     expandedKeys: [],
   };
 
@@ -85,6 +73,7 @@ export default class areaSelect extends React.Component {
 
   render() {
     const { expandedKeys, visible } = this.state;
+    console.log('this.props.selectArea_2', this.props.selectArea);
     return (
       // <div className={`${styles.area}`}>
       <div className={`${styles.main}`}>
@@ -102,7 +91,6 @@ export default class areaSelect extends React.Component {
             checkedKeys={this.state.checkedKeys}
             onSelect={this.onSelect}
             expandedKeys={expandedKeys}
-            selectedKeys={this.state.selectedKeys}
             onExpand={this.onExpand}
             className="areaTree"
           >

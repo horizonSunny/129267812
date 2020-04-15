@@ -47,20 +47,31 @@ export default class TemplateFreight extends React.Component {
     // }
   }
 
+  state = {
+    // 当前选中的区域
+    modalAreaSelect: [],
+    // 当前操作的是第几个指定区域数据
+    modalAreaIndex: '',
+  };
+
   onRefInfo = ref => {
     this.child = ref;
     console.log('onRefInfo_', ref);
   };
 
   // 弹窗配置不可配送区域
-  showArea = () => {
-    console.log('this.child_', this.child);
-
+  showArea = (area, index) => {
+    console.log('this.child_', area);
+    this.setState({
+      modalAreaSelect: area,
+      modalAreaIndex: index,
+    });
     this.child.openModal();
   };
 
   render() {
     const { value } = this.props;
+    const { modalAreaSelect } = this.state;
     return (
       <div className={`${styles.main}`}>
         <div className={`${styles.defaultFreight}`}>
@@ -93,26 +104,9 @@ export default class TemplateFreight extends React.Component {
                     <td className={`${styles.templateArea}`}>
                       <span className={`${styles.templateAreaItem}`}>
                         {filterAreaName(item.areas)}
-                        {/* {item.areas.map((itemInfo, indexInfo) => {
-                          // return <span key={indexInfo}>{itemInfo}</span>;
-                          const result = [];
-                          console.log('options_', options);
-                          console.log('itemInfo_', itemInfo);
-                          findItem(
-                            options,
-                            itemArea => {
-                              console.log('itemArea.key_', itemArea.key);
-                              return itemArea.key === itemInfo;
-                            },
-                            result,
-                          );
-                          console.log('result_', result);
-
-                          return result[0].title;
-                        })} */}
                       </span>
                       <span className={`${styles.templateAreaEditor}`}>
-                        <Button onClick={this.showArea}>编辑</Button>
+                        <Button onClick={this.showArea.bind(this, item.areas, index)}>编辑</Button>
                       </span>
                     </td>
                     <td>
@@ -139,7 +133,7 @@ export default class TemplateFreight extends React.Component {
             </tbody>
           </table>
         </div>
-        <AreaSelect onRef={this.onRefInfo} />
+        <AreaSelect onRef={this.onRefInfo} selectArea={modalAreaSelect} />
       </div>
     );
   }
