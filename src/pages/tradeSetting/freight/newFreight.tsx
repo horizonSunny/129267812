@@ -53,7 +53,7 @@ class FormSelfDelivery extends React.Component {
         xxl: { span: 4 },
       },
       wrapperCol: {
-        sm: { span: 18 },
+        sm: { span: 20 },
         xxl: { span: 15 },
       },
     };
@@ -102,6 +102,15 @@ class FormSelfDelivery extends React.Component {
                 b: '122',
               },
             })(<TemplateFreight />)}
+          </Form.Item>
+          <Form.Item
+            wrapperCol={{
+              sm: { span: 2, offset: 11 },
+            }}
+          >
+            <Button type="primary" htmlType="submit">
+              保存模版
+            </Button>
           </Form.Item>
         </Form>
       </PageHeaderWrapper>

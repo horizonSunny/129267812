@@ -11,12 +11,12 @@
   }
 
   .reminder {
-    height: 17px;
+    height: 40px;
     font-size: 12px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;
     color: rgba(231, 163, 16, 1);
-    line-height: 17px;
+    line-height: 40px;
   }
 
   .table {
@@ -24,8 +24,14 @@
       border: 1px solid rgba(209, 209, 209, 1);
       width: 100%;
 
-      tr td th {
+      tr {
+        border: 1px solid rgba(209, 209, 209, 1);
         background: rgba(244, 245, 248, 1);
+        min-height: 60px;
+
+        td {
+          min-height: 60px;
+        }
       }
 
       .templateTitle {
@@ -47,12 +53,17 @@
           }
 
           .templateAreaEditor {
+            display: inline-block;
             vertical-align: middle;
             // float: right;
-            width: 15%;
-            text-align: center;
+            width: 20%;
+            text-align: right;
           }
         }
+      }
+
+      .templateAdd {
+        text-align: center;
       }
     }
   }
