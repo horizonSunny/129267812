@@ -29,22 +29,7 @@ function filterAreaName(areaInfo) {
   tradeSetting,
 }))
 export default class TemplateFreight extends React.Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    console.log('this.props.value_', this.props.value);
-
-    // if (dispatch) {
-    //   dispatch({
-    //     type: 'commodityClassify/classification',
-    //   }).then(() => {
-    //     // 查询单个分类的商品
-    //     dispatch({
-    //       type: 'commodityClassify/selectCas',
-    //       payload: this.props.commodityClassify.casInfoOne[0],
-    //     });
-    //   });
-    // }
-  }
+  componentDidMount() {}
 
   state = {
     // 当前操作的是第几个指定区域数据
@@ -67,7 +52,18 @@ export default class TemplateFreight extends React.Component {
 
   // 弹窗配置区域确定
   modalAreaConfirm = areaIds => {
-    console.log('areaIds_', areaIds);
+    const params = {
+      areaIds,
+      index: this.state.modalAreaIndex,
+    };
+    console.log('modalAreaConfirm_', params);
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'tradeSetting/setFreightTemplateArea',
+        payload: params,
+      });
+    }
   };
 
   render() {

@@ -1,6 +1,8 @@
 // import { Effect } from 'dva';
 // import { Reducer } from 'redux';
 import { getPickUp } from '@/services/tradeSetting';
+import deepCopy from '@/utils/deepCopy';
+
 // 运费模版初始化
 const freightTemplateInfo = {
   // 区域运费
@@ -30,8 +32,6 @@ const tradeSetting = {
   namespace: 'tradeSetting',
 
   state: {
-    hasSelfDelivery: false,
-    selfDeliveryInfo: {},
     // 运费模版配置信息
     freightTemplateInfo,
   },
@@ -49,21 +49,17 @@ const tradeSetting = {
   },
 
   reducers: {
-    // 设置订单list集合
-    setSelfDelivery(state, action) {
-      let selfDeliveryInfo;
-      let hasSelfDelivery;
-      if (action.payload !== null) {
-        selfDeliveryInfo = action.payload;
-        hasSelfDelivery = true;
-      }
+    // 新增运费模版区域更改
+    setFreightTemplateArea(state, action) {
+      const freightTemplateInfo = deepCopy(state.freightTemplateInfo);
+      const { index } = action.payload;
+      freightTemplateInfo.areaFreights[index].areas = action.payload.areaIds;
+      // state.
       return {
         ...state,
-        selfDeliveryInfo,
-        hasSelfDelivery,
+        freightTemplateInfo,
       };
     },
-    // 新增运费模版初始化
   },
 };
 
