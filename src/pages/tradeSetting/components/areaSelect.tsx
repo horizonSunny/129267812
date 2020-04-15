@@ -71,6 +71,11 @@ export default class areaSelect extends React.Component {
     });
   };
 
+  confrim = () => {
+    this.props.confirmArea(this.state.checkedKeys);
+    this.handleCancel();
+  };
+
   render() {
     const { expandedKeys, visible } = this.state;
     return (
@@ -97,8 +102,10 @@ export default class areaSelect extends React.Component {
           </Tree>
 
           <div className="submit">
-            <Button>取消</Button>
-            <Button type="primary">保存</Button>
+            <Button onClick={this.handleCancel}>取消</Button>
+            <Button type="primary" onClick={this.confrim}>
+              保存
+            </Button>
           </div>
         </Modal>
       </div>

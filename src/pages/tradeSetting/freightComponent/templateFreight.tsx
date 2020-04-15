@@ -65,6 +65,11 @@ export default class TemplateFreight extends React.Component {
     this.child.openModal(area);
   };
 
+  // 弹窗配置区域确定
+  modalAreaConfirm = areaIds => {
+    console.log('areaIds_', areaIds);
+  };
+
   render() {
     const { value } = this.props;
     return (
@@ -128,7 +133,7 @@ export default class TemplateFreight extends React.Component {
             </tbody>
           </table>
         </div>
-        <AreaSelect onRef={this.onRefInfo} />
+        <AreaSelect onRef={this.onRefInfo} confirmArea={this.modalAreaConfirm} />
       </div>
     );
   }
