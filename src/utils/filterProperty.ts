@@ -187,7 +187,7 @@ export function filterStatusDiabTree(obj, key = '', level = 0) {
 
 // 递归遍历 寻找对应的节点
 export function findItem(arr, fn, result) {
-  arr.some(item => {
+  arr.forEach(item => {
     if (fn(item)) {
       console.log('findItem_', item);
       result.push(item);

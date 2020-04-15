@@ -20,7 +20,7 @@ export default class areaSelect extends React.Component {
   state = {
     visible: false,
     // checkedKeys: ['50', '44', '11'],
-    checkedKeys: this.props.selectArea,
+    checkedKeys: [],
     expandedKeys: [],
   };
 
@@ -42,8 +42,8 @@ export default class areaSelect extends React.Component {
     this.setState({ visible: false });
   };
 
-  openModal = () => {
-    this.setState({ visible: true, expandedKeys: [] });
+  openModal = (checkedKeys? = []) => {
+    this.setState({ checkedKeys, visible: true, expandedKeys: [] });
   };
 
   renderTreeNodes = data =>
@@ -73,7 +73,6 @@ export default class areaSelect extends React.Component {
 
   render() {
     const { expandedKeys, visible } = this.state;
-    console.log('this.props.selectArea_2', this.props.selectArea);
     return (
       // <div className={`${styles.area}`}>
       <div className={`${styles.main}`}>

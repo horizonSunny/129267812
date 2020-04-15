@@ -14,7 +14,6 @@ function filterAreaName(areaInfo) {
   findItem(
     options,
     itemArea => {
-      console.log('itemArea.key_', itemArea.key);
       return areaInfo.indexOf(itemArea.key) > -1;
     },
     result,
@@ -48,8 +47,6 @@ export default class TemplateFreight extends React.Component {
   }
 
   state = {
-    // 当前选中的区域
-    modalAreaSelect: [],
     // 当前操作的是第几个指定区域数据
     modalAreaIndex: '',
   };
@@ -63,15 +60,13 @@ export default class TemplateFreight extends React.Component {
   showArea = (area, index) => {
     console.log('this.child_', area);
     this.setState({
-      modalAreaSelect: area,
       modalAreaIndex: index,
     });
-    this.child.openModal();
+    this.child.openModal(area);
   };
 
   render() {
     const { value } = this.props;
-    const { modalAreaSelect } = this.state;
     return (
       <div className={`${styles.main}`}>
         <div className={`${styles.defaultFreight}`}>
@@ -133,7 +128,7 @@ export default class TemplateFreight extends React.Component {
             </tbody>
           </table>
         </div>
-        <AreaSelect onRef={this.onRefInfo} selectArea={modalAreaSelect} />
+        <AreaSelect onRef={this.onRefInfo} />
       </div>
     );
   }
