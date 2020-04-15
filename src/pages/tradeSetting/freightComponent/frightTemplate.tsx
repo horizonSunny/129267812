@@ -24,7 +24,7 @@ const columns = [
   },
   {
     title: '续件费(元/件)',
-    dataIndex: 'address',
+    dataIndex: 'addressInfo',
   },
 ];
 const data = [

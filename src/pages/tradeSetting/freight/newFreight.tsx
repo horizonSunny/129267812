@@ -6,7 +6,6 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import moment from 'moment';
 import styles from './newFreight.less';
 import { newAreaTree } from '@/utils/area.js';
-import { CompareDate } from '@/utils/utils.ts';
 import TemplateFreight from '../freightComponent/templateFreight';
 // const { Search } = Input;
 const options = newAreaTree();
@@ -47,6 +46,7 @@ class FormSelfDelivery extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { freightTemplateInfo } = this.props.tradeSetting;
     const formItemLayout = {
       labelCol: {
         sm: { span: 3 },
@@ -62,25 +62,25 @@ class FormSelfDelivery extends React.Component {
       <PageHeaderWrapper>
         <Form className={styles.main} {...formItemLayout} onSubmit={this.handleSubmit}>
           <Form.Item label="模版名称">
-            {getFieldDecorator('tenantName', {
+            {getFieldDecorator('templateName', {
               rules: [
                 {
                   required: true,
-                  message: '店铺名称',
+                  message: '请输入模版名称',
                 },
               ],
-              initialValue: '231',
+              initialValue: freightTemplateInfo.templateName,
             })(<Input />)}
           </Form.Item>
           <Form.Item label="类型">
-            {getFieldDecorator('tenantName', {
+            {getFieldDecorator('templateType', {
               rules: [
                 {
                   required: true,
-                  message: '店铺名称',
+                  message: '请选择模版类型',
                 },
               ],
-              initialValue: value,
+              initialValue: freightTemplateInfo.templateType,
             })(
               <Radio.Group onChange={this.onChange}>
                 <Radio value={1}>普通</Radio>
@@ -90,17 +90,14 @@ class FormSelfDelivery extends React.Component {
             )}
           </Form.Item>
           <Form.Item label="运费">
-            {getFieldDecorator('tenantName', {
+            {getFieldDecorator('templateFreight', {
               rules: [
                 {
                   required: true,
                   message: '店铺名称',
                 },
               ],
-              initialValue: {
-                a: '12',
-                b: '122',
-              },
+              initialValue: freightTemplateInfo,
             })(<TemplateFreight />)}
           </Form.Item>
           <Form.Item

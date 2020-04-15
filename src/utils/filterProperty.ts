@@ -184,3 +184,16 @@ export function filterStatusDiabTree(obj, key = '', level = 0) {
   });
   return obj;
 }
+
+// 递归遍历 寻找对应的节点
+export function findItem(arr, fn, result) {
+  arr.some(item => {
+    if (fn(item)) {
+      result.push(item);
+      return true;
+    }
+    if (item.children) {
+      findItem(item.children, fn, result);
+    }
+  });
+}
