@@ -65,6 +65,17 @@ export default class TemplateFreight extends React.Component {
     }
   };
 
+  changeTemplateDefault = (value, key) => {
+    console.log('vaule_', value, '_key_', key);
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'tradeSetting/changeTemplateDefault',
+        payload: { key, value },
+      });
+    }
+  };
+
   addTemplateArea = () => {
     const { dispatch } = this.props;
     if (dispatch) {
@@ -93,11 +104,23 @@ export default class TemplateFreight extends React.Component {
           {/* <span>(全国包邮，除指定地区)</span> */}
           <span>
             &nbsp;
-            <InputNumber min={1} defaultValue={value.firstNum} />
+            <InputNumber
+              min={1}
+              defaultValue={value.firstNum}
+              onChange={event => this.changeTemplateDefault(event, 'firstNum')}
+            />
             &nbsp; 件内 &nbsp;
-            <InputNumber min={1} defaultValue={value.firstPrice} />
+            <InputNumber
+              min={1}
+              defaultValue={value.firstPrice}
+              onChange={event => this.changeTemplateDefault(event, 'firstPrice')}
+            />
             &nbsp; 元，续件费 &nbsp;
-            <InputNumber min={1} defaultValue={value.continuePrice} />
+            <InputNumber
+              min={1}
+              defaultValue={value.continuePrice}
+              onChange={event => this.changeTemplateDefault(event, 'continuePrice')}
+            />
             &nbsp; 元/件
           </span>
         </div>

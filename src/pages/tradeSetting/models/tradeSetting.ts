@@ -69,6 +69,18 @@ const tradeSetting = {
         freightTemplateInfo,
       };
     },
+    // 改变模版默认运费
+    changeTemplateDefault(state, action) {
+      const freightTemplateInfo = deepCopy(state.freightTemplateInfo);
+      const { key, value } = action.payload;
+      console.log();
+
+      freightTemplateInfo[key] = value;
+      return {
+        ...state,
+        freightTemplateInfo,
+      };
+    },
     // 删除新模版区域
     deleteTemplateArea(state, action) {
       const freightTemplateInfo = deepCopy(state.freightTemplateInfo);
