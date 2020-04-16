@@ -81,6 +81,7 @@ const tradeSetting = {
         freightTemplateInfo,
       };
     },
+    // 改变新模版区域价格，件数
     changeTemplateArea(state, action) {
       const freightTemplateInfo = deepCopy(state.freightTemplateInfo);
       const { key, value, index } = action.payload;
@@ -102,6 +103,19 @@ const tradeSetting = {
     },
     // 添加新模版
     newTemplate(state, action) {
+      return {
+        ...state,
+        freightTemplateInfo,
+      };
+    },
+    // 修改新模版名称和类型
+    changeTemplateName(state, action) {
+      const freightTemplateInfo = deepCopy(state.freightTemplateInfo);
+      const { templateName, templateType } = action.payload;
+      console.log('templateName_', templateName);
+      console.log('templateType_', templateType);
+      freightTemplateInfo.templateName = templateName;
+      freightTemplateInfo.templateType = templateType;
       return {
         ...state,
         freightTemplateInfo,

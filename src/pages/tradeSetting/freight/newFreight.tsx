@@ -18,12 +18,26 @@ class FormSelfDelivery extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const { freightTemplateInfo } = this.props.tradeSetting;
-    console.log('templateFreight_submit', freightTemplateInfo);
     this.props.form.setFieldsValue({
       templateFreight: freightTemplateInfo,
     });
     this.props.form.validateFieldsAndScroll((err, values) => {
-      console.log('value', values);
+      if (!err) {
+        const { dispatch } = this.props;
+        if (dispatch) {
+          dispatch({
+            type: 'tradeSetting/changeTemplateName',
+            payload: {
+              templateName: values.templateName,
+              templateType: values.templateType,
+            },
+          });
+        }
+        const _this = this;
+        setTimeout(() => {
+          console.log('templateFreight_submit', _this.props.tradeSetting.freightTemplateInfo);
+        }, 100);
+      }
     });
   };
 
@@ -38,11 +52,6 @@ class FormSelfDelivery extends React.Component {
 
   checkFreightArea = (rule, value, callback) => {
     const { firstNum, firstPrice, continuePrice } = this.props.tradeSetting.freightTemplateInfo;
-    console.log(
-      'this.props.tradeSetting.freightTemplateInfo_',
-      this.props.tradeSetting.freightTemplateInfo,
-    );
-
     if (
       typeof firstNum !== 'number' ||
       typeof firstPrice !== 'number' ||
@@ -73,7 +82,7 @@ class FormSelfDelivery extends React.Component {
           return;
         }
       }
-      // callback();
+      callback();
     }
   };
 
