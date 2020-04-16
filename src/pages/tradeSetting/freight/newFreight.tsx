@@ -13,35 +13,22 @@ const options = newAreaTree();
   tradeSetting,
 }))
 class FormSelfDelivery extends React.Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    // if (dispatch) {
-    //   dispatch({
-    //     type: 'commodityClassify/classification',
-    //   }).then(() => {
-    //     // 查询单个分类的商品
-    //     dispatch({
-    //       type: 'commodityClassify/selectCas',
-    //       payload: this.props.commodityClassify.casInfoOne[0],
-    //     });
-    //   });
-    // }
-  }
-
-  state = {
-    // formInit: this.props.commodity.productWithId,
-    value: 2,
-  };
+  componentDidMount() {}
 
   handleSubmit = () => {
-    console.log('sss');
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      console.log('value', values);
+      if (!err) {
+        validateValue = true;
+      }
+    });
   };
 
   onChange = e => {
-    console.log('radio checked', e.target.value);
-    this.setState({
-      value: e.target.value,
-    });
+    // console.log('radio checked', e.target.value);
+    // this.setState({
+    //   value: e.target.value,
+    // });
   };
 
   render() {
@@ -57,7 +44,6 @@ class FormSelfDelivery extends React.Component {
         xxl: { span: 15 },
       },
     };
-    const { value } = this.state;
     return (
       <PageHeaderWrapper>
         <Form className={styles.main} {...formItemLayout} onSubmit={this.handleSubmit}>
