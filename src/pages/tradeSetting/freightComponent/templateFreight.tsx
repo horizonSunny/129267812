@@ -56,7 +56,6 @@ export default class TemplateFreight extends React.Component {
       areaIds,
       index: this.state.modalAreaIndex,
     };
-    console.log('modalAreaConfirm_', params);
     const { dispatch } = this.props;
     if (dispatch) {
       dispatch({
@@ -86,7 +85,7 @@ export default class TemplateFreight extends React.Component {
   };
 
   render() {
-    const { value } = this.props;
+    const value = this.props.tradeSetting.freightTemplateInfo;
     return (
       <div className={`${styles.main}`}>
         <div className={`${styles.defaultFreight}`}>
@@ -126,13 +125,13 @@ export default class TemplateFreight extends React.Component {
                       </span>
                     </td>
                     <td>
-                      <InputNumber />
+                      <InputNumber min={1} />
                     </td>
                     <td>
-                      <InputNumber />
+                      <InputNumber min={1} />
                     </td>
                     <td>
-                      <InputNumber />
+                      <InputNumber min={1} />
                     </td>
                     <td>
                       <Button type="danger" onClick={this.deleteTemplateArea.bind(this, index)}>

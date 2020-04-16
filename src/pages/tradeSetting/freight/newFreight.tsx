@@ -17,16 +17,29 @@ class FormSelfDelivery extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const { freightTemplateInfo } = this.props.tradeSetting;
+    console.log('templateFreight_submit', freightTemplateInfo);
+    this.props.form.setFieldsValue({
+      templateFreight: freightTemplateInfo,
+    });
     this.props.form.validateFieldsAndScroll((err, values) => {
       console.log('value', values);
     });
   };
+
+  // 数据变了但表单数据没有变化导致的
 
   onChange = e => {
     // console.log('radio checked', e.target.value);
     // this.setState({
     //   value: e.target.value,
     // });
+  };
+
+  checkFreightArea = (rule, value, callback) => {
+    const { freightTemplateInfo } = this.props.tradeSetting;
+    console.log('checkFreightArea_submit', freightTemplateInfo);
+    callback('lalala213');
   };
 
   render() {
@@ -78,7 +91,10 @@ class FormSelfDelivery extends React.Component {
               rules: [
                 {
                   required: true,
-                  message: '店铺名称',
+                  message: '请填写运费详情',
+                },
+                {
+                  validator: this.checkFreightArea.bind(this),
                 },
               ],
               initialValue: freightTemplateInfo,
@@ -89,6 +105,7 @@ class FormSelfDelivery extends React.Component {
               sm: { span: 2, offset: 11 },
             }}
           >
+            {/* <Button type="primary" htmlType="submit"> */}
             <Button type="primary" htmlType="submit">
               保存模版
             </Button>
