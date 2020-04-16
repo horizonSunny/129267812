@@ -19,12 +19,13 @@ export default class SelfDelivery extends React.Component {
     if (dispatch) {
       dispatch({
         type: 'tradeSetting/selfDeliveryInfo',
-      }).then(() => {
-        // dispatch({
-        //   type: 'commodityClassify/selectCas',
-        //   payload: this.props.commodityClassify.casInfoOne[0],
-        // });
       });
+      // .then(() => {
+      //   // dispatch({
+      //   //   type: 'commodityClassify/selectCas',
+      //   //   payload: this.props.commodityClassify.casInfoOne[0],
+      //   // });
+      // });
     }
   }
 

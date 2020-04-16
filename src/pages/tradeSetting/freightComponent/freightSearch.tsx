@@ -3,18 +3,14 @@ import React from 'react';
 import router from 'umi/router';
 import { connect } from 'dva';
 import styles from './freightSearch.less';
-// import filterProperty from '@/utils/filterProperty';
+import filterProperty from '@/utils/filterProperty';
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 @connect(({ tradeSetting }) => ({ tradeSetting }))
 class AdvancedSearchForm extends React.Component {
-  state = {
-    expand: false,
-    sellingStatus: null,
-    selectedRowKeys: [],
-  };
+  state = {};
 
   // 查询
   handleSearch = e => {
@@ -35,13 +31,12 @@ class AdvancedSearchForm extends React.Component {
       const searchParams = {
         startTime: values['range-picker'][0],
         endTime: values['range-picker'][1],
-        recommandStatus: values.recommandStatus == 3 ? undefined : values.recommandStatus,
-        productCommonName: values.keyword,
-        approvalNumber: values.approvalNumber,
+        templateType: values.recommandStatus == 3 ? undefined : values.recommandStatus,
+        templateName: values.keyword,
       };
       const searchInfo = filterProperty(searchParams);
       dispatch({
-        type: 'commodity/getList',
+        type: 'tradeSetting/getFreightList',
         payload: Object.assign(
           {
             pageNumber: 0,
@@ -50,7 +45,7 @@ class AdvancedSearchForm extends React.Component {
           searchInfo,
         ),
       });
-      this.props.saveSearchInfo(searchInfo);
+      // this.props.saveSearchInfo(searchInfo);
     });
   };
 

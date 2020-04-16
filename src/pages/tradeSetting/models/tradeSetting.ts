@@ -1,6 +1,6 @@
 // import { Effect } from 'dva';
 // import { Reducer } from 'redux';
-import { getPickUp, newFreight } from '@/services/tradeSetting';
+import { getPickUp, newFreight, freightList } from '@/services/tradeSetting';
 import deepCopy from '@/utils/deepCopy';
 
 // 运费模版初始化
@@ -48,12 +48,11 @@ const tradeSetting = {
     },
     *newFreight({ payload }, { call, put }) {
       yield call(newFreight, payload);
-      // if (response && response.code === 1) {
-      //   yield put({
-      //     type: 'setSelfDelivery',
-      //     payload: response.data,
-      //   });
-      // }
+    },
+    // 获取运费模版list
+    *getFreightList({ payload }, { call, put }) {
+      const response = yield call(freightList, payload);
+      console.log('response_', response);
     },
   },
 
