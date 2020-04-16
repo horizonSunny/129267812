@@ -37,9 +37,44 @@ class FormSelfDelivery extends React.Component {
   };
 
   checkFreightArea = (rule, value, callback) => {
-    const { freightTemplateInfo } = this.props.tradeSetting;
-    console.log('checkFreightArea_submit', freightTemplateInfo);
-    callback('lalala213');
+    const { firstNum, firstPrice, continuePrice } = this.props.tradeSetting.freightTemplateInfo;
+    console.log(
+      'this.props.tradeSetting.freightTemplateInfo_',
+      this.props.tradeSetting.freightTemplateInfo,
+    );
+
+    if (
+      typeof firstNum !== 'number' ||
+      typeof firstPrice !== 'number' ||
+      typeof continuePrice !== 'number'
+    ) {
+      callback('请填写默认模版信息');
+    } else {
+      const { areaFreights } = this.props.tradeSetting.freightTemplateInfo;
+      // for(let item=0;item<areaFreight.length;item++)
+      for (let index = 0; index < areaFreights.length; index++) {
+        const element = areaFreights[index];
+        const {
+          firstNum: areaFirstNum,
+          firstPrice: areaFirstPrice,
+          continuePrice: areaContinuePrice,
+        } = element;
+        console.log('element_', element);
+        if (element.areas.length === 0) {
+          callback('请填写指定区域');
+          return;
+        }
+        if (
+          typeof areaFirstNum !== 'number' ||
+          typeof areaFirstPrice !== 'number' ||
+          typeof areaContinuePrice !== 'number'
+        ) {
+          callback('请填写指定区域运费详情');
+          return;
+        }
+      }
+      // callback();
+    }
   };
 
   render() {

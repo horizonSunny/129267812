@@ -9,24 +9,24 @@ const freightTemplateInfo = {
   areaFreights: [
     {
       areas: [],
-      firstNum: '',
-      firstPrice: '',
-      continuePrice: '',
+      firstNum: null,
+      firstPrice: null,
+      continuePrice: null,
     },
   ],
   // 默认运费
-  continuePrice: '',
-  firstNum: '',
-  firstPrice: '',
+  continuePrice: null,
+  firstNum: null,
+  firstPrice: null,
   templateName: '',
   templateType: 1,
 };
 // 区域运费初始化
 const areaFreight = {
   areas: [],
-  continuePrice: '',
-  firstNum: '',
-  firstPrice: '',
+  continuePrice: null,
+  firstNum: null,
+  firstPrice: null,
 };
 const tradeSetting = {
   namespace: 'tradeSetting',
@@ -76,6 +76,15 @@ const tradeSetting = {
       console.log();
 
       freightTemplateInfo[key] = value;
+      return {
+        ...state,
+        freightTemplateInfo,
+      };
+    },
+    changeTemplateArea(state, action) {
+      const freightTemplateInfo = deepCopy(state.freightTemplateInfo);
+      const { key, value, index } = action.payload;
+      freightTemplateInfo.areaFreights[index][key] = value;
       return {
         ...state,
         freightTemplateInfo,

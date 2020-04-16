@@ -95,6 +95,16 @@ export default class TemplateFreight extends React.Component {
     }
   };
 
+  changeTemplateArea = (value, index, key) => {
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'tradeSetting/changeTemplateArea',
+        payload: { key, value, index },
+      });
+    }
+  };
+
   render() {
     const value = this.props.tradeSetting.freightTemplateInfo;
     return (
@@ -136,6 +146,7 @@ export default class TemplateFreight extends React.Component {
             </tr>
             <tbody>
               {value.areaFreights.map((item, index) => {
+                console.log('item_', item);
                 return (
                   <tr key={index} className={`${styles.templateContent}`}>
                     <td className={`${styles.templateArea}`}>
@@ -148,13 +159,25 @@ export default class TemplateFreight extends React.Component {
                       </span>
                     </td>
                     <td>
-                      <InputNumber min={1} />
+                      <InputNumber
+                        min={1}
+                        defaultValue={item.firstNum}
+                        onChange={event => this.changeTemplateArea(event, index, 'firstNum')}
+                      />
                     </td>
                     <td>
-                      <InputNumber min={1} />
+                      <InputNumber
+                        min={1}
+                        defaultValue={item.firstPrice}
+                        onChange={event => this.changeTemplateArea(event, index, 'firstPrice')}
+                      />
                     </td>
                     <td>
-                      <InputNumber min={1} />
+                      <InputNumber
+                        min={1}
+                        defaultValue={item.continuePrice}
+                        onChange={event => this.changeTemplateArea(event, index, 'continuePrice')}
+                      />
                     </td>
                     <td>
                       <Button type="danger" onClick={this.deleteTemplateArea.bind(this, index)}>
