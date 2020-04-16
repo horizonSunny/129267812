@@ -196,3 +196,18 @@ export function findItem(arr, fn, result) {
     }
   });
 }
+export function filterAreaName(areaInfo) {
+  const result = [];
+  findItem(
+    options,
+    itemArea => {
+      return areaInfo.indexOf(itemArea.key) > -1;
+    },
+    result,
+  );
+  const areaNams = result.map(item => {
+    return item.title;
+  });
+  console.log('areaNams_', areaNams.toString());
+  return areaNams.toString();
+}

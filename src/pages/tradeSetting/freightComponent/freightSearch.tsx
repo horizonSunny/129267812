@@ -12,6 +12,20 @@ const { Option } = Select;
 class AdvancedSearchForm extends React.Component {
   state = {};
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'tradeSetting/getFreightList',
+        payload: {
+          pageNumber: 0,
+          pageSize: 3,
+          templateType: 0,
+        },
+      });
+    }
+  }
+
   // 查询
   handleSearch = e => {
     const { dispatch } = this.props;
@@ -40,7 +54,7 @@ class AdvancedSearchForm extends React.Component {
         payload: Object.assign(
           {
             pageNumber: 0,
-            pageSize: 10,
+            pageSize: 3,
           },
           searchInfo,
         ),

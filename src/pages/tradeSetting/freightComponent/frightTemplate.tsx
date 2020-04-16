@@ -4,27 +4,24 @@ import { connect } from 'dva';
 // 外部引入
 import styles from './frightTemplate.less';
 // const { Search } = Input;
-@connect(({ tradeSetting }) => ({
-  tradeSetting,
-}))
 const columns = [
   {
     title: '配送范围',
-    dataIndex: 'name',
-    render: text => <a>{text}</a>,
+    dataIndex: 'areas',
+    render: (text, record) => <a>{text.toString()}</a>,
   },
   {
     title: '首件数(件)',
     className: 'column-money',
-    dataIndex: 'money',
+    dataIndex: 'firstNum',
   },
   {
     title: '运费(元)',
-    dataIndex: 'address',
+    dataIndex: 'firstPrice',
   },
   {
     title: '续件费(元/件)',
-    dataIndex: 'addressInfo',
+    dataIndex: 'continuePrice',
   },
 ];
 const data = [
@@ -49,6 +46,9 @@ const data = [
 ];
 
 // 运费list，运费模版展示
+@connect(({ tradeSetting }) => ({
+  tradeSetting,
+}))
 export default class Freight extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -66,27 +66,38 @@ export default class Freight extends React.Component {
   }
 
   render() {
+    const { totalElements, pageList } = this.props.tradeSetting.freightList;
+    console.log('pageList_', pageList, '_totalElements_', totalElements);
+
     return (
       <div className={`${styles.main}`}>
-        {[1, 2, 3].map((item, index) => {
+        {pageList.map((item, index) => {
           return (
             <Table
               className={`${styles.table}`}
               columns={columns}
-              dataSource={data}
+              dataSource={item.areaFreights}
               key={index}
               bordered
               title={() => {
                 return (
                   <div className={`${styles.tableHeader}`}>
                     <div>
-                      <span className={`${styles.tableHeaderSpan}`}>模版名称:默认运费模版</span>
-                      <span className={`${styles.tableHeaderSpan}`}>使用中的商品:0个</span>
+                      <span className={`${styles.tableHeaderSpan}`}>
+                        模版名称:{item.templateName}
+                      </span>
+                      <span className={`${styles.tableHeaderSpan}`}>
+                        使用中的商品:{item.useNumber}
+                      </span>
                     </div>
                     <div>
-                      <span className={`${styles.tableHeaderSpan}`}>类型:包邮</span>
                       <span className={`${styles.tableHeaderSpan}`}>
-                        最后编辑时间:2020-04-01 10
+                        类型:{item.templateType === 1 && '普通'}
+                        {item.templateType === 2 && '加急'}
+                        {item.templateType === 3 && '包邮'}
+                      </span>
+                      <span className={`${styles.tableHeaderSpan}`}>
+                        最后编辑时间:{item.updateTime}
                       </span>
                     </div>
                     <div>
@@ -100,7 +111,7 @@ export default class Freight extends React.Component {
             />
           );
         })}
-        <Pagination defaultCurrent={1} total={50} />
+        <Pagination defaultCurrent={1} pageSize={3} total={totalElements} />
       </div>
     );
   }

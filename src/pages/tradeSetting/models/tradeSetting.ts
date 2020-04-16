@@ -27,6 +27,7 @@ const areaFreight = {
   continuePrice: null,
   firstNum: null,
   firstPrice: null,
+  // list
 };
 const tradeSetting = {
   namespace: 'tradeSetting',
@@ -34,6 +35,10 @@ const tradeSetting = {
   state: {
     // 运费模版配置信息
     freightTemplateInfo,
+    freightList: {
+      totalElements: 0,
+      pageList: [],
+    },
   },
 
   effects: {
@@ -52,7 +57,14 @@ const tradeSetting = {
     // 获取运费模版list
     *getFreightList({ payload }, { call, put }) {
       const response = yield call(freightList, payload);
-      console.log('response_', response);
+      console.log('response_', response.data);
+      // setFreightList
+      if (response && response.code === 1) {
+        yield put({
+          type: 'setFreightList',
+          payload: response.data,
+        });
+      }
     },
   },
 
@@ -125,6 +137,13 @@ const tradeSetting = {
       return {
         ...state,
         freightTemplateInfo,
+      };
+    },
+    // 设置请求获取到的Freightlist
+    setFreightList(state, action) {
+      return {
+        ...state,
+        freightList: action.payload,
       };
     },
   },
