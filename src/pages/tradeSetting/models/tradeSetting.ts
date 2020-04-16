@@ -9,16 +9,16 @@ const freightTemplateInfo = {
   areaFreights: [
     {
       areas: [],
-      firstNum: 10,
-      firstPrice: 10,
-      continuePrice: 10,
+      firstNum: '',
+      firstPrice: '',
+      continuePrice: '',
     },
   ],
   // 默认运费
-  continuePrice: 10,
-  firstNum: 5,
-  firstPrice: 7,
-  templateName: 'test',
+  continuePrice: '',
+  firstNum: '',
+  firstPrice: '',
+  templateName: '',
   templateType: 1,
 };
 // 区域运费初始化
@@ -55,6 +55,32 @@ const tradeSetting = {
       const { index } = action.payload;
       freightTemplateInfo.areaFreights[index].areas = action.payload.areaIds;
       // state.
+      return {
+        ...state,
+        freightTemplateInfo,
+      };
+    },
+    // 增加新模版区域
+    addTemplateArea(state, action) {
+      const freightTemplateInfo = deepCopy(state.freightTemplateInfo);
+      freightTemplateInfo.areaFreights.push(areaFreight);
+      return {
+        ...state,
+        freightTemplateInfo,
+      };
+    },
+    // 删除新模版区域
+    deleteTemplateArea(state, action) {
+      const freightTemplateInfo = deepCopy(state.freightTemplateInfo);
+      const index = action.payload;
+      freightTemplateInfo.areaFreights.splice(index, 1);
+      return {
+        ...state,
+        freightTemplateInfo,
+      };
+    },
+    // 添加新模版
+    newTemplate(state, action) {
       return {
         ...state,
         freightTemplateInfo,

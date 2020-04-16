@@ -66,6 +66,25 @@ export default class TemplateFreight extends React.Component {
     }
   };
 
+  addTemplateArea = () => {
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'tradeSetting/addTemplateArea',
+      });
+    }
+  };
+
+  deleteTemplateArea = index => {
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'tradeSetting/deleteTemplateArea',
+        payload: index,
+      });
+    }
+  };
+
   render() {
     const { value } = this.props;
     return (
@@ -116,15 +135,19 @@ export default class TemplateFreight extends React.Component {
                       <InputNumber />
                     </td>
                     <td>
-                      <Button type="danger">删除</Button>
+                      <Button type="danger" onClick={this.deleteTemplateArea.bind(this, index)}>
+                        删除
+                      </Button>
                     </td>
                   </tr>
                 );
               })}
               <tr className={`${styles.templateAdd}`}>
                 <td colSpan="5">
-                  <img src={add} alt="" />
-                  添加指定地区
+                  <span onClick={this.addTemplateArea}>
+                    <img src={add} alt="" />
+                    添加指定地区
+                  </span>
                 </td>
               </tr>
             </tbody>

@@ -62,26 +62,10 @@ class AdvancedSearchForm extends React.Component {
 
   // 新增产品
   handleNew = () => {
-    // const { dispatch } = this.props;
-    // dispatch({
-    //   type: 'commodity/resetProduct',
-    //   payload: {
-    //     approvalNumber: '',
-    //     englishName: '',
-    //     isMp: '',
-    //     manufacturer: '',
-    //     pinyin: '',
-    //     productBrand: '',
-    //     productDesc: '',
-    //     productExpire: '',
-    //     productImage: [],
-    //     productModel: '',
-    //     productCommonName: '',
-    //     productSpec: '',
-    //     productSpecif: '',
-    //     productType: '',
-    //   },
-    // });
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'tradeSetting/newTemplate',
+    });
     router.push('/tradeSetting/freight/newFreight');
   };
 
