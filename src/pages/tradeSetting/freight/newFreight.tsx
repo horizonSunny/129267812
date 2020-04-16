@@ -15,12 +15,10 @@ const options = newAreaTree();
 class FormSelfDelivery extends React.Component {
   componentDidMount() {}
 
-  handleSubmit = () => {
+  handleSubmit = e => {
+    e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       console.log('value', values);
-      if (!err) {
-        validateValue = true;
-      }
     });
   };
 
