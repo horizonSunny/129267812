@@ -87,6 +87,11 @@ request.interceptors.response.use(async response => {
       type: 'login/logout',
     });
   }
+  if (data && data.code === 0) {
+    notification.error({
+      message: data.msg,
+    });
+  }
   return response;
 });
 export default request;

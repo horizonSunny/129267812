@@ -25,18 +25,30 @@ class FormSelfDelivery extends React.Component {
       if (!err) {
         const { dispatch } = this.props;
         if (dispatch) {
-          dispatch({
-            type: 'tradeSetting/changeTemplateName',
-            payload: {
-              templateName: values.templateName,
-              templateType: values.templateType,
-            },
-          });
+          const _this = this;
+          async function step() {
+            await dispatch({
+              type: 'tradeSetting/changeTemplateName',
+              payload: {
+                templateName: values.templateName,
+                templateType: values.templateType,
+              },
+            });
+            await dispatch({
+              type: 'tradeSetting/newFreight',
+              payload: _this.props.tradeSetting.freightTemplateInfo,
+            });
+          }
+          step();
+          // dispatch({
+          //   type: 'tradeSetting/newFreight',
+          //   payload: this.props.tradeSetting.freightTemplateInfo,
+          // });
         }
-        const _this = this;
-        setTimeout(() => {
-          console.log('templateFreight_submit', _this.props.tradeSetting.freightTemplateInfo);
-        }, 100);
+        // const _this = this;
+        // setTimeout(() => {
+        //   console.log('templateFreight_submit', _this.props.tradeSetting.freightTemplateInfo);
+        // }, 100);
       }
     });
   };

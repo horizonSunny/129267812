@@ -13,6 +13,14 @@ export async function freightList(params: Object) {
     params,
   });
 }
+
+// 获取运费模版列表数据
+export async function newFreight(params: Object) {
+  return request('/admin/v1/freight/insert', {
+    method: 'post',
+    data: params,
+  });
+}
 // // 快速分类顺序调整
 // export async function reverseCategoryList(params: Object) {
 //   return request('/admin/v1/quickCategory/update/order', {

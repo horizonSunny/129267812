@@ -1,6 +1,6 @@
 // import { Effect } from 'dva';
 // import { Reducer } from 'redux';
-import { getPickUp } from '@/services/tradeSetting';
+import { getPickUp, newFreight } from '@/services/tradeSetting';
 import deepCopy from '@/utils/deepCopy';
 
 // 运费模版初始化
@@ -37,7 +37,7 @@ const tradeSetting = {
   },
 
   effects: {
-    *selfDeliveryInfo({ payload }, { call, put }) {
+    *selfDelivnewFreighteryInfo({ payload }, { call, put }) {
       const response = yield call(getPickUp, payload);
       if (response && response.code === 1) {
         yield put({
@@ -45,6 +45,15 @@ const tradeSetting = {
           payload: response.data,
         });
       }
+    },
+    *newFreight({ payload }, { call, put }) {
+      yield call(newFreight, payload);
+      // if (response && response.code === 1) {
+      //   yield put({
+      //     type: 'setSelfDelivery',
+      //     payload: response.data,
+      //   });
+      // }
     },
   },
 
@@ -112,8 +121,6 @@ const tradeSetting = {
     changeTemplateName(state, action) {
       const freightTemplateInfo = deepCopy(state.freightTemplateInfo);
       const { templateName, templateType } = action.payload;
-      console.log('templateName_', templateName);
-      console.log('templateType_', templateType);
       freightTemplateInfo.templateName = templateName;
       freightTemplateInfo.templateType = templateType;
       return {
