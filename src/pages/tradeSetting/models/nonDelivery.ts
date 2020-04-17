@@ -1,12 +1,13 @@
 import { getNonDelivery, setNonDelivery } from '@/services/tradeSetting';
-import deepCopy from '@/utils/deepCopy';
 
-const tradeSetting = {
+const nonDelivery = {
   namespace: 'nonDelivery',
 
   state: {
     // 运费模版配置信息
-    nonDeliveryInfo: {},
+    nonDeliveryInfo: {
+      deliveryArea: [],
+    },
   },
 
   effects: {
@@ -48,4 +49,4 @@ const tradeSetting = {
   },
 };
 
-export default tradeSetting;
+export default nonDelivery;
