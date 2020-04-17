@@ -1,6 +1,12 @@
 // import { Effect } from 'dva';
 // import { Reducer } from 'redux';
-import { getPickUp, newFreight, freightList, deleteFreight } from '@/services/tradeSetting';
+import {
+  getPickUp,
+  newFreight,
+  freightList,
+  deleteFreight,
+  updateFreight,
+} from '@/services/tradeSetting';
 import deepCopy from '@/utils/deepCopy';
 
 // 运费模版初始化
@@ -55,6 +61,9 @@ const tradeSetting = {
     },
     *newFreight({ payload }, { call, put }) {
       yield call(newFreight, payload);
+    },
+    *updateFreight({ payload }, { call, put }) {
+      yield call(updateFreight, payload);
     },
     // 获取运费模版list
     *getFreightList({ payload }, { call, put }) {
@@ -151,6 +160,14 @@ const tradeSetting = {
       return {
         ...state,
         freightTemplateInfo,
+      };
+    },
+    // 编辑模版
+    eidtorTemplate(state, action) {
+      const freightTemplate = action.payload;
+      return {
+        ...state,
+        freightTemplateInfo: freightTemplate,
       };
     },
     // 修改新模版名称和类型

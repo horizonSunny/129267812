@@ -4,6 +4,7 @@ import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // 外部引入
 import moment from 'moment';
+import { router } from 'umi';
 import styles from './newFreight.less';
 import { newAreaTree } from '@/utils/area.js';
 import TemplateFreight from '../freightComponent/templateFreight';
@@ -18,6 +19,8 @@ class FormSelfDelivery extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const { freightTemplateInfo } = this.props.tradeSetting;
+    console.log('freightTemplateInfo_', freightTemplateInfo);
+
     this.props.form.setFieldsValue({
       templateFreight: freightTemplateInfo,
     });
@@ -34,10 +37,21 @@ class FormSelfDelivery extends React.Component {
                 templateType: values.templateType,
               },
             });
-            await dispatch({
-              type: 'tradeSetting/newFreight',
-              payload: _this.props.tradeSetting.freightTemplateInfo,
-            });
+            if (_this.props.tradeSetting.freightTemplateInfo.freightTemplateId) {
+              await dispatch({
+                type: 'tradeSetting/updateFreight',
+                payload: _this.props.tradeSetting.freightTemplateInfo,
+              }).then(() => {
+                router.goBack();
+              });
+            } else {
+              await dispatch({
+                type: 'tradeSetting/newFreight',
+                payload: _this.props.tradeSetting.freightTemplateInfo,
+              }).then(() => {
+                router.goBack();
+              });
+            }
           }
           step();
           // dispatch({

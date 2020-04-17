@@ -14,10 +14,17 @@ export async function freightList(params: Object) {
   });
 }
 
-// 获取运费模版列表数据
+// 新建模版
 export async function newFreight(params: Object) {
   return request('/admin/v1/freight/insert', {
     method: 'post',
+    data: params,
+  });
+}
+// 更新模版
+export async function updateFreight(params: Object) {
+  return request('/admin/v1/freight/update', {
+    method: 'put',
     data: params,
   });
 }

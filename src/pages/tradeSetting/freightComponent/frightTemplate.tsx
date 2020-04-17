@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Button, Pagination, Modal } from 'antd';
 import { connect } from 'dva';
+import router from 'umi/router';
 // 外部引入
 import styles from './frightTemplate.less';
 import { filterAreaName } from '@/utils/filterProperty';
@@ -107,6 +108,16 @@ export default class Freight extends React.Component {
     });
   };
 
+  handleModify = templateInfo => {
+    console.log('templateInfo_', templateInfo);
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'tradeSetting/eidtorTemplate',
+      payload: templateInfo,
+    });
+    router.push('/tradeSetting/freight/newFreight');
+  };
+
   render() {
     const { totalElements, pageList } = this.props.tradeSetting.freightList;
     console.log('pageList_', pageList, '_totalElements_', totalElements);
@@ -153,7 +164,12 @@ export default class Freight extends React.Component {
                       </span>
                     </div>
                     <div>
-                      <Button className={`${styles.tableHeaderButton}`}>修改</Button>
+                      <Button
+                        className={`${styles.tableHeaderButton}`}
+                        onClick={this.handleModify.bind(this, item)}
+                      >
+                        修改
+                      </Button>
                       {item.status === 2 && (
                         <Button
                           className={`${styles.tableHeaderButton}`}
