@@ -3,12 +3,13 @@ import { Table, Button, Pagination } from 'antd';
 import { connect } from 'dva';
 // 外部引入
 import styles from './frightTemplate.less';
+import { filterAreaName } from '@/utils/filterProperty';
 // const { Search } = Input;
 const columns = [
   {
     title: '配送范围',
     dataIndex: 'areas',
-    render: (text, record) => <a>{text.toString()}</a>,
+    render: (text, record) => <a>{filterAreaName(text)}</a>,
   },
   {
     title: '首件数(件)',
@@ -22,26 +23,6 @@ const columns = [
   {
     title: '续件费(元/件)',
     dataIndex: 'continuePrice',
-  },
-];
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    money: '￥300,000.00',
-    address: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    money: '￥1,256,000.00',
-    address: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    money: '￥120,000.00',
-    address: 'Sidney No. 1 Lake Park',
   },
 ];
 

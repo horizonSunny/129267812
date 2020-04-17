@@ -9,6 +9,19 @@
       .ant-table-title {
         background: #E7E9ED;
       }
+
+      .ant-table-tbody>tr>td {
+        max-width: 110px;
+        min-width: 110px;
+        text-align: center !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .ant-table-thead>tr>th {
+        text-align: center !important;
+      }
     }
   }
 }
@@ -64,5 +77,13 @@
       margin-top: 20px;
       text-align: center;
     }
+
+    // .ant-table-tbody>tr>td {
+    //   max-width: 110px;
+    //   text-align: center !important;
+    //   white-space: nowrap;
+    //   overflow: hidden;
+    //   text-overflow: ellipsis;
+    // }
   }
 }

@@ -5,26 +5,8 @@ import { connect } from 'dva';
 import styles from './templateFreight.less';
 import add from '@/assets/Add to-icon.svg';
 import AreaSelect from '../components/areaSelect';
-import { findItem } from '@/utils/filterProperty';
-import { newAreaTree } from '@/utils/area.js';
+import { filterAreaName } from '@/utils/filterProperty';
 
-const options = newAreaTree();
-function filterAreaName(areaInfo) {
-  const result = [];
-  findItem(
-    options,
-    itemArea => {
-      return areaInfo.indexOf(itemArea.key) > -1;
-    },
-    result,
-  );
-  const areaNams = result.map(item => {
-    return item.title;
-  });
-  console.log('areaNams_', areaNams.toString());
-  return areaNams.toString();
-}
-// const { Search } = Input;
 @connect(({ tradeSetting }) => ({
   tradeSetting,
 }))

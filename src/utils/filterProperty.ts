@@ -1,3 +1,5 @@
+import { newAreaTree } from '@/utils/area.js';
+
 export default function filterProperty(obj) {
   const newObj = new Object();
   for (const key in obj) {
@@ -196,6 +198,8 @@ export function findItem(arr, fn, result) {
     }
   });
 }
+
+const options = newAreaTree();
 export function filterAreaName(areaInfo) {
   const result = [];
   findItem(
@@ -208,6 +212,5 @@ export function filterAreaName(areaInfo) {
   const areaNams = result.map(item => {
     return item.title;
   });
-  console.log('areaNams_', areaNams.toString());
   return areaNams.toString();
 }
