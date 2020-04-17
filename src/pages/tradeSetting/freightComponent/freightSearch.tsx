@@ -65,8 +65,17 @@ class AdvancedSearchForm extends React.Component {
 
   handleReset = () => {
     console.log('reset');
-    this.props.saveSearchInfo({});
+    // this.props.saveSearchInfo({});
     this.props.form.resetFields();
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'tradeSetting/searchInfo',
+      payload: {
+        pageNumber: 0,
+        pageSize: 3,
+        templateType: 0,
+      },
+    });
   };
 
   // 新增产品

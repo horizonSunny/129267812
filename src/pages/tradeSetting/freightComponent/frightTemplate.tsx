@@ -10,7 +10,14 @@ const columns = [
   {
     title: '配送范围',
     dataIndex: 'areas',
-    render: (text, record) => <a>{filterAreaName(text)}</a>,
+    render: (text, record) => {
+      return (
+        <div>
+          <a>{text === 'all' && '全国'}</a>
+          <a>{text !== 'all' && filterAreaName(text)}</a>
+        </div>
+      );
+    },
   },
   {
     title: '首件数(件)',
@@ -107,11 +114,20 @@ export default class Freight extends React.Component {
     return (
       <div className={`${styles.main}`}>
         {pageList.map((item, index) => {
+          // 这边把默认模版信息转换为全国信息
+          const itemInfo = {
+            areas: 'all',
+            firstNum: item.firstNum,
+            firstPrice: item.firstPrice,
+            continuePrice: item.continuePrice,
+          };
+          // item.areaFreights.unshift(itemInfo);
+          const areaFreights = [itemInfo, ...item.areaFreights];
           return (
             <Table
               className={`${styles.table}`}
               columns={columns}
-              dataSource={item.areaFreights}
+              dataSource={areaFreights}
               key={index}
               bordered
               title={() => {
@@ -119,7 +135,8 @@ export default class Freight extends React.Component {
                   <div className={`${styles.tableHeader}`}>
                     <div>
                       <span className={`${styles.tableHeaderSpan}`}>
-                        模版名称:{item.templateName}
+                        模版名称:{item.status === 2 && item.templateName}
+                        {item.status === 1 && '默认模版'}
                       </span>
                       <span className={`${styles.tableHeaderSpan}`}>
                         使用中的商品:{item.useNumber}
@@ -137,12 +154,14 @@ export default class Freight extends React.Component {
                     </div>
                     <div>
                       <Button className={`${styles.tableHeaderButton}`}>修改</Button>
-                      <Button
-                        className={`${styles.tableHeaderButton}`}
-                        onClick={this.deleteTemplate.bind(this, item)}
-                      >
-                        删除
-                      </Button>
+                      {item.status === 2 && (
+                        <Button
+                          className={`${styles.tableHeaderButton}`}
+                          onClick={this.deleteTemplate.bind(this, item)}
+                        >
+                          删除
+                        </Button>
+                      )}
                     </div>
                   </div>
                 );
