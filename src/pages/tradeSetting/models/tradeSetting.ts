@@ -39,6 +39,8 @@ const tradeSetting = {
       totalElements: 0,
       pageList: [],
     },
+    // 保存搜索条件
+    saveSearchInfo: {},
   },
 
   effects: {
@@ -57,7 +59,11 @@ const tradeSetting = {
     // 获取运费模版list
     *getFreightList({ payload }, { call, put }) {
       const response = yield call(freightList, payload);
-      console.log('response_', response.data);
+      // 保存搜索条件
+      yield put({
+        type: 'searchInfo',
+        payload,
+      });
       // setFreightList
       if (response && response.code === 1) {
         yield put({
@@ -80,6 +86,13 @@ const tradeSetting = {
   },
 
   reducers: {
+    // 保存搜索条件
+    searchInfo(state, action) {
+      return {
+        ...state,
+        saveSearchInfo: action.payload,
+      };
+    },
     // 新增运费模版区域更改
     setFreightTemplateArea(state, action) {
       const freightTemplateInfo = deepCopy(state.freightTemplateInfo);

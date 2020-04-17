@@ -20,7 +20,6 @@ export default class TemplateFreight extends React.Component {
 
   onRefInfo = ref => {
     this.child = ref;
-    console.log('onRefInfo_', ref);
   };
 
   // 弹窗配置不可配送区域

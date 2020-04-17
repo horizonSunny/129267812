@@ -34,7 +34,6 @@ export default class NoDistribute extends React.Component {
   // 调用子组件方法
   onRefInfo = ref => {
     this.child = ref;
-    console.log('onRefInfo_', ref);
   };
 
   // 弹窗配置不可配送区域
