@@ -21,6 +21,11 @@ export async function newFreight(params: Object) {
     data: params,
   });
 }
+export async function deleteFreight(params: Object) {
+  return request(`/admin/v1/freight/${params.freightTemplateId}`, {
+    method: 'delete',
+  });
+}
 // // 快速分类顺序调整
 // export async function reverseCategoryList(params: Object) {
 //   return request('/admin/v1/quickCategory/update/order', {

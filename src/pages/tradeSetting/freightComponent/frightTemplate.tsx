@@ -1,10 +1,11 @@
 import React from 'react';
-import { Table, Button, Pagination } from 'antd';
+import { Table, Button, Pagination, Modal } from 'antd';
 import { connect } from 'dva';
 // 外部引入
 import styles from './frightTemplate.less';
 import { filterAreaName } from '@/utils/filterProperty';
-// const { Search } = Input;
+
+const { confirm } = Modal;
 const columns = [
   {
     title: '配送范围',
@@ -31,20 +32,45 @@ const columns = [
   tradeSetting,
 }))
 export default class Freight extends React.Component {
-  componentDidMount() {
+  componentDidMount() {}
+
+  state = {
+    visible: false,
+    currentTemplate: {},
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
     const { dispatch } = this.props;
-    // if (dispatch) {
-    //   dispatch({
-    //     type: 'commodityClassify/classification',
-    //   }).then(() => {
-    //     // 查询单个分类的商品
-    //     dispatch({
-    //       type: 'commodityClassify/selectCas',
-    //       payload: this.props.commodityClassify.casInfoOne[0],
-    //     });
-    //   });
-    // }
-  }
+    console.log('this.state.currentTemplate.freightTemplateId,', this.state.currentTemplate);
+
+    if (dispatch) {
+      dispatch({
+        type: 'tradeSetting/deleteFreight',
+        payload: {
+          freightTemplateId: this.state.currentTemplate.freightTemplateId,
+        },
+      });
+    }
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  deleteTemplate = template => {
+    console.log('currentTemplate_', template);
+    this.setState({
+      currentTemplate: template,
+      visible: true,
+    });
+  };
 
   render() {
     const { totalElements, pageList } = this.props.tradeSetting.freightList;
@@ -83,7 +109,12 @@ export default class Freight extends React.Component {
                     </div>
                     <div>
                       <Button className={`${styles.tableHeaderButton}`}>修改</Button>
-                      <Button className={`${styles.tableHeaderButton}`}>删除</Button>
+                      <Button
+                        className={`${styles.tableHeaderButton}`}
+                        onClick={this.deleteTemplate.bind(this, item)}
+                      >
+                        删除
+                      </Button>
                     </div>
                   </div>
                 );
@@ -93,6 +124,14 @@ export default class Freight extends React.Component {
           );
         })}
         <Pagination defaultCurrent={1} pageSize={3} total={totalElements} />
+        <Modal
+          title="删除模版"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <span>是否确认删除该模版?</span>
+        </Modal>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 // import { Effect } from 'dva';
 // import { Reducer } from 'redux';
-import { getPickUp, newFreight, freightList } from '@/services/tradeSetting';
+import { getPickUp, newFreight, freightList, deleteFreight } from '@/services/tradeSetting';
 import deepCopy from '@/utils/deepCopy';
 
 // 运费模版初始化
@@ -64,6 +64,17 @@ const tradeSetting = {
           type: 'setFreightList',
           payload: response.data,
         });
+      }
+    },
+    // 删除运费模版
+    *deleteFreight({ payload }, { call, put }) {
+      const response = yield call(deleteFreight, payload);
+      // setFreightList
+      if (response && response.code === 1) {
+        // yield put({
+        //   type: 'setFreightList',
+        //   payload: response.data,
+        // });
       }
     },
   },
