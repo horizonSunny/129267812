@@ -53,10 +53,10 @@ export default class NoDistribute extends React.Component {
   };
 
   // 弹窗配置不可配送区域
-  showArea = () => {
+  showArea = (area = []) => {
     console.log('this.child_', this.child);
 
-    this.child.openModal();
+    this.child.openModal(area);
   };
 
   render() {
@@ -67,7 +67,7 @@ export default class NoDistribute extends React.Component {
     console.log('area_', area);
     return (
       <PageHeaderWrapper>
-        {!nonDeliveryInfo && (
+        {nonDeliveryInfo && (
           <div className={`${styles.noDistribute}`}>
             <img src={mapImg} alt="" />
             <span>你还未配置不可配送区域</span>
@@ -76,7 +76,7 @@ export default class NoDistribute extends React.Component {
             </Button>
           </div>
         )}
-        {nonDeliveryInfo && (
+        {!nonDeliveryInfo && (
           <div className={`${styles.main}`}>
             <Row className={styles.selfDelivery}>
               <Col span={20} className={styles.selfDeliveryInfo}>
@@ -100,7 +100,10 @@ export default class NoDistribute extends React.Component {
                 </table>
               </Col>
               <Col span={1}>
-                <Button className={`${styles.editorButton}`} onClick={this.showArea}>
+                <Button
+                  className={`${styles.editorButton}`}
+                  onClick={this.showArea.bind(this, nonDeliveryInfo.deliveryArea)}
+                >
                   配置
                 </Button>
               </Col>
