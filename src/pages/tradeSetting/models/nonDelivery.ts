@@ -1,4 +1,4 @@
-import { getNonDelivery } from '@/services/tradeSetting';
+import { getNonDelivery, setNonDelivery } from '@/services/tradeSetting';
 import deepCopy from '@/utils/deepCopy';
 
 const tradeSetting = {
@@ -12,6 +12,15 @@ const tradeSetting = {
   effects: {
     *getNonDelivery({ payload }, { call, put }) {
       const response = yield call(getNonDelivery);
+      if (response && response.code === 1) {
+        yield put({
+          type: 'setnonDelivery',
+          payload: response.data,
+        });
+      }
+    },
+    *setNonDelivery({ payload }, { call, put }) {
+      const response = yield call(setNonDelivery, payload);
       if (response && response.code === 1) {
         yield put({
           type: 'setnonDelivery',

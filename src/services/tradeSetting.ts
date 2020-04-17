@@ -10,6 +10,13 @@ export async function getPickUp(params: Object) {
 export async function getNonDelivery() {
   return request('/admin/v1/tenant/getNonDelivery');
 }
+// 设置不可配送区域
+export async function setNonDelivery(params: Array) {
+  return request('/admin/v1/tenant/setNonDelivery', {
+    method: 'post',
+    data: params,
+  });
+}
 
 // 获取运费模版列表数据
 export async function freightList(params: Object) {
