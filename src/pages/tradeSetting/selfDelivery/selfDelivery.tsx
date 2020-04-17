@@ -22,7 +22,16 @@ export default class SelfDelivery extends React.Component {
   }
 
   onChange = info => {
-    console.log('onChange_', info);
+    console.log('onChange_Info', info);
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'selfDelivery/changePickUpStatus',
+        payload: {
+          status: info ? 1 : 2,
+        },
+      });
+    }
   };
 
   toSelfDelivery = () => {
