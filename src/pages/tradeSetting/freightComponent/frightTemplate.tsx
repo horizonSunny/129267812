@@ -37,6 +37,7 @@ export default class Freight extends React.Component {
   state = {
     visible: false,
     currentTemplate: {},
+    currentPage: 1,
   };
 
   handleOk = e => {
@@ -53,6 +54,17 @@ export default class Freight extends React.Component {
         payload: {
           freightTemplateId: this.state.currentTemplate.freightTemplateId,
         },
+      }).then(() => {
+        const { saveSearchInfo } = this.props.tradeSetting;
+        const { currentPage } = this.state;
+        const searchInfo = {
+          ...saveSearchInfo,
+          pageNumber: currentPage - 1,
+        };
+        dispatch({
+          type: 'tradeSetting/getFreightList',
+          payload: searchInfo,
+        });
       });
     }
   };
@@ -72,10 +84,26 @@ export default class Freight extends React.Component {
     });
   };
 
+  paginationChange = (page, pageSize) => {
+    this.setState({
+      currentPage: page,
+    });
+    const { saveSearchInfo } = this.props.tradeSetting;
+    const { dispatch } = this.props;
+    const searchInfo = {
+      ...saveSearchInfo,
+      pageNumber: page - 1,
+    };
+    dispatch({
+      type: 'tradeSetting/getFreightList',
+      payload: searchInfo,
+    });
+  };
+
   render() {
     const { totalElements, pageList } = this.props.tradeSetting.freightList;
     console.log('pageList_', pageList, '_totalElements_', totalElements);
-
+    const { currentPage } = this.state;
     return (
       <div className={`${styles.main}`}>
         {pageList.map((item, index) => {
@@ -123,7 +151,12 @@ export default class Freight extends React.Component {
             />
           );
         })}
-        <Pagination defaultCurrent={1} pageSize={3} total={totalElements} />
+        <Pagination
+          current={currentPage}
+          pageSize={3}
+          total={totalElements}
+          onChange={this.paginationChange}
+        />
         <Modal
           title="删除模版"
           visible={this.state.visible}

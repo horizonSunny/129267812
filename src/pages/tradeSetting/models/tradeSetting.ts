@@ -88,6 +88,7 @@ const tradeSetting = {
   reducers: {
     // 保存搜索条件
     searchInfo(state, action) {
+      console.log('action.payload_', action.payload);
       return {
         ...state,
         saveSearchInfo: action.payload,
