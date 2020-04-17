@@ -9,8 +9,8 @@ import { newArea } from '@/utils/area.js';
 import { CompareDate } from '@/utils/utils.ts';
 // const { Search } = Input;
 const options = newArea();
-@connect(({ tradeSetting }) => ({
-  tradeSetting,
+@connect(({ selfDelivery }) => ({
+  selfDelivery,
 }))
 class FormSelfDelivery extends React.Component {
   componentDidMount() {
