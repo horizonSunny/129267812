@@ -59,6 +59,17 @@ export default class NoDistribute extends React.Component {
     this.child.openModal(area);
   };
 
+  // 弹窗配置区域确定
+  modalAreaConfirm = areaIds => {
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'nonDelivery/setNonDelivery',
+        payload: areaIds,
+      });
+    }
+  };
+
   render() {
     const { nonDeliveryInfo } = this.props.nonDelivery;
     // const {keys,values}
@@ -67,7 +78,7 @@ export default class NoDistribute extends React.Component {
     console.log('area_', area);
     return (
       <PageHeaderWrapper>
-        {nonDeliveryInfo && (
+        {!nonDeliveryInfo && (
           <div className={`${styles.noDistribute}`}>
             <img src={mapImg} alt="" />
             <span>你还未配置不可配送区域</span>
@@ -76,7 +87,7 @@ export default class NoDistribute extends React.Component {
             </Button>
           </div>
         )}
-        {!nonDeliveryInfo && (
+        {nonDeliveryInfo && (
           <div className={`${styles.main}`}>
             <Row className={styles.selfDelivery}>
               <Col span={20} className={styles.selfDeliveryInfo}>
@@ -110,7 +121,7 @@ export default class NoDistribute extends React.Component {
             </Row>
           </div>
         )}
-        <AreaSelect onRef={this.onRefInfo} />
+        <AreaSelect onRef={this.onRefInfo} confirmArea={this.modalAreaConfirm} />
       </PageHeaderWrapper>
     );
   }
