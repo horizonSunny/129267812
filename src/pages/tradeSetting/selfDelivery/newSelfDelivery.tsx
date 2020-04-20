@@ -144,27 +144,29 @@ class FormSelfDelivery extends React.Component {
             })(<Input />)}
           </Form.Item>
           <Form.Item label="营业日期">
-            {/* {getFieldDecorator('tenantName', {
+            {getFieldDecorator('hebdomad', {
               rules: [
                 {
                   required: true,
                   message: '店铺名称',
                 },
               ],
-              initialValue: '231',
-            })( */}
-            {hebdomad.map(item => {
-              return (
-                <Button
-                  className={`${styles.hebdomad} ${
-                    pickUpForm.businessDate.indexOf(item) > -1 ? styles.hebdomadChecked : ''
-                  }`}
-                >
-                  {item}
-                </Button>
-              );
-            })}
-            {/* )} */}
+              initialValue: pickUpForm.businessDate,
+            })(
+              <div>
+                {hebdomad.map(item => {
+                  return (
+                    <Button
+                      className={`${styles.hebdomad} ${
+                        pickUpForm.businessDate.indexOf(item) > -1 ? styles.hebdomadChecked : ''
+                      }`}
+                    >
+                      {item}
+                    </Button>
+                  );
+                })}
+              </div>,
+            )}
           </Form.Item>
           <Form.Item label="营业时间">
             {getFieldDecorator('tenantStartTime', {
