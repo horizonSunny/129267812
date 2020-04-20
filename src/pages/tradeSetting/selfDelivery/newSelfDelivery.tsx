@@ -74,48 +74,45 @@ class FormSelfDelivery extends React.Component {
     });
   };
 
-  startTimeChange = (time, timeString) => {
-    this.setState({
-      startTime: timeString,
-    });
-  };
-
-  endTimeChange = (time, timeString) => {
-    console.log('onChange_', timeString);
-    this.setState({
-      endTime: timeString,
-    });
+  timeChange = (time, isStart) => {
+    console.log('this.props.form.getFieldsValue()_', this.props.form.getFieldsValue());
+    if (isStart) {
+      this.props.form.setFieldsValue({
+        startTime: time,
+      });
+    } else {
+      this.props.form.setFieldsValue({
+        endTime: time,
+      });
+    }
   };
 
   onOpenChange = info => {
-    // console.log('onOpenChange_', info);
-    if (!info) {
-      const { startTime, endTime } = this.state;
-      const test = CompareDate(startTime, endTime);
-      console.log('info_', test);
-      const oldEndTime = endTime;
-      const oldStartTime = startTime;
-      const _this = this;
-      if (test) {
-        console.log('oldEndTime_', oldEndTime);
-        console.log('oldStartTime_', oldStartTime);
-        this.setState({
-          endTime: oldStartTime,
-          startTime: oldEndTime,
-        });
-        // this.setState({
-        //   startTime: oldEndTime,
-        // });
-        // setTimeout(() => {
-        //   _this.setState({
-        //     endTime: oldStartTime,
-        //   });
-        //   _this.setState({
-        //     startTime: oldEndTime,
-        //   });
-        // }, 1000);
-      }
+    console.log('this.props.form.getFieldsValue()_', this.props.form.getFieldsValue());
+    const { startTime, endTime } = this.props.form.getFieldsValue();
+    const sTime = new Date(startTime._d);
+    console.log('sTime_', `${sTime.getHours()}:${sTime.getMinutes()}:${sTime.getSeconds()}`);
+
+    // this.props.form.setFieldsValue({
+    //   startTime: moment('12:00:00', 'HH:mm:ss'),
+    //   endTime: moment('12:00:00', 'HH:mm:ss'),
+    // });
+  };
+
+  // 改变周期
+  hebdomadChange = item => {
+    console.log('item_', item);
+    // console.log('this.props.form_', this.props.form.getFieldValue('hebdomad'));
+    const hasSelectHed = this.props.form.getFieldValue('hebdomad');
+    const index = hasSelectHed.indexOf(item);
+    if (index > -1) {
+      hasSelectHed.splice(index, 1);
+    } else {
+      hasSelectHed.push(item);
     }
+    this.props.form.setFieldsValue({
+      hebdomad: hasSelectHed,
+    });
   };
 
   render() {
@@ -131,8 +128,6 @@ class FormSelfDelivery extends React.Component {
         sm: { span: 16 },
       },
     };
-    console.log('pickUpForm_', pickUpForm);
-
     const { startTime, endTime, hebdomad } = this.state;
     return (
       <PageHeaderWrapper>
@@ -196,6 +191,7 @@ class FormSelfDelivery extends React.Component {
                       className={`${styles.hebdomad} ${
                         pickUpForm.businessDate.indexOf(item) > -1 ? styles.hebdomadChecked : ''
                       }`}
+                      onClick={this.hebdomadChange.bind(this, item)}
                     >
                       {item}
                     </Button>
@@ -205,7 +201,7 @@ class FormSelfDelivery extends React.Component {
             )}
           </Form.Item>
           <Form.Item label="营业时间">
-            {getFieldDecorator('tenantStartTime', {
+            {getFieldDecorator('startTime', {
               rules: [
                 {
                   required: true,
@@ -213,9 +209,16 @@ class FormSelfDelivery extends React.Component {
                 },
               ],
               initialValue: moment(pickUpForm.startTime, 'HH:mm:ss'),
-            })(<TimePicker onChange={this.startTimeChange} onOpenChange={this.onOpenChange} />)}
+            })(
+              <TimePicker
+                onChange={(time, timeString) => {
+                  this.timeChange.bind(this, time, true);
+                }}
+                onOpenChange={this.onOpenChange}
+              />,
+            )}
             &nbsp; — &nbsp;
-            {getFieldDecorator('tenantEndTime', {
+            {getFieldDecorator('endTime', {
               rules: [
                 {
                   required: true,
@@ -223,7 +226,14 @@ class FormSelfDelivery extends React.Component {
                 },
               ],
               initialValue: moment(pickUpForm.endTime, 'HH:mm:ss'),
-            })(<TimePicker onChange={this.endTimeChange} onOpenChange={this.onOpenChange} />)}
+            })(
+              <TimePicker
+                onChange={(time, timeString) => {
+                  this.timeChange.bind(this, time, false);
+                }}
+                onOpenChange={this.onOpenChange}
+              />,
+            )}
           </Form.Item>
 
           <Form.Item
