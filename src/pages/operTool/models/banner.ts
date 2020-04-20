@@ -42,7 +42,7 @@ const CommodityModel = {
       console.log('in_reverseBannerList_', response);
       yield put({
         type: 'reverseCategory',
-        payload: payload.quickCategoryIds,
+        payload: payload.bannerIds,
       });
     },
     // 删除listItem
@@ -63,7 +63,7 @@ const CommodityModel = {
       // const response = yield call(newBannerItem, payload);
       let response;
       console.log('in_newBannerItem_', payload);
-      if (payload.quickCategoryId) {
+      if (payload.bannerId) {
         // 编辑
         response = yield call(editorBannerItem, payload);
         if (!response) {
@@ -108,12 +108,14 @@ const CommodityModel = {
     // 排序categoryList
     reverseCategory(state, action) {
       const startIndex = state.categoryList.findIndex(item => {
-        return item.quickCategoryId === action.payload[0];
+        return item.bannerId === action.payload[0];
       });
       const endIndex = state.categoryList.findIndex(item => {
-        return item.quickCategoryId === action.payload[1];
+        return item.bannerId === action.payload[1];
       });
       const item = state.categoryList[startIndex];
+      console.log('state.categoryList[startIndex]_', state.categoryList[startIndex]);
+      console.log('state.categoryList[endIndex]_', state.categoryList[endIndex]);
       state.categoryList[startIndex] = state.categoryList[endIndex];
       state.categoryList[endIndex] = item;
       return {

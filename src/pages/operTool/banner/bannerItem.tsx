@@ -56,23 +56,24 @@ class BannerItem extends React.Component {
     e.preventDefault();
     this.props.form.setFieldsValue({
       img: this.state.imageUrl ? this.state.imageUrl : '',
-      cateClassify: this.state.tags ? this.state.tags : '',
     });
     this.props.form.validateFieldsAndScroll((err, values) => {
+      console.log('values_', values);
       if (!err) {
+        const { dispatch } = this.props;
         if (dispatch) {
           dispatch({
-            type: 'banner/newCategoryItem',
+            type: 'banner/newBannerItem',
             payload: {
-              categoryIds: ids,
-              image: this.state.imageUrl,
-              quickCategoryId: this.props.banner.categoryItem.quickCategoryId
-                ? this.props.banner.categoryItem.quickCategoryId
+              redirectUrl: values.redirectUrl,
+              bannerImage: this.state.imageUrl,
+              bannerName: values.bannerName,
+              bannerId: this.props.banner.categoryItem.bannerId
+                ? this.props.banner.categoryItem.bannerId
                 : undefined,
-              bannerName: values.cateName,
             },
           }).then(res => {
-            router.push('/banner/findCommodity');
+            router.push('/operTool/banner');
           });
         }
       }
@@ -105,7 +106,7 @@ class BannerItem extends React.Component {
       <PageHeaderWrapper className={styles.main}>
         <Form {...formItemLayout} onSubmit={this.handleSubmit}>
           <Form.Item label="名称">
-            {getFieldDecorator('cateName', {
+            {getFieldDecorator('bannerName', {
               initialValue: this.props.banner.categoryItem.bannerName,
               rules: [
                 {

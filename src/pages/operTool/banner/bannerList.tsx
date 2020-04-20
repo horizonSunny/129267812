@@ -57,12 +57,13 @@ export default class BannerList extends React.Component {
         title: '状态',
         dataIndex: 'status',
         key: 'status',
-        render: (text, record) => (
-          <Switch
-            defaultChecked={text === 1}
-            onChange={value => this.statusChange(value, record)}
-          />
-        ),
+        render: (text, record) =>
+          (record.status === 1 && (
+            <Switch checked onChange={value => this.statusChange(value, record)} />
+          )) ||
+          (record.status !== 1 && (
+            <Switch checked={false} onChange={value => this.statusChange(value, record)} />
+          )),
       },
       {
         title: '调整排序',
@@ -155,7 +156,6 @@ export default class BannerList extends React.Component {
     const { dispatch } = this.props;
     if (record) {
       // 编辑
-      console.log('in 摆埃及');
       recordInfo = {
         image: record.bannerImage,
         bannerName: record.bannerName,

@@ -74,10 +74,7 @@ export default class FindList extends React.Component {
         dataIndex: 'status',
         key: 'status',
         render: (text, record) => (
-          <Switch
-            defaultChecked={text === 1}
-            onChange={value => this.statusChange(value, record)}
-          />
+          <Switch checked={text === 1} onChange={value => this.statusChange(value, record)} />
         ),
       },
       {
