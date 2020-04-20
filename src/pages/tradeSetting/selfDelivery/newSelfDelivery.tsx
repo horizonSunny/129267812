@@ -90,9 +90,15 @@ class FormSelfDelivery extends React.Component {
   onOpenChange = info => {
     console.log('this.props.form.getFieldsValue()_', this.props.form.getFieldsValue());
     const { startTime, endTime } = this.props.form.getFieldsValue();
-    const sTime = new Date(startTime._d);
-    console.log('sTime_', `${sTime.getHours()}:${sTime.getMinutes()}:${sTime.getSeconds()}`);
-
+    const sTime = Date.parse(startTime._d);
+    const eTime = Date.parse(endTime._d);
+    console.log('isStart', sTime > eTime);
+    if (sTime > eTime) {
+      this.props.form.setFieldsValue({
+        startTime: endTime,
+        endTime: startTime,
+      });
+    }
     // this.props.form.setFieldsValue({
     //   startTime: moment('12:00:00', 'HH:mm:ss'),
     //   endTime: moment('12:00:00', 'HH:mm:ss'),
