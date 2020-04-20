@@ -37,8 +37,41 @@ class FormSelfDelivery extends React.Component {
     hebdomad: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
   };
 
-  handleSubmit = () => {
-    console.log('sss');
+  handleSubmit = e => {
+    e.preventDefault();
+    // this.props.form.setFieldsValue({
+    //   img: this.state.imageUrl ? this.state.imageUrl : '',
+    //   cateClassify: this.state.tags ? this.state.tags : '',
+    // });
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      console.log('values_', values);
+      // if (!err) {
+      //   console.log('Received values of form: ', values);
+      //   const { dispatch } = this.props;
+      //   const ids = [];
+      //   this.state.tags.forEach(element => {
+      //     const length = element.length - 1;
+      //     ids.push(element[length].categoryId);
+      //   });
+      //   console.log('ids123_', this.state.tags);
+      //   console.log('ids_', ids);
+      //   if (dispatch) {
+      //     dispatch({
+      //       type: 'operTool/newCategoryItem',
+      //       payload: {
+      //         categoryIds: ids,
+      //         image: this.state.imageUrl,
+      //         quickCategoryId: this.props.operTool.categoryItem.quickCategoryId
+      //           ? this.props.operTool.categoryItem.quickCategoryId
+      //           : undefined,
+      //         quickCategoryName: values.cateName,
+      //       },
+      //     }).then(res => {
+      //       router.push('/operTool/findCommodity');
+      //     });
+      //   }
+      // }
+    });
   };
 
   startTimeChange = (time, timeString) => {
@@ -117,7 +150,10 @@ class FormSelfDelivery extends React.Component {
           </Form.Item>
           <Form.Item label="所在区域">
             {getFieldDecorator('areaData', {
-              initialValue: [pickUpForm.province, pickUpForm.city, pickUpForm.area],
+              initialValue:
+                pickUpForm.province !== ''
+                  ? [pickUpForm.province, pickUpForm.city, pickUpForm.area]
+                  : [],
               rules: [{ required: true, message: '请选择店铺所在地!' }],
             })(<Cascader options={options} changeOnSelect placeholder="省市区" />)}
           </Form.Item>
