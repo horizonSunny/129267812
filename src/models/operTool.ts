@@ -57,8 +57,14 @@ const CommodityModel = {
       if (payload.quickCategoryId) {
         // 编辑
         response = yield call(editorCategoryItem, payload);
+        if (!response) {
+          throw new Error('未成功');
+        }
       } else {
         response = yield call(newCategoryItem, payload);
+        if (!response) {
+          throw new Error('未成功');
+        }
       }
     },
     // 为生成treeSelect选择器data

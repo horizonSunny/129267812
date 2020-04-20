@@ -88,9 +88,13 @@ request.interceptors.response.use(async response => {
     });
   }
   if (data && data.code === 0) {
+    // reje
     notification.error({
       message: data.msg,
     });
+    // return PromiseRejectionEvent();
+    // return Promise.reject(data.msg);
+    throw new Error(data.msg);
   }
   return response;
 });
