@@ -29,7 +29,7 @@ export default class BannerList extends React.Component {
     columns: [
       {
         title: 'banner',
-        dataIndex: 'image',
+        dataIndex: 'bannerImage',
         key: 'bannerId',
         render: text => (
           <img
@@ -157,17 +157,17 @@ export default class BannerList extends React.Component {
       // 编辑
       console.log('in 摆埃及');
       recordInfo = {
-        categorys: record.categorys,
-        image: record.image,
-        quickBannerName: record.categoryName,
+        image: record.bannerImage,
+        bannerName: record.bannerName,
         bannerId: record.bannerId,
+        redirectUrl: record.redirectUrl,
       };
     } else {
       // 新建
       recordInfo = {
-        categorys: [],
         image: '',
-        quickBannerName: '',
+        bannerName: '',
+        redirectUrl: '',
       };
     }
     dispatch({

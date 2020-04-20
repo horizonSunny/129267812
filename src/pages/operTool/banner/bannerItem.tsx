@@ -18,57 +18,17 @@ function beforeUpload(file) {
   }
   return isJpgOrPng && isLt2M;
 }
-// tags
-function Tags(props) {
-  return props.tags.map(item => {
-    return (
-      <Tag
-        closable
-        onClose={e => {
-          e.preventDefault();
-          props.handleClose(item);
-        }}
-      >
-        {item.map((info, index) => {
-          return index + 1 !== item.length ? `${info.cateName}/` : info.cateName;
-        })}
-      </Tag>
-    );
-  });
-}
-
 @connect(({ banner }) => ({
   banner,
 }))
 class BannerItem extends React.Component {
   state = {
     loading: false,
-    tags: this.props.banner.categoryItem.categorys,
     imageUrl: this.props.banner.categoryItem.image,
     value: '',
   };
 
-  componentDidMount() {
-    const { dispatch } = this.props;
-    if (dispatch) {
-      dispatch({
-        type: 'banner/categoryTree',
-      }).then(() => {
-        // 同时使得已经选过的tree及其子类隐藏
-        const tag = this.state.tags.map(item => {
-          return item[item.length - 1].categoryId;
-        });
-        console.log('this.tags_', tag[0]);
-        dispatch({
-          type: 'banner/changTreeDis',
-          payload: {
-            status: true,
-            id: tag[0],
-          },
-        });
-      });
-    }
-  }
+  componentDidMount() {}
 
   // 上传图片变化
   handleChange = ({ fileList, file, event }) => {
@@ -100,15 +60,6 @@ class BannerItem extends React.Component {
     });
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
-        const { dispatch } = this.props;
-        const ids = [];
-        this.state.tags.forEach(element => {
-          const length = element.length - 1;
-          ids.push(element[length].categoryId);
-        });
-        console.log('ids123_', this.state.tags);
-        console.log('ids_', ids);
         if (dispatch) {
           dispatch({
             type: 'banner/newCategoryItem',
@@ -118,7 +69,7 @@ class BannerItem extends React.Component {
               quickCategoryId: this.props.banner.categoryItem.quickCategoryId
                 ? this.props.banner.categoryItem.quickCategoryId
                 : undefined,
-              quickCategoryName: values.cateName,
+              bannerName: values.cateName,
             },
           }).then(res => {
             router.push('/banner/findCommodity');
@@ -127,52 +78,6 @@ class BannerItem extends React.Component {
       }
     });
   };
-
-  //  关闭标签
-  handleClose(tag) {
-    const newTags = this.state.tags.filter(item => {
-      const compare = comparisonObject(item, tag);
-      if (!compare) {
-        return item;
-      }
-    });
-    // console.log('newTags_', tag);
-    const treeItemId = tag[tag.length - 1].categoryId;
-    const { dispatch } = this.props;
-    if (dispatch) {
-      dispatch({
-        type: 'banner/changTreeDis',
-        payload: {
-          status: false,
-          id: treeItemId,
-        },
-      });
-    }
-    this.setState({
-      tags: newTags,
-    });
-  }
-
-  // 树状选择
-  treeSelectChange(value) {
-    console.log('value_', value);
-    console.log('this.props.banner.categoryTree_', this.props.banner.categoryTree);
-    this.setState({ value });
-    const newArr = value.split('_');
-    const filterArr = filterTreeStatus(this.props.banner.categoryTree, newArr, 0);
-    // changTreeDis
-    const { dispatch } = this.props;
-    if (dispatch) {
-      dispatch({
-        type: 'banner/changTreeDis',
-        payload: {
-          value,
-          status: true,
-        },
-      });
-    }
-    this.state.tags.push(filterArr);
-  }
 
   render() {
     // 上传图片
@@ -201,18 +106,18 @@ class BannerItem extends React.Component {
         <Form {...formItemLayout} onSubmit={this.handleSubmit}>
           <Form.Item label="名称">
             {getFieldDecorator('cateName', {
-              initialValue: this.props.banner.categoryItem.quickCategoryName,
+              initialValue: this.props.banner.categoryItem.bannerName,
               rules: [
                 {
                   required: true,
-                  message: '请填写分类名称!',
+                  message: '请填写banner名称!',
                 },
               ],
             })(<Input />)}
           </Form.Item>
           <Form.Item label="跳转链接">
-            {getFieldDecorator('cateName', {
-              initialValue: this.props.banner.categoryItem.quickCategoryName,
+            {getFieldDecorator('redirectUrl', {
+              initialValue: this.props.banner.categoryItem.redirectUrl,
               rules: [
                 {
                   message: '请输入跳转链接!',
@@ -245,40 +150,6 @@ class BannerItem extends React.Component {
               </Upload>,
             )}
           </Form.Item>
-          {/* <Form.Item label="关联商品分类">
-            {getFieldDecorator('cateClassify', {
-              initialValue: this.props.banner.categoryItem.quickCategoryName,
-              rules: [
-                {
-                  required: true,
-                  message: '请选择关联商品分类!',
-                },
-              ],
-            })(
-              <div>
-                <Tags tags={tags} handleClose={this.handleClose.bind(this)} />
-                <TreeSelect
-                  style={{ width: '70%' }}
-                  label="请选择分类"
-                  value={this.state.value}
-                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                  treeData={this.props.banner.categoryTree}
-                  placeholder="Please select"
-                  onChange={this.treeSelectChange.bind(this)}
-                  suffixIcon={
-                    <Icon
-                      type="plus-circle"
-                      style={{
-                        fontSize: '14px',
-                      }}
-                    />
-                  }
-                />
-
-
-              </div>,
-            )}
-          </Form.Item>     */}
           <Form.Item
             wrapperCol={{
               xs: { span: 24, offset: 0 },
