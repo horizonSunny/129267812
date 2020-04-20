@@ -4,7 +4,7 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import router from 'umi/router';
 import { connect } from 'dva';
 import styles from './findList.less';
-import dataInfo from '../../../../mock/quick';
+// import dataInfo from '../../../../mock/quick';
 
 @connect(({ operTool }) => ({
   operTool,
@@ -17,7 +17,7 @@ export default class FindList extends React.Component {
         type: 'operTool/getCategoryList',
         payload: {
           pageNumber: 0,
-          pageSize: 1000,
+          pageSize: 10,
         },
       }).then(() => {
         console.log('operTool');
@@ -91,7 +91,7 @@ export default class FindList extends React.Component {
                 <Icon type="caret-up" className="disableIcon" />
               </div>
             )}
-            {dataIndex !== 0 && (
+            {dataIndex !== 0 && this.props.operTool.categoryList.length !== 1 && (
               <div>
                 <Icon
                   type="caret-up"
@@ -99,7 +99,8 @@ export default class FindList extends React.Component {
                 />
               </div>
             )}
-            {dataIndex + 1 !== dataInfo.data.pageList.length && (
+            {/* {console.log('record_', record)} */}
+            {dataIndex + 1 !== this.props.operTool.categoryList.length && (
               <div>
                 <Icon
                   type="caret-down"
@@ -107,7 +108,7 @@ export default class FindList extends React.Component {
                 />
               </div>
             )}
-            {dataIndex + 1 === dataInfo.data.pageList.length && (
+            {dataIndex + 1 === this.props.operTool.categoryList.length && (
               <div>
                 <Icon type="caret-down" className="disableIcon" />
               </div>
