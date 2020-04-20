@@ -223,13 +223,26 @@ function findCode(arr, nameInfo) {
   });
   return item;
 }
-export function filterAreaNameInfo(dataName) {
-  const [provinceName, cityName, areaName] = dataName;
+function findName(arr, codeInfo) {
+  const item = arr.find(item => {
+    return item.value === codeInfo;
+  });
+  return item;
+}
+export function filterAreaNameInfo(dataInfo, info) {
+  const [provinceName, cityName, areaName] = dataInfo;
   // const provinceInfo = area.find(item => {
   //   return item.label === provinceName;
   // });
-  const provinceInfo = findCode(area, provinceName);
-  const cityInfo = findCode(provinceInfo.children, cityName);
-  const areaInfo = findCode(cityInfo.children, areaName);
-  return [provinceInfo.value, cityInfo.value, areaInfo.value];
+  if (info === 'findCode') {
+    const provinceInfo = findCode(area, provinceName);
+    const cityInfo = findCode(provinceInfo.children, cityName);
+    const areaInfo = findCode(cityInfo.children, areaName);
+    return [provinceInfo.value, cityInfo.value, areaInfo.value];
+  }
+
+  const provinceInfo = findName(area, provinceName);
+  const cityInfo = findName(provinceInfo.children, cityName);
+  const areaInfo = findName(cityInfo.children, areaName);
+  return [provinceInfo.label, cityInfo.label, areaInfo.label];
 }

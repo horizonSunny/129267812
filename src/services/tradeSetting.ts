@@ -13,6 +13,13 @@ export async function pickUpStatus(params: Object) {
     data: params,
   });
 }
+// 开通自提功能
+export async function openPickUp(params: Object) {
+  return request('/admin/v1/tenant/openPickUp', {
+    method: 'post',
+    data: params,
+  });
+}
 // 获取不可配送区域
 export async function getNonDelivery() {
   return request('/admin/v1/tenant/getNonDelivery');

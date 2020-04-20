@@ -1,4 +1,4 @@
-import { getPickUp, pickUpStatus } from '@/services/tradeSetting';
+import { getPickUp, pickUpStatus, openPickUp } from '@/services/tradeSetting';
 import { filterAreaNameInfo } from '@/utils/filterProperty';
 
 const pickUpForm = {
@@ -8,9 +8,10 @@ const pickUpForm = {
   area: '',
   address: '',
   adminTel: '',
-  businessDate: '',
+  businessDate: [],
   startTime: '00:00:00',
-  endTime: '00:00:00',
+  endTime: '23:59:59',
+  isPick: 2,
 };
 const selfDelivery = {
   namespace: 'selfDelivery',
@@ -34,6 +35,15 @@ const selfDelivery = {
     *changePickUpStatus({ payload }, { call, put }) {
       const response = yield call(pickUpStatus, payload);
     },
+    *openPickUp({ payload }, { call, put }) {
+      const response = yield call(openPickUp, payload);
+      // if (response && response.code === 1) {
+      //   yield put({
+      //     type: 'setPickUp',
+      //     payload: response.data,
+      //   });
+      // }
+    },
     // *setNonDelivery({ payload }, { call, put }) {
     //   const response = yield call(setNonDelivery, payload);
     //   if (response && response.code === 1) {
@@ -51,7 +61,7 @@ const selfDelivery = {
       console.log('action.payload_', action.payload);
       const [startTime, endTime] = action.payload.businessHours.split('-');
       const params = [action.payload.province, action.payload.city, action.payload.area];
-      const [province, city, area] = filterAreaNameInfo(params);
+      const [province, city, area] = filterAreaNameInfo(params, 'findCode');
       let form = pickUpForm;
       if (action.payload) {
         form = {

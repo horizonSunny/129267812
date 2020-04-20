@@ -44,3 +44,14 @@ export function CompareDate(t1, t2) {
   const b = t2.split(':');
   return date.setHours(a[0], a[1], a[2]) > date.setHours(b[0], b[1], b[2]);
 }
+
+function formatTen(num) {
+  return num > 9 ? `${num}` : `0${num}`;
+}
+export function formatDate(date) {
+  var date = new Date(date);
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+  const second = date.getSeconds();
+  return `${formatTen(hour)}:${formatTen(minute)}:${formatTen(second)}`;
+}

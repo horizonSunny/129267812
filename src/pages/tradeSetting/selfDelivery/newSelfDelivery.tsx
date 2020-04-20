@@ -6,71 +6,50 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import moment from 'moment';
 import styles from './newSelfDelivery.less';
 import { newArea } from '@/utils/area.js';
-import { CompareDate } from '@/utils/utils.ts';
+import { filterAreaNameInfo } from '@/utils/filterProperty';
+import { formatDate } from '@/utils/utils';
 // const { Search } = Input;
 const options = newArea();
 @connect(({ selfDelivery }) => ({
   selfDelivery,
 }))
 class FormSelfDelivery extends React.Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    // if (dispatch) {
-    //   dispatch({
-    //     type: 'commodityClassify/classification',
-    //   }).then(() => {
-    //     // 查询单个分类的商品
-    //     dispatch({
-    //       type: 'commodityClassify/selectCas',
-    //       payload: this.props.commodityClassify.casInfoOne[0],
-    //     });
-    //   });
-    // }
-  }
+  componentDidMount() {}
 
   state = {
-    // formInit: this.props.commodity.productWithId,
-    // editorState: null,
-    // productType: this.props.commodity.allProductType,
-    startTime: '00:00:00',
-    endTime: '00:00:00',
     hebdomad: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
   };
 
+  // phoneValidator = (rule, value, callback) => {
+  //   const reg = /^1(3[0-9]|4[5,7]|5[0,1,2,3,5,6,7,8,9]|6[2,5,6,7]|7[0,1,7,8]|8[0-9]|9[1,8,9])\d{8}$/;
+  //   if (value && value.length > 10 && !reg.test(value)) {
+  //     callback('手机号格式错误!');
+  //   }
+  //   callback();
+  // };
+
   handleSubmit = e => {
     e.preventDefault();
-    // this.props.form.setFieldsValue({
-    //   img: this.state.imageUrl ? this.state.imageUrl : '',
-    //   cateClassify: this.state.tags ? this.state.tags : '',
-    // });
     this.props.form.validateFieldsAndScroll((err, values) => {
-      console.log('values_', values);
-      // if (!err) {
-      //   console.log('Received values of form: ', values);
-      //   const { dispatch } = this.props;
-      //   const ids = [];
-      //   this.state.tags.forEach(element => {
-      //     const length = element.length - 1;
-      //     ids.push(element[length].categoryId);
-      //   });
-      //   console.log('ids123_', this.state.tags);
-      //   console.log('ids_', ids);
-      //   if (dispatch) {
-      //     dispatch({
-      //       type: 'operTool/newCategoryItem',
-      //       payload: {
-      //         categoryIds: ids,
-      //         image: this.state.imageUrl,
-      //         quickCategoryId: this.props.operTool.categoryItem.quickCategoryId
-      //           ? this.props.operTool.categoryItem.quickCategoryId
-      //           : undefined,
-      //         quickCategoryName: values.cateName,
-      //       },
-      //     }).then(res => {
-      //       router.push('/operTool/findCommodity');
-      //     });
-      //   }
-      // }
+      const areaName = filterAreaNameInfo(values.areaData, 'findName');
+      const params = {
+        tenantName: values.tenantName,
+        address: values.address,
+        adminTel: values.adminTel,
+        province: areaName[0],
+        city: areaName[1],
+        area: areaName[2],
+        isPick: this.props.selfDelivery.pickUpForm.isPick,
+        businessDate: values.hebdomad,
+        businessHours: `${formatDate(values.startTime)}-${formatDate(values.endTime)}`,
+      };
+      const { dispatch } = this.props;
+      if (dispatch) {
+        dispatch({
+          type: 'selfDelivery/openPickUp',
+          payload: params,
+        });
+      }
     });
   };
 
@@ -176,9 +155,10 @@ class FormSelfDelivery extends React.Component {
                   required: true,
                   message: '请填写联系电话',
                 },
+                // { validator: this.phoneValidator },
               ],
               initialValue: pickUpForm.adminTel,
-            })(<Input />)}
+            })(<Input maxLength={11} />)}
           </Form.Item>
           <Form.Item label="营业日期">
             {getFieldDecorator('hebdomad', {
