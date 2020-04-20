@@ -6,21 +6,21 @@ import { connect } from 'dva';
 import styles from './bannerList.less';
 import dataInfo from '../../../../mock/quick';
 
-@connect(({ operTool }) => ({
-  operTool,
+@connect(({ banner }) => ({
+  banner,
 }))
 export default class BannerList extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     if (dispatch) {
       dispatch({
-        type: 'operTool/getCategoryList',
+        type: 'banner/getBannerList',
         payload: {
-          pageNumber: 0,
-          pageSize: 1000,
+          pageNumber: this.props.banner.pageNumber,
+          pageSize: this.props.banner.pageSize,
         },
       }).then(() => {
-        console.log('operTool');
+        console.log('banner');
       });
     }
   }
@@ -30,7 +30,7 @@ export default class BannerList extends React.Component {
       {
         title: 'banner',
         dataIndex: 'image',
-        key: 'quickCategoryId',
+        key: 'bannerId',
         render: text => (
           <img
             src={text}
@@ -43,8 +43,8 @@ export default class BannerList extends React.Component {
       },
       {
         title: '名称',
-        dataIndex: 'categoryName',
-        key: 'categoryName',
+        dataIndex: 'bannerName',
+        key: 'bannerName',
         render: text => <a>{text}</a>,
       },
       {
@@ -75,23 +75,23 @@ export default class BannerList extends React.Component {
                 <Icon type="caret-up" className="disableIcon" />
               </div>
             )}
-            {dataIndex !== 0 && (
+            {dataIndex !== 0 && this.props.banner.categoryList.length !== 1 && (
               <div>
                 <Icon
                   type="caret-up"
-                  onClick={this.reverseCategoryList.bind(this, dataIndex, 'up')}
+                  onClick={this.reverseBannerList.bind(this, dataIndex, 'up')}
                 />
               </div>
             )}
-            {dataIndex + 1 !== dataInfo.data.pageList.length && (
+            {dataIndex + 1 !== this.props.banner.categoryList.length && (
               <div>
                 <Icon
                   type="caret-down"
-                  onClick={this.reverseCategoryList.bind(this, dataIndex, 'down')}
+                  onClick={this.reverseBannerList.bind(this, dataIndex, 'down')}
                 />
               </div>
             )}
-            {dataIndex + 1 === dataInfo.data.pageList.length && (
+            {dataIndex + 1 === this.props.banner.categoryList.length && (
               <div>
                 <Icon type="caret-down" className="disableIcon" />
               </div>
@@ -105,9 +105,9 @@ export default class BannerList extends React.Component {
         key: 'operate',
         render: (text, record) => (
           <span>
-            <a onClick={this.editorCategory.bind(this, record)}>编辑</a>
+            <a onClick={this.editorBanner.bind(this, record)}>编辑</a>
             <Divider type="vertical" />
-            <a onClick={this.deleteCategory.bind(this, record)}>删除</a>
+            <a onClick={this.deleteBanner.bind(this, record)}>删除</a>
           </span>
         ),
       },
@@ -124,31 +124,30 @@ export default class BannerList extends React.Component {
     const { dispatch } = this.props;
     if (dispatch) {
       dispatch({
-        type: 'operTool/resetCategoryItem',
+        type: 'banner/resetBannerItem',
         payload: {
-          quickCategoryId: record.quickCategoryId,
+          bannerId: record.bannerId,
           status,
         },
       });
     }
   }
 
-  deleteCategory(record) {
-    console.log('record_', record.quickCategoryId);
+  deleteBanner(record) {
+    console.log('record_', record.bannerId);
     const { dispatch } = this.props;
     if (dispatch) {
       dispatch({
-        type: 'operTool/deleteCategoryItem',
+        type: 'banner/deleteBannerItem',
         payload: {
-          quickCategoryId: record.quickCategoryId,
+          bannerId: record.bannerId,
         },
       });
     }
   }
 
-  editorCategory(record?) {
+  editorBanner(record?) {
     const obj = {
-      // pathname: '/operTool/findCommodity/newCategory',
       pathname: '/operTool/banner/newBanner',
     };
     console.log('record_', record);
@@ -160,35 +159,35 @@ export default class BannerList extends React.Component {
       recordInfo = {
         categorys: record.categorys,
         image: record.image,
-        quickCategoryName: record.categoryName,
-        quickCategoryId: record.quickCategoryId,
+        quickBannerName: record.categoryName,
+        bannerId: record.bannerId,
       };
     } else {
       // 新建
       recordInfo = {
         categorys: [],
         image: '',
-        quickCategoryName: '',
+        quickBannerName: '',
       };
     }
     dispatch({
-      type: 'operTool/saveCategory',
+      type: 'banner/saveBanner',
       payload: recordInfo,
     });
     router.push(obj);
   }
 
   // reverse排序
-  reverseCategoryList(index, direction) {
+  reverseBannerList(index, direction) {
     console.log('index_', index, '_direction_', direction);
-    const startId = this.props.operTool.categoryList[index].quickCategoryId;
+    const startId = this.props.banner.categoryList[index].bannerId;
     let endId;
     switch (direction) {
       case 'up':
-        endId = this.props.operTool.categoryList[index - 1].quickCategoryId;
+        endId = this.props.banner.categoryList[index - 1].bannerId;
         break;
       case 'down':
-        endId = this.props.operTool.categoryList[index + 1].quickCategoryId;
+        endId = this.props.banner.categoryList[index + 1].bannerId;
         break;
       default:
         break;
@@ -196,13 +195,29 @@ export default class BannerList extends React.Component {
     const { dispatch } = this.props;
     if (dispatch) {
       dispatch({
-        type: 'operTool/reverseCategoryList',
+        type: 'banner/reverseBannerList',
         payload: {
-          quickCategoryIds: [startId, endId],
+          bannerIds: [startId, endId],
         },
       });
     }
   }
+
+  tableChange = pagination => {
+    console.log('pagination_', pagination);
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'banner/getBannerList',
+        payload: {
+          pageNumber: pagination.current - 1,
+          pageSize: this.props.banner.pageSize,
+        },
+      }).then(() => {
+        console.log('banner');
+      });
+    }
+  };
 
   render() {
     const { columns } = this.state;
@@ -213,7 +228,7 @@ export default class BannerList extends React.Component {
           type="danger"
           icon="plus-circle"
           className="buttonAdd"
-          onClick={this.editorCategory.bind(this, '')}
+          onClick={this.editorBanner.bind(this, '')}
         >
           添加
         </Button>
@@ -222,7 +237,17 @@ export default class BannerList extends React.Component {
             clear: 'both',
           }}
         />
-        <Table columns={columns} dataSource={this.props.operTool.categoryList} pagination={false} />
+        <Table
+          columns={columns}
+          dataSource={this.props.banner.categoryList}
+          pagination={{
+            current: this.props.banner.pageNumber + 1,
+            pageSize: this.props.banner.pageSize,
+            // pageSize: 5,
+            total: this.props.banner.totalElements,
+          }}
+          onChange={this.tableChange}
+        />
       </PageHeaderWrapper>
     );
   }

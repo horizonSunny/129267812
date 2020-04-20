@@ -37,14 +37,14 @@ function Tags(props) {
   });
 }
 
-@connect(({ operTool }) => ({
-  operTool,
+@connect(({ banner }) => ({
+  banner,
 }))
 class BannerItem extends React.Component {
   state = {
     loading: false,
-    tags: this.props.operTool.categoryItem.categorys,
-    imageUrl: this.props.operTool.categoryItem.image,
+    tags: this.props.banner.categoryItem.categorys,
+    imageUrl: this.props.banner.categoryItem.image,
     value: '',
   };
 
@@ -52,7 +52,7 @@ class BannerItem extends React.Component {
     const { dispatch } = this.props;
     if (dispatch) {
       dispatch({
-        type: 'operTool/categoryTree',
+        type: 'banner/categoryTree',
       }).then(() => {
         // 同时使得已经选过的tree及其子类隐藏
         const tag = this.state.tags.map(item => {
@@ -60,7 +60,7 @@ class BannerItem extends React.Component {
         });
         console.log('this.tags_', tag[0]);
         dispatch({
-          type: 'operTool/changTreeDis',
+          type: 'banner/changTreeDis',
           payload: {
             status: true,
             id: tag[0],
@@ -111,17 +111,17 @@ class BannerItem extends React.Component {
         console.log('ids_', ids);
         if (dispatch) {
           dispatch({
-            type: 'operTool/newCategoryItem',
+            type: 'banner/newCategoryItem',
             payload: {
               categoryIds: ids,
               image: this.state.imageUrl,
-              quickCategoryId: this.props.operTool.categoryItem.quickCategoryId
-                ? this.props.operTool.categoryItem.quickCategoryId
+              quickCategoryId: this.props.banner.categoryItem.quickCategoryId
+                ? this.props.banner.categoryItem.quickCategoryId
                 : undefined,
               quickCategoryName: values.cateName,
             },
           }).then(res => {
-            router.push('/operTool/findCommodity');
+            router.push('/banner/findCommodity');
           });
         }
       }
@@ -141,7 +141,7 @@ class BannerItem extends React.Component {
     const { dispatch } = this.props;
     if (dispatch) {
       dispatch({
-        type: 'operTool/changTreeDis',
+        type: 'banner/changTreeDis',
         payload: {
           status: false,
           id: treeItemId,
@@ -156,15 +156,15 @@ class BannerItem extends React.Component {
   // 树状选择
   treeSelectChange(value) {
     console.log('value_', value);
-    console.log('this.props.operTool.categoryTree_', this.props.operTool.categoryTree);
+    console.log('this.props.banner.categoryTree_', this.props.banner.categoryTree);
     this.setState({ value });
     const newArr = value.split('_');
-    const filterArr = filterTreeStatus(this.props.operTool.categoryTree, newArr, 0);
+    const filterArr = filterTreeStatus(this.props.banner.categoryTree, newArr, 0);
     // changTreeDis
     const { dispatch } = this.props;
     if (dispatch) {
       dispatch({
-        type: 'operTool/changTreeDis',
+        type: 'banner/changTreeDis',
         payload: {
           value,
           status: true,
@@ -201,7 +201,7 @@ class BannerItem extends React.Component {
         <Form {...formItemLayout} onSubmit={this.handleSubmit}>
           <Form.Item label="名称">
             {getFieldDecorator('cateName', {
-              initialValue: this.props.operTool.categoryItem.quickCategoryName,
+              initialValue: this.props.banner.categoryItem.quickCategoryName,
               rules: [
                 {
                   required: true,
@@ -212,7 +212,7 @@ class BannerItem extends React.Component {
           </Form.Item>
           <Form.Item label="跳转链接">
             {getFieldDecorator('cateName', {
-              initialValue: this.props.operTool.categoryItem.quickCategoryName,
+              initialValue: this.props.banner.categoryItem.quickCategoryName,
               rules: [
                 {
                   message: '请输入跳转链接!',
@@ -247,7 +247,7 @@ class BannerItem extends React.Component {
           </Form.Item>
           {/* <Form.Item label="关联商品分类">
             {getFieldDecorator('cateClassify', {
-              initialValue: this.props.operTool.categoryItem.quickCategoryName,
+              initialValue: this.props.banner.categoryItem.quickCategoryName,
               rules: [
                 {
                   required: true,
@@ -262,7 +262,7 @@ class BannerItem extends React.Component {
                   label="请选择分类"
                   value={this.state.value}
                   dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                  treeData={this.props.operTool.categoryTree}
+                  treeData={this.props.banner.categoryTree}
                   placeholder="Please select"
                   onChange={this.treeSelectChange.bind(this)}
                   suffixIcon={
