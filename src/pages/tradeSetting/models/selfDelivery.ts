@@ -1,11 +1,24 @@
 import { getPickUp, pickUpStatus } from '@/services/tradeSetting';
+import { filterAreaNameInfo } from '@/utils/filterProperty';
 
+const pickUpForm = {
+  tenantName: '',
+  province: '',
+  city: '',
+  area: '',
+  address: '',
+  adminTel: '',
+  businessDate: '',
+  startTime: '00:00:00',
+  endTime: '00:00:00',
+};
 const selfDelivery = {
   namespace: 'selfDelivery',
 
   state: {
     // 运费模版配置信息
     pickUp: null,
+    pickUpForm,
   },
 
   effects: {
@@ -36,9 +49,26 @@ const selfDelivery = {
     // 保存搜索条件
     setPickUp(state, action) {
       console.log('action.payload_', action.payload);
+      const [startTime, endTime] = action.payload.businessHours.split('-');
+      const params = [action.payload.province, action.payload.city, action.payload.area];
+      const [province, city, area] = filterAreaNameInfo(params);
+      let form = pickUpForm;
+      if (action.payload) {
+        form = {
+          ...action.payload,
+          startTime,
+          endTime,
+          province,
+          city,
+          area,
+        };
+      }
       return {
         ...state,
         pickUp: action.payload,
+        pickUpForm: form,
+        // 如果有就是action.payload，没有就设置定义的pickUpForm
+        // pickUpForm: action.payload ? action.payload : pickUpForm,
       };
     },
   },

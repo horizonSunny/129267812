@@ -1,4 +1,4 @@
-import { newAreaTree } from '@/utils/area.js';
+import { newAreaTree, newArea } from '@/utils/area.js';
 
 export default function filterProperty(obj) {
   const newObj = new Object();
@@ -199,6 +199,7 @@ export function findItem(arr, fn, result) {
   });
 }
 
+// 依据code过滤出area数组
 const options = newAreaTree();
 export function filterAreaName(areaInfo) {
   const result = [];
@@ -213,4 +214,22 @@ export function filterAreaName(areaInfo) {
     return item.title;
   });
   return areaNams.toString();
+}
+// 依据省市区name过滤出省市区code
+const area = newArea();
+function findCode(arr, nameInfo) {
+  const item = arr.find(item => {
+    return item.label === nameInfo;
+  });
+  return item;
+}
+export function filterAreaNameInfo(dataName) {
+  const [provinceName, cityName, areaName] = dataName;
+  // const provinceInfo = area.find(item => {
+  //   return item.label === provinceName;
+  // });
+  const provinceInfo = findCode(area, provinceName);
+  const cityInfo = findCode(provinceInfo.children, cityName);
+  const areaInfo = findCode(cityInfo.children, areaName);
+  return [provinceInfo.value, cityInfo.value, areaInfo.value];
 }

@@ -87,6 +87,7 @@ class FormSelfDelivery extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { pickUpForm } = this.props.selfDelivery;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -97,6 +98,8 @@ class FormSelfDelivery extends React.Component {
         sm: { span: 16 },
       },
     };
+    console.log('pickUpForm_', pickUpForm);
+
     const { startTime, endTime, hebdomad } = this.state;
     return (
       <PageHeaderWrapper>
@@ -109,39 +112,35 @@ class FormSelfDelivery extends React.Component {
                   message: '店铺名称',
                 },
               ],
-              initialValue: '231',
+              initialValue: pickUpForm.tenantName,
             })(<Input />)}
           </Form.Item>
           <Form.Item label="所在区域">
             {getFieldDecorator('areaData', {
-              // initialValue: [
-              //   currentRecord.provinceCode,
-              //   currentRecord.cityCode,
-              //   currentRecord.areaCode,
-              // ],
+              initialValue: [pickUpForm.province, pickUpForm.city, pickUpForm.area],
               rules: [{ required: true, message: '请选择店铺所在地!' }],
             })(<Cascader options={options} changeOnSelect placeholder="省市区" />)}
           </Form.Item>
           <Form.Item label="详细地址">
-            {getFieldDecorator('tenantName', {
+            {getFieldDecorator('address', {
               rules: [
                 {
                   required: true,
-                  message: '店铺名称',
+                  message: '请填写详细地址信息',
                 },
               ],
-              initialValue: '231',
+              initialValue: pickUpForm.address,
             })(<Input />)}
           </Form.Item>
           <Form.Item label="联系电话">
-            {getFieldDecorator('tenantName', {
+            {getFieldDecorator('adminTel', {
               rules: [
                 {
                   required: true,
-                  message: '店铺名称',
+                  message: '请填写联系电话',
                 },
               ],
-              initialValue: '231',
+              initialValue: pickUpForm.adminTel,
             })(<Input />)}
           </Form.Item>
           <Form.Item label="营业日期">
@@ -155,7 +154,15 @@ class FormSelfDelivery extends React.Component {
               initialValue: '231',
             })( */}
             {hebdomad.map(item => {
-              return <Button className={`${styles.hebdomad}`}>{item}</Button>;
+              return (
+                <Button
+                  className={`${styles.hebdomad} ${
+                    pickUpForm.businessDate.indexOf(item) > -1 ? styles.hebdomadChecked : ''
+                  }`}
+                >
+                  {item}
+                </Button>
+              );
             })}
             {/* )} */}
           </Form.Item>
@@ -167,7 +174,7 @@ class FormSelfDelivery extends React.Component {
                   message: '',
                 },
               ],
-              initialValue: moment(startTime, 'HH:mm:ss'),
+              initialValue: moment(pickUpForm.startTime, 'HH:mm:ss'),
             })(<TimePicker onChange={this.startTimeChange} onOpenChange={this.onOpenChange} />)}
             &nbsp; — &nbsp;
             {getFieldDecorator('tenantEndTime', {
@@ -177,7 +184,7 @@ class FormSelfDelivery extends React.Component {
                   message: '',
                 },
               ],
-              initialValue: moment(endTime, 'HH:mm:ss'),
+              initialValue: moment(pickUpForm.endTime, 'HH:mm:ss'),
             })(<TimePicker onChange={this.endTimeChange} onOpenChange={this.onOpenChange} />)}
           </Form.Item>
 
