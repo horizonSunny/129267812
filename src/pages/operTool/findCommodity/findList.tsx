@@ -16,8 +16,8 @@ export default class FindList extends React.Component {
       dispatch({
         type: 'operTool/getCategoryList',
         payload: {
-          pageNumber: 0,
-          pageSize: 10,
+          pageNumber: this.props.operTool.pageNumber,
+          pageSize: this.props.operTool.pageSize,
         },
       }).then(() => {
         console.log('operTool');
@@ -220,6 +220,22 @@ export default class FindList extends React.Component {
     }
   }
 
+  tableChange = pagination => {
+    console.log('pagination_', pagination);
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'operTool/getCategoryList',
+        payload: {
+          pageNumber: pagination.current - 1,
+          pageSize: this.props.operTool.pageSize,
+        },
+      }).then(() => {
+        console.log('operTool');
+      });
+    }
+  };
+
   render() {
     const { columns } = this.state;
     return (
@@ -238,7 +254,17 @@ export default class FindList extends React.Component {
             clear: 'both',
           }}
         />
-        <Table columns={columns} dataSource={this.props.operTool.categoryList} pagination={false} />
+        <Table
+          columns={columns}
+          dataSource={this.props.operTool.categoryList}
+          pagination={{
+            current: this.props.operTool.pageNumber + 1,
+            pageSize: this.props.operTool.pageSize,
+            // pageSize: 5,
+            total: this.props.operTool.totalElements,
+          }}
+          onChange={this.tableChange}
+        />
       </PageHeaderWrapper>
     );
   }

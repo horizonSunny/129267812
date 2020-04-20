@@ -16,6 +16,9 @@ const CommodityModel = {
   namespace: 'operTool',
   state: {
     categoryList: [],
+    pageNumber: 0,
+    pageSize: 5,
+    totalElements: 0,
   },
   effects: {
     // 获取分类类型,对分类类型进行切分,化为分别的三级分类样式
@@ -25,6 +28,14 @@ const CommodityModel = {
       yield put({
         type: 'setCategoryList',
         payload: response.data.pageList,
+      });
+      yield put({
+        type: 'setCategoryListInfo',
+        payload: {
+          pageNumber: response.data.pageNumber,
+          pageSize: response.data.pageSize,
+          totalElements: response.data.totalElements,
+        },
       });
     },
     // 改变list顺序
@@ -87,6 +98,13 @@ const CommodityModel = {
       return {
         ...state,
         categoryList: action.payload,
+      };
+    },
+    setCategoryListInfo(state, action) {
+      console.log('action.setCategoryListInfo_', action);
+      return {
+        ...state,
+        ...action.payload,
       };
     },
     // 排序categoryList
