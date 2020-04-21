@@ -149,10 +149,10 @@ class QueryForm extends Component {
               })(
                 <Select>
                   <Option value="1">全部</Option>
-                  <Option value="2">付款</Option>
-                  <Option value="3">审核</Option>
-                  <Option value="4">代发货</Option>
-                  <Option value="5">代收货</Option>
+                  <Option value="2">待付款</Option>
+                  <Option value="3">待审核</Option>
+                  <Option value="4">待发货</Option>
+                  <Option value="5">待收货</Option>
                   <Option value="6">退款中</Option>
                   <Option value="7">交易成功</Option>
                   <Option value="8">交易失败</Option>

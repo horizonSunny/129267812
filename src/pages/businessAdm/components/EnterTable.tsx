@@ -145,18 +145,9 @@ class EnterTable extends Component {
     dispatch({
       type: 'businessAdm/currentRecord',
       payload: { ...record },
+    }).then(() => {
+      router.push('/businessAdm/enter/particulars');
     });
-    // 获取操作日志
-    // dispatch({
-    //   type: 'businessAdm/getOperationRecord',
-    //   payload: {
-    //     ...recordPagenation,
-    //     tenantId: record.tenantId,
-    //     pageNumber: 0,
-    //     totalElements: 0,
-    //   },
-    // });
-    router.push('/businessAdm/enter/particulars');
   };
 
   onSelectChange = selectedRowKeys => {

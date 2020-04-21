@@ -14,19 +14,19 @@ class Prescription extends Component {
         <div className={`${styles.tableContent}`}>
           <div className={`${'flex-between'} ${styles.lineInfo}`}>
             <div className={`${styles.label} `}>用药人姓名</div>
-            <div className={`${styles.message}`}>王新瑜</div>
+            <div className={`${styles.message}`}>{currentRecord.prescribInfo.fullName}</div>
           </div>
           <div className={`${'flex-between'} ${styles.lineInfo}`}>
             <div className={`${styles.label}`}>性别</div>
-            <div className={`${styles.message}`}>男</div>
+            <div className={`${styles.message}`}>{currentRecord.prescribInfo.fullName}</div>
           </div>
           <div className={`${'flex-between'} ${styles.lineInfo}`}>
             <div className={`${styles.label}`}>年龄</div>
-            <div className={`${styles.message}`}>70岁</div>
+            <div className={`${styles.message}`}>{currentRecord.prescribInfo.fullName}</div>
           </div>
           <div className={`${'flex-between'} ${styles.lineInfo}`}>
             <div className={`${styles.label}`}>手机号</div>
-            <div className={`${styles.message}`}>136****5648</div>
+            <div className={`${styles.message}`}>{currentRecord.prescribInfo.phone}</div>
           </div>
           <div className={`${styles.lineInfo} ${'flex-start'} ${'flex-wrap'}`}>
             {currentRecord.prescribInfo &&

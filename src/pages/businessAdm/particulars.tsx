@@ -15,6 +15,9 @@ import {
   DeliverModal,
 } from './particularsComponents/index';
 
+@connect(({ businessAdm }) => ({
+  businessAdm,
+}))
 class Particulars extends Component {
   handleEdit = () => {
     router.push('/businessAdm/enter/edit');
@@ -25,13 +28,14 @@ class Particulars extends Component {
   };
 
   render() {
+    const { currentRecord } = this.props.businessAdm;
     return (
       <PageHeaderWrapper>
         <div className={styles.container}>
           <div className={`${styles.content}`}>
             <Title />
             <Delivery />
-            <Prescription />
+            {currentRecord.prescribInfo && <Prescription />}
             <PurchaseInfo />
             <Rest />
             <Footer />

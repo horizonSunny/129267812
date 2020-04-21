@@ -21,21 +21,32 @@ class PurchaseInfo extends Component {
           </div>
           <div className={`${'flex-between'} ${styles.lineInfo}`}>
             <div className={`${styles.label} `}>发票信息</div>
-            <div className={`${styles.message}`}>王慧 98765655445</div>
+            <div className={`${styles.message}`}>
+              {' '}
+              {currentRecord.invoice &&
+                `${currentRecord.invoice.invoiceName} ${currentRecord.invoice.invoiceIdCard}`}
+              {!currentRecord.invoice && `无需发票`}
+            </div>
           </div>
           <div className={`${'flex-between'} ${styles.lineInfo}`}>
             <div className={`${styles.label}`}>商品总价</div>
-            <div className={`${styles.message}`}>￥464.00</div>
+            <div className={`${styles.message}`}>
+              ￥{currentRecord.totalPrice - currentRecord.totalPostage}
+            </div>
           </div>
           <div className={`${'flex-between'} `}>
-            <div className={`${styles.label}`}>配送方式 普通快递</div>
-            <div className={`${styles.message}`}>￥0.00</div>
+            <div className={`${styles.label}`}>
+              配送方式 {currentRecord.shipperTypeId === 1 && '普通配送'}
+              {currentRecord.shipperTypeId === 2 && '加急配送'}
+              {currentRecord.shipperTypeId === 3 && '到店自提'}
+            </div>
+            <div className={`${styles.message}`}>￥{currentRecord.totalPostage}</div>
           </div>
         </div>
         <div className={`${styles.footers} ${'flex-between'}`}>
           <div />
           <div>
-            订单总价 <span className={`${styles.price}`}> ¥464.00</span>
+            订单总价 <span className={`${styles.price}`}> ¥{currentRecord.totalPrice}</span>
           </div>
         </div>
       </div>
