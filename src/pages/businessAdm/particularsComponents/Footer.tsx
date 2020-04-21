@@ -41,11 +41,14 @@ class Footer extends Component {
         {currentRecord.orderStatus === 1 && (
           <Button style={{ background: '#4874EF' }}>审核通过</Button>
         )}
-        {currentRecord.orderStatus === 3 && (
+        {[3, 4, 6, -1].indexOf(currentRecord.orderStatus) > -1 && (
           <Button style={{ background: '#4874EF' }}>查看物流</Button>
         )}
-        {(currentRecord.orderStatus === 4 || currentRecord.orderStatus === 6) && (
-          <Button style={{ background: '#4874EF' }}>查看物流</Button>
+        {[-1].indexOf(currentRecord.orderStatus) > -1 && (
+          <span>
+            <Button type="danger">拒绝退款</Button>
+            <Button style={{ background: '#F5AB1C' }}>同意退款</Button>
+          </span>
         )}
       </div>
     );

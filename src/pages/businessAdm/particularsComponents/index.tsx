@@ -5,5 +5,6 @@ import PurchaseInfo from './PurchaseInfo';
 import Rest from './Rest';
 import Footer from './Footer';
 import DeliverModal from './DeliverModal';
+import RefundInfo from './RefundInfo';
 
-export { Title, Delivery, Prescription, PurchaseInfo, Rest, Footer, DeliverModal };
+export { Title, Delivery, Prescription, PurchaseInfo, Rest, Footer, DeliverModal, RefundInfo };

@@ -13,6 +13,7 @@ import {
   Rest,
   Footer,
   DeliverModal,
+  RefundInfo,
 } from './particularsComponents/index';
 
 @connect(({ businessAdm }) => ({
@@ -38,8 +39,9 @@ class Particulars extends Component {
             {currentRecord.prescribInfo && <Prescription />}
             <PurchaseInfo />
             <Rest />
-            <Footer />
             <DeliverModal />
+            {[-1, -2].indexOf(currentRecord.orderStatus) > -1 && <RefundInfo />}
+            <Footer />
           </div>
         </div>
       </PageHeaderWrapper>
