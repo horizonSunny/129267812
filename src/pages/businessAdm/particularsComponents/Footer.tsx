@@ -23,10 +23,24 @@ class Footer extends Component {
     const { currentRecord } = this.props.businessAdm;
     return (
       <div className={`${styles.footer}`}>
-        <Button onClick={this.openModal} style={{ background: '#F5AB1C' }}>
-          发货
-        </Button>
-        <Button style={{ background: '#4874EF' }}>取货码核销</Button>
+        {currentRecord.orderStatus === 2 && (
+          <div>
+            {currentRecord.shipperTypeId !== 3 && (
+              <Button onClick={this.openModal} style={{ background: '#F5AB1C' }}>
+                发货
+              </Button>
+            )}
+            {currentRecord.shipperTypeId === 3 && (
+              <Button style={{ background: '#4874EF' }}>取货码核销</Button>
+            )}
+          </div>
+        )}
+        {currentRecord.orderStatus === 0 && (
+          <Button style={{ background: '#4874EF' }}>取消订单</Button>
+        )}
+        {currentRecord.orderStatus === 1 && (
+          <Button style={{ background: '#4874EF' }}>审核通过</Button>
+        )}
       </div>
     );
   }
