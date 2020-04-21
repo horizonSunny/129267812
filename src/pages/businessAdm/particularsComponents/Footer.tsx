@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Button } from 'antd';
 import { connect } from 'dva';
 import styles from './index.less';
-import { orderStatus } from '@/utils/configInfo';
-import tipsIcon from '@/assets/order/Tips-icon.svg';
+// import { orderStatus } from '@/utils/configInfo';
+// import tipsIcon from '@/assets/order/Tips-icon.svg';
 
 @connect(({ businessAdm }) => ({
   businessAdm,
@@ -40,6 +40,12 @@ class Footer extends Component {
         )}
         {currentRecord.orderStatus === 1 && (
           <Button style={{ background: '#4874EF' }}>审核通过</Button>
+        )}
+        {currentRecord.orderStatus === 3 && (
+          <Button style={{ background: '#4874EF' }}>查看物流</Button>
+        )}
+        {(currentRecord.orderStatus === 4 || currentRecord.orderStatus === 6) && (
+          <Button style={{ background: '#4874EF' }}>查看物流</Button>
         )}
       </div>
     );

@@ -11,13 +11,13 @@ function orderStatus(status: Number) {
     case 2:
       return '待发货';
     case 3:
-      return '待收货';
+      return '已发货';
     case 4:
-      return '待评价';
+      return '交易成功';
     case 5:
       return '已取消';
     case 6:
-      return '已评价';
+      return '交易成功';
     default:
       return '';
   }

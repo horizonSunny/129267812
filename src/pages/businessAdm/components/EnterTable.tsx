@@ -68,7 +68,7 @@ class EnterTable extends Component {
           case 2:
             return <span>待发货</span>;
           case 3:
-            return <span>待收货</span>;
+            return <span>已发货</span>;
           case 4:
             return <span>待评价</span>;
           case 5:
