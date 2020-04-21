@@ -1,9 +1,9 @@
 function orderStatus(status: Number) {
   switch (status) {
     case -1:
-      return '申请退款';
+      return '退款中';
     case -2:
-      return '已退款';
+      return '交易失败';
     case 0:
       return '待付款';
     case 1:
