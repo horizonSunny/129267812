@@ -13,7 +13,7 @@ class PurchaseInfo extends Component {
       <div className={`${styles.table}`}>
         <div className={`${styles.titleInfo}`}>商品购买信息</div>
         <div className={`${styles.tableContent}`}>
-          <div className={`${'flex-between'} ${styles.lineInfo}`}>
+          <div className={`${styles.lineInfo}`}>
             {currentRecord.orderItems &&
               currentRecord.orderItems.map((item, index) => {
                 return <CommodityItem message={item} key={index} />;
