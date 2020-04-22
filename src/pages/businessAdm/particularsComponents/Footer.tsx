@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import { connect } from 'dva';
 import styles from './index.less';
 // import { orderStatus } from '@/utils/configInfo';
 // import tipsIcon from '@/assets/order/Tips-icon.svg';
 
+// 装饰器模式
 @connect(({ businessAdm }) => ({
   businessAdm,
 }))
 class Footer extends Component {
-  openModal = () => {
-    const { dispatch } = this.props;
-    if (dispatch) {
-      dispatch({
-        type: 'businessAdm/resetDeliverModal',
-        payload: true,
-      });
-    }
+  state = {
+    modalStatus: false,
+    modalTitle: '',
   };
 
   render() {
     const { currentRecord } = this.props.businessAdm;
+    const { modalStatus } = this.state;
     return (
       <div className={`${styles.footer}`}>
         {currentRecord.orderStatus === 2 && (
