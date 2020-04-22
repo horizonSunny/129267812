@@ -27,6 +27,12 @@ class CommonModal extends Component {
       case '取消订单':
         this.cancelOrder();
         break;
+      case '同意退款':
+        this.refundOrder(1);
+        break;
+      case '拒绝退款':
+        this.refundOrder(2);
+        break;
 
       default:
         break;
@@ -38,15 +44,33 @@ class CommonModal extends Component {
     const { dispatch } = this.props;
     const { currentRecord } = this.props.businessAdm;
     const { reason } = this.state;
-    console.log('currentRecord_', currentRecord.orderNo);
-    console.log('cancelReason', reason);
-
     if (dispatch) {
       dispatch({
         type: 'businessAdm/cancelOrder',
         payload: {
           cancelReason: reason,
           orderNo: currentRecord.orderNo,
+        },
+      }).then(() => {
+        this.setState({
+          visible: false,
+        });
+      });
+    }
+  };
+
+  // 退款
+  refundOrder = status => {
+    const { dispatch } = this.props;
+    const { currentRecord } = this.props.businessAdm;
+    const { reason } = this.state;
+    if (dispatch) {
+      dispatch({
+        type: 'businessAdm/refundOrder',
+        payload: {
+          refundReason: reason,
+          orderNo: currentRecord.orderNo,
+          refundStatus: status,
         },
       }).then(() => {
         this.setState({
@@ -124,6 +148,7 @@ class CommonModal extends Component {
         {modalInfo === '拒绝退款' && (
           <Select
             style={{ width: 120 }}
+            placeholder="请选择拒绝退款原因"
             onChange={this.refuseReason}
             style={{
               width: '50%',

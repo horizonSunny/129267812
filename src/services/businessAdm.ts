@@ -23,6 +23,13 @@ export async function cancelOrder(params) {
     data: params,
   });
 }
+// 退款 refundStatus 1为同意退款，2为拒绝退款
+export async function refundOrder(params) {
+  return request('/order/sysOrder/refundOrder', {
+    method: 'put',
+    data: params,
+  });
+}
 // 查询订单列表
 // export async function insertBusiness(params) {
 //   return request('/admin/v1/tenant', {

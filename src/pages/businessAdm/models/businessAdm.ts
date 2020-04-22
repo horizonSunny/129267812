@@ -1,6 +1,6 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
-import { queryOrederList, cancelOrder, getOrder } from '@/services/businessAdm';
+import { queryOrederList, cancelOrder, getOrder, refundOrder } from '@/services/businessAdm';
 
 const businessAdm = {
   namespace: 'businessAdm',
@@ -106,6 +106,22 @@ const businessAdm = {
           payload: response.data,
         });
       }
+    },
+    // 退款
+    *refundOrder({ payload }, { call, put, select }) {
+      const response = yield call(refundOrder, payload);
+      const { currentRecord } = yield select(state => state.businessAdm);
+      if (response) {
+        yield put({
+          type: 'getOrder',
+          payload: {
+            orderNo: currentRecord.orderNo,
+          },
+        });
+      } else {
+        return Promise.reject();
+      }
+      console.log('refundOrder');
     },
   },
 
