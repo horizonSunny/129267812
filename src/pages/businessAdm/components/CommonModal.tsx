@@ -39,6 +39,7 @@ class CommonModal extends Component {
   // 取消订单
   cancelOrder = () => {
     const { dispatch } = this.props;
+
     if (dispatch) {
       dispatch({
         type: 'businessAdm/resetDeliverModal',
