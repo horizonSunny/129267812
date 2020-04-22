@@ -37,6 +37,13 @@ export async function pickupCode(params) {
     data: params,
   });
 }
+// 订单审核通过
+export async function audit(params) {
+  return request('/order/sysOrder/audit', {
+    method: 'put',
+    data: params,
+  });
+}
 // 查询订单列表
 // export async function insertBusiness(params) {
 //   return request('/admin/v1/tenant', {

@@ -1,5 +1,6 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
+import { notification } from 'antd';
 import {
   queryOrederList,
   cancelOrder,
@@ -133,13 +134,19 @@ const businessAdm = {
     *pickupCode({ payload }, { call, put, select }) {
       const response = yield call(pickupCode, payload);
       const { currentRecord } = yield select(state => state.businessAdm);
-      if (response) {
+      if (response && response.data.checkResult) {
         yield put({
           type: 'getOrder',
           payload: {
             orderNo: currentRecord.orderNo,
           },
         });
+      } else if (response && !response.data.checkResult) {
+        // return Promise.reject();
+        notification.error({
+          message: '取货码核验失败',
+        });
+        return Promise.reject();
       } else {
         return Promise.reject();
       }
