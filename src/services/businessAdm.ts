@@ -8,6 +8,14 @@ export async function queryOrederList(params) {
     params,
   });
 }
+// 根据订单号查询订单
+export async function getOrder(params) {
+  console.log('根据订单号查询订单', params);
+  return request('/order/sysOrder/getOrder', {
+    method: 'get',
+    params,
+  });
+}
 // 取消订单
 export async function cancelOrder(params) {
   return request('/order/order/cancel', {

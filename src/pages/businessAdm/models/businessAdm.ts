@@ -1,6 +1,6 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
-import { queryOrederList, cancelOrder } from '@/services/businessAdm';
+import { queryOrederList, cancelOrder, getOrder } from '@/services/businessAdm';
 
 const businessAdm = {
   namespace: 'businessAdm',
@@ -77,6 +77,35 @@ const businessAdm = {
         });
       }
       return response;
+    },
+    // 取消订单
+    *cancelOrder({ payload }, { call, put, select }) {
+      const response = yield call(cancelOrder, payload);
+      const { currentRecord } = yield select(state => state.businessAdm);
+      console.log('cancelOrder_over');
+      console.log('state_', currentRecord);
+      if (response) {
+        yield put({
+          type: 'getOrder',
+          payload: {
+            orderNo: currentRecord.orderNo,
+          },
+        });
+      } else {
+        return Promise.reject();
+      }
+      console.log('getOrder_over');
+    },
+    // 根据订单号查询订单
+    *getOrder({ payload }, { call, put }) {
+      console.log('payload_', payload);
+      const response = yield call(getOrder, payload);
+      if (response && response.code === 1) {
+        yield put({
+          type: 'record',
+          payload: response.data,
+        });
+      }
     },
   },
 
