@@ -36,8 +36,6 @@ const businessAdm = {
     },
     currentRecord: {},
     selectedRowKeys: [],
-    // 发货弹窗，初始关闭
-    deliverModalStatus: false,
   },
 
   effects: {
@@ -202,13 +200,6 @@ const businessAdm = {
       return {
         ...state,
         businessData: tempbusinessData,
-      };
-    },
-    // 订单详情页面打开或者发货弹窗
-    resetDeliverModal(state, action) {
-      return {
-        ...state,
-        deliverModalStatus: action.payload,
       };
     },
   },

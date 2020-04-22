@@ -3,7 +3,7 @@ import { Button, Modal } from 'antd';
 import { connect } from 'dva';
 import styles from './index.less';
 import CommonModal from '../components/CommonModal';
-import { DeliverModal } from './index';
+import { DeliverModal, LogisticsModal } from './index';
 // import { orderStatus } from '@/utils/configInfo';
 // import tipsIcon from '@/assets/order/Tips-icon.svg';
 
@@ -20,9 +20,25 @@ class Footer extends Component {
     this.commonModalChild = ref;
   };
 
+  onDeliverRef = ref => {
+    this.deliverModalChild = ref;
+  };
+
+  onLogisticsRef = ref => {
+    this.logisticsModalChild = ref;
+  };
+
   buttonClick = e => {
     // const _this = this;
     console.log('e_', e.target.innerText);
+    if (e.target.innerText === '发货') {
+      this.deliverModalChild.openModal();
+      return;
+    }
+    if (e.target.innerText === '查看物流') {
+      this.logisticsModalChild.openModal();
+      return;
+    }
     this.setState(
       {
         modalInfo: e.target.innerText,
@@ -69,7 +85,9 @@ class Footer extends Component {
           )}
         </div>
         <CommonModal modalInfo={modalInfo} onRef={this.onCommonRef} />
-        <DeliverModal />
+        {/* 发货modal */}
+        <DeliverModal onRef={this.onDeliverRef} />
+        <LogisticsModal onRef={this.onLogisticsRef} />
       </div>
     );
   }

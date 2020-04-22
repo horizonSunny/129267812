@@ -8,7 +8,7 @@ const { Option } = Select;
 @connect(({ businessAdm }) => ({
   businessAdm,
 }))
-class DeliverModal extends Component {
+class LogisticsModal extends Component {
   state = { visible: false };
 
   openModal = e => {
@@ -36,7 +36,7 @@ class DeliverModal extends Component {
     return (
       // <div className={`${styles.modalInfo}`}>
       <Modal
-        title="订单发货"
+        title="查看物流"
         className={`${styles.modal}`}
         visible={visible}
         onCancel={this.handleCancel}
@@ -100,4 +100,4 @@ class DeliverModal extends Component {
   }
 }
 
-export default DeliverModal;
+export default LogisticsModal;
