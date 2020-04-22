@@ -68,21 +68,10 @@ const route = [
                 name: '订单管理 ',
                 component: './businessAdm/businessEnter',
               },
-              // {
-              //   path: 'examine',
-              //   name: '入驻审核',
-              //   component: './commodity/commodityAdm/CommodityAdm.tsx',
-              // },
               {
                 path: '/businessAdm/enter/particulars',
                 name: '查看详情',
                 component: './businessAdm/particulars',
-                hideInMenu: true,
-              },
-              {
-                path: '/businessAdm/enter/edit',
-                name: '编辑资料',
-                component: './businessAdm/businessEdit',
                 hideInMenu: true,
               },
             ],

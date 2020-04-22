@@ -15,12 +15,36 @@ class CommonModal extends Component {
 
   state = { visible: false, reason: '', inputValue: '' };
 
-  handleOk = e => {
-    console.log('this.state.reason_', this.state.reason);
-    console.log('this.state.inputValue_', this.state.inputValue);
+  openModal = e => {
     this.setState({
       visible: true,
     });
+  };
+
+  handleOk = e => {
+    const { modalInfo } = this.props;
+    switch (modalInfo) {
+      case '取消订单':
+        this.cancelOrder;
+        break;
+
+      default:
+        break;
+    }
+    this.setState({
+      visible: false,
+    });
+  };
+
+  // 取消订单
+  cancelOrder = () => {
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'businessAdm/resetDeliverModal',
+        payload: false,
+      });
+    }
   };
 
   handleCancel = e => {

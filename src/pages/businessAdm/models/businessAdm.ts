@@ -1,13 +1,6 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
-import {
-  queryBusiness,
-  insertBusiness,
-  saveBusiness,
-  switchStatus,
-  queryChannel,
-  queryOperation,
-} from '@/services/businessAdm';
+import { queryOrederList, cancelOrder } from '@/services/businessAdm';
 
 const businessAdm = {
   namespace: 'businessAdm',
@@ -35,13 +28,6 @@ const businessAdm = {
       // },
     },
     currentRecord: {},
-    channel: [],
-    operaRecord: [],
-    recordPagenation: {
-      pageNumber: 0,
-      pageSize: 10,
-      totalElements: 0,
-    },
     selectedRowKeys: [],
     // 发货弹窗，初始关闭
     deliverModalStatus: false,
@@ -52,7 +38,7 @@ const businessAdm = {
       // if (payload.province && payload.province.length > 0) {
       //   payload.province = payload.province.join(',');
       // }
-      const response = yield call(queryBusiness, payload);
+      const response = yield call(queryOrederList, payload);
       if (response && response.code === 1) {
         yield put({
           type: 'queryData',
@@ -82,49 +68,6 @@ const businessAdm = {
       });
       return payload;
     },
-    *saveBusiness({ payload }, { call, put, select }) {
-      const data = yield select(state => state.businessAdm.currentRecord);
-      let response = {};
-      const tempenterpriseQualification = [];
-      if (payload.enterpriseQualification.length > 0) {
-        payload.enterpriseQualification.forEach(item => {
-          if (!item.url) {
-            item.url = item.response.data;
-          }
-          tempenterpriseQualification.push({
-            name: item.name,
-            url: item.url,
-          });
-        });
-        payload.enterpriseQualification = tempenterpriseQualification;
-      }
-      const tempstoreLive = [];
-      if (payload.storeLive.length > 0) {
-        payload.storeLive.forEach(item => {
-          if (!item.url) {
-            item.url = item.response.data;
-          }
-          tempstoreLive.push(item.url);
-        });
-        payload.storeLive = tempstoreLive;
-      }
-      const tempParam = Object.assign({}, data, payload);
-      if (data && data.tenantId) {
-        // 更新
-        response = yield call(saveBusiness, tempParam);
-      } else {
-        // 新增
-        response = yield call(insertBusiness, tempParam);
-      }
-
-      if (response && response.code === 1) {
-        yield put({
-          type: 'saveData',
-          payload: response.data,
-        });
-      }
-      return response;
-    },
     *switchStatus({ payload }, { call, put }) {
       const response = yield call(switchStatus, payload);
       if (response && response.code === 1) {
@@ -134,37 +77,6 @@ const businessAdm = {
         });
       }
       return response;
-    },
-    *initChannel(_, { call, put }) {
-      const response = yield call(queryChannel);
-      if (response && response.code === 1) {
-        yield put({
-          type: 'saveChannel',
-          payload: response.data,
-        });
-      }
-      return response;
-    },
-    *getOperationRecord({ payload }, { call, put }) {
-      yield put({
-        type: 'operaRecord',
-        payload: [],
-      });
-      const response = yield call(queryOperation, payload);
-      if (response && response.code === 1) {
-        yield put({
-          type: 'operaRecord',
-          payload: response.data.pageList,
-        });
-        yield put({
-          type: 'recordPagenation',
-          payload: {
-            pageNumber: response.data.pageNumber,
-            pageSize: response.data.pageSize,
-            totalElements: response.data.totalElements,
-          },
-        });
-      }
     },
   },
 
@@ -204,12 +116,6 @@ const businessAdm = {
         currentRecord: action.payload,
       };
     },
-    saveData(state, action) {
-      return {
-        ...state,
-        currentRecord: action.payload,
-      };
-    },
     switchSave(state, action) {
       const tempbusinessData = state.businessData;
       const result = action.payload;
@@ -222,32 +128,6 @@ const businessAdm = {
       return {
         ...state,
         businessData: tempbusinessData,
-      };
-    },
-    saveChannel(state, action) {
-      return {
-        ...state,
-        channel: action.payload,
-      };
-    },
-    operaRecord(state, action) {
-      return {
-        ...state,
-        operaRecord: action.payload,
-      };
-    },
-    recordPagenation(state, action) {
-      return {
-        ...state,
-        recordPagenation: action.payload,
-      };
-    },
-    // 修改清空选中商品数据
-    modifyCommodity(state, action) {
-      console.log('action_modifyCommodity_', action.payload);
-      return {
-        ...state,
-        selectedRowKeys: action.payload,
       };
     },
     // 订单详情页面打开或者发货弹窗

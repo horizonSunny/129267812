@@ -28,7 +28,7 @@ class Footer extends Component {
         modalInfo: e.target.innerText,
       },
       () => {
-        this.commonModalChild.handleOk();
+        this.commonModalChild.openModal();
       },
     );
     // this.commonModalChild

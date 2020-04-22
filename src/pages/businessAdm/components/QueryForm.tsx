@@ -23,16 +23,7 @@ class QueryForm extends Component {
     };
   }
 
-  componentDidMount() {
-    // this.initChannel()
-  }
-
-  initChannel = () => {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'businessAdm/initChannel',
-    });
-  };
+  componentDidMount() {}
 
   handleSearch = e => {
     e.preventDefault();
