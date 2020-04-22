@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal } from 'antd';
 import { connect } from 'dva';
 import styles from './index.less';
+import CommonModal from '../components/CommonModal';
 // import { orderStatus } from '@/utils/configInfo';
 // import tipsIcon from '@/assets/order/Tips-icon.svg';
 
@@ -47,6 +48,7 @@ class Footer extends Component {
             <Button style={{ background: '#F5AB1C' }}>同意退款</Button>
           </span>
         )}
+        {/* <CommonModal modalInfo={} /> */}
       </div>
     );
   }
