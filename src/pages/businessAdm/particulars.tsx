@@ -39,7 +39,6 @@ class Particulars extends Component {
             {currentRecord.prescribInfo && <Prescription />}
             <PurchaseInfo />
             <Rest />
-            <DeliverModal />
             {[-1, -2].indexOf(currentRecord.orderStatus) > -1 && <RefundInfo />}
             <Footer />
           </div>
