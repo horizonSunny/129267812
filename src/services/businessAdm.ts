@@ -30,6 +30,13 @@ export async function refundOrder(params) {
     data: params,
   });
 }
+// 取货码核销
+export async function pickupCode(params) {
+  return request('/order/sysOrder/check/pickupCode', {
+    method: 'post',
+    data: params,
+  });
+}
 // 查询订单列表
 // export async function insertBusiness(params) {
 //   return request('/admin/v1/tenant', {

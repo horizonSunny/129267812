@@ -33,7 +33,9 @@ class CommonModal extends Component {
       case '拒绝退款':
         this.refundOrder(2);
         break;
-
+      case '取货码核销':
+        this.pickupCode();
+        break;
       default:
         break;
     }
@@ -71,6 +73,26 @@ class CommonModal extends Component {
           refundReason: reason,
           orderNo: currentRecord.orderNo,
           refundStatus: status,
+        },
+      }).then(() => {
+        this.setState({
+          visible: false,
+        });
+      });
+    }
+  };
+
+  // 取货码核销
+  pickupCode = () => {
+    const { dispatch } = this.props;
+    const { currentRecord } = this.props.businessAdm;
+    const { inputValue } = this.state;
+    if (dispatch) {
+      dispatch({
+        type: 'businessAdm/pickupCode',
+        payload: {
+          orderNo: currentRecord.orderNo,
+          pickupCode: inputValue,
         },
       }).then(() => {
         this.setState({
