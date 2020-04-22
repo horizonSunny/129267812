@@ -9,6 +9,10 @@ const { Option } = Select;
   businessAdm,
 }))
 class DeliverModal extends Component {
+  componentDidMount() {
+    this.props.onRef(this);
+  }
+
   state = { visible: false };
 
   openModal = e => {
@@ -33,6 +37,9 @@ class DeliverModal extends Component {
 
   render() {
     const { currentRecord } = this.props.businessAdm;
+    const { visible } = this.state;
+    console.log('currentRecord_', currentRecord);
+
     return (
       // <div className={`${styles.modalInfo}`}>
       <Modal
@@ -65,9 +72,17 @@ class DeliverModal extends Component {
         >
           <div className={`${styles.labelInfo} `}>配送信息</div>
           <div>
-            <div className={`${styles.contentInfo} `}>配送方式:普通快递</div>
-            <div className={`${styles.contentInfo} `}>收货人:王慧</div>
-            <div className={`${styles.contentInfo} `}>收货地址：上海市 长泰广长泰广场E座10</div>
+            <div className={`${styles.contentInfo} `}>
+              配送方式: {currentRecord.shipperTypeId === 1 && '普通配送'}
+              {currentRecord.shipperTypeId === 2 && '加急配送'}
+              {currentRecord.shipperTypeId === 3 && '到店自提'}
+            </div>
+            <div className={`${styles.contentInfo} `}>
+              收货人: {currentRecord.deliveryAddress.fullName}
+            </div>
+            <div className={`${styles.contentInfo} `}>
+              收货地址：{currentRecord.deliveryAddress.address}
+            </div>
           </div>
         </div>
         <div

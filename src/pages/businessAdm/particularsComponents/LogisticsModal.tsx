@@ -9,6 +9,10 @@ const { Option } = Select;
   businessAdm,
 }))
 class LogisticsModal extends Component {
+  componentDidMount() {
+    this.props.onRef(this);
+  }
+
   state = { visible: false };
 
   openModal = e => {
@@ -33,6 +37,7 @@ class LogisticsModal extends Component {
 
   render() {
     const { currentRecord } = this.props.businessAdm;
+    const { visible } = this.state;
     return (
       // <div className={`${styles.modalInfo}`}>
       <Modal

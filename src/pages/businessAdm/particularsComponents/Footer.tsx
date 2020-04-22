@@ -31,7 +31,7 @@ class Footer extends Component {
   buttonClick = e => {
     // const _this = this;
     console.log('e_', e.target.innerText);
-    if (e.target.innerText === '发货') {
+    if (e.target.innerText === '发 货') {
       this.deliverModalChild.openModal();
       return;
     }
