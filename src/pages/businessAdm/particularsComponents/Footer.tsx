@@ -42,10 +42,10 @@ class Footer extends Component {
         dispatch({
           type: 'businessAdm/getTraces',
           payload: {
-            // logisticCode: currentRecord.logisticCode,
-            // shipperCode: currentRecord.shipperCode,
-            logisticCode: '75340139495421',
-            shipperCode: 'ZTO',
+            logisticCode: currentRecord.logisticCode,
+            shipperCode: currentRecord.shipperCode,
+            // logisticCode: '75340139495421',
+            // shipperCode: 'ZTO',
           },
         }).then(() => {
           this.logisticsModalChild.openModal();

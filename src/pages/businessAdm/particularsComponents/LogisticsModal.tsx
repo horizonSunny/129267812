@@ -71,20 +71,21 @@ class LogisticsModal extends Component {
             overflowY: 'scroll',
           }}
         >
-          {tracesInfo && tracesInfo.traces.length === 0 && '暂无物流轨迹'}
-          {tracesInfo &&
-            tracesInfo.traces.length !== 0 &&
-            tracesInfo.traces.map(item => {
-              return (
-                <Timeline.Item>
-                  <div>{item.acceptStation}</div>
-                  <div> {item.acceptTime}</div>
-                </Timeline.Item>
-              );
-            })}
+          <Timeline>
+            {tracesInfo && tracesInfo.traces.length === 0 && '暂无物流轨迹'}
+            {tracesInfo &&
+              tracesInfo.traces.length !== 0 &&
+              tracesInfo.traces.map(item => {
+                return (
+                  <Timeline.Item>
+                    <div>{item.acceptStation}</div>
+                    <div> {item.acceptTime}</div>
+                  </Timeline.Item>
+                );
+              })}
+          </Timeline>
         </div>
       </Modal>
-      // </div>
     );
   }
 }
