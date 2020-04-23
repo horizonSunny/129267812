@@ -13,7 +13,7 @@ class AdvancedSearchForm extends React.Component {
   state = {
     expand: false,
     sellingStatus: null,
-    productType: this.props.commodity.allProductType,
+    // productType: this.props.commodity.allProductType,
     selectedRowKeys: [],
   };
 
@@ -92,7 +92,8 @@ class AdvancedSearchForm extends React.Component {
     const rangeConfig = {
       rules: [{ type: 'array', message: 'Please select time!' }],
     };
-    const { productType } = this.state;
+    // const { productType } = this.state;
+    const productType = this.props.commodity.allProductType;
     return (
       <Form className={styles['ant-advanced-search-form']} onSubmit={this.handleSearch}>
         <Row gutter={24}>
