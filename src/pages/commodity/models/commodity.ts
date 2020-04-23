@@ -7,25 +7,26 @@ import {
   shelve,
   productTemplateList,
 } from '@/services/commodity';
+import deepCopy from '@/utils/deepCopy';
 
-const tabelConditions = {
+const tabelConditionsInfo = {
   0: {
-    currentPage: 0,
-    saleOrder: undefined,
+    currentPage: 1,
+    saleOrder: 'ascend',
     stockOrder: undefined,
   },
   1: {
-    currentPage: 0,
+    currentPage: 1,
     saleOrder: undefined,
     stockOrder: undefined,
   },
   2: {
-    currentPage: 0,
+    currentPage: 1,
     saleOrder: undefined,
     stockOrder: undefined,
   },
 };
-const searchForm = {
+const searchFormInfo = {
   startTime: undefined,
   endTime: undefined,
   recommandStatus: 3,
@@ -44,9 +45,9 @@ const CommodityModel = {
     // 代表商品是0-出售中,1-已下架，2-已售罄
     productListStatus: tabStatus,
     // 商品三个状态分别的sort排序方式,0-出售中,1-已下架，2-已售罄
-    tabelConditions,
+    tabelConditions: deepCopy(tabelConditionsInfo),
     // list searchForm
-    searchForm,
+    searchForm: deepCopy(searchFormInfo),
   },
   effects: {
     // 获取商品列表
@@ -193,12 +194,21 @@ const CommodityModel = {
         ...action.payload,
       };
     },
-    // 设置商品列表sort值
+    // 设置商品列表table值
     setTabelConditions(state, action) {
       console.log('tabelConditions_', action.payload);
       return {
         ...state,
         tabelConditions: action.payload,
+      };
+    },
+    // 重置按钮重置所有，除了当前tab
+    resetForm(state, action) {
+      console.log('tabelConditionsInfo_', tabelConditionsInfo);
+      return {
+        ...state,
+        tabelConditions: deepCopy(tabelConditionsInfo),
+        searchForm: deepCopy(searchFormInfo),
       };
     },
 

@@ -7,85 +7,10 @@ import styles from './TableList.less';
 const { TabPane } = Tabs;
 @connect(({ commodity }) => ({ commodity }))
 export default class TableList extends React.Component {
+  // cons
   state = {
     data: this.props.commodity.productList.pageList,
     searchInfo: this.props.searchInfo,
-    columns: [
-      {
-        title: 'Sku',
-        dataIndex: 'productSku',
-        key: 'productSku',
-        render: text => <a>{text}</a>,
-      },
-      {
-        title: '商品名',
-        dataIndex: 'productCommonName',
-        key: 'productCommonName',
-      },
-      {
-        title: '批准文号',
-        dataIndex: 'approvalNumber',
-        key: 'approvalNumber',
-      },
-      {
-        title: '包装规格',
-        key: 'productSpecif',
-        dataIndex: 'productSpecif',
-      },
-      {
-        title: '价格',
-        key: 'price',
-        dataIndex: 'price',
-        render: text => <a>{text}</a>,
-      },
-      {
-        title: '库存',
-        key: 'stock',
-        dataIndex: 'stock',
-        sorter: true,
-        defaultSortOrder: this.props.commodity.tabelConditions[
-          this.props.commodity.productListStatus
-        ].saleOrder,
-        render: text => <a>{text}</a>,
-      },
-      {
-        title: '销量',
-        key: 'sales',
-        dataIndex: 'sales',
-        sorter: true,
-        defaultSortOrder: this.props.commodity.tabelConditions[
-          this.props.commodity.productListStatus
-        ].saleOrder,
-        render: text => <a>{text}</a>,
-      },
-      {
-        title: '上下架',
-        key: 'isShelf',
-        render: record => (
-          <Switch
-            checked={record.isShelf !== 0}
-            onChange={this.onSwitchChange.bind(this, record)}
-          />
-        ),
-      },
-      {
-        title: '操作',
-        key: 'action',
-        fixed: 'right',
-        width: 300,
-        render: (text, record) => (
-          <span>
-            <a onClick={this.goToNextPage.bind(this, record, 'detail')}>查看</a>
-            <Divider type="vertical" />
-            <a onClick={this.goToNextPage.bind(this, record, 'editor')}>编辑</a>
-            <Divider type="vertical" />
-            <a onClick={this.goToNextPage.bind(this, record, 'detail')}>生成二维码</a>
-            <Divider type="vertical" />
-            <a onClick={this.goToNextPage.bind(this, record, 'editor')}>删除</a>
-          </span>
-        ),
-      },
-    ],
     visible: false,
     switchRecord: {},
   };
@@ -100,7 +25,6 @@ export default class TableList extends React.Component {
       tabelConditions[productListStatus].saleOrder = undefined;
       tabelConditions[productListStatus].stockOrder = sorter.order;
     }
-    console.log('tabelConditions_', tabelConditions);
     const { dispatch } = this.props;
     dispatch({
       type: 'commodity/setTabelConditions',
@@ -201,6 +125,81 @@ export default class TableList extends React.Component {
   render() {
     const { state } = this;
     const { productList, productListStatus, tabelConditions } = this.props.commodity;
+    console.log('tabelConditions_', tabelConditions);
+    const columns = [
+      {
+        title: 'Sku',
+        dataIndex: 'productSku',
+        key: 'productSku',
+        render: text => <a>{text}</a>,
+      },
+      {
+        title: '商品名',
+        dataIndex: 'productCommonName',
+        key: 'productCommonName',
+      },
+      {
+        title: '批准文号',
+        dataIndex: 'approvalNumber',
+        key: 'approvalNumber',
+      },
+      {
+        title: '包装规格',
+        key: 'productSpecif',
+        dataIndex: 'productSpecif',
+      },
+      {
+        title: '价格',
+        key: 'price',
+        dataIndex: 'price',
+        render: text => <a>{text}</a>,
+      },
+      {
+        title: '库存',
+        key: 'stock',
+        dataIndex: 'stock',
+        sorter: true,
+        sortOrder: this.props.commodity.tabelConditions[this.props.commodity.productListStatus]
+          .stockOrder,
+        render: text => <a>{text}</a>,
+      },
+      {
+        title: '销量',
+        key: 'sales',
+        dataIndex: 'sales',
+        sorter: true,
+        sortOrder: this.props.commodity.tabelConditions[this.props.commodity.productListStatus]
+          .saleOrder,
+        render: text => <a>{text}</a>,
+      },
+      {
+        title: '上下架',
+        key: 'isShelf',
+        render: record => (
+          <Switch
+            checked={record.isShelf !== 0}
+            onChange={this.onSwitchChange.bind(this, record)}
+          />
+        ),
+      },
+      {
+        title: '操作',
+        key: 'action',
+        fixed: 'right',
+        width: 300,
+        render: (text, record) => (
+          <span>
+            <a onClick={this.goToNextPage.bind(this, record, 'detail')}>查看</a>
+            <Divider type="vertical" />
+            <a onClick={this.goToNextPage.bind(this, record, 'editor')}>编辑</a>
+            <Divider type="vertical" />
+            <a onClick={this.goToNextPage.bind(this, record, 'detail')}>生成二维码</a>
+            <Divider type="vertical" />
+            <a onClick={this.goToNextPage.bind(this, record, 'editor')}>删除</a>
+          </span>
+        ),
+      },
+    ];
     return (
       <Tabs
         defaultActiveKey={`${productListStatus}`}
@@ -210,7 +209,7 @@ export default class TableList extends React.Component {
         <TabPane tab="出售中" key="0">
           <Table
             {...this.state}
-            columns={state.columns}
+            columns={columns}
             dataSource={productList.pageList}
             onChange={this.onChange}
             pagination={{
