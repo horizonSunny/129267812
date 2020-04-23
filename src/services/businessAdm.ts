@@ -58,6 +58,14 @@ export async function deliverGoods(params) {
     data: params,
   });
 }
+
+// 根据快递单号查询物流轨迹
+export async function getTraces(params) {
+  return request('/admin/v1/shipper/traces', {
+    method: 'get',
+    params,
+  });
+}
 // 查询订单列表
 // export async function insertBusiness(params) {
 //   return request('/admin/v1/tenant', {

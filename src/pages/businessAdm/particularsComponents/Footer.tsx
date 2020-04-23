@@ -31,12 +31,29 @@ class Footer extends Component {
   buttonClick = e => {
     // const _this = this;
     console.log('e_', e.target.innerText);
+    const { currentRecord } = this.props.businessAdm;
     if (e.target.innerText === '发 货') {
       this.deliverModalChild.openModal();
       return;
     }
     if (e.target.innerText === '查看物流') {
-      this.logisticsModalChild.openModal();
+      const { dispatch } = this.props;
+      if (dispatch) {
+        dispatch({
+          type: 'businessAdm/getTraces',
+          payload: {
+            // logisticCode: currentRecord.logisticCode,
+            // shipperCode: currentRecord.shipperCode,
+            logisticCode: '75340139495421',
+            shipperCode: 'ZTO',
+          },
+        }).then(() => {
+          this.logisticsModalChild.openModal();
+        });
+      }
+      // getTraces
+      // this.logisticsModalChild.openModal();
+
       return;
     }
     this.setState(

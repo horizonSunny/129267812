@@ -9,6 +9,7 @@ import {
   pickupCode,
   shipper,
   deliverGoods,
+  getTraces,
 } from '@/services/businessAdm';
 
 const businessAdm = {
@@ -40,6 +41,7 @@ const businessAdm = {
     },
     currentRecord: {},
     selectedRowKeys: [],
+    // 物流信息
   },
 
   effects: {
@@ -179,6 +181,18 @@ const businessAdm = {
         return Promise.reject();
       }
     },
+    // 获取物流信息
+    *getTraces({ payload }, { call, put, select }) {
+      const response = yield call(getTraces, payload);
+      if (response) {
+        yield put({
+          type: 'setTraces',
+          payload: response.data,
+        });
+        return response;
+      }
+      return Promise.reject('null');
+    },
   },
 
   reducers: {
@@ -235,6 +249,13 @@ const businessAdm = {
       return {
         ...state,
         businessData: tempbusinessData,
+      };
+    },
+    // 重置物流信息
+    setTraces(state, action) {
+      return {
+        ...state,
+        tracesInfo: action.payload,
       };
     },
   },

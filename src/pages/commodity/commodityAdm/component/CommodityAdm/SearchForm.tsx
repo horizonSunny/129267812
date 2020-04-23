@@ -138,7 +138,12 @@ class AdvancedSearchForm extends React.Component {
                 rules: [],
                 initialValue: '',
               })(
-                <TreeSelect treeData={productType} treeDefaultExpandAll onChange={this.onChange} />,
+                <TreeSelect
+                  placeholder="选择商品分类"
+                  treeData={productType}
+                  treeDefaultExpandAll
+                  onChange={this.onChange}
+                />,
               )}
             </Form.Item>
           </Col>
