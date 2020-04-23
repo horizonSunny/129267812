@@ -8,6 +8,20 @@ import {
   productTemplateList,
 } from '@/services/commodity';
 
+const sortInit = {
+  0: {
+    saleOrder: 'ascend',
+    stockOrder: undefined,
+  },
+  1: {
+    saleOrder: undefined,
+    stockOrder: undefined,
+  },
+  2: {
+    saleOrder: undefined,
+    stockOrder: undefined,
+  },
+};
 const CommodityModel = {
   namespace: 'commodity',
   state: {
@@ -17,8 +31,10 @@ const CommodityModel = {
     allProductType: {},
     // 查询商品列别的时候需要筛选的字段,只是searchInfo表单里面含有的字段
     // searchInfo: {},
-    // 代表商品是出售中
+    // 代表商品是0-出售中,1-已下架，2-已售罄
     productListStatus: 0,
+    // 商品三个状态分别的sort排序方式,0-出售中,1-已下架，2-已售罄
+    sort: sortInit,
   },
   effects: {
     // 获取商品列表
@@ -163,6 +179,14 @@ const CommodityModel = {
       return {
         ...state,
         ...action.payload,
+      };
+    },
+    // 设置商品列表sort值
+    setSort(state, action) {
+      console.log('setSort_', action.payload);
+      return {
+        ...state,
+        sort: action.payload,
       };
     },
   },

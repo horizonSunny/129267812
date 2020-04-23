@@ -42,12 +42,18 @@ export default class TableList extends React.Component {
         title: '库存',
         key: 'stock',
         dataIndex: 'stock',
+        sorter: true,
+        defaultSortOrder: this.props.commodity.sort[this.props.commodity.productListStatus]
+          .saleOrder,
         render: text => <a>{text}</a>,
       },
       {
         title: '销量',
         key: 'sales',
         dataIndex: 'sales',
+        sorter: true,
+        defaultSortOrder: this.props.commodity.sort[this.props.commodity.productListStatus]
+          .saleOrder,
         render: text => <a>{text}</a>,
       },
       {
@@ -82,22 +88,37 @@ export default class TableList extends React.Component {
     switchRecord: {},
   };
 
-  onChange = e => {
-    console.log('触发', this.props.searchInfo);
+  onChange = (pagination, filters, sorter) => {
+    // console.log('触发', this.props.searchInfo);
+    const { sort, productListStatus } = this.props.commodity;
+    console.log('productListStatus_', productListStatus);
+    console.log('sorter_', sorter);
+    if (sorter.field === 'sales') {
+      sort[productListStatus].saleOrder = sorter.order;
+      sort[productListStatus].stockOrder = undefined;
+    } else if (sorter.field === 'stock') {
+      sort[productListStatus].saleOrder = undefined;
+      sort[productListStatus].stockOrder = sorter.order;
+    }
+    console.log('sort_', sort);
     const { dispatch } = this.props;
-    const currentPage = e.current - 1;
-    console.log('触发currentPage_', currentPage);
     dispatch({
-      type: 'commodity/getList',
-      payload: Object.assign(
-        {
-          pageNumber: currentPage,
-          pageSize: 10,
-        },
-        this.props.searchInfo,
-      ),
+      type: 'commodity/setSort',
+      payload: sort,
     });
-    return false;
+    // const currentPage = e.current - 1;
+    // console.log('触发currentPage_', currentPage);
+    // dispatch({
+    //   type: 'commodity/getList',
+    //   payload: Object.assign(
+    //     {
+    //       pageNumber: currentPage,
+    //       pageSize: 10,
+    //     },
+    //     this.props.searchInfo,
+    //   ),
+    // });
+    // return false;
   };
 
   // 切换按钮
