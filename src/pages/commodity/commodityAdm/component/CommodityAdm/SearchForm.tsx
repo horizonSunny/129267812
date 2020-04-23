@@ -2,6 +2,7 @@ import { Form, Row, Col, Input, Button, DatePicker, Select, TreeSelect } from 'a
 import React from 'react';
 import styles from './SearchForm.less';
 import router from 'umi/router';
+import moment from 'moment';
 import { connect } from 'dva';
 import filterProperty from '@/utils/filterProperty';
 
@@ -40,7 +41,7 @@ class AdvancedSearchForm extends React.Component {
       const searchParams = {
         startTime: values['range-picker'][0],
         endTime: values['range-picker'][1],
-        recommandStatus: values.recommandStatus == 3 ? undefined : values.recommandStatus,
+        recommandStatus: values.recommandStatus,
         productType: values.status,
         productCommonName: values.keyword,
         approvalNumber: values.approvalNumber,
@@ -48,16 +49,10 @@ class AdvancedSearchForm extends React.Component {
       const searchInfo = filterProperty(searchParams);
       console.log('searchInfo_', searchInfo);
 
-      // dispatch({
-      //   type: 'commodity/getList',
-      //   payload: Object.assign(
-      //     {
-      //       pageNumber: 0,
-      //       pageSize: 10,
-      //     },
-      //     searchInfo,
-      //   ),
-      // });
+      dispatch({
+        type: 'commodity/saveSearchForm',
+        payload: searchInfo,
+      });
       // this.props.saveSearchInfo(searchInfo);
     });
   };
@@ -78,8 +73,8 @@ class AdvancedSearchForm extends React.Component {
     const rangeConfig = {
       rules: [{ type: 'array', message: 'Please select time!' }],
     };
-    // const { productType } = this.state;
-    const productType = this.props.commodity.allProductType;
+    const { allProductType, searchForm } = this.props.commodity;
+    const productType = allProductType;
     return (
       <Form className={styles['ant-advanced-search-form']} onSubmit={this.handleSearch}>
         <Row gutter={24}>
@@ -90,15 +85,18 @@ class AdvancedSearchForm extends React.Component {
             }}
           >
             <Form.Item label="创建时间">
-              {getFieldDecorator(
-                'range-picker',
-                rangeConfig,
-              )(<RangePicker showTime={{ format: 'HH:mm' }} format="YYYY-MM-DD HH:mm" />)}
+              {getFieldDecorator('range-picker', {
+                initialValue:
+                  searchForm.startTime && searchForm.endTime
+                    ? [moment(searchForm.startTime), moment(searchForm.endTime)]
+                    : '',
+              })(<RangePicker showTime={{ format: 'HH:mm' }} format="YYYY-MM-DD HH:mm" />)}
             </Form.Item>
           </Col>
           <Col span={7} style={{}}>
             <Form.Item label="商品名">
               {getFieldDecorator('keyword', {
+                initialValue: searchForm.productCommonName,
                 rules: [],
               })(<Input placeholder="输入商品名" />)}
             </Form.Item>
@@ -107,6 +105,7 @@ class AdvancedSearchForm extends React.Component {
             <Form.Item label="批准文号">
               {getFieldDecorator('approvalNumber', {
                 rules: [],
+                initialValue: searchForm.approvalNumber,
               })(<Input placeholder="输入批准文号" />)}
             </Form.Item>
           </Col>
@@ -122,12 +121,11 @@ class AdvancedSearchForm extends React.Component {
             <Form.Item label="商品分类">
               {getFieldDecorator('status', {
                 rules: [],
-                initialValue: '',
+                initialValue: searchForm.productType,
               })(
                 <TreeSelect
                   placeholder="选择商品分类"
                   treeData={productType}
-                  treeDefaultExpandAll
                   onChange={this.onChange}
                 />,
               )}
@@ -137,7 +135,7 @@ class AdvancedSearchForm extends React.Component {
             <Form.Item label="是否推荐商品">
               {getFieldDecorator('recommandStatus', {
                 rules: [],
-                initialValue: 3,
+                initialValue: searchForm.recommandStatus,
               })(
                 <Select style={{ width: 120 }}>
                   <Option value={3}>全部</Option>

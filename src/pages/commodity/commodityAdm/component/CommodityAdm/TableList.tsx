@@ -43,8 +43,9 @@ export default class TableList extends React.Component {
         key: 'stock',
         dataIndex: 'stock',
         sorter: true,
-        defaultSortOrder: this.props.commodity.sort[this.props.commodity.productListStatus]
-          .saleOrder,
+        defaultSortOrder: this.props.commodity.tabelConditions[
+          this.props.commodity.productListStatus
+        ].saleOrder,
         render: text => <a>{text}</a>,
       },
       {
@@ -52,8 +53,9 @@ export default class TableList extends React.Component {
         key: 'sales',
         dataIndex: 'sales',
         sorter: true,
-        defaultSortOrder: this.props.commodity.sort[this.props.commodity.productListStatus]
-          .saleOrder,
+        defaultSortOrder: this.props.commodity.tabelConditions[
+          this.props.commodity.productListStatus
+        ].saleOrder,
         render: text => <a>{text}</a>,
       },
       {
@@ -89,36 +91,21 @@ export default class TableList extends React.Component {
   };
 
   onChange = (pagination, filters, sorter) => {
-    // console.log('触发', this.props.searchInfo);
-    const { sort, productListStatus } = this.props.commodity;
-    console.log('productListStatus_', productListStatus);
-    console.log('sorter_', sorter);
+    const { tabelConditions, productListStatus } = this.props.commodity;
+    tabelConditions[productListStatus].currentPage = pagination.current;
     if (sorter.field === 'sales') {
-      sort[productListStatus].saleOrder = sorter.order;
-      sort[productListStatus].stockOrder = undefined;
+      tabelConditions[productListStatus].saleOrder = sorter.order;
+      tabelConditions[productListStatus].stockOrder = undefined;
     } else if (sorter.field === 'stock') {
-      sort[productListStatus].saleOrder = undefined;
-      sort[productListStatus].stockOrder = sorter.order;
+      tabelConditions[productListStatus].saleOrder = undefined;
+      tabelConditions[productListStatus].stockOrder = sorter.order;
     }
-    console.log('sort_', sort);
+    console.log('tabelConditions_', tabelConditions);
     const { dispatch } = this.props;
     dispatch({
-      type: 'commodity/setSort',
-      payload: sort,
+      type: 'commodity/setTabelConditions',
+      payload: tabelConditions,
     });
-    // const currentPage = e.current - 1;
-    // console.log('触发currentPage_', currentPage);
-    // dispatch({
-    //   type: 'commodity/getList',
-    //   payload: Object.assign(
-    //     {
-    //       pageNumber: currentPage,
-    //       pageSize: 10,
-    //     },
-    //     this.props.searchInfo,
-    //   ),
-    // });
-    // return false;
   };
 
   // 切换按钮
@@ -200,56 +187,34 @@ export default class TableList extends React.Component {
   };
 
   // 切换位置
-  callback = e => {
-    console.log(e);
+  setTabChange = currentTab => {
+    console.log('currentTab_', currentTab);
     const { dispatch } = this.props;
-    let stauts;
-    switch (e) {
-      case '1':
-        stauts = 0;
-        break;
-      case '2':
-        stauts = 1;
-        break;
-      case '3':
-        stauts = 2;
-        break;
-      default:
-        break;
-    }
-    console.log('stauts_', stauts);
     dispatch({
       type: 'commodity/resetStatus',
       payload: {
-        productListStatus: stauts,
+        productListStatus: currentTab,
       },
     });
-    // dispatch({
-    //   type: 'commodity/getList',
-    //   payload: Object.assign(
-    //     {
-    //       pageNumber: 0,
-    //       pageSize: 10,
-    //       stauts: this.props.productListStatus,
-    //     },
-    //     this.props.searchInfo,
-    //   ),
-    // });
   };
 
   render() {
     const { state } = this;
-    const { productList, tabCurrentpage } = this.props.commodity;
+    const { productList, productListStatus, tabelConditions } = this.props.commodity;
     return (
-      <Tabs defaultActiveKey="1" onChange={this.callback} className={styles.main}>
-        <TabPane tab="出售中" key="1">
+      <Tabs
+        defaultActiveKey={`${productListStatus}`}
+        onChange={this.setTabChange}
+        className={styles.main}
+      >
+        <TabPane tab="出售中" key="0">
           <Table
             {...this.state}
             columns={state.columns}
             dataSource={productList.pageList}
             onChange={this.onChange}
             pagination={{
-              current: tabCurrentpage[0] + 1,
+              current: tabelConditions[productListStatus].currentPage,
               position: 'bottom',
               pageSize: 10,
               total: productList.totalElements,
@@ -258,7 +223,7 @@ export default class TableList extends React.Component {
             scroll={{ x: 1200 }}
           />
         </TabPane>
-        <TabPane tab="已售罄" key="2">
+        <TabPane tab="已售罄" key="1">
           <Table
             {...this.state}
             className={styles.main}
@@ -266,7 +231,7 @@ export default class TableList extends React.Component {
             dataSource={productList.pageList}
             onChange={this.onChange}
             pagination={{
-              current: tabCurrentpage[1] + 1,
+              current: tabelConditions[productListStatus].currentPage,
               position: 'bottom',
               pageSize: 10,
               total: productList.totalElements,
@@ -274,7 +239,7 @@ export default class TableList extends React.Component {
             scroll={{ x: 1200 }}
           />
         </TabPane>
-        <TabPane tab="已下架" key="3">
+        <TabPane tab="已下架" key="2">
           <Table
             {...this.state}
             className={styles.main}
@@ -282,7 +247,7 @@ export default class TableList extends React.Component {
             dataSource={productList.pageList}
             onChange={this.onChange}
             pagination={{
-              current: tabCurrentpage[2] + 1,
+              current: tabelConditions[productListStatus].currentPage,
               position: 'bottom',
               pageSize: 10,
               total: productList.totalElements,
