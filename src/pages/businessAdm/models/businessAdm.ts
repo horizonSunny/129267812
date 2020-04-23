@@ -24,10 +24,10 @@ const businessAdm = {
       endTime: '',
       startTime: '',
       logisticCode: '',
-      orderSource: 0,
+      orderSource: '0',
       orderNo: '',
-      orderStatus: 1,
-      shipperTypeId: 0,
+      orderStatus: '1',
+      shipperTypeId: '0',
     },
     pagenation: {
       pageNumber: 0,
