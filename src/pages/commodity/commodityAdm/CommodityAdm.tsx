@@ -43,18 +43,11 @@ export default class CommodityAdm extends React.Component {
     searchInfo: {},
   };
 
-  resetSearch(info) {
-    console.log('info_', info);
-    this.setState({
-      searchInfo: info,
-    });
-  }
-
   render() {
     return (
       <PageHeaderWrapper>
-        <SearchForm saveSearchInfo={this.resetSearch.bind(this)} />
-        <TableList searchInfo={this.state.searchInfo} />
+        <SearchForm />
+        <TableList />
       </PageHeaderWrapper>
     );
   }

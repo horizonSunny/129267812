@@ -239,19 +239,20 @@ export default class TableList extends React.Component {
 
   render() {
     const { state } = this;
+    const { productList, tabCurrentpage } = this.props.commodity;
     return (
       <Tabs defaultActiveKey="1" onChange={this.callback} className={styles.main}>
         <TabPane tab="出售中" key="1">
           <Table
             {...this.state}
             columns={state.columns}
-            dataSource={this.props.commodity.productList.pageList}
+            dataSource={productList.pageList}
             onChange={this.onChange}
             pagination={{
-              current: this.props.commodity.productList.pageNumber + 1,
+              current: tabCurrentpage[0] + 1,
               position: 'bottom',
               pageSize: 10,
-              total: this.props.commodity.productList.totalElements,
+              total: productList.totalElements,
             }}
             // rowSelection={rowSelection}
             scroll={{ x: 1200 }}
@@ -262,13 +263,13 @@ export default class TableList extends React.Component {
             {...this.state}
             className={styles.main}
             columns={state.columns}
-            dataSource={this.props.commodity.productList.pageList}
+            dataSource={productList.pageList}
             onChange={this.onChange}
             pagination={{
-              current: this.props.commodity.productList.pageNumber + 1,
+              current: tabCurrentpage[1] + 1,
               position: 'bottom',
               pageSize: 10,
-              total: this.props.commodity.productList.totalElements,
+              total: productList.totalElements,
             }}
             scroll={{ x: 1200 }}
           />
@@ -278,13 +279,13 @@ export default class TableList extends React.Component {
             {...this.state}
             className={styles.main}
             columns={state.columns}
-            dataSource={this.props.commodity.productList.pageList}
+            dataSource={productList.pageList}
             onChange={this.onChange}
             pagination={{
-              current: this.props.commodity.productList.pageNumber + 1,
+              current: tabCurrentpage[2] + 1,
               position: 'bottom',
               pageSize: 10,
-              total: this.props.commodity.productList.totalElements,
+              total: productList.totalElements,
             }}
             scroll={{ x: 1200 }}
           />

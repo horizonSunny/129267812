@@ -46,17 +46,19 @@ class AdvancedSearchForm extends React.Component {
         approvalNumber: values.approvalNumber,
       };
       const searchInfo = filterProperty(searchParams);
-      dispatch({
-        type: 'commodity/getList',
-        payload: Object.assign(
-          {
-            pageNumber: 0,
-            pageSize: 10,
-          },
-          searchInfo,
-        ),
-      });
-      this.props.saveSearchInfo(searchInfo);
+      console.log('searchInfo_', searchInfo);
+
+      // dispatch({
+      //   type: 'commodity/getList',
+      //   payload: Object.assign(
+      //     {
+      //       pageNumber: 0,
+      //       pageSize: 10,
+      //     },
+      //     searchInfo,
+      //   ),
+      // });
+      // this.props.saveSearchInfo(searchInfo);
     });
   };
 
@@ -68,26 +70,6 @@ class AdvancedSearchForm extends React.Component {
 
   // 新增产品
   handleNew = () => {
-    // const { dispatch } = this.props;
-    // dispatch({
-    //   type: 'commodity/resetProduct',
-    //   payload: {
-    //     approvalNumber: '',
-    //     englishName: '',
-    //     isMp: '',
-    //     manufacturer: '',
-    //     pinyin: '',
-    //     productBrand: '',
-    //     productDesc: '',
-    //     productExpire: '',
-    //     productImage: [],
-    //     productModel: '',
-    //     productCommonName: '',
-    //     productSpec: '',
-    //     productSpecif: '',
-    //     productType: '',
-    //   },
-    // });
     router.push('/commodityAdm/management/chooseProducts');
   };
 
