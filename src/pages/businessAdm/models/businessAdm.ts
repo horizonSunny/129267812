@@ -7,12 +7,16 @@ import {
   getOrder,
   refundOrder,
   pickupCode,
+  shipper,
+  deliverGoods,
 } from '@/services/businessAdm';
 
 const businessAdm = {
   namespace: 'businessAdm',
 
   state: {
+    // 快递公司编号
+    shipperInfo: [],
     businessData: [],
     queryForm: {
       productCommonName: '',
@@ -39,6 +43,16 @@ const businessAdm = {
   },
 
   effects: {
+    // 获取快递公司的编号
+    *getShipperInfo({ payload }, { call, put }) {
+      const response = yield call(shipper);
+      if (response && response.code === 1) {
+        yield put({
+          type: 'setShipperInfo',
+          payload: response.data,
+        });
+      }
+    },
     *queryList({ payload }, { call, put }) {
       // if (payload.province && payload.province.length > 0) {
       //   payload.province = payload.province.join(',');
@@ -150,9 +164,30 @@ const businessAdm = {
       }
       console.log('refundOrder');
     },
+    // 发货
+    *deliverGoods({ payload }, { call, put, select }) {
+      const response = yield call(deliverGoods, payload);
+      const { currentRecord } = yield select(state => state.businessAdm);
+      if (response) {
+        yield put({
+          type: 'getOrder',
+          payload: {
+            orderNo: currentRecord.orderNo,
+          },
+        });
+      } else {
+        return Promise.reject();
+      }
+    },
   },
 
   reducers: {
+    setShipperInfo(state, action) {
+      return {
+        ...state,
+        shipperInfo: action.payload,
+      };
+    },
     // 设置订单list集合
     queryData(state, action) {
       const pagenation = {

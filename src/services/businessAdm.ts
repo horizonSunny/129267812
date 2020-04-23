@@ -44,6 +44,20 @@ export async function audit(params) {
     data: params,
   });
 }
+// 获取快递公司列表
+export async function shipper(params) {
+  return request('/admin/v1/shipper', {
+    method: 'get',
+    params,
+  });
+}
+// 发货
+export async function deliverGoods(params) {
+  return request('/order/sysOrder/deliverGoods', {
+    method: 'put',
+    data: params,
+  });
+}
 // 查询订单列表
 // export async function insertBusiness(params) {
 //   return request('/admin/v1/tenant', {

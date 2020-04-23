@@ -86,7 +86,9 @@ class Footer extends Component {
         </div>
         <CommonModal modalInfo={modalInfo} onRef={this.onCommonRef} />
         {/* 发货modal */}
-        <DeliverModal onRef={this.onDeliverRef} />
+        {currentRecord.orderStatus === 2 && currentRecord.shipperTypeId !== 3 && (
+          <DeliverModal onRef={this.onDeliverRef} />
+        )}
         <LogisticsModal onRef={this.onLogisticsRef} />
       </div>
     );

@@ -13,18 +13,11 @@ class DeliverModal extends Component {
     this.props.onRef(this);
   }
 
-  state = { visible: false };
+  state = { visible: false, logisticCode: '', shipperCode: '' };
 
   openModal = e => {
     this.setState({
       visible: true,
-    });
-  };
-
-  handleOk = e => {
-    console.log(e);
-    this.setState({
-      visible: false,
     });
   };
 
@@ -35,8 +28,43 @@ class DeliverModal extends Component {
     });
   };
 
-  render() {
+  shipperChange = value => {
+    console.log(`selected ${value}`);
+    this.setState({
+      shipperCode: value,
+    });
+  };
+
+  logisticChange = e => {
+    const { value } = e.target;
+    console.log(`logisticChange ${value}`);
+    this.setState({
+      logisticCode: value,
+    });
+  };
+
+  deliverGoods = e => {
+    const { dispatch } = this.props;
     const { currentRecord } = this.props.businessAdm;
+    const { logisticCode, shipperCode } = this.state;
+    if (dispatch) {
+      dispatch({
+        type: 'businessAdm/deliverGoods',
+        payload: {
+          logisticCode,
+          shipperCode,
+          orderNo: currentRecord.orderNo,
+        },
+      }).then(() => {
+        this.setState({
+          visible: false,
+        });
+      });
+    }
+  };
+
+  render() {
+    const { currentRecord, shipperInfo } = this.props.businessAdm;
     const { visible } = this.state;
     console.log('currentRecord_', currentRecord);
 
@@ -81,7 +109,7 @@ class DeliverModal extends Component {
               收货人: {currentRecord.deliveryAddress.fullName}
             </div>
             <div className={`${styles.contentInfo} `}>
-              收货地址：{currentRecord.deliveryAddress.address}
+              收货地址: {currentRecord.deliveryAddress.address}
             </div>
           </div>
         </div>
@@ -96,18 +124,28 @@ class DeliverModal extends Component {
           <div style={{ position: 'relative', top: '-5px' }}>
             <div className={`${styles.contentInfo} `}>
               <span>物流公司</span>
-              <Select defaultValue="lucy" style={{ width: 200 }}>
-                <Option value="lucy">Lucy</Option>
+              <Select
+                style={{ width: 200 }}
+                placeholder="请选择物流公司"
+                onChange={this.shipperChange}
+              >
+                {shipperInfo.map(item => {
+                  return <Option value={item.shipperCode}>{item.shipperName}</Option>;
+                })}
               </Select>
             </div>
             <div className={`${styles.contentInfo} `}>
               <span>快递单号</span>
-              <Input placeholder="请输入快递单号" style={{ width: 200 }} />
+              <Input
+                placeholder="请输入快递单号"
+                style={{ width: 200 }}
+                onChange={this.logisticChange}
+              />
             </div>
           </div>
         </div>
         <div className={`${styles.deliver}`}>
-          <Button>发货</Button>
+          <Button onClick={this.deliverGoods}>发货</Button>
         </div>
       </Modal>
       // </div>

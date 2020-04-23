@@ -22,6 +22,9 @@ class BusinessEnter extends Component {
       type: 'businessAdm/queryList',
       payload: { ...params },
     });
+    dispatch({
+      type: 'businessAdm/getShipperInfo',
+    });
   }
 
   render() {
