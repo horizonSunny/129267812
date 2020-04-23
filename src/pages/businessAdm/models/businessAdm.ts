@@ -12,6 +12,16 @@ import {
   getTraces,
 } from '@/services/businessAdm';
 
+const queryFormInit = {
+  productCommonName: '',
+  endTime: '',
+  startTime: '',
+  logisticCode: '',
+  orderSource: '0',
+  orderNo: '',
+  orderStatus: '1',
+  shipperTypeId: '0',
+};
 const businessAdm = {
   namespace: 'businessAdm',
 
@@ -19,16 +29,7 @@ const businessAdm = {
     // 快递公司编号
     shipperInfo: [],
     businessData: [],
-    queryForm: {
-      productCommonName: '',
-      endTime: '',
-      startTime: '',
-      logisticCode: '',
-      orderSource: '0',
-      orderNo: '',
-      orderStatus: '1',
-      shipperTypeId: '0',
-    },
+    queryForm: queryFormInit,
     pagenation: {
       pageNumber: 0,
       pageSize: 10,
@@ -71,9 +72,8 @@ const businessAdm = {
     *queryFormChange({ payload }, { call, put }) {
       yield put({
         type: 'formChange',
-        payload,
+        payload: queryFormInit,
       });
-      return payload;
     },
     *queryPagenationChange({ payload }, { call, put }) {
       yield put({

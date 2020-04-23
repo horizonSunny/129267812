@@ -61,17 +61,8 @@ class QueryForm extends Component {
   handleReset = () => {
     const { dispatch } = this.props;
     this.props.form.resetFields();
-    const params = {
-      orderNo: '',
-      logisticCode: '',
-      orderStatus: 1,
-      orderSource: 0,
-      productCommonName: '',
-      shipperTypeId: 0,
-    };
     dispatch({
       type: 'businessAdm/queryFormChange',
-      payload: { ...params },
     }).then(() => {
       this.handleQuery();
     });
