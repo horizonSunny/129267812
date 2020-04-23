@@ -106,7 +106,9 @@ class Footer extends Component {
         {currentRecord.orderStatus === 2 && currentRecord.shipperTypeId !== 3 && (
           <DeliverModal onRef={this.onDeliverRef} />
         )}
-        <LogisticsModal onRef={this.onLogisticsRef} />
+        {[3, 4, 6, -1].indexOf(currentRecord.orderStatus) > -1 && (
+          <LogisticsModal onRef={this.onLogisticsRef} />
+        )}
       </div>
     );
   }
