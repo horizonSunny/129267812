@@ -1,6 +1,7 @@
 import { Form, Row, Col, Input, Button, Icon, DatePicker, Select, Cascader } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'dva';
+import moment from 'moment';
 import router from 'umi/router';
 import styles from './QueryForm.less';
 import { newArea } from '../../../utils/area.js';
@@ -103,7 +104,7 @@ class QueryForm extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { queryForm, channel } = this.props.businessAdm;
-
+    console.log('queryForm_', queryForm);
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -123,7 +124,10 @@ class QueryForm extends Component {
           <Col span={7}>
             <Form.Item {...formItemLayout} label="创建时间">
               {getFieldDecorator('time', {
-                // initialValue: [queryForm.startTime,queryForm.endTime]
+                initialValue:
+                  queryForm.startTime && queryForm.endTime
+                    ? [moment(queryForm.startTime), moment(queryForm.endTime)]
+                    : '',
               })(
                 <RangePicker
                   showTime={{ format: 'HH:mm' }}
@@ -136,7 +140,7 @@ class QueryForm extends Component {
           <Col span={7}>
             <Form.Item {...formItemLayout} label="订单状态">
               {getFieldDecorator('status', {
-                initialValue: '1',
+                initialValue: queryForm.orderStatus,
               })(
                 <Select>
                   <Option value="1">全部</Option>
@@ -155,7 +159,7 @@ class QueryForm extends Component {
           <Col span={7}>
             <Form.Item {...formItemLayout} label="配送方式">
               {getFieldDecorator('shipperTypeId', {
-                initialValue: '0',
+                initialValue: queryForm.shipperTypeId,
               })(
                 <Select>
                   <Option value="0">全部</Option>
@@ -170,7 +174,7 @@ class QueryForm extends Component {
             <Form.Item {...formItemLayout} label="来源">
               {getFieldDecorator('channel', {
                 // initialValue: queryForm.channel,
-                initialValue: '0',
+                initialValue: queryForm.orderSource,
               })(
                 <Select>
                   <Option value="0">全部</Option>
