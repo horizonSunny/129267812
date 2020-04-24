@@ -59,6 +59,18 @@ class NextForm extends React.Component {
 
   goForward = e => {
     // 调用父组件上的modifyFormPage方法
+    const { dispatch } = this.props;
+    const { getFieldValue } = this.props.form;
+    const params = {
+      recommandStatus: getFieldValue('recommandStatus'),
+      price: getFieldValue('price'),
+      stock: getFieldValue('stock'),
+    };
+    dispatch({
+      type: 'commodity/saveProduct',
+      payload: params,
+    });
+    // console.log('params_', params);
     this.props.modifyFormPage(true);
   };
 
@@ -204,7 +216,7 @@ class NextForm extends React.Component {
             })(
               <Switch
                 style={{ marginLeft: '20px' }}
-                defaultChecked={formInit.recommandStatus === 1}
+                defaultChecked={formInit.recommandStatus || formInit.recommandStatus === 1}
               />,
             )}
           </Form.Item>
