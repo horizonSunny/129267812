@@ -213,7 +213,7 @@ export default class TableList extends React.Component {
         onChange={this.setTabChange}
         className={styles.main}
       >
-        <TabPane tab="出售中" key="0">
+        <TabPane tab="出售中" key="1">
           <Table
             {...this.state}
             columns={columns}
@@ -229,7 +229,7 @@ export default class TableList extends React.Component {
             scroll={{ x: 1200 }}
           />
         </TabPane>
-        <TabPane tab="已售罄" key="1">
+        <TabPane tab="已售罄" key="2">
           <Table
             {...this.state}
             className={styles.main}
@@ -245,7 +245,7 @@ export default class TableList extends React.Component {
             scroll={{ x: 1200 }}
           />
         </TabPane>
-        <TabPane tab="已下架" key="2">
+        <TabPane tab="已下架" key="0">
           <Table
             {...this.state}
             className={styles.main}

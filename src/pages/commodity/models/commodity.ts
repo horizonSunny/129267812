@@ -38,7 +38,7 @@ const searchFormInfo = {
   productCommonName: '',
   approvalNumber: '',
 };
-const tabStatus = 0;
+const tabStatus = 1;
 const CommodityModel = {
   namespace: 'commodity',
   state: {
@@ -46,9 +46,9 @@ const CommodityModel = {
     productWithId: {},
     productLog: {},
     allProductType: {},
-    // 代表商品是0-出售中,1-已下架，2-已售罄
+    // 代表商品是0-已下架,1-出售中，2-已售罄
     productListStatus: tabStatus,
-    // 商品三个状态分别的sort排序方式,0-出售中,1-已下架，2-已售罄
+    // 商品三个状态分别的sort排序方式,0-已下架,1-出售中，2-已售罄
     tabelConditions: deepCopy(tabelConditionsInfo),
     // list searchForm
     searchForm: deepCopy(searchFormInfo),
