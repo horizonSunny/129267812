@@ -216,7 +216,7 @@ export default class TableList extends React.Component {
             pagination={{
               current: tabelConditions[productListStatus].currentPage,
               position: 'bottom',
-              pageSize: 10,
+              pageSize: tabelConditions[productListStatus].pageSize,
               total: productList.totalElements,
             }}
             // rowSelection={rowSelection}
@@ -233,7 +233,7 @@ export default class TableList extends React.Component {
             pagination={{
               current: tabelConditions[productListStatus].currentPage,
               position: 'bottom',
-              pageSize: 10,
+              pageSize: tabelConditions[productListStatus].pageSize,
               total: productList.totalElements,
             }}
             scroll={{ x: 1200 }}
@@ -249,7 +249,7 @@ export default class TableList extends React.Component {
             pagination={{
               current: tabelConditions[productListStatus].currentPage,
               position: 'bottom',
-              pageSize: 10,
+              pageSize: tabelConditions[productListStatus].pageSize,
               total: productList.totalElements,
             }}
             scroll={{ x: 1200 }}

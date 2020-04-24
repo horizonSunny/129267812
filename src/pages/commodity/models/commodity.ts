@@ -8,22 +8,26 @@ import {
   productTemplateList,
 } from '@/services/commodity';
 import deepCopy from '@/utils/deepCopy';
+import filterProperty from '@/utils/filterProperty';
 
 const tabelConditionsInfo = {
   0: {
     currentPage: 1,
     saleOrder: undefined,
     stockOrder: undefined,
+    pageSize: 10,
   },
   1: {
     currentPage: 1,
     saleOrder: undefined,
     stockOrder: undefined,
+    pageSize: 10,
   },
   2: {
     currentPage: 1,
     saleOrder: undefined,
     stockOrder: undefined,
+    pageSize: 10,
   },
 };
 const searchFormInfo = {
@@ -52,10 +56,18 @@ const CommodityModel = {
   effects: {
     // 获取商品列表
     *getList({ payload }, { call, put, select }) {
-      const status = yield select(state => state.commodity.productListStatus);
-      const params = Object.assign(payload, { status });
+      const state = yield select(state => state.commodity);
+      // params包括searchForm的属性,包括根据productListStatus获取的tabelConditionsItem属性
+      const tabelConditionsItem = state.tabelConditions[state.productListStatus];
+      const params = Object.assign({}, state.searchForm, tabelConditionsItem);
+
       console.log('in_getList_params', params);
-      const response = yield call(productList, params);
+      params.pageNumber = params.currentPage - 1;
+      if ([0, 1].indexOf(params.recommandStatus) === -1) {
+        params.recommandStatus = '';
+      }
+      const paramsInfo = filterProperty(params);
+      const response = yield call(productList, paramsInfo);
       yield put({
         type: 'list',
         payload: response.data,

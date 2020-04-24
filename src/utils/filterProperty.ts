@@ -3,7 +3,7 @@ import { newAreaTree, newArea } from '@/utils/area.js';
 export default function filterProperty(obj) {
   const newObj = new Object();
   for (const key in obj) {
-    if (obj[key] !== null && obj[key] !== undefined) {
+    if (obj[key] !== null && obj[key] !== undefined && obj[key] !== '') {
       newObj[key] = obj[key];
     }
   }
