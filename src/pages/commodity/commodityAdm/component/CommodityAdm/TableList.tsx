@@ -114,12 +114,18 @@ export default class TableList extends React.Component {
   setTabChange = currentTab => {
     console.log('currentTab_', currentTab);
     const { dispatch } = this.props;
-    dispatch({
-      type: 'commodity/resetStatus',
-      payload: {
-        productListStatus: currentTab,
-      },
-    });
+    async function tabChange() {
+      await dispatch({
+        type: 'commodity/resetStatus',
+        payload: {
+          productListStatus: currentTab,
+        },
+      });
+      await dispatch({
+        type: 'commodity/getList',
+      });
+    }
+    tabChange();
   };
 
   render() {

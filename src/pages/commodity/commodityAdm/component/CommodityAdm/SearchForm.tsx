@@ -49,10 +49,16 @@ class AdvancedSearchForm extends React.Component {
       const searchInfo = filterProperty(searchParams);
       console.log('searchInfo_', searchInfo);
 
-      dispatch({
-        type: 'commodity/saveSearchForm',
-        payload: searchInfo,
-      });
+      async function search() {
+        await dispatch({
+          type: 'commodity/saveSearchForm',
+          payload: searchInfo,
+        });
+        await dispatch({
+          type: 'commodity/getList',
+        });
+      }
+      search();
       // this.props.saveSearchInfo(searchInfo);
     });
   };
@@ -128,6 +134,7 @@ class AdvancedSearchForm extends React.Component {
                 initialValue: searchForm.productType,
               })(
                 <TreeSelect
+                  allowClear
                   placeholder="选择商品分类"
                   treeData={productType}
                   onChange={this.onChange}

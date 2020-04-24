@@ -59,10 +59,14 @@ const CommodityModel = {
       const state = yield select(state => state.commodity);
       // params包括searchForm的属性,包括根据productListStatus获取的tabelConditionsItem属性
       const tabelConditionsItem = state.tabelConditions[state.productListStatus];
-      const params = Object.assign({}, state.searchForm, tabelConditionsItem);
+      const params = Object.assign({}, state.searchForm, tabelConditionsItem, {
+        status: state.productListStatus,
+      });
 
       console.log('in_getList_params', params);
       params.pageNumber = params.currentPage - 1;
+      // 过滤掉这个条件
+      params.currentPage = '';
       if ([0, 1].indexOf(params.recommandStatus) === -1) {
         params.recommandStatus = '';
       }
