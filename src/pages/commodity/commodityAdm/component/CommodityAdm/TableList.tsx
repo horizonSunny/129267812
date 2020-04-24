@@ -81,7 +81,7 @@ export default class TableList extends React.Component {
         dispatch({
           type: 'commodity/shelveProduct',
           payload: {
-            productId: this.state.switchRecord.productId,
+            productIds: [this.state.switchRecord.productId],
             status: info,
           },
         }).then(res => {
