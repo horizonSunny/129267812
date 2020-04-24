@@ -50,28 +50,28 @@ class EditForm extends React.Component {
       console.log('values[productImage]_', values.productImage);
       if (!err) {
         validateValue = true;
-        // 调用父组件上的modifyFormPage方法
-        this.props.modifyFormPage(false);
       }
     });
-    // if (validateValue) {
-    //   console.log('location_', routerParams(location.search));
-    //   const params = routerParams(location.search);
-    //   const typeInfo = params.id ? 'commodity/editProduct' : 'commodity/newProduct';
-    //   // 判断是不是编辑
-    //   const value = this.props.form.getFieldsValue();
-    //   value.productSpec = value.productSpec.toHTML();
-    //   if (params.id) {
-    //     value.productId = this.props.commodity.productWithId.productId;
-    //   }
-    //   value.productType = [value.productType];
-    //   // dispatch({
-    //   //   type: typeInfo,
-    //   //   payload: value,
-    //   // }).then(() => {
-    //   //   // router.push('/commodityAdm/management');
-    //   // });
-    // }
+    if (validateValue) {
+      // console.log('location_', routerParams(location.search));
+      const params = routerParams(location.search);
+      const typeInfo = params.id ? 'commodity/editProduct' : 'commodity/newProduct';
+      // 判断是不是编辑
+      const value = this.props.form.getFieldsValue();
+      value.productSpec = value.productSpec.toHTML();
+      if (params.id) {
+        value.productId = this.props.commodity.productWithId.productId;
+      }
+      value.productType = [value.productType];
+      dispatch({
+        type: 'commodity/saveProduct',
+        payload: value,
+      });
+      // .then(() => {
+      //   // 调用父组件上的modifyFormPage方法;
+      this.props.modifyFormPage(false);
+      // });
+    }
   };
 
   // 判断

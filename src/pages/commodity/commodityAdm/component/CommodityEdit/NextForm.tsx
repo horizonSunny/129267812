@@ -1,8 +1,5 @@
-import { Form, Input, Select, Radio, Button, TreeSelect, InputNumber, Switch } from 'antd';
+import { Form, Select, Radio, Button, InputNumber, Switch, Checkbox } from 'antd';
 import React from 'react';
-import styles from './Form.less';
-import LabelInfo from '../../../../../components/Label/label';
-import CommodityImg from './CommodityImg';
 import router from 'umi/router';
 // 引入富文本编辑器
 import BraftEditor from 'braft-editor';
@@ -10,20 +7,22 @@ import 'braft-editor/dist/index.css';
 import { connect } from 'dva';
 import { callbackify } from 'util';
 import routerParams from '@/utils/routerParams';
+import Item from 'antd/lib/list/Item';
+import CommodityImg from './CommodityImg';
+import LabelInfo from '../../../../../components/Label/label';
+import styles from './Form.less';
 
 const { Option } = Select;
-const isMapClass = {
-  width: '40px',
-  borderRadius: '15px',
-  height: '20px',
-  lineHeight: '20px',
-  fontSize: '10px',
-};
-@connect(({ commodity }) => ({ commodity }))
+
+@connect(({ commodity, tradeSetting }) => ({ commodity, tradeSetting }))
 class NextForm extends React.Component {
   state = {
     formInit: this.props.commodity.productWithId,
   };
+
+  componentDidMount() {
+    // 获取产品中保存的运费模版
+  }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -63,16 +62,39 @@ class NextForm extends React.Component {
     this.props.modifyFormPage(true);
   };
 
-  radioChange = () => {};
+  checkboxChange = value => {
+    console.log('value_', value);
+    const { dispatch } = this.props;
+    const { productDeliveryTemplate } = this.props.commodity;
+    productDeliveryTemplate.hasSelectTemplate = value;
+    dispatch({
+      type: 'commodity/setProductDeliveryTemplate',
+      payload: productDeliveryTemplate,
+    });
+  };
 
-  handleChange = () => {};
+  handleChange = (name, value) => {
+    const { freightList } = this.props.tradeSetting;
+    const templateInfo = freightList.pageList.find(item => {
+      return item.freightTemplateId === value;
+    });
+    const { productDeliveryTemplate } = this.props.commodity;
+    productDeliveryTemplate[name] = templateInfo;
+    console.log('name_', name, '_value_', value);
+    console.log('productDeliveryTemplate_', productDeliveryTemplate);
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'commodity/setProductDeliveryTemplate',
+      payload: productDeliveryTemplate,
+    });
+  };
 
   commitSubmit = () => {};
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { formInit, isFirstpage } = this.state;
-    const { editorState } = this.state;
+    const { formInit } = this.state;
+    const { productDeliveryTemplate } = this.props.commodity;
     // 不在控制栏显示的控件
     const formItemLayout = {
       labelCol: {
@@ -88,7 +110,19 @@ class NextForm extends React.Component {
       display: 'block',
       height: '50px',
       lineHeight: '30px',
+      marginLeft: '0px',
     };
+    // 获取到模版,然后进行模版划分,设置options值
+    const { freightList } = this.props.tradeSetting;
+    const ordinary = [];
+    const urgent = [];
+    freightList.pageList.map(item => {
+      if (item.templateType === 2) {
+        urgent.push(item);
+      } else {
+        ordinary.push(item);
+      }
+    });
     return (
       <div>
         <Form className={styles.main} {...formItemLayout} onSubmit={this.commitSubmit}>
@@ -116,40 +150,63 @@ class NextForm extends React.Component {
             })(<InputNumber min={0} style={{ width: '90%' }} />)}
             <span>&nbsp;&nbsp;件</span>
           </Form.Item>
-          <Form.Item label="快捷方式">
-            {getFieldDecorator('stock', {
+          <Form.Item label="快递方式">
+            {getFieldDecorator('delivery', {
               rules: [
                 {
                   required: true,
-                  message: '请填写你的商品库存',
+                  message: '选择你的快递模版',
                 },
               ],
-              initialValue: formInit.stock ? formInit.stock : '',
+              // initialValue: formInit.stock ? formInit.stock : '',
+              initialValue: productDeliveryTemplate.hasSelectTemplate,
             })(
-              <Radio.Group onChange={this.radioChange} value={1}>
-                <Radio style={radioStyle} value={1}>
+              <Checkbox.Group onChange={this.checkboxChange}>
+                <Checkbox style={radioStyle} value={1}>
                   普通快递:&nbsp;&nbsp;
-                  <Select defaultValue="lucy" style={{ width: 250 }} onChange={this.handleChange}>
-                    <Option value="jack">Jack</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="Yiminghe">yiminghe</Option>
+                  <Select
+                    defaultValue={
+                      productDeliveryTemplate.ordinaryTemplate
+                        ? productDeliveryTemplate.ordinaryTemplate.freightTemplateId
+                        : ''
+                    }
+                    style={{ width: 250 }}
+                    onChange={value => this.handleChange('ordinaryTemplate', value)}
+                  >
+                    {ordinary.map(item => {
+                      return <Option value={item.freightTemplateId}>{item.templateName}</Option>;
+                    })}
                   </Select>
-                </Radio>
-                <Radio style={radioStyle} value={2}>
+                </Checkbox>
+                <Checkbox style={radioStyle} value={2}>
                   加急快递:&nbsp;&nbsp;
-                  <Select defaultValue="lucy" style={{ width: 250 }} onChange={this.handleChange}>
-                    <Option value="jack">Jack</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="Yiminghe">yiminghe</Option>
+                  <Select
+                    defaultValue={
+                      productDeliveryTemplate.urgentTemplate
+                        ? productDeliveryTemplate.urgentTemplate.freightTemplateId
+                        : ''
+                    }
+                    style={{ width: 250 }}
+                    onChange={value => this.handleChange('urgentTemplate', value)}
+                  >
+                    {/* urgent.map() <Option value="jack">Jack</Option> */}
+                    {urgent.map(item => {
+                      return <Option value={item.freightTemplateId}>{item.templateName}</Option>;
+                    })}
                   </Select>
-                </Radio>
-              </Radio.Group>,
+                </Checkbox>
+              </Checkbox.Group>,
             )}
           </Form.Item>
           <Form.Item label="是否推荐产品">
             {getFieldDecorator('recommandStatus', {
               initialValue: formInit.recommandStatus ? formInit.recommandStatus : '',
-            })(<Switch style={{ marginLeft: '20px' }} />)}
+            })(
+              <Switch
+                style={{ marginLeft: '20px' }}
+                defaultChecked={formInit.recommandStatus === 1}
+              />,
+            )}
           </Form.Item>
 
           <Form.Item

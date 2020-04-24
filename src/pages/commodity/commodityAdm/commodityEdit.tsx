@@ -5,11 +5,23 @@ import styles from './CommodityDet.less';
 import Form from './component/CommodityEdit/Form';
 import NextForm from './component/CommodityEdit/NextForm';
 
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ commodity, tradeSetting }) => ({ commodity, tradeSetting }))
 export default class CommodityEdit extends React.Component {
   state = {
     isFirstForm: true,
   };
+
+  componentDidMount() {
+    // getFreightList;
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'tradeSetting/getFreightList',
+      payload: {
+        pageNumber: 0,
+        pageSize: 10000,
+      },
+    });
+  }
 
   modifyFormPage = status => {
     this.setState({

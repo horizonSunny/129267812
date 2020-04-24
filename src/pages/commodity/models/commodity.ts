@@ -44,6 +44,12 @@ const CommodityModel = {
   state: {
     productList: {},
     productWithId: {},
+    // 设置当前商品的模版信息,hasSelectTemplate 1 为普通模版,2为加急模版
+    productDeliveryTemplate: {
+      ordinaryTemplate: '',
+      urgentTemplate: '',
+      hasSelectTemplate: [],
+    },
     productLog: {},
     allProductType: {},
     // 代表商品是0-已下架,1-出售中，2-已售罄
@@ -92,6 +98,35 @@ const CommodityModel = {
         type: 'product',
         payload: response.data,
       });
+      // 同时设置对应运费模版的信息
+      if (response.data && response.data.product) {
+        const { freightTemplates } = response.data.product;
+        console.log('freightTemplates_', freightTemplates);
+        let ordinaryTemplate = null;
+        let urgentTemplate = null;
+        freightTemplates.forEach(item => {
+          if (item.templateType === 2) {
+            urgentTemplate = item;
+          } else {
+            ordinaryTemplate = item;
+          }
+        });
+        const hasSelectTemplate = [];
+        if (urgentTemplate) {
+          hasSelectTemplate.push(2);
+        }
+        if (ordinaryTemplate) {
+          hasSelectTemplate.push(1);
+        }
+        yield put({
+          type: 'setProductDeliveryTemplate',
+          payload: {
+            ordinaryTemplate,
+            urgentTemplate,
+            hasSelectTemplate,
+          },
+        });
+      }
     },
     // 新建产品
     *newProduct({ payload }, { call, put }) {
@@ -162,10 +197,20 @@ const CommodityModel = {
     // 获取单个商品
     product(state, action) {
       console.log('in product');
+
       return {
         ...state,
         productWithId: action.payload.product,
         productLog: action.payload.log,
+      };
+    },
+    // 保存单个商品的信息
+    saveProduct(state, action) {
+      // console.log('in saveProduct_', action.payload);
+      const newProduct = Object.assign({}, state.productWithId, action.payload);
+      return {
+        ...state,
+        productWithId: newProduct,
       };
     },
     // 重置所有图片信息
@@ -232,6 +277,14 @@ const CommodityModel = {
       return {
         ...state,
         searchForm: action.payload,
+      };
+    },
+    // 设置编辑或者新建模版时候的运费模版信息
+    setProductDeliveryTemplate(state, action) {
+      console.log('setProductDeliveryTemplate_', action.payload);
+      return {
+        ...state,
+        productDeliveryTemplate: action.payload,
       };
     },
   },
