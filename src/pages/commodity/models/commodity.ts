@@ -12,7 +12,7 @@ import deepCopy from '@/utils/deepCopy';
 const tabelConditionsInfo = {
   0: {
     currentPage: 1,
-    saleOrder: 'ascend',
+    saleOrder: undefined,
     stockOrder: undefined,
   },
   1: {

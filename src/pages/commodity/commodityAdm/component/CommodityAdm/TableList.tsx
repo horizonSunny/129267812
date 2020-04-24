@@ -126,6 +126,7 @@ export default class TableList extends React.Component {
     const { state } = this;
     const { productList, productListStatus, tabelConditions } = this.props.commodity;
     console.log('tabelConditions_', tabelConditions);
+    console.log('productList_', productList);
     const columns = [
       {
         title: 'Sku',
@@ -226,7 +227,7 @@ export default class TableList extends React.Component {
           <Table
             {...this.state}
             className={styles.main}
-            columns={state.columns}
+            columns={columns}
             dataSource={productList.pageList}
             onChange={this.onChange}
             pagination={{
@@ -242,7 +243,7 @@ export default class TableList extends React.Component {
           <Table
             {...this.state}
             className={styles.main}
-            columns={state.columns}
+            columns={columns}
             dataSource={productList.pageList}
             onChange={this.onChange}
             pagination={{
