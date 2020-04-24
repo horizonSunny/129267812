@@ -27,7 +27,7 @@ export default class CommodityDet extends React.Component {
     return (
       <PageHeaderWrapper className={styles.main}>
         <div className={styles.contentWrap}>
-          <Title level={4} style={{ borderBottom: '0px' }}>
+          <Title level={4} style={{ border: '0px' }}>
             商品名称(SKU编号:{productWithId.productSku})
           </Title>
           <TableList />
