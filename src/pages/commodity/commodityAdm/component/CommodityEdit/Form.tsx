@@ -1,4 +1,4 @@
-import { Form, Input, Select, Radio, Button, TreeSelect } from 'antd';
+import { Form, Input, Select, Radio, Button, TreeSelect, InputNumber, Switch } from 'antd';
 import React from 'react';
 import styles from './Form.less';
 import LabelInfo from '../../../../../components/Label/label';
@@ -50,29 +50,29 @@ class EditForm extends React.Component {
       console.log('values[productImage]_', values.productImage);
       if (!err) {
         validateValue = true;
+        // 调用父组件上的modifyFormPage方法
+        this.props.modifyFormPage(false);
       }
     });
-    if (validateValue) {
-      console.log('location_', routerParams(location.search));
-      const params = routerParams(location.search);
-      const typeInfo = params.id ? 'commodity/editProduct' : 'commodity/newProduct';
-      // 判断是不是编辑
-      const value = this.props.form.getFieldsValue();
-      value.productSpec = value.productSpec.toHTML();
-      if (params.id) {
-        value.productId = this.props.commodity.productWithId.productId;
-      }
-      value.productType = [value.productType];
-      dispatch({
-        type: typeInfo,
-        payload: value,
-      }).then(() => {
-        router.push('/commodityAdm/management');
-      });
-    }
+    // if (validateValue) {
+    //   console.log('location_', routerParams(location.search));
+    //   const params = routerParams(location.search);
+    //   const typeInfo = params.id ? 'commodity/editProduct' : 'commodity/newProduct';
+    //   // 判断是不是编辑
+    //   const value = this.props.form.getFieldsValue();
+    //   value.productSpec = value.productSpec.toHTML();
+    //   if (params.id) {
+    //     value.productId = this.props.commodity.productWithId.productId;
+    //   }
+    //   value.productType = [value.productType];
+    //   // dispatch({
+    //   //   type: typeInfo,
+    //   //   payload: value,
+    //   // }).then(() => {
+    //   //   // router.push('/commodityAdm/management');
+    //   // });
+    // }
   };
-
-  onChange = e => {};
 
   // 判断
   validatorImg = (rule, value, callback) => {
@@ -86,21 +86,21 @@ class EditForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { formInit } = this.state;
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-      },
-    };
+    const { formInit, isFirstpage } = this.state;
     const { editorState } = this.state;
     // 不在控制栏显示的控件
     const excludeControls = ['media', 'emoji'];
     const { productType } = this.state;
+    const formItemLayout = {
+      labelCol: {
+        sm: { span: 3 },
+        xxl: { span: 4 },
+      },
+      wrapperCol: {
+        sm: { span: 20 },
+        xxl: { span: 15 },
+      },
+    };
     return (
       <Form className={styles.main} {...formItemLayout} onSubmit={this.handleSubmit}>
         <Form.Item label="商品图">
@@ -112,7 +112,31 @@ class EditForm extends React.Component {
               },
             ],
             initialValue: formInit.productImage,
-          })(<CommodityImg onRef={this.onRef} />)}
+          })(
+            <div>
+              <CommodityImg onRef={this.onRef} />
+              <div
+                style={{
+                  fontSize: '12px',
+                  color: '#E7A310',
+                  lineHeight: '10px',
+                }}
+              >
+                支持PNG、JPG、JPEG，大小控制在300KB内，最多添加16张
+              </div>
+            </div>,
+          )}
+        </Form.Item>
+        <Form.Item label="商品品牌">
+          {getFieldDecorator('productBrand', {
+            rules: [
+              {
+                required: true,
+                message: '请填写你的商品品牌',
+              },
+            ],
+            initialValue: formInit.productBrand,
+          })(<Input />)}
         </Form.Item>
         <Form.Item label="通用名">
           {getFieldDecorator('productCommonName', {
@@ -124,24 +148,6 @@ class EditForm extends React.Component {
             ],
             initialValue: formInit.productCommonName,
           })(<Input />)}
-        </Form.Item>
-        <Form.Item label="商品类别">
-          {getFieldDecorator('productType', {
-            rules: [
-              {
-                required: true,
-                message: '请选择商品类别',
-              },
-            ],
-            initialValue: formInit.productType[0],
-          })(
-            <TreeSelect
-              style={{ width: '100%' }}
-              dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-              treeData={productType}
-              placeholder="Please select"
-            />,
-          )}
         </Form.Item>
         <Form.Item label="是否处方药">
           {getFieldDecorator('isMp', {
@@ -205,16 +211,56 @@ class EditForm extends React.Component {
             </Radio.Group>,
           )}
         </Form.Item>
-        <Form.Item label="商品品牌">
-          {getFieldDecorator('productBrand', {
+        <Form.Item label="批准文号">
+          {getFieldDecorator('approvalNumber', {
             rules: [
               {
                 required: true,
-                message: '请填写你的商品品牌',
+                message: '请填写你的批准文号',
               },
             ],
-            initialValue: formInit.productBrand,
+            initialValue: formInit.approvalNumber,
           })(<Input />)}
+        </Form.Item>
+        <Form.Item label="包装规格">
+          {getFieldDecorator('productSpecif', {
+            rules: [
+              {
+                required: true,
+                message: '请填写你的产品规格',
+              },
+            ],
+            initialValue: formInit.productSpecif,
+          })(<Input />)}
+        </Form.Item>
+        <Form.Item label="有效期">
+          {getFieldDecorator('productExpire', {
+            rules: [
+              {
+                required: true,
+                message: '请填写你的产品有效期',
+              },
+            ],
+            initialValue: formInit.productExpire,
+          })(<Input />)}
+        </Form.Item>
+        <Form.Item label="商品类别">
+          {getFieldDecorator('productType', {
+            rules: [
+              {
+                required: true,
+                message: '请选择商品类别',
+              },
+            ],
+            initialValue: formInit.productType[0],
+          })(
+            <TreeSelect
+              style={{ width: '100%' }}
+              dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+              treeData={productType}
+              placeholder="Please select"
+            />,
+          )}
         </Form.Item>
         <Form.Item label="商品简介">
           {getFieldDecorator('productDesc', {
@@ -227,26 +273,15 @@ class EditForm extends React.Component {
             initialValue: formInit.productDesc,
           })(<Input.TextArea />)}
         </Form.Item>
-        <Form.Item label="批准文号">
-          {getFieldDecorator('approvalNumber', {
+        <Form.Item label="生产企业">
+          {getFieldDecorator('manufacturer', {
             rules: [
               {
                 required: true,
-                message: '请填写你的批准文号',
+                message: '请填写你的生产企业',
               },
             ],
-            initialValue: formInit.approvalNumber,
-          })(<Input />)}
-        </Form.Item>
-        <Form.Item label="产品规格">
-          {getFieldDecorator('productSpecif', {
-            rules: [
-              {
-                required: true,
-                message: '请填写你的产品规格',
-              },
-            ],
-            initialValue: formInit.productSpecif,
+            initialValue: formInit.manufacturer,
           })(<Input />)}
         </Form.Item>
         <Form.Item label="剂型/型号">
@@ -270,28 +305,6 @@ class EditForm extends React.Component {
           {getFieldDecorator('pinyin', {
             rules: [],
             initialValue: formInit.pinyin ? formInit.pinyin : '',
-          })(<Input />)}
-        </Form.Item>
-        <Form.Item label="产品有效期">
-          {getFieldDecorator('productExpire', {
-            rules: [
-              {
-                required: true,
-                message: '请填写你的产品有效期',
-              },
-            ],
-            initialValue: formInit.productExpire,
-          })(<Input />)}
-        </Form.Item>
-        <Form.Item label="生产企业">
-          {getFieldDecorator('manufacturer', {
-            rules: [
-              {
-                required: true,
-                message: '请填写你的生产企业',
-              },
-            ],
-            initialValue: formInit.manufacturer,
           })(<Input />)}
         </Form.Item>
         <Form.Item label="说明书">
@@ -327,7 +340,7 @@ class EditForm extends React.Component {
           }}
         >
           <Button type="primary" htmlType="submit">
-            提交
+            下一步
           </Button>
         </Form.Item>
       </Form>

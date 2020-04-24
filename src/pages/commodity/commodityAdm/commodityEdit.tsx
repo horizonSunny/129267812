@@ -1,18 +1,29 @@
 import React from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Card, Typography, Alert } from 'antd';
+import { connect } from 'dva';
 import styles from './CommodityDet.less';
 import Form from './component/CommodityEdit/Form';
-import { connect } from 'dva';
-import routerParams from '@/utils/routerParams';
+import NextForm from './component/CommodityEdit/NextForm';
 
 @connect(({ commodity }) => ({ commodity }))
 export default class CommodityEdit extends React.Component {
+  state = {
+    isFirstForm: true,
+  };
+
+  modifyFormPage = status => {
+    this.setState({
+      isFirstForm: status,
+    });
+  };
+
   render() {
+    const { isFirstForm } = this.state;
     return (
-      <PageHeaderWrapper className={styles['main']}>
+      <PageHeaderWrapper className={styles.main}>
         {/* <Title level={4}>商品编辑</Title> */}
-        <Form></Form>
+        {isFirstForm && <Form modifyFormPage={this.modifyFormPage} />}
+        {!isFirstForm && <NextForm modifyFormPage={this.modifyFormPage} />}
       </PageHeaderWrapper>
     );
   }

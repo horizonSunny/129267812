@@ -96,19 +96,19 @@ const CommodityModel = {
     // 新建产品
     *newProduct({ payload }, { call, put }) {
       const response = yield call(newProduct, payload);
-      yield put({
-        type: 'successProduct',
-        payload: response.data,
-      });
+      // yield put({
+      //   type: 'successProduct',
+      //   payload: response.data,
+      // });
     },
     // 编辑产品
     *editProduct({ payload }, { call, put }) {
       console.log('in_editProduct');
       const response = yield call(editorProduct, payload);
-      yield put({
-        type: 'successProduct',
-        payload: response.data,
-      });
+      // yield put({
+      //   type: 'successProduct',
+      //   payload: response.data,
+      // });
     },
     // 获取产品类型字典
     *getProductType(_, { call, put }) {
@@ -178,12 +178,12 @@ const CommodityModel = {
       };
     },
     // 编辑或者新建产品成功后
-    successProduct(state, action) {
-      return {
-        ...state,
-        ...action.payload,
-      };
-    },
+    // successProduct(state, action) {
+    //   return {
+    //     ...state,
+    //     ...action.payload,
+    //   };
+    // },
 
     allProductType(state, action) {
       state.allProductType = action.payload;
