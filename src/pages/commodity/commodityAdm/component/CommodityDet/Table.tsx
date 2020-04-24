@@ -22,6 +22,7 @@ export default class TableList extends React.Component {
     columns: [
       {
         dataIndex: 'name',
+        width: '200px',
       },
       {
         className: 'column-money',
@@ -106,15 +107,12 @@ export default class TableList extends React.Component {
   dataReverse(data) {
     const arr = [];
     let i = 0;
-    for (const item in data) {
-      // this.state.tabelArr.push(obj);
-      if (filterData.hasOwnProperty(item)) {
-        const obj = new Object();
-        obj.key = i++;
-        obj.value = data[item];
-        obj.name = filterData[item];
-        arr.push(obj);
-      }
+    for (const item in filterData) {
+      const obj = new Object();
+      obj.key = i++;
+      obj.name = filterData[item];
+      obj.value = data[item];
+      arr.push(obj);
     }
     console.log('tabelArr_', arr);
     // return arr;
@@ -135,7 +133,6 @@ export default class TableList extends React.Component {
         className={styles.main}
         columns={state.columns}
         dataSource={state.tabelArr}
-        bordered
         pagination={false}
       />
     );

@@ -161,12 +161,11 @@ const CommodityModel = {
     },
     // 获取单个商品
     product(state, action) {
-      state.productWithId = action.payload.product;
-      state.productLog = action.payload.log;
       console.log('in product');
       return {
         ...state,
-        ...action.payload,
+        productWithId: action.payload.product,
+        productLog: action.payload.log,
       };
     },
     // 重置所有图片信息

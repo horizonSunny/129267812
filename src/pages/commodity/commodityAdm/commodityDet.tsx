@@ -22,13 +22,17 @@ export default class CommodityDet extends React.Component {
   }
 
   render() {
-    const commodity = this.props.commodity.product.productSku;
+    const { productWithId } = this.props.commodity;
+    // const commodity = this.props.commodity.product.productSku;
     return (
       <PageHeaderWrapper className={styles.main}>
-        <Title level={4}>商品名称(SKU编号:{commodity})</Title>
-        <TableList />
-        <RecordList />
-        <div className={`${styles.operationIn}`} />
+        <div className={styles.contentWrap}>
+          <Title level={4} style={{ borderBottom: '0px' }}>
+            商品名称(SKU编号:{productWithId.productSku})
+          </Title>
+          <TableList />
+          <RecordList />
+          {/* <div className={`${styles.operationIn}`} />
         <div className={`${styles.operation}`}>
           <Button type="primary" onClick={this.handleEdit.bind(this, this.props.commodity.product)}>
             编辑
@@ -36,6 +40,7 @@ export default class CommodityDet extends React.Component {
           <Button icon="left" className={`${styles.back}`} onClick={this.handleBack}>
             返回
           </Button>
+        </div> */}
         </div>
       </PageHeaderWrapper>
     );

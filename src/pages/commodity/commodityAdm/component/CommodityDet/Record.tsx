@@ -14,23 +14,6 @@ const columns = [
     dataIndex: 'operateInfo',
   },
 ];
-// const data = [
-//   {
-//     operation: '下架时间',
-//     optTime: '2012-03-03',
-//     operator: '张三1',
-//   },
-//   {
-//     operation: '上架时间',
-//     optTime: '2012-03-04',
-//     operator: '张三2',
-//   },
-//   {
-//     operation: '创建时间',
-//     optTime: '2012-03-05',
-//     operator: '张三3',
-//   },
-// ];
 @connect(({ commodity }) => ({ commodity }))
 export default class TableList extends React.Component {
   componentDidMount() {}
