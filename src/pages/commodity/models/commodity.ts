@@ -208,6 +208,7 @@ const CommodityModel = {
     saveProduct(state, action) {
       // console.log('in saveProduct_', action.payload);
       const newProduct = Object.assign({}, state.productWithId, action.payload);
+      console.log('productWithId_', newProduct);
       return {
         ...state,
         productWithId: newProduct,

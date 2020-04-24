@@ -101,7 +101,59 @@ class NextForm extends React.Component {
     });
   };
 
-  commitSubmit = () => {};
+  // 保存是否上下架
+  saveForm = isShelf => {
+    const { dispatch } = this.props;
+    const { productWithId } = this.props.commodity;
+    const { ordinaryTemplate, urgentTemplate } = this.props.commodity.productDeliveryTemplate;
+    // 对全部模版进行一个校验
+    const freightTemplateIds = [];
+    if (ordinaryTemplate) {
+      freightTemplateIds.push(ordinaryTemplate.freightTemplateId);
+      debugger;
+    }
+    if (urgentTemplate) {
+      freightTemplateIds.push(urgentTemplate.freightTemplateId);
+    }
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        // if()
+        const { getFieldValue } = this.props.form;
+        const params = {
+          freightTemplateIds,
+          recommandStatus: getFieldValue('recommandStatus'),
+          price: getFieldValue('price'),
+          stock: getFieldValue('stock'),
+          isShelf,
+        };
+        dispatch({
+          type: 'commodity/saveProduct',
+          payload: params,
+        });
+      }
+    });
+  };
+
+  // 检查
+  deliveryCheck = (rule, value, callback) => {
+    const {
+      ordinaryTemplate,
+      urgentTemplate,
+      hasSelectTemplate,
+    } = this.props.commodity.productDeliveryTemplate;
+    if (hasSelectTemplate.length === 0) {
+      callback('请选择运费模版');
+    }
+    if (hasSelectTemplate.length !== 0) {
+      const ordinaryChecked = hasSelectTemplate.indexOf(1) > -1 && ordinaryTemplate;
+      const urgentChecked = hasSelectTemplate.indexOf(2) > -1 && urgentTemplate;
+      debugger;
+      if (!(ordinaryChecked || urgentChecked)) {
+        callback('请选择快递方式');
+      }
+    }
+    callback();
+  };
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -169,6 +221,9 @@ class NextForm extends React.Component {
                   required: true,
                   message: '选择你的快递模版',
                 },
+                {
+                  validator: this.deliveryCheck.bind(this),
+                },
               ],
               // initialValue: formInit.stock ? formInit.stock : '',
               initialValue: productDeliveryTemplate.hasSelectTemplate,
@@ -228,8 +283,12 @@ class NextForm extends React.Component {
             }}
           >
             <Button onClick={this.goForward}>上一步</Button>
-            <Button style={{ margin: '0px 20px' }}>保存到已下架</Button>
-            <Button type="primary">上架出售</Button>
+            <Button onClick={this.saveForm.bind(this, 0)} style={{ margin: '0px 20px' }}>
+              保存到已下架
+            </Button>
+            <Button onClick={this.saveForm.bind(this, 1)} type="primary">
+              上架出售
+            </Button>
           </Form.Item>
         </Form>
       </div>
