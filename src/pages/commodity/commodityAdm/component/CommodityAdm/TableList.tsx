@@ -26,10 +26,16 @@ export default class TableList extends React.Component {
       tabelConditions[productListStatus].stockOrder = sorter.order;
     }
     const { dispatch } = this.props;
-    dispatch({
-      type: 'commodity/setTabelConditions',
-      payload: tabelConditions,
-    });
+    async function tableChange() {
+      await dispatch({
+        type: 'commodity/setTabelConditions',
+        payload: tabelConditions,
+      });
+      await dispatch({
+        type: 'commodity/getList',
+      });
+    }
+    tableChange();
   };
 
   // 切换按钮
