@@ -106,19 +106,21 @@ const CommodityModel = {
         console.log('freightTemplates_', freightTemplates);
         let ordinaryTemplate = null;
         let urgentTemplate = null;
-        freightTemplates.forEach(item => {
-          if (item.templateType === 2) {
-            urgentTemplate = item;
-          } else {
-            ordinaryTemplate = item;
-          }
-        });
         const hasSelectTemplate = [];
-        if (urgentTemplate) {
-          hasSelectTemplate.push(2);
-        }
-        if (ordinaryTemplate) {
-          hasSelectTemplate.push(1);
+        if (freightTemplates) {
+          freightTemplates.forEach(item => {
+            if (item.templateType === 2) {
+              urgentTemplate = item;
+            } else {
+              ordinaryTemplate = item;
+            }
+          });
+          if (urgentTemplate) {
+            hasSelectTemplate.push(2);
+          }
+          if (ordinaryTemplate) {
+            hasSelectTemplate.push(1);
+          }
         }
         yield put({
           type: 'setProductDeliveryTemplate',

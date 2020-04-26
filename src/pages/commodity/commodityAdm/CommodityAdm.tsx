@@ -15,20 +15,10 @@ export default class CommodityAdm extends React.Component {
     const { dispatch } = this.props;
     // const searchParams = filterProperty(this.props.commodity.searchInfo);
     dispatch({
-      type: 'commodity/resetStatus',
-      payload: {
-        productListStatus: 0,
-      },
-    });
-    dispatch({
       type: 'commodity/getProductType',
     });
     dispatch({
       type: 'commodity/getList',
-      payload: {
-        pageNumber: 0,
-        pageSize: 10,
-      },
     });
   }
 

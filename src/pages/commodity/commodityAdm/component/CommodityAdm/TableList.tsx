@@ -320,7 +320,12 @@ export default class TableList extends React.Component {
           <h3>确定{this.state.switchRecord.isShelf === 0 ? '上架' : '下架'}该产品</h3>
         </Modal>
         {/* 二维码展示 */}
-        <Modal footer={null} visible={this.state.qrVisible} onCancel={this.qrhandleCancel}>
+        <Modal
+          key="qrModal"
+          footer={null}
+          visible={this.state.qrVisible}
+          onCancel={this.qrhandleCancel}
+        >
           <div
             style={{
               width: '400px',
