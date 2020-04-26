@@ -3,7 +3,8 @@ import { Table, Button } from 'antd';
 import { connect } from 'dva';
 import { DragableBodyRow } from './casTr';
 import AddClassifyModal from '../../modelComponent/addClassify';
-
+import styles from './casTable.less';
+import { editImg, deleteImg, seeNl, seeSel } from '@/assets/casTable';
 @connect(({ commodityClassify }) => ({
   commodityClassify,
 }))
@@ -44,11 +45,26 @@ export default class CasTable extends React.Component {
     this.child.showModal(classifyName);
   }
 
+  operate = (operate, record) => {
+    console.log('operate_', operate);
+    console.log('record_', record);
+  };
+
   render() {
     const columns = [
       {
         dataIndex: 'cateName',
         key: 'id',
+        render: (text, record) => (
+          <div className={`${styles.main}`}>
+            <div>{text}</div>
+            <div className={`${styles.operate}`}>
+              <img src={editImg} alt="" onClick={this.operate.bind(this, 'editor', record)} />
+              <img src={seeSel} alt="" onClick={this.operate.bind(this, 'eye', record)} />
+              <img src={deleteImg} alt="" onClick={this.operate.bind(this, 'delete', record)} />
+            </div>
+          </div>
+        ),
       },
     ];
     const dataSourceInfo = this.props.commodityClassify[`casInfo${this.props.levelInfo}`];
