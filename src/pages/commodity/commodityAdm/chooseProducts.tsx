@@ -132,7 +132,7 @@ class CommodityAdm extends React.Component {
   handleNew = record => {
     const { dispatch } = this.props;
     console.log('record_', record);
-    const params = {
+    let params = {
       approvalNumber: '',
       englishName: '',
       isMp: '',

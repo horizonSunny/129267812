@@ -6,6 +6,8 @@ import {
   productype,
   shelve,
   productTemplateList,
+  deletProduct,
+  generateQR,
 } from '@/services/commodity';
 import deepCopy from '@/utils/deepCopy';
 import filterProperty from '@/utils/filterProperty';
@@ -179,6 +181,15 @@ const CommodityModel = {
       // 接口调用失败
       // do something...
       return false;
+    },
+    *deletProduct({ payload }, { call }) {
+      const response = yield call(deletProduct, payload);
+    },
+    *generateQR({ payload }, { call }) {
+      const response = yield call(generateQR, payload);
+      if (response && response.data) {
+        return response.data;
+      }
     },
   },
 

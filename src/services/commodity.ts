@@ -44,3 +44,19 @@ export async function productTemplateList(params: any) {
     params,
   });
 }
+
+// 删除产品
+export async function deletProduct(params: any) {
+  return request('/admin/v1/delete', {
+    method: 'delete',
+    data: params,
+  });
+}
+
+// 生成二维码
+export async function generateQR(params: any) {
+  // return request('/admin/v1/generateQR', {
+  //   params,
+  // });
+  return request(`/admin/v1/generateQR/${params.productId}`);
+}

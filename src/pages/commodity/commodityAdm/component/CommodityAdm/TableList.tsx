@@ -13,6 +13,8 @@ export default class TableList extends React.Component {
     searchInfo: this.props.searchInfo,
     visible: false,
     switchRecord: {},
+    qrVisible: false,
+    qrImg: '',
   };
 
   onChange = (pagination, filters, sorter) => {
@@ -68,6 +70,24 @@ export default class TableList extends React.Component {
         query: { id: params.productId },
       });
     });
+  };
+
+  // 删除商品
+  deleteProduct = record => {
+    // deletProduct
+    const { dispatch } = this.props;
+    async function deleteProductInfo() {
+      await dispatch({
+        type: 'commodity/deletProduct',
+        payload: {
+          productIds: [record.productId],
+        },
+      });
+      await dispatch({
+        type: 'commodity/getList',
+      });
+    }
+    deleteProductInfo();
   };
 
   // 弹窗
@@ -132,6 +152,30 @@ export default class TableList extends React.Component {
       });
     }
     tabChange();
+  };
+
+  // 获取二维码
+  generateQR = record => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'commodity/generateQR',
+      payload: {
+        productId: record.productId,
+      },
+    }).then(res => {
+      console.log('data_', res);
+      this.setState({
+        qrVisible: true,
+        qrImg: res,
+      });
+    });
+  };
+
+  qrhandleCancel = e => {
+    console.log(e);
+    this.setState({
+      qrVisible: false,
+    });
   };
 
   render() {
@@ -206,9 +250,9 @@ export default class TableList extends React.Component {
             <Divider type="vertical" />
             <a onClick={this.goToNextPage.bind(this, record, 'editor')}>编辑</a>
             <Divider type="vertical" />
-            <a onClick={this.goToNextPage.bind(this, record, 'detail')}>生成二维码</a>
+            <a onClick={this.generateQR.bind(this, record)}>生成二维码</a>
             <Divider type="vertical" />
-            <a onClick={this.goToNextPage.bind(this, record, 'editor')}>删除</a>
+            <a onClick={this.deleteProduct.bind(this, record)}>删除</a>
           </span>
         ),
       },
@@ -274,6 +318,10 @@ export default class TableList extends React.Component {
           onCancel={this.handleCancel}
         >
           <h3>确定{this.state.switchRecord.isShelf === 0 ? '上架' : '下架'}该产品</h3>
+        </Modal>
+        {/* 二维码展示 */}
+        <Modal footer={null} visible={this.state.qrVisible} onCancel={this.qrhandleCancel}>
+          <img src={this.state.qrImg} height="400" width="400" alt="未查询到二维码信息" />
         </Modal>
       </Tabs>
     );
