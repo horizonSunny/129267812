@@ -321,7 +321,14 @@ export default class TableList extends React.Component {
         </Modal>
         {/* 二维码展示 */}
         <Modal footer={null} visible={this.state.qrVisible} onCancel={this.qrhandleCancel}>
-          <img src={this.state.qrImg} height="400" width="400" alt="未查询到二维码信息" />
+          <div
+            style={{
+              width: '400px',
+              height: '400px',
+            }}
+          >
+            <img src={this.state.qrImg} height="400" width="400" alt="未查询到二维码信息" />
+          </div>
         </Modal>
       </Tabs>
     );
