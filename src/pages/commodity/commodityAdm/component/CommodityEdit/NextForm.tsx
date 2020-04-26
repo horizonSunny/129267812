@@ -11,6 +11,7 @@ import Item from 'antd/lib/list/Item';
 import CommodityImg from './CommodityImg';
 import LabelInfo from '../../../../../components/Label/label';
 import styles from './Form.less';
+import Login from '@/pages/user/login/components/Login';
 
 const { Option } = Select;
 
@@ -105,14 +106,17 @@ class NextForm extends React.Component {
   saveForm = isShelf => {
     const { dispatch } = this.props;
     const { productWithId } = this.props.commodity;
-    const { ordinaryTemplate, urgentTemplate } = this.props.commodity.productDeliveryTemplate;
+    const {
+      ordinaryTemplate,
+      urgentTemplate,
+      hasSelectTemplate,
+    } = this.props.commodity.productDeliveryTemplate;
     // 对全部模版进行一个校验
     const freightTemplateIds = [];
-    if (ordinaryTemplate) {
+    if (ordinaryTemplate && hasSelectTemplate.indexOf(1) > -1) {
       freightTemplateIds.push(ordinaryTemplate.freightTemplateId);
-      debugger;
     }
-    if (urgentTemplate) {
+    if (urgentTemplate && hasSelectTemplate.indexOf(2) > -1) {
       freightTemplateIds.push(urgentTemplate.freightTemplateId);
     }
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -121,15 +125,29 @@ class NextForm extends React.Component {
         const { getFieldValue } = this.props.form;
         const params = {
           freightTemplateIds,
-          recommandStatus: getFieldValue('recommandStatus'),
+          recommandStatus: getFieldValue('recommandStatus') ? 1 : 0,
           price: getFieldValue('price'),
           stock: getFieldValue('stock'),
           isShelf,
         };
-        dispatch({
-          type: 'commodity/saveProduct',
-          payload: params,
-        });
+        // 依据路由来判断是不是编辑
+        const paramsInfo = routerParams(location.search);
+        const typeInfo = paramsInfo.id ? 'commodity/editProduct' : 'commodity/newProduct';
+        const _this = this;
+        async function saveProduct() {
+          await dispatch({
+            type: 'commodity/saveProduct',
+            payload: params,
+          });
+          const productInfo = _this.props.commodity.productWithId;
+          console.log('params_', params);
+          console.log('productInfo_', productInfo);
+          await dispatch({
+            type: typeInfo,
+            payload: productInfo,
+          });
+        }
+        saveProduct();
       }
     });
   };
@@ -147,7 +165,6 @@ class NextForm extends React.Component {
     if (hasSelectTemplate.length !== 0) {
       const ordinaryChecked = hasSelectTemplate.indexOf(1) > -1 && ordinaryTemplate;
       const urgentChecked = hasSelectTemplate.indexOf(2) > -1 && urgentTemplate;
-      debugger;
       if (!(ordinaryChecked || urgentChecked)) {
         callback('请选择快递方式');
       }
