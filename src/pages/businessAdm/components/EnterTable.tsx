@@ -2,6 +2,7 @@ import { Table, Switch, Button, Modal, message } from 'antd';
 import React, { Component } from 'react';
 import router from 'umi/router';
 import { connect } from 'dva';
+import styles from './EnterTable.less';
 
 const { confirm } = Modal;
 @connect(({ businessAdm }) => ({
@@ -173,6 +174,7 @@ class EnterTable extends Component {
   };
 
   onChange = (pagination, filters, sorter) => {
+    debugger;
     const { dispatch } = this.props;
     dispatch({
       type: 'businessAdm/queryPagenationChange',
@@ -182,6 +184,7 @@ class EnterTable extends Component {
       const params = {
         ...queryForm,
         ...pagenation,
+        pageNumber: pagenation.current,
       };
       // 查询列表
       dispatch({
@@ -201,6 +204,7 @@ class EnterTable extends Component {
     };
     return (
       <Table
+        className={styles.main}
         style={{ paddingLeft: '10px', paddingRight: '10px' }}
         rowKey="tenantId"
         dataSource={businessAdm.businessData}

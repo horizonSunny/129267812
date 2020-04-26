@@ -209,10 +209,11 @@ const businessAdm = {
         pageSize: action.payload.pageSize,
         total: action.payload.totalElements,
       };
+      debugger;
       return {
         ...state,
         businessData: action.payload.pageList || [],
-        pageNation: pagenation,
+        pagenation,
       };
     },
     formChange(state, action) {
@@ -222,6 +223,7 @@ const businessAdm = {
       };
     },
     pageNationChange(state, action) {
+      debugger;
       const tempPagenation = {
         ...state.pagenation,
         ...action.payload,
@@ -256,6 +258,14 @@ const businessAdm = {
       return {
         ...state,
         tracesInfo: action.payload,
+      };
+    },
+    // 修改清空选中商品数据
+    modifyCommodity(state, action) {
+      console.log('action_modifyCommodity_', action.payload);
+      return {
+        ...state,
+        selectedRowKeys: action.payload,
       };
     },
   },
