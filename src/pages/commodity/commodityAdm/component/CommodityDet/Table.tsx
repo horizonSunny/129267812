@@ -30,16 +30,14 @@ export default class TableList extends React.Component {
         render: (text, record) => {
           if (record.name === '商品图') {
             return (
-              <Carousel>
-                <Carousel>
-                  {record.value.map((item, index) => {
-                    return (
-                      <div>
-                        <img src={item} alt="暂无图片" style={{ height: '100%', width: '100%' }} />
-                      </div>
-                    );
-                  })}
-                </Carousel>
+              <Carousel autoplay>
+                {record.value.map((item, index) => {
+                  return (
+                    <div key={index} style={{ border: '1px dashed #ddd' }}>
+                      <img src={item} alt="暂无图片" style={{ height: '100%', width: '100%' }} />
+                    </div>
+                  );
+                })}
               </Carousel>
             );
           }

@@ -31,6 +31,7 @@ const selfDelivery = {
           payload: response.data,
         });
       }
+      return response.data;
     },
     *changePickUpStatus({ payload }, { call, put }) {
       const response = yield call(pickUpStatus, payload);

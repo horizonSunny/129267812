@@ -6,6 +6,7 @@ import router from 'umi/router';
 import styles from './CommodityDet.less';
 import TableList from './component/CommodityDet/Table';
 import RecordList from './component/CommodityDet/Record';
+import ProductConfig from './component/CommodityDet/ProductConfig';
 
 const { Title } = Typography;
 @connect(({ commodity }) => ({ commodity }))
@@ -30,7 +31,9 @@ export default class CommodityDet extends React.Component {
           <Title level={4} style={{ border: '0px' }}>
             商品名称(SKU编号:{productWithId.productSku})
           </Title>
+          {/* <ProductConfig /> */}
           <TableList />
+          <ProductConfig />
           <RecordList />
           {/* <div className={`${styles.operationIn}`} />
         <div className={`${styles.operation}`}>
