@@ -214,13 +214,12 @@ const CommodityModel = {
         productWithId: newProduct,
       };
     },
-    // 重置所有图片信息
+    // 重置所有铲平信息
     resetProduct(state, action) {
       console.log('in_resetProduct');
-      state.productWithId = action.payload;
       return {
         ...state,
-        ...action.payload,
+        productWithId: action.payload,
       };
     },
     // 编辑或者新建产品成功后

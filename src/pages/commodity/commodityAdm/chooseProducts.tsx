@@ -71,7 +71,7 @@ class CommodityAdm extends React.Component {
         key: 'name',
         render: (text, record) => {
           return record.status === 1 ? (
-            <Button style={{ background: '#F5AB1C' }} onClick={this.handleNew}>
+            <Button style={{ background: '#F5AB1C' }} onClick={this.handleNew.bind(this, record)}>
               添加
             </Button>
           ) : (
@@ -128,27 +128,34 @@ class CommodityAdm extends React.Component {
     return false;
   };
 
-  // 新增产品
-  handleNew = () => {
+  // 模版新增产品
+  handleNew = record => {
     const { dispatch } = this.props;
+    console.log('record_', record);
+    const params = {
+      approvalNumber: '',
+      englishName: '',
+      isMp: '',
+      manufacturer: '',
+      pinyin: '',
+      productBrand: '',
+      productDesc: '',
+      productExpire: '',
+      productImage: [],
+      productModel: '',
+      productCommonName: '',
+      productSpec: '',
+      productSpecif: '',
+      productType: '',
+    };
+    if (record) {
+      params = record;
+      params.productTemplateId = params.productId;
+    }
+
     dispatch({
       type: 'commodity/resetProduct',
-      payload: {
-        approvalNumber: '',
-        englishName: '',
-        isMp: '',
-        manufacturer: '',
-        pinyin: '',
-        productBrand: '',
-        productDesc: '',
-        productExpire: '',
-        productImage: [],
-        productModel: '',
-        productCommonName: '',
-        productSpec: '',
-        productSpecif: '',
-        productType: '',
-      },
+      payload: params,
     });
     router.push('/commodityAdm/management/edit');
   };
@@ -173,7 +180,10 @@ class CommodityAdm extends React.Component {
               <Button type="primary" htmlType="submit">
                 搜索
               </Button>
-              <Button style={{ marginLeft: 8, background: '#F5AB1C' }} onClick={this.handleNew}>
+              <Button
+                style={{ marginLeft: 8, background: '#F5AB1C' }}
+                onClick={this.handleNew.bind(this, false)}
+              >
                 手动添加
               </Button>
             </Col>
