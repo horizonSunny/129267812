@@ -183,13 +183,15 @@ const CommodityModel = {
         parentId,
       });
       // 往对应的分类级里面添加分类
-      yield put({
-        type: 'categoryAdd',
-        payload: {
-          ...response,
-          classify: payload.classify,
-        },
-      });
+      if (response && response.data) {
+        yield put({
+          type: 'categoryAdd',
+          payload: {
+            ...response,
+            classify: payload.classify,
+          },
+        });
+      }
     },
     // 往当前三级分类里面添加商品信息
     *productInsert(_, { select, call, put }) {
@@ -276,11 +278,15 @@ const CommodityModel = {
         case 1:
           // 下面是对选中后1，2，3级类别进行修改
           Obj.casInfoTwo = findChildren(state.casInfoOne, action.payload.id);
-          Obj.casInfoThree = Obj.casInfoTwo[0].children;
+          Obj.casInfoThree =
+            Obj.casInfoTwo[0] && Obj.casInfoTwo[0].children ? Obj.casInfoTwo[0].children : [];
           // 下面是对当前选中id值进行修改
           Obj.casOneId = action.payload.id;
-          Obj.casTwoId = Obj.casInfoTwo[0].id;
-          Obj.casThreeId = Obj.casInfoTwo[0].children[0].id;
+          Obj.casTwoId = Obj.casInfoTwo[0] && Obj.casInfoTwo[0].id ? Obj.casInfoTwo[0].id : '';
+          Obj.casThreeId =
+            Obj.casInfoTwo[0] && Obj.casInfoTwo[0].children[0] && Obj.casInfoTwo[0].children[0].id
+              ? Obj.casInfoTwo[0].children[0].id
+              : '';
           break;
         case 2:
           Obj.casInfoThree = findChildren(state.casInfoTwo, action.payload.id);

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Table } from 'antd';
 import { DragSource, DropTarget } from 'react-dnd';
-import styles from './casTr.less';
 import { connect } from 'dva';
+import styles from './casTr.less';
 
 let dragingIndex = -1;
 @connect(({ commodityClassify }) => ({
@@ -32,6 +32,7 @@ export class BodyRow extends React.Component {
       });
     }
   }
+
   render() {
     const { isOver, connectDragSource, connectDropTarget, moveRow, ...restProps } = this.props;
     const style = {
@@ -41,20 +42,20 @@ export class BodyRow extends React.Component {
       height: '25px',
       lineHeight: '25px',
     };
-    let { className } = restProps;
+    const { className } = restProps;
     // 测试
     const item = restProps.children;
-    const info = item[item.length - 1]['props']['record'];
+    const info = item[item.length - 1].props.record;
     let classifyInfo = '';
-    switch (info['classify']) {
+    switch (info.classify) {
       case 1:
-        classifyInfo = this.props.commodityClassify['casOneId'];
+        classifyInfo = this.props.commodityClassify.casOneId;
         break;
       case 2:
-        classifyInfo = this.props.commodityClassify['casTwoId'];
+        classifyInfo = this.props.commodityClassify.casTwoId;
         break;
       case 3:
-        classifyInfo = this.props.commodityClassify['casThreeId'];
+        classifyInfo = this.props.commodityClassify.casThreeId;
         break;
       default:
         break;

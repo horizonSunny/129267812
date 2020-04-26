@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, Input } from 'antd';
+import { Button, Modal, Input, notification } from 'antd';
 
 import { connect } from 'dva';
 
@@ -10,11 +10,16 @@ export default class AddClassifyModal extends React.Component {
   componentDidMount() {
     this.props.onRef(this);
   }
+
   state = { visible: false, title: '' };
+
   showModal = classifyName => {
     console.log('classifyName_', this.props.commodityClassify);
     const props = this.props.commodityClassify;
-    let classify, classifyItem, classifyInfo;
+    let classify;
+    let classifyItem;
+    let classifyInfo;
+    debugger;
     switch (classifyName) {
       case '一级':
         (classify = 1),
@@ -41,11 +46,17 @@ export default class AddClassifyModal extends React.Component {
       default:
         break;
     }
-    this.setState({
-      title: classifyItem['cateName'] + classifyInfo,
-      visible: true,
-      classify,
-    });
+    if (classifyItem) {
+      this.setState({
+        title: classifyItem.cateName + classifyInfo,
+        visible: true,
+        classify,
+      });
+    } else {
+      notification.error({
+        message: '请先选择要添加分类目标',
+      });
+    }
   };
 
   handleOk = e => {
@@ -72,6 +83,7 @@ export default class AddClassifyModal extends React.Component {
       visible: false,
     });
   };
+
   // input输入改变
   onChange(e) {
     const { value } = e.target;
@@ -80,6 +92,7 @@ export default class AddClassifyModal extends React.Component {
       newCateName: value,
     });
   }
+
   render() {
     const { visible, title } = this.state;
     return (
