@@ -3,13 +3,13 @@ import request from '@/utils/request';
 // 获取商品种类数据
 export async function categoryType(params: any) {
   return request('/admin/v1/category/getCategorys', {
-    params: params,
+    params,
   });
 }
 // 根据第三级分类id查询商品信息
 export async function categoryProduct(params: any) {
   return request('/admin/v1/category/search/categoryProduct', {
-    params: params,
+    params,
   });
 }
 // 从分类中移除产品
@@ -34,10 +34,23 @@ export async function categoryInsert(params: any) {
   });
 }
 
-// 往三级分类里面添加商品
-export async function productInsert(params: any) {
-  return request('/admin/v1/category/insert/product', {
-    method: 'POST',
+// 删除分类接口
+export async function deleteClassify(params: any) {
+  return request(`/admin/v1/category/delete/${params}`, {
+    method: 'delete',
+  });
+}
+// 设置分类是否可见
+export async function categoryShow(params: any) {
+  return request('/admin/v1/category/isShow', {
+    method: 'PUT',
+    data: params,
+  });
+}
+// 编辑分类名称
+export async function editorClassify(params: any) {
+  return request('/admin/v1/category/update', {
+    method: 'PUT',
     data: params,
   });
 }

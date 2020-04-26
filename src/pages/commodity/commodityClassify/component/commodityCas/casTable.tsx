@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button } from 'antd';
+import { Table, Button, Modal, Input } from 'antd';
 import { connect } from 'dva';
 import { DragableBodyRow } from './casTr';
 import AddClassifyModal from '../../modelComponent/addClassify';
@@ -9,7 +9,9 @@ import { editImg, deleteImg, seeNl, seeSel } from '@/assets/casTable';
   commodityClassify,
 }))
 export default class CasTable extends React.Component {
-  state = {};
+  state = {
+    modalVisabled: false,
+  };
 
   components = {
     body: {
@@ -45,9 +47,94 @@ export default class CasTable extends React.Component {
     this.child.showModal(classifyName);
   }
 
-  operate = (operate, record) => {
+  openModal = (operate, record) => {
+    // this.operate(operate, record);
+    this.setState({
+      operate,
+      record,
+      modalVisabled: true,
+    });
+  };
+
+  isShow = record => {
+    const _this = this;
+    const { dispatch } = this.props;
+    async function afterRefesh() {
+      await dispatch({
+        type: 'commodityClassify/classification',
+      });
+      await dispatch({
+        type: 'commodityClassify/selectCas',
+        payload: _this.props.commodityClassify.casInfoOne[0],
+      });
+    }
+    async function showInfo() {
+      await dispatch({
+        type: 'commodityClassify/categoryShow',
+        payload: {
+          categoryId: record.id,
+          isShow: record.isShow == 1 ? 2 : 1,
+        },
+      });
+      afterRefesh();
+    }
+    showInfo();
+  };
+
+  handleCancel = () => {
+    this.setState({
+      modalVisabled: false,
+    });
+  };
+
+  handleOk = () => {
+    const { dispatch } = this.props;
+    const { operate, record, editorName } = this.state;
     console.log('operate_', operate);
     console.log('record_', record);
+    console.log('editorName_', editorName);
+    const _this = this;
+    async function afterRefesh() {
+      await dispatch({
+        type: 'commodityClassify/classification',
+      });
+      await dispatch({
+        type: 'commodityClassify/selectCas',
+        payload: _this.props.commodityClassify.casInfoOne[0],
+      });
+    }
+    if (operate === 'delete') {
+      async function deleteInfo() {
+        await dispatch({
+          type: 'commodityClassify/deleteClassify',
+          payload: record.id,
+        });
+        afterRefesh();
+      }
+      deleteInfo();
+    } else if (operate === 'editor') {
+      async function editorInfo() {
+        await dispatch({
+          type: 'commodityClassify/editorClassify',
+          payload: {
+            cateName: editorName,
+            categoryId: record.id,
+          },
+        });
+        afterRefesh();
+      }
+      editorInfo();
+    }
+    this.setState({
+      modalVisabled: false,
+    });
+  };
+
+  editorChange = e => {
+    console.log('e_', e.target.value);
+    this.setState({
+      editorName: e.target.value,
+    });
   };
 
   render() {
@@ -57,11 +144,15 @@ export default class CasTable extends React.Component {
         key: 'id',
         render: (text, record) => (
           <div className={`${styles.main}`}>
-            <div>{text}</div>
+            <div className={`${styles.half}`}>{text}</div>
             <div className={`${styles.operate}`}>
-              <img src={editImg} alt="" onClick={this.operate.bind(this, 'editor', record)} />
-              <img src={seeSel} alt="" onClick={this.operate.bind(this, 'eye', record)} />
-              <img src={deleteImg} alt="" onClick={this.operate.bind(this, 'delete', record)} />
+              <img src={editImg} alt="" onClick={this.openModal.bind(this, 'editor', record)} />
+              <img
+                src={record.isShow === 1 ? seeSel : seeNl}
+                alt=""
+                onClick={this.isShow.bind(this, record)}
+              />
+              <img src={deleteImg} alt="" onClick={this.openModal.bind(this, 'delete', record)} />
             </div>
           </div>
         ),
@@ -108,6 +199,17 @@ export default class CasTable extends React.Component {
           })}
         />
         <AddClassifyModal onRef={this.onRef} />
+        <Modal
+          visible={this.state.modalVisabled}
+          title={this.state.operate === 'editor' ? '编辑该分类信息' : '删除该分类信息'}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          {this.state.operate === 'editor' && (
+            <Input onChange={value => this.editorChange(value)} />
+          )}
+          {this.state.operate !== 'editor' && <span>确认删除该分类信息</span>}
+        </Modal>
       </div>
     );
   }

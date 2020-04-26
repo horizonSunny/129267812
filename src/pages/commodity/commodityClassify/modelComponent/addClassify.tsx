@@ -19,7 +19,6 @@ export default class AddClassifyModal extends React.Component {
     let classify;
     let classifyItem;
     let classifyInfo;
-    debugger;
     switch (classifyName) {
       case '一级':
         (classify = 1),

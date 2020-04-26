@@ -11,6 +11,9 @@ import {
   reorderCategory,
   categoryInsert,
   productInsert,
+  deleteClassify,
+  categoryShow,
+  editorClassify,
 } from '@/services/comdClassify';
 
 function findChildren(data, id) {
@@ -234,6 +237,19 @@ const CommodityModel = {
         type: 'classifyDisabledMod',
         payload: response.data,
       });
+    },
+    // 删除分类接口
+    *deleteClassify({ payload }, { select, call, put }) {
+      // const state = yield select(state => state.commodityClassify);
+      const response = yield call(deleteClassify, payload);
+    },
+    // 设置分类是否可见
+    *categoryShow({ payload }, { select, call, put }) {
+      // const state = yield select(state => state.commodityClassify);
+      const response = yield call(categoryShow, payload);
+    },
+    *editorClassify({ payload }, { select, call, put }) {
+      const response = yield call(editorClassify, payload);
     },
   },
 
