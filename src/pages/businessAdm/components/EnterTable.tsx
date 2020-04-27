@@ -184,7 +184,7 @@ class EnterTable extends Component {
       const params = {
         ...queryForm,
         ...pagenation,
-        pageNumber: pagenation.current,
+        pageNumber: pagenation.current - 1,
       };
       // 查询列表
       dispatch({
@@ -206,9 +206,9 @@ class EnterTable extends Component {
       <Table
         className={styles.main}
         style={{ paddingLeft: '10px', paddingRight: '10px' }}
-        rowKey="tenantId"
         dataSource={businessAdm.businessData}
         columns={this.columns}
+        rowKey={record => record.orderId}
         rowSelection={rowSelection}
         pagination={businessAdm.pagenation}
         onChange={this.onChange}
