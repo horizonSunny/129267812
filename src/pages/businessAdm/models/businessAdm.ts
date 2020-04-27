@@ -10,6 +10,7 @@ import {
   shipper,
   deliverGoods,
   getTraces,
+  exportOrderList,
 } from '@/services/businessAdm';
 
 const queryFormInit = {
@@ -72,6 +73,12 @@ const businessAdm = {
     *queryFormChange({ payload }, { call, put }) {
       yield put({
         type: 'formChange',
+        payload,
+      });
+    },
+    *restFormChange({ payload }, { call, put }) {
+      yield put({
+        type: 'formChange',
         payload: queryFormInit,
       });
     },
@@ -131,7 +138,7 @@ const businessAdm = {
     // 退款
     *refundOrder({ payload }, { call, put, select }) {
       const response = yield call(refundOrder, payload);
-      const { currentRecord } = yield select(state => state.businessAdm);
+      const { queryForm } = yield select(state => state.businessAdm);
       if (response) {
         yield put({
           type: 'getOrder',
@@ -193,6 +200,17 @@ const businessAdm = {
       }
       return Promise.reject('null');
     },
+    // 导出接口
+    *exportOrderList({ payload }, { call, put, select }) {
+      const { queryForm, selectedRowKeys } = yield select(state => state.businessAdm);
+      // const response = yield call(exportOrderList, payload);
+      console.log('queryForm_', queryForm, '_selectedRowKeys_', selectedRowKeys);
+
+      if (response) {
+        return response;
+      }
+      return Promise.reject('null');
+    },
   },
 
   reducers: {
@@ -209,7 +227,6 @@ const businessAdm = {
         pageSize: action.payload.pageSize,
         total: action.payload.totalElements,
       };
-      debugger;
       return {
         ...state,
         businessData: action.payload.pageList || [],
@@ -223,7 +240,6 @@ const businessAdm = {
       };
     },
     pageNationChange(state, action) {
-      debugger;
       const tempPagenation = {
         ...state.pagenation,
         ...action.payload,

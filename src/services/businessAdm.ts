@@ -66,24 +66,10 @@ export async function getTraces(params) {
     params,
   });
 }
-// 查询订单列表
-// export async function insertBusiness(params) {
-//   return request('/admin/v1/tenant', {
-//     method: 'post',
-//     data: params,
-//   });
-// }
-
-// export async function saveBusiness(params) {
-//   return request('/admin/v1/tenant', {
-//     method: 'put',
-//     data: params,
-//   });
-// }
-
-// export async function queryOperation(params) {
-//   return request('/admin/v1/log', {
-//     method: 'get',
-//     params,
-//   });
-// }
+// 导出订单接口
+export async function exportOrderList(params) {
+  return request('/order/sysOrder/exportOrderList', {
+    method: 'get',
+    params,
+  });
+}

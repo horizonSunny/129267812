@@ -62,7 +62,7 @@ class QueryForm extends Component {
     const { dispatch } = this.props;
     this.props.form.resetFields();
     dispatch({
-      type: 'businessAdm/queryFormChange',
+      type: 'businessAdm/restFormChange',
     }).then(() => {
       this.handleQuery();
     });
@@ -85,10 +85,7 @@ class QueryForm extends Component {
   handleInsert = () => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'businessAdm/currentRecord',
-      payload: {},
-    }).then(() => {
-      router.push('/businessAdm/enter/edit');
+      type: 'businessAdm/exportOrderList',
     });
   };
 
@@ -96,6 +93,7 @@ class QueryForm extends Component {
     const { getFieldDecorator } = this.props.form;
     const { queryForm, channel } = this.props.businessAdm;
     console.log('queryForm_', queryForm);
+    debugger;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -116,7 +114,7 @@ class QueryForm extends Component {
             <Form.Item {...formItemLayout} label="创建时间">
               {getFieldDecorator('time', {
                 initialValue:
-                  queryForm.startTime && queryForm.endTime
+                  queryForm && queryForm.startTime && queryForm.endTime
                     ? [moment(queryForm.startTime), moment(queryForm.endTime)]
                     : '',
               })(
