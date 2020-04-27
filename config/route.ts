@@ -24,6 +24,10 @@ const route = [
             redirect: '/businessAdm/enter',
           },
           {
+            path: '/index',
+            redirect: '/businessAdm/enter',
+          },
+          {
             path: '/commodityAdm',
             name: '商品管理',
             icon: 'shop',
