@@ -1,5 +1,6 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
+import qs from 'qs';
 import { notification } from 'antd';
 import {
   queryOrederList,
@@ -201,15 +202,39 @@ const businessAdm = {
       return Promise.reject('null');
     },
     // 导出接口
-    *exportOrderList({ payload }, { call, put, select }) {
+    *exportOrderList({ payload, callback }, { call, put, select }) {
       const { queryForm, selectedRowKeys } = yield select(state => state.businessAdm);
-      // const response = yield call(exportOrderList, payload);
-      console.log('queryForm_', queryForm, '_selectedRowKeys_', selectedRowKeys);
-
-      if (response) {
-        return response;
-      }
-      return Promise.reject('null');
+      exportOrderList({
+        ...queryForm,
+        orderIds: selectedRowKeys,
+      }).then(
+        response => {
+          console.log('response_', response.data);
+          console.log('response_', response.data instanceof Blob);
+          if (response.data instanceof Blob) {
+            if (callback && typeof callback === 'function') {
+              callback(response.data);
+            }
+          } else {
+            // message.warning('Some error messages...', 5);
+          }
+        },
+        error => {
+          console.log('error_', error);
+        },
+      );
+      // const response = yield call(exportOrderList, {
+      //   ...queryForm,
+      //   orderIds: selectedRowKeys,
+      // });
+      // if (response instanceof Blob) {
+      //   debugger;
+      //   if (callback && typeof callback === 'function') {
+      //     callback(response);
+      //   }
+      // } else {
+      //   // message.warning('Some error messages...', 5);
+      // }
     },
   },
 

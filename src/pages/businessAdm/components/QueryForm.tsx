@@ -82,10 +82,28 @@ class QueryForm extends Component {
     });
   };
 
-  handleInsert = () => {
+  handleExport = () => {
     const { dispatch } = this.props;
+    const fileName = 'orderList.xls';
     dispatch({
       type: 'businessAdm/exportOrderList',
+      callback: blob => {
+        console.log('in_blob_', blob);
+
+        if (window.navigator.msSaveOrOpenBlob) {
+          navigator.msSaveBlob(blob, fileName);
+        } else {
+          const link = document.createElement('a');
+          const evt = document.createEvent('MouseEvents');
+          link.style.display = 'none';
+          link.href = window.URL.createObjectURL(blob);
+          link.download = fileName;
+          document.body.appendChild(link); // 此写法兼容可火狐浏览器
+          evt.initEvent('click', false, false);
+          link.dispatchEvent(evt);
+          document.body.removeChild(link);
+        }
+      },
     });
   };
 
@@ -93,7 +111,6 @@ class QueryForm extends Component {
     const { getFieldDecorator } = this.props.form;
     const { queryForm, channel } = this.props.businessAdm;
     console.log('queryForm_', queryForm);
-    debugger;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -212,7 +229,7 @@ class QueryForm extends Component {
                 border: '1px solid rgba(72,116,239,1)',
                 color: 'rgba(72,116,239,1)',
               }}
-              onClick={this.handleInsert}
+              onClick={this.handleExport}
             >
               导出
             </Button>

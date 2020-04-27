@@ -1,5 +1,6 @@
 import request from '@/utils/request';
-
+import axios from 'axios';
+import qs from 'qs';
 // 查询订单列表
 export async function queryOrederList(params) {
   console.log('列表最终参数为:', params);
@@ -67,9 +68,26 @@ export async function getTraces(params) {
   });
 }
 // 导出订单接口
+// export async function exportOrderList(params) {
+//   return request('/order/sysOrder/exportOrderList', {
+//     method: 'post',
+//     data: params,
+//     responseType: 'blob',
+//   });
+// }
+// 导出订单接口
 export async function exportOrderList(params) {
-  return request('/order/sysOrder/exportOrderList', {
-    method: 'get',
-    params,
+  return axios({
+    method: 'POST',
+    url: 'http://47.103.158.133:8088/order/sysOrder/exportOrderList',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: sessionStorage.getItem('token'),
+    },
+    data: JSON.stringify(params),
+    responseType: 'blob',
   });
 }
+// export async function exportOrderList(params) {
+//   return axios.post();
+// }

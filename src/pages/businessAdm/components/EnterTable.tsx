@@ -174,7 +174,6 @@ class EnterTable extends Component {
   };
 
   onChange = (pagination, filters, sorter) => {
-    debugger;
     const { dispatch } = this.props;
     dispatch({
       type: 'businessAdm/queryPagenationChange',
