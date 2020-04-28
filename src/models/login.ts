@@ -62,6 +62,8 @@ const Model: LoginModelType = {
             return;
           }
         }
+        console.log('311');
+
         // yield put(routerRedux.replace(redirect || '/'));
         setTimeout(() => {
           router.push(redirect);
