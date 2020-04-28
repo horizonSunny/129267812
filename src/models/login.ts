@@ -45,9 +45,9 @@ const Model: LoginModelType = {
         const token = `bearer ${response.data.access_token}`;
         sessionStorage.setItem('token', token);
         const urlParams = new URL(window.location.href);
-        console.log('urlParams_', urlParams);
 
         const params = getPageQuery();
+        console.log('urlParams_', params);
         let { redirect } = params as { redirect: string };
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
@@ -79,14 +79,15 @@ const Model: LoginModelType = {
       yield call(getFakeCaptcha, payload);
     },
     *logout(_, { call, put }) {
-      const { redirect } = getPageQuery();
-      // redirect
+      //  const { redirect } = getPageQuery();
       const response = yield call(userLogout);
       yield put({
         type: 'changeLoginStatus',
         payload: response,
       });
+      const redirect = window.location.href.split('?redirect=')[1];
       if (window.location.pathname !== '/user/login' && !redirect) {
+        console.log('走了几遍logout_', window.location.href);
         yield put(
           routerRedux.replace({
             pathname: '/user/login',
@@ -101,7 +102,6 @@ const Model: LoginModelType = {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      debugger;
       setAuthority(payload.currentAuthority);
       return {
         ...state,
