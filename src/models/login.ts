@@ -3,6 +3,7 @@ import { routerRedux } from 'dva/router';
 import { Effect } from 'dva';
 import { stringify } from 'querystring';
 import { notification } from 'antd';
+import router from 'umi/router';
 
 import { fakeAccountLogin, getFakeCaptcha, userLogout } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
@@ -40,8 +41,6 @@ const Model: LoginModelType = {
         type: 'changeLoginStatus',
         payload: response,
       });
-      console.log('response:', response);
-      // Login successfully
       if (response && response.code === 1) {
         const token = `bearer ${response.data.access_token}`;
         sessionStorage.setItem('token', token);
@@ -61,7 +60,10 @@ const Model: LoginModelType = {
             return;
           }
         }
-        yield put(routerRedux.replace(redirect || '/'));
+        // yield put(routerRedux.replace(redirect || '/'));
+        setTimeout(() => {
+          router.push(redirect);
+        }, 0);
       } else {
         // notification.error({
         //   description: (response && response.msg )||'网络连接失败',
