@@ -45,6 +45,8 @@ const Model: LoginModelType = {
         const token = `bearer ${response.data.access_token}`;
         sessionStorage.setItem('token', token);
         const urlParams = new URL(window.location.href);
+        console.log('urlParams_', urlParams);
+
         const params = getPageQuery();
         let { redirect } = params as { redirect: string };
         if (redirect) {
