@@ -39,7 +39,7 @@ const Model: LoginModelType = {
       const response = yield call(fakeAccountLogin, payload);
       yield put({
         type: 'changeLoginStatus',
-        payload: response,
+        payload: response.data,
       });
       if (response && response.code === 1) {
         const token = `bearer ${response.data.access_token}`;
@@ -62,11 +62,10 @@ const Model: LoginModelType = {
             return;
           }
         }
-        console.log('311');
-
         // yield put(routerRedux.replace(redirect || '/'));
         setTimeout(() => {
-          router.push(redirect);
+          router.push(redirect || '/');
+          // put(routerRedux.replace(redirect || '/'));
         }, 0);
       } else {
         // notification.error({
@@ -102,6 +101,7 @@ const Model: LoginModelType = {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
+      debugger;
       setAuthority(payload.currentAuthority);
       return {
         ...state,

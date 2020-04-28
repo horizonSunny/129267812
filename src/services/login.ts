@@ -19,7 +19,6 @@ export interface LoginParamsType {
 //     data: params,
 //   });
 // }
-
 export async function fakeAccountLogin(params: LoginParamsType) {
   return request('/auth/oauth/token', {
     method: 'POST',
@@ -33,6 +32,6 @@ export async function getFakeCaptcha(mobile: string) {
 
 export async function userLogout() {
   return request('/auth/oauth/token', {
-    method: 'delete'
+    method: 'delete',
   });
 }
