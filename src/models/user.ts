@@ -51,8 +51,12 @@ const UserModel: UserModelType = {
     },
     *fetchCurrent(_, { call, put }) {
       // const response = yield call(queryCurrent);
+      const authority = localStorage.getItem('antd-pro-authority');
+
+      const authorityInfo = JSON.parse(authority);
+      console.log('fetchCurrent_username_', JSON.parse(authority));
       const response = {
-        name: 'admin',
+        name: (authorityInfo && authorityInfo.username) || 'admin',
         avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
         userid: '00000001',
         email: '',

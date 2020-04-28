@@ -81,10 +81,6 @@ const Model: LoginModelType = {
     *logout(_, { call, put }) {
       //  const { redirect } = getPageQuery();
       const response = yield call(userLogout);
-      yield put({
-        type: 'changeLoginStatus',
-        payload: response,
-      });
       const redirect = window.location.href.split('?redirect=')[1];
       if (window.location.pathname !== '/user/login' && !redirect) {
         console.log('走了几遍logout_', window.location.href);
@@ -102,7 +98,7 @@ const Model: LoginModelType = {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
+      setAuthority(payload);
       return {
         ...state,
         status: payload.status,
