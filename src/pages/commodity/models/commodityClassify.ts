@@ -258,14 +258,26 @@ const CommodityModel = {
     sortCas(state, action) {
       // const commdityClassify = filterClassify(state.classifyInfo.data);
       const info = action.payload;
+      let casOne = [];
+      let casTwo = [];
+      let casThree = [];
+      if (info.data && info.data.length !== 0) {
+        casOne = info.data;
+        if (info.data[0].children && info.data[0].children.length !== 0) {
+          casTwo = info.data[0].children;
+          if (info.data[0].children[0].children && info.data[0].children[0].children.length !== 0) {
+            casThree = info.data[0].children[0].children;
+          }
+        }
+      }
       const obj = {
-        casOneId: info.data[0].id,
-        casTwoId: info.data[0].children[0].id,
-        casThreeId: info.data[0].children[0].children[0].id,
+        casOneId: casOne.length !== 0 && casOne[0].id ? casOne[0].id : '',
+        casTwoId: casTwo.length !== 0 && casTwo[0].id ? casTwo[0].id : '',
+        casThreeId: casThree.length !== 0 && casThree[0].id ? casThree[0].id : '',
         // 当前三级分类各级对应id
-        casInfoOne: info.data,
-        casInfoTwo: info.data[0].children,
-        casInfoThree: info.data[0].children[0].children,
+        casInfoOne: casOne,
+        casInfoTwo: casTwo,
+        casInfoThree: casThree,
       };
       const commdityClassify = filterClassify(info.data);
       return {
