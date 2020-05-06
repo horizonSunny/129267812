@@ -1,4 +1,4 @@
-import { Form, Input, Select, Radio, Button, TreeSelect, InputNumber, Switch } from 'antd';
+import { Form, Input, Select, Radio, Button, TreeSelect, InputNumber, Switch,Cascader } from 'antd';
 import React from 'react';
 import styles from './Form.less';
 import LabelInfo from '../../../../../components/Label/label';
@@ -10,6 +10,7 @@ import 'braft-editor/dist/index.css';
 import { connect } from 'dva';
 import { callbackify } from 'util';
 import routerParams from '@/utils/routerParams';
+import { filterLabel } from '@/utils/filterProperty';
 
 const { Option } = Select;
 const isMapClass = {
@@ -101,6 +102,7 @@ class EditForm extends React.Component {
         xxl: { span: 15 },
       },
     };
+    const labelCast = filterLabel(this.props.commodity.allProductType)
     return (
       <Form className={styles.main} {...formItemLayout} onSubmit={this.handleSubmit}>
         <Form.Item label="商品图">
@@ -122,7 +124,7 @@ class EditForm extends React.Component {
                   lineHeight: '10px',
                 }}
               >
-                支持PNG、JPG、JPEG，大小控制在300KB内，最多添加16张
+                支持PNG、JPG、JPEG，大小控制在300KB内，最多添加8张
               </div>
             </div>,
           )}
@@ -187,7 +189,7 @@ class EditForm extends React.Component {
               <Radio value={2}>
                 <LabelInfo
                   text="Rx"
-                  classInfo={Object.assign(
+                  classInfo={Object.assign( 
                     {
                       border: '1px solid red',
                       color: 'red',
@@ -252,13 +254,19 @@ class EditForm extends React.Component {
                 message: '请选择商品类别',
               },
             ],
-            initialValue: formInit.productType[0],
+            
+            initialValue: formInit.productType[0], 
           })(
-            <TreeSelect
+            // <TreeSelect
+            //   style={{ width: '100%' }}
+            //   dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+            //   treeData={productType}
+            //   placeholder="Please select"
+            // />,
+            <Cascader
               style={{ width: '100%' }}
-              dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-              treeData={productType}
-              placeholder="Please select"
+              options={labelCast}
+              placeholder="请选择商品类别"
             />,
           )}
         </Form.Item>

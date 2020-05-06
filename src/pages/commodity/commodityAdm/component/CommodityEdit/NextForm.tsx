@@ -216,7 +216,7 @@ class NextForm extends React.Component {
                 },
               ],
               initialValue: formInit.price ? formInit.price : '',
-            })(<InputNumber min={0} style={{ width: '90%' }} />)}
+            })(<InputNumber min={0} style={{ width: '90%' }}/>)}
             <span>&nbsp;&nbsp;元</span>
           </Form.Item>
           <Form.Item label="库存">
@@ -228,7 +228,7 @@ class NextForm extends React.Component {
                 },
               ],
               initialValue: formInit.stock ? formInit.stock : '',
-            })(<InputNumber min={0} style={{ width: '90%' }} />)}
+            })(<InputNumber min={0} style={{ width: '90%' }} precision={0}/>)}
             <span>&nbsp;&nbsp;件</span>
           </Form.Item>
           <Form.Item label="快递方式">

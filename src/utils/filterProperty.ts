@@ -246,3 +246,13 @@ export function filterAreaNameInfo(dataInfo, info) {
   const areaInfo = findName(cityInfo.children, areaName);
   return [provinceInfo.label, cityInfo.label, areaInfo.label];
 }
+
+
+// 商品类别title替换label
+export function filterLabel(obj) {
+  obj.forEach(data => {
+    data.label = data.title;
+    data.children && data.children.length !== 0 && filterLabel( data.children);
+  });
+  return obj
+}
