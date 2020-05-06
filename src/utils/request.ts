@@ -92,8 +92,9 @@ request.interceptors.response.use(async response => {
     notification.error({
       message: data.msg,
     });
-    // return PromiseRejectionEvent();
-    // return Promise.reject(data.msg);
+    throw new Error(data.msg);
+  }
+  if (data.data === null) {
     throw new Error(data.msg);
   }
   return response;

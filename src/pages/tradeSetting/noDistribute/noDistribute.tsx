@@ -78,7 +78,7 @@ export default class NoDistribute extends React.Component {
     console.log('area_', area);
     return (
       <PageHeaderWrapper>
-        {!nonDeliveryInfo && (
+        {nonDeliveryInfo.deliveryArea.length === 0 && (
           <div className={`${styles.noDistribute}`}>
             <img src={mapImg} alt="" />
             <span>你还未配置不可配送区域</span>
@@ -87,7 +87,7 @@ export default class NoDistribute extends React.Component {
             </Button>
           </div>
         )}
-        {nonDeliveryInfo && (
+        {nonDeliveryInfo.deliveryArea.length !== 0 && (
           <div className={`${styles.main}`}>
             <Row className={styles.selfDelivery}>
               <Col span={20} className={styles.selfDeliveryInfo}>
