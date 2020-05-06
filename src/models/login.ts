@@ -83,7 +83,7 @@ const Model: LoginModelType = {
       const response = yield call(userLogout);
       const redirect = window.location.href.split('?redirect=')[1];
       if (window.location.pathname !== '/user/login' && !redirect) {
-        console.log('走了几遍logout_', window.location.href);
+        // console.log('走了几遍logout_', window.location.href);
         yield put(
           routerRedux.replace({
             pathname: '/user/login',
