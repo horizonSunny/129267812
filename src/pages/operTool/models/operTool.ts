@@ -55,8 +55,21 @@ const CommodityModel = {
       });
     },
     // 开启或者关闭快速找药
-    *resetCategoryItem({ payload }, { call, put }) {
-      yield call(changeCategoryItem, payload);
+    *resetCategoryItem({ payload }, { call, put, select }) {
+      // yield call(changeCategoryItem, payload);
+      const response = yield call(changeCategoryItem, payload);
+      if (response && response.code === 1) {
+        const { categoryList } = yield select(state => state.operTool);
+        categoryList.map(item => {
+          if (item.quickCategoryId === payload.quickCategoryId) {
+            item.status = payload.status;
+          }
+        });
+        yield put({
+          type: 'setCategoryList',
+          payload: categoryList,
+        });
+      }
     },
     // 新增快速找药
     *newCategoryItem({ payload }, { call, put }) {
