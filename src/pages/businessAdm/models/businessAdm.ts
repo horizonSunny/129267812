@@ -12,6 +12,7 @@ import {
   deliverGoods,
   getTraces,
   exportOrderList,
+  audit,
 } from '@/services/businessAdm';
 
 const queryFormInit = {
@@ -173,6 +174,29 @@ const businessAdm = {
         return Promise.reject();
       }
       console.log('refundOrder');
+    },
+    // 审核通过
+    *audit({ payload }, { call, put, select }) {
+      const response = yield call(audit, payload);
+      const { currentRecord } = yield select(state => state.businessAdm);
+      if (response && response.code === 1) {
+        yield put({
+          type: 'getOrder',
+          payload: {
+            orderNo: currentRecord.orderNo,
+          },
+        });
+      } else {
+        return Promise.reject();
+      }
+      // else if (response && !response.data.checkResult) {
+      //   // return Promise.reject();
+      //   notification.error({
+      //     message: '取货码核验失败',
+      //   });
+      //   return Promise.reject();
+      // }
+      console.log('审核通过');
     },
     // 发货
     *deliverGoods({ payload }, { call, put, select }) {

@@ -36,6 +36,9 @@ class CommonModal extends Component {
       case '取货码核销':
         this.pickupCode();
         break;
+      case '审核通过':
+        this.audit();
+        break;
       default:
         break;
     }
@@ -93,6 +96,24 @@ class CommonModal extends Component {
         payload: {
           orderNo: currentRecord.orderNo,
           pickupCode: inputValue,
+        },
+      }).then(() => {
+        this.setState({
+          visible: false,
+        });
+      });
+    }
+  };
+
+  // 审核通过
+  audit = () => {
+    const { dispatch } = this.props;
+    const { currentRecord } = this.props.businessAdm;
+    if (dispatch) {
+      dispatch({
+        type: 'businessAdm/audit',
+        payload: {
+          orderNo: currentRecord.orderNo,
         },
       }).then(() => {
         this.setState({

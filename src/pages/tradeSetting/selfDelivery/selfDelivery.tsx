@@ -94,7 +94,7 @@ export default class SelfDelivery extends React.Component {
                   </table>
                 </Col>
                 <Col span={1} className={`${styles.switch}`}>
-                  <Switch defaultChecked onChange={this.onChange} />
+                  <Switch checked={pickUp.isPick === 1} onChange={this.onChange} />
                 </Col>
                 <Col span={1}>
                   <Button className={`${styles.editorButton}`} onClick={this.toSelfDelivery}>

@@ -209,7 +209,10 @@ class EnterTable extends Component {
         columns={this.columns}
         rowKey={record => record.orderId}
         rowSelection={rowSelection}
-        pagination={businessAdm.pagenation}
+        pagination={{
+          ...businessAdm.pagenation,
+          current: businessAdm.pagenation.pageNumber + 1,
+        }}
         onChange={this.onChange}
         scroll={{ x: 1200 }}
       />

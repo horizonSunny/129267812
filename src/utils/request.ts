@@ -94,9 +94,9 @@ request.interceptors.response.use(async response => {
     });
     throw new Error(data.msg);
   }
-  if (data.data === null) {
-    throw new Error(data.msg);
-  }
+  // if (data.data === null) {
+  //   throw new Error(data.msg);
+  // }
   return response;
 });
 export default request;
