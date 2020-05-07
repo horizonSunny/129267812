@@ -71,11 +71,10 @@ class LogisticsModal extends Component {
             overflowY: 'scroll',
           }}
         >
-          <Timeline>
-            {tracesInfo && tracesInfo.traces.length === 0 && '暂无物流轨迹'}
-            {tracesInfo &&
-              tracesInfo.traces.length !== 0 &&
-              tracesInfo.traces.map(item => {
+          {tracesInfo && tracesInfo.traces.length === 0 && '暂无物流轨迹'}
+          {tracesInfo && tracesInfo.traces.length !== 0 && (
+            <Timeline>
+              {tracesInfo.traces.map(item => {
                 return (
                   <Timeline.Item>
                     <div>{item.acceptStation}</div>
@@ -83,7 +82,8 @@ class LogisticsModal extends Component {
                   </Timeline.Item>
                 );
               })}
-          </Timeline>
+            </Timeline>
+          )}
         </div>
       </Modal>
     );
