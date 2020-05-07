@@ -33,8 +33,16 @@ const selfDelivery = {
       }
       return response.data;
     },
-    *changePickUpStatus({ payload }, { call, put }) {
+    *changePickUpStatus({ payload }, { call, put, select }) {
       const response = yield call(pickUpStatus, payload);
+      if (response && response.code === 1) {
+        const { pickUp } = yield select(state => state.selfDelivery);
+        pickUp.isPick = payload.status;
+        yield put({
+          type: 'savePickUp',
+          payload: pickUp,
+        });
+      }
     },
     *openPickUp({ payload }, { call, put }) {
       const response = yield call(openPickUp, payload);
@@ -80,6 +88,12 @@ const selfDelivery = {
         pickUpForm: form,
         // 如果有就是action.payload，没有就设置定义的pickUpForm
         // pickUpForm: action.payload ? action.payload : pickUpForm,
+      };
+    },
+    savePickUp(state, action) {
+      return {
+        ...state,
+        pickUp: action.payload,
       };
     },
   },
