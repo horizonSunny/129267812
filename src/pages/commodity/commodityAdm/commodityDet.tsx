@@ -9,6 +9,7 @@ import RecordList from './component/CommodityDet/Record';
 import ProductConfig from './component/CommodityDet/ProductConfig';
 
 const { Title } = Typography;
+
 @connect(({ commodity }) => ({ commodity }))
 export default class CommodityDet extends React.Component {
   handleEdit = params => {

@@ -37,6 +37,15 @@ export default class SelfDelivery extends React.Component {
   toSelfDelivery = () => {
     router.push('/tradeSetting/selfDelivery/newSelfDelivery');
   };
+   // toSelfDelivery = (params,opening) => {
+  //   const { dispatch } = this.props;
+  //   console.log(opening,'opening');
+  //   dispatch({
+  //     type: 'selfDelivery/merchantInformation',
+  //   }).then(result=>{
+      // router.push('/tradeSetting/selfDelivery/newSelfDelivery');
+  //   })
+  // };
 
   render() {
     // const { hasSelfDelivery, pickUp } = this.props.tradeSetting;

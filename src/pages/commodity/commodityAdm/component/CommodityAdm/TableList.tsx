@@ -55,7 +55,8 @@ export default class TableList extends React.Component {
   // 请求数据跳转详情页面
   goToNextPage = (params, operate) => {
     const { dispatch } = this.props;
-    console.log('operate_', operate);
+    console.log(dispatch,'111111');
+    console.log('operate_111111', operate);
     dispatch({
       type: 'commodity/getProduct',
       payload: {

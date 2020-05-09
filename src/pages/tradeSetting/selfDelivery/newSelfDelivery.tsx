@@ -8,6 +8,7 @@ import styles from './newSelfDelivery.less';
 import { newArea } from '@/utils/area.js';
 import { filterAreaNameInfo } from '@/utils/filterProperty';
 import { formatDate } from '@/utils/utils';
+// import { filterLabel } from '@/utils/filterProperty';
 // const { Search } = Input;
 const options = newArea();
 @connect(({ selfDelivery }) => ({
@@ -41,7 +42,7 @@ class FormSelfDelivery extends React.Component {
         area: areaName[2],
         isPick: this.props.selfDelivery.pickUpForm.isPick,
         businessDate: values.hebdomad,
-        businessHours: `${formatDate(values.startTime)}-${formatDate(values.endTime)}`,
+        businessHours: `${formatDate(values.startTime)}-${formatDate(values.endTime)}`, 
       };
       const { dispatch } = this.props;
       if (dispatch) {

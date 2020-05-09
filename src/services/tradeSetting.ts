@@ -58,3 +58,11 @@ export async function deleteFreight(params: Object) {
     method: 'delete',
   });
 }
+// 获取商户信息
+// export async function merchantTitle(params: Object) {
+//   return request('/admin/v1/tenant/getTenant', {
+//     method: 'get',
+//     data: params,
+//   });
+// }
+

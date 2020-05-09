@@ -58,6 +58,8 @@ class NextForm extends React.Component {
     // }
   };
 
+  
+
   goForward = e => {
     // 调用父组件上的modifyFormPage方法
     const { dispatch } = this.props;
@@ -79,6 +81,8 @@ class NextForm extends React.Component {
     console.log('value_', value);
     const { dispatch } = this.props;
     const { productDeliveryTemplate } = this.props.commodity;
+    console.log(productDeliveryTemplate,'快递名称111111');
+    
     productDeliveryTemplate.hasSelectTemplate = value;
     dispatch({
       type: 'commodity/setProductDeliveryTemplate',
@@ -133,6 +137,7 @@ class NextForm extends React.Component {
         // 依据路由来判断是不是编辑
         const paramsInfo = routerParams(location.search);
         const typeInfo = paramsInfo.id ? 'commodity/editProduct' : 'commodity/newProduct';
+        // console.log(typeInfo,'??????????')
         const _this = this;
         async function saveProduct() {
           await dispatch({
@@ -145,7 +150,9 @@ class NextForm extends React.Component {
           await dispatch({
             type: typeInfo,
             payload: productInfo,
-          });
+          }).then(res=>{
+            router.push('/commodityAdm/management');
+          })
         }
         saveProduct();
       }
@@ -195,6 +202,7 @@ class NextForm extends React.Component {
     };
     // 获取到模版,然后进行模版划分,设置options值
     const { freightList } = this.props.tradeSetting;
+    // console.log(freightList,'freightList????????');
     const ordinary = [];
     const urgent = [];
     freightList.pageList.map(item => {
@@ -204,6 +212,18 @@ class NextForm extends React.Component {
         ordinary.push(item);
       }
     });
+    // 设置小数点为2位
+    const limitDecimals = (value: string | number): string => {
+      const reg = /^(\-)*(\d+)\.(\d\d).*$/;
+      console.log(value);
+      if(typeof value === 'string') {
+          return !isNaN(Number(value)) ? value.replace(reg, '$1$2.$3') : ''
+      } else if (typeof value === 'number') {
+          return !isNaN(value) ? String(value).replace(reg, '$1$2.$3') : ''
+      } else {
+          return ''
+      }
+  };
     return (
       <div>
         <Form className={styles.main} {...formItemLayout} onSubmit={this.commitSubmit}>
@@ -216,7 +236,7 @@ class NextForm extends React.Component {
                 },
               ],
               initialValue: formInit.price ? formInit.price : '',
-            })(<InputNumber min={0} style={{ width: '90%' }}/>)}
+            })(<InputNumber min={0} style={{ width: '90%' }} step={0.00} formatter={limitDecimals} parser={limitDecimals}/>)}
             <span>&nbsp;&nbsp;元</span>
           </Form.Item>
           <Form.Item label="库存">
@@ -228,7 +248,7 @@ class NextForm extends React.Component {
                 },
               ],
               initialValue: formInit.stock ? formInit.stock : '',
-            })(<InputNumber min={0} style={{ width: '90%' }} precision={0}/>)}
+            })(<InputNumber min={0} step={1} style={{ width: '90%' }} precision={0}/>)}
             <span>&nbsp;&nbsp;件</span>
           </Form.Item>
           <Form.Item label="快递方式">
@@ -245,15 +265,12 @@ class NextForm extends React.Component {
               // initialValue: formInit.stock ? formInit.stock : '',
               initialValue: productDeliveryTemplate.hasSelectTemplate,
             })(
-              <Checkbox.Group onChange={this.checkboxChange}>
-                <Checkbox style={radioStyle} value={1}>
+              // <Checkbox.Group onChange={this.checkboxChange}>
+              <Checkbox onClick={this.checkboxChange}>
+                <Checkbox style={radioStyle} value={1} defaultChecked>
                   普通快递:&nbsp;&nbsp;
                   <Select
-                    defaultValue={
-                      productDeliveryTemplate.ordinaryTemplate
-                        ? productDeliveryTemplate.ordinaryTemplate.freightTemplateId
-                        : ''
-                    }
+                    defaultValue={ordinary[0].templateName}
                     style={{ width: 250 }}
                     onChange={value => this.handleChange('ordinaryTemplate', value)}
                   >
@@ -262,7 +279,7 @@ class NextForm extends React.Component {
                     })}
                   </Select>
                 </Checkbox>
-                <Checkbox style={radioStyle} value={2}>
+                <Checkbox style={radioStyle} value={2} defaultChecked={false}>
                   加急快递:&nbsp;&nbsp;
                   <Select
                     defaultValue={
@@ -279,7 +296,8 @@ class NextForm extends React.Component {
                     })}
                   </Select>
                 </Checkbox>
-              </Checkbox.Group>,
+              {/* </Checkbox.Group>, */}
+              </Checkbox>
             )}
           </Form.Item>
           <Form.Item label="是否推荐产品">

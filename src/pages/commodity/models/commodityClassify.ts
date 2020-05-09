@@ -199,10 +199,13 @@ const CommodityModel = {
     // 往当前三级分类里面添加商品信息
     *productInsert(_, { select, call, put }) {
       const state = yield select(state => state.commodityClassify);
-      const response = yield call(productInsert, {
+      let params = {
         categoryId: state.casThreeId,
         productIds: state.selectedProductKeys,
-      });
+      }
+      console.log('params_',params);
+      
+      const response = yield call(productInsert,params);
     },
     // 选好的商品添加到别的三级分类中
     *productInsertTo({ payload }, { select, call, put }) {
@@ -420,6 +423,7 @@ const CommodityModel = {
     // 修改清空弹框选中添加商品数据
     modifyProduct(state, action) {
       console.log('action_modifyProduct_', action.payload);
+      console.log('===========', action);
       return {
         ...state,
         selectedProductKeys: action.payload,

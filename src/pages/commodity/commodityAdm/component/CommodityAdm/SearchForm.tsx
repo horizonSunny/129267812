@@ -84,6 +84,7 @@ class AdvancedSearchForm extends React.Component {
       rules: [{ type: 'array', message: 'Please select time!' }],
     };
     const { allProductType, searchForm } = this.props.commodity;
+    console.log(searchForm,'2222222')
     const productType = allProductType;
     return (
       <Form className={styles['ant-advanced-search-form']} onSubmit={this.handleSearch}>

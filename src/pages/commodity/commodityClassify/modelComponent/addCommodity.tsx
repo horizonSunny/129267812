@@ -23,7 +23,7 @@ export default class AddCommodityModal extends React.Component {
 
   showModal = () => {
     const { dispatch } = this.props;
-    console.log('this.props.commodityClassify_', this.props.commodityClassify.selectedProductKeys);
+    console.log(']]]]]]]]]]]]]_', this.props.commodityClassify.selectedProductKeys);
     if (dispatch) {
       dispatch({
         type: 'commodityClassify/productSearch',
@@ -45,6 +45,7 @@ export default class AddCommodityModal extends React.Component {
     this.setState({
       visible: false,
     });
+    location.reload([true]);
   };
 
   handleCancel = e => {
@@ -112,6 +113,9 @@ export default class AddCommodityModal extends React.Component {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
     // this.setState({ selectedRowKeys });
     const { dispatch } = this.props;
+
+
+    console.log(dispatch,'eeeeeee');
     if (dispatch) {
       dispatch({
         type: 'commodityClassify/modifyProduct',

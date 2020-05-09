@@ -71,7 +71,7 @@ class CommodityAdm extends React.Component {
         key: 'name',
         render: (text, record) => {
           return record.status === 1 ? (
-            <Button style={{ background: '#F5AB1C' }} onClick={this.handleNew.bind(this, record)}>
+            <Button style={{ background: '#F5AB1C' }} onClick={this.handleNew.bind(this, record, 'editAdd')}>
               添加
             </Button>
           ) : (
@@ -129,7 +129,7 @@ class CommodityAdm extends React.Component {
   };
 
   // 模版新增产品
-  handleNew = record => {
+  handleNew = (record,type) => {
     const { dispatch } = this.props;
     console.log('record_', record);
     let params = {
@@ -147,17 +147,22 @@ class CommodityAdm extends React.Component {
       productSpec: '',
       productSpecif: '',
       productType: '',
-    };
+    }; 
     if (record) {
       params = record;
       params.productTemplateId = params.productId;
     }
+    if(type =='editAdd'){
+      router.push('/commodityAdm/management/edit?type=1');
+    }else if(type =='addDress'){
+      router.push('/commodityAdm/management/edit?type=2');
+    }   
 
     dispatch({
       type: 'commodity/resetProduct',
       payload: params,
     });
-    router.push('/commodityAdm/management/edit');
+    // router.push('/commodityAdm/management/edit');
   };
 
   render() {
@@ -177,12 +182,12 @@ class CommodityAdm extends React.Component {
               <span className={styles.searchInfo}>若未搜索到商品，则该商品不支持搜索添加</span>
             </Col>
             <Col span={8} style={{}}>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit"> 
                 搜索
               </Button>
               <Button
                 style={{ marginLeft: 8, background: '#F5AB1C' }}
-                onClick={this.handleNew.bind(this, false)}
+                onClick={this.handleNew.bind(this, false, 'addDress')}
               >
                 手动添加
               </Button>

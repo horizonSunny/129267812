@@ -67,7 +67,7 @@ export default class TableList extends React.Component {
       { operation: '配送方式', operateInfo: freightTemplates.toString() },
       { operation: '普通快递模版', operateInfo: ordinaryTemplate || '' },
       { operation: '加急快递模版', operateInfo: urgentTemplate || '' },
-      { operation: '是否推荐商品', operateInfo: data.recommandStatus === 0 ? '推荐' : '不推荐' },
+      { operation: '是否推荐商品', operateInfo: data.recommandStatus === 1 ? '推荐' : '不推荐' },
     ];
     return (
       <div className={styles.main}>

@@ -15,7 +15,7 @@ export default class CommodityEdit extends React.Component {
     // getFreightList;
     const { dispatch } = this.props;
     dispatch({
-      type: 'tradeSetting/getFreightList',
+      type: 'tradeSetting/getFreightList', 
       payload: {
         pageNumber: 0,
         pageSize: 10000,

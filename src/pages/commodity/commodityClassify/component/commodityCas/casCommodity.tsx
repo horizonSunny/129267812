@@ -78,13 +78,14 @@ export default class CasCommodity extends React.Component {
     this.child = ref;
   };
 
-  clickModal() {
+  clickModal(this) {
+    console.log(this,'111111111')
     this.child.showModal();
   }
 
   // 分类至弹窗
   onSortTo = ref => {
-    this.childSortTo = ref;
+    this.childSortTo = ref; 
   };
 
   clickSortModal() {

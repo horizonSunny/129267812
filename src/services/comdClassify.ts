@@ -54,3 +54,10 @@ export async function editorClassify(params: any) {
     data: params,
   });
 }
+// 分类添加产品信息
+export async function productInsert(params: any) {
+  return request('/admin/v1/category/insert/product', {
+    method: 'POST',
+    data: params,
+  });
+}

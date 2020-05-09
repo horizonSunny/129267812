@@ -1,6 +1,6 @@
 // import { Table, Divider, Tag, Switch } from 'antd';
 
-import { Table, Carousel } from 'antd';
+  import { Table, Carousel } from 'antd';
 import React from 'react';
 import styles from './Table.less';
 import filterData from './filter';

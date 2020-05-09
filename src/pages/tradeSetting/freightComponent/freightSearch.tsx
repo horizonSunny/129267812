@@ -7,8 +7,8 @@ import filterProperty from '@/utils/filterProperty';
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
-
 @connect(({ tradeSetting }) => ({ tradeSetting }))
+@connect(({ commodity }) => ({ commodity }))
 class AdvancedSearchForm extends React.Component {
   state = {};
 
@@ -49,9 +49,10 @@ class AdvancedSearchForm extends React.Component {
       const searchParams = {
         startTime: values['range-picker'][0],
         endTime: values['range-picker'][1],
-        templateType: values.recommandStatus == 3 ? undefined : values.recommandStatus,
+        templateType: values.recommandStatus === 3 ? undefined : values.recommandStatus,
         templateName: values.keyword,
       };
+      // console.log(searchParams,'、、、、、、、、')
       const searchInfo = filterProperty(searchParams);
       dispatch({
         type: 'tradeSetting/getFreightList',
@@ -93,6 +94,7 @@ class AdvancedSearchForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { allProductType, searchForm } = this.props.commodity;  
     const rangeConfig = {
       rules: [{ type: 'array', message: 'Please select time!' }],
     };
@@ -123,7 +125,8 @@ class AdvancedSearchForm extends React.Component {
             <Form.Item label="类型">
               {getFieldDecorator('recommandStatus', {
                 rules: [],
-                initialValue: 0,
+                // initialValue: 0,
+                initialValue: searchForm.recommandStatus,
               })(
                 <Select style={{ width: 120 }}>
                   <Option value={0}>全部</Option>

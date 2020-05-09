@@ -1,4 +1,4 @@
-import { getPickUp, pickUpStatus, openPickUp } from '@/services/tradeSetting';
+import { getPickUp, pickUpStatus, openPickUp, merchantTitle } from '@/services/tradeSetting';
 import { filterAreaNameInfo } from '@/utils/filterProperty';
 
 const pickUpForm = {
@@ -62,6 +62,10 @@ const selfDelivery = {
     //     });
     //   }
     // },
+    // 获取商户信息
+    *merchantInformation({payload},{call, put}){
+      const response = yield call(merchantTitle, payload);
+    }
   },
 
   reducers: {
