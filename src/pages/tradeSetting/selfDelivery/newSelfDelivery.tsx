@@ -8,6 +8,7 @@ import styles from './newSelfDelivery.less';
 import { newArea } from '@/utils/area.js';
 import { filterAreaNameInfo } from '@/utils/filterProperty';
 import { formatDate } from '@/utils/utils';
+import route from 'mock/route';
 // import { filterLabel } from '@/utils/filterProperty';
 // const { Search } = Input;
 const options = newArea();
@@ -32,24 +33,28 @@ class FormSelfDelivery extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
-      const areaName = filterAreaNameInfo(values.areaData, 'findName');
-      const params = {
-        tenantName: values.tenantName,
-        address: values.address,
-        adminTel: values.adminTel,
-        province: areaName[0],
-        city: areaName[1],
-        area: areaName[2],
-        isPick: this.props.selfDelivery.pickUpForm.isPick,
-        businessDate: values.hebdomad,
-        businessHours: `${formatDate(values.startTime)}-${formatDate(values.endTime)}`, 
-      };
-      const { dispatch } = this.props;
-      if (dispatch) {
-        dispatch({
-          type: 'selfDelivery/openPickUp',
-          payload: params,
-        });
+      if(!err){
+        const areaName = filterAreaNameInfo(values.areaData, 'findName');
+        const params = {
+          tenantName: values.tenantName,
+          address: values.address,
+          adminTel: values.adminTel,
+          province: areaName[0],
+          city: areaName[1],
+          area: areaName[2],
+          isPick: this.props.selfDelivery.pickUpForm.isPick,
+          businessDate: values.hebdomad,
+          businessHours: `${formatDate(values.startTime)}-${formatDate(values.endTime)}`, 
+        };
+        const { dispatch } = this.props;
+        if (dispatch) {
+          dispatch({
+            type: 'selfDelivery/openPickUp',
+            payload: params,
+          }).then(result=>{
+            window.history.back(-1)
+          })
+        }
       }
     });
   };
@@ -166,7 +171,7 @@ class FormSelfDelivery extends React.Component {
               rules: [
                 {
                   required: true,
-                  message: '店铺名称',
+                  message: '请选择营业时间',
                 },
               ],
               initialValue: pickUpForm.businessDate,
@@ -192,7 +197,7 @@ class FormSelfDelivery extends React.Component {
               rules: [
                 {
                   required: true,
-                  message: '',
+                  message: '请选择营业时间',
                 },
               ],
               initialValue: moment(pickUpForm.startTime, 'HH:mm:ss'),

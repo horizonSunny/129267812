@@ -74,35 +74,38 @@ export default class SelfDelivery extends React.Component {
                 <Col span={20} className={styles.selfDeliveryInfo}>
                   <img src={selfDelivery} alt="" />
                   <table className={`${styles.tableInfo}`}>
-                    <tr>
-                      <td>门店自提点</td>
-                      <td>{pickUp.tenantName}</td>
-                    </tr>
-                    <tr>
-                      <td> 地址</td>
-                      <td>{pickUp.address}</td>
-                    </tr>
-                    <tr>
-                      <td> 联系电话</td>
-                      <td>{pickUp.adminTel}</td>
-                    </tr>
-                    <tr>
-                      <td> 营业时间</td>
-                      <td>
-                        {pickUp.businessDate.map((item, index) => {
-                          const length = pickUp.businessDate.length - 1;
-                          if (length !== index) {
-                            return `${item}/`;
-                          }
-                          return item;
-                        })}
-                        &nbsp;&nbsp;
-                        {pickUp.businessHours}
-                      </td>
-                    </tr>
+                    <tbody>
+                      <tr>
+                        <td>门店自提点</td>
+                        <td>{pickUp.tenantName}</td>
+                      </tr>
+                      <tr>
+                        <td> 地址</td>
+                        <td>{pickUp.address}</td>
+                      </tr>
+                      <tr>
+                        <td> 联系电话</td>
+                        <td>{pickUp.adminTel}</td>
+                      </tr>
+                      <tr>
+                        <td> 营业时间</td>
+                        <td>
+                          {pickUp.businessDate ? pickUp.businessDate.map((item, index) => {
+                            const length = pickUp.businessDate.length - 1;
+                            if (length !== index) {
+                              return `${item}/`;
+                            }
+                            return item;
+                          }) : '无营业日期'}
+                          &nbsp;&nbsp;
+                          {pickUp.businessHours ? pickUp.businessHours : '无营业时间'}
+                        </td>
+                      </tr>
+                    </tbody>
                   </table>
                 </Col>
                 <Col span={1} className={`${styles.switch}`}>
+                  {/* <Switch checked={pickUp.isPick === 1} onChange={this.onChange} /> */}
                   <Switch checked={pickUp.isPick === 1} onChange={this.onChange} />
                 </Col>
                 <Col span={1}>

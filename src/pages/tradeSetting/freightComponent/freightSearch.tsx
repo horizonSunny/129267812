@@ -49,7 +49,8 @@ class AdvancedSearchForm extends React.Component {
       const searchParams = {
         startTime: values['range-picker'][0],
         endTime: values['range-picker'][1],
-        templateType: values.recommandStatus === 3 ? undefined : values.recommandStatus,
+        // 快递类型
+        templateType: values.recommandStatus === 4 ? undefined : values.recommandStatus,
         templateName: values.keyword,
       };
       // console.log(searchParams,'、、、、、、、、')

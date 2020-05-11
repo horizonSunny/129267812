@@ -7,12 +7,11 @@ const { pwa } = defaultSettings; // if pwa is true
 if (pwa) {
   // Notify user if offline now
   window.addEventListener('sw.offline', () => {
-    message.warning('当前处于离线状态');
+    message.warning('当前处于离线状态')
   }); // Pop up a prompt on the page asking the user if they want to use the latest version
-
+  
   window.addEventListener('sw.updated', (event: Event) => {
     const e = event as CustomEvent;
-
     const reloadSW = async () => {
       // Check if there is sw whose state is waiting in ServiceWorkerRegistration
       // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration

@@ -139,7 +139,9 @@ class AdvancedSearchForm extends React.Component {
                   placeholder="选择商品分类"
                   treeData={productType}
                   onChange={this.onChange}
-                />,
+                  // 设置下拉框的高度，控制个数
+                  dropdownStyle={{ maxHeight: 280}}
+                />
               )}
             </Form.Item>
           </Col>

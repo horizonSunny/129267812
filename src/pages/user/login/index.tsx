@@ -60,6 +60,7 @@ class Login extends Component<LoginProps, LoginState> {
         type: 'login/login',
         payload: { ...params },
       });
+      console.log('登陆啦啦啦——成功');
     } else {
       console.log('登陆啦啦啦_报错');
     }

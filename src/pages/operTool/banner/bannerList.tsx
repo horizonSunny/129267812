@@ -59,10 +59,10 @@ export default class BannerList extends React.Component {
         key: 'status',
         render: (text, record) =>
           (record.status === 1 && (
-            <Switch checked onChange={value => this.statusChange(value, record)} />
+            <Switch checked={false} onChange={value => this.statusChange(value, record)} />
           )) ||
           (record.status !== 1 && (
-            <Switch checked={false} onChange={value => this.statusChange(value, record)} />
+            <Switch checked onChange={value => this.statusChange(value, record)} />
             // <Switch checked={false} onChange={value => this.statusChange(value, record)} />
           )),
       },

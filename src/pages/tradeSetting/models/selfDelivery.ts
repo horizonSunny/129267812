@@ -1,5 +1,7 @@
 import { getPickUp, pickUpStatus, openPickUp, merchantTitle } from '@/services/tradeSetting';
 import { filterAreaNameInfo } from '@/utils/filterProperty';
+// 没开通自提
+import noSelfDelivery from '@/assets/tradeSetting/noSelfDelivery.svg';
 
 const pickUpForm = {
   tenantName: '',
@@ -8,9 +10,12 @@ const pickUpForm = {
   area: '',
   address: '',
   adminTel: '',
+  // 营业日期
   businessDate: [],
+  businessDateTime:[],
   startTime: '00:00:00',
   endTime: '23:59:59',
+  // 是否开通
   isPick: 2,
 };
 const selfDelivery = {
@@ -38,6 +43,8 @@ const selfDelivery = {
       if (response && response.code === 1) {
         const { pickUp } = yield select(state => state.selfDelivery);
         pickUp.isPick = payload.status;
+        console.log(pickUp.isPick,'是否开通');
+        
         yield put({
           type: 'savePickUp',
           payload: pickUp,
@@ -46,6 +53,11 @@ const selfDelivery = {
     },
     *openPickUp({ payload }, { call, put }) {
       const response = yield call(openPickUp, payload);
+    
+      if(response && response.code === 1){
+        return response
+      }
+      return Promise.reject()
       // if (response && response.code === 1) {
       //   yield put({
       //     type: 'setPickUp',
@@ -63,16 +75,43 @@ const selfDelivery = {
     //   }
     // },
     // 获取商户信息
-    *merchantInformation({payload},{call, put}){
-      const response = yield call(merchantTitle, payload);
-    }
+    // *merchantInformation({payload},{call, put}){
+    //   const response = yield call(merchantTitle, payload);
+    // }
   },
 
   reducers: {
     // 保存搜索条件
     setPickUp(state, action) {
+      let startTime
+      let endTime
+      // let businessDate
+      let isPick
+      let businessDateTime
       console.log('action.payload_', action.payload);
-      const [startTime, endTime] = action.payload.businessHours.split('-');
+      // 营业时间
+      if(action.payload.businessHours === null){
+         [startTime, endTime] =[0,0]
+      }else{
+        [startTime, endTime] = action.payload.businessHours.split('-');
+      };
+      console.log(startTime, endTime,'startTime, endTime');
+      // const [startTime, endTime] = action.payload.businessHours.split('-');
+      // 营业日期
+      if(action.payload.businessDate === null){
+        businessDateTime = ['暂无信息']
+      }else{
+        businessDateTime = action.payload.businessDate;
+      }
+      console.log(businessDateTime,'营业日期');
+        
+      // 开通自提
+      if(action.payload.isPick===null&&2){
+        return;
+      }else if(action.payload.isPick===1){
+        isPick = action.payload.isPick;
+      }
+      console.log(isPick,'是否开通');
       const params = [action.payload.province, action.payload.city, action.payload.area];
       const [province, city, area] = filterAreaNameInfo(params, 'findCode');
       let form = pickUpForm;
@@ -84,6 +123,7 @@ const selfDelivery = {
           province,
           city,
           area,
+          businessDateTime,
         };
       }
       return {

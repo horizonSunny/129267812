@@ -36,6 +36,7 @@ export default class SortTo extends React.Component {
     this.setState({
       visible: false,
     });
+    location.reload([true]);
   };
 
   handleCancel = e => {

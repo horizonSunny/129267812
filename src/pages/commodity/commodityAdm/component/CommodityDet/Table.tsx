@@ -28,9 +28,11 @@ export default class TableList extends React.Component {
         className: 'column-money',
         dataIndex: 'value',
         render: (text, record) => {
+          console.log(record,'图片放大了');
+          
           if (record.name === '商品图') {
             return (
-              <Carousel autoplay>
+              <Carousel autoplay afterChange={this.onChangeBig}>
                 {record.value.map((item, index) => {
                   return (
                     <div key={index} style={{ border: '1px dashed #ddd' }}>
@@ -100,6 +102,12 @@ export default class TableList extends React.Component {
       },
     ],
   };
+
+  // 点击查看商品图放大
+  onChangeBig(){
+    console.log('图片放大了');
+    
+  }
 
   // 获取处理后的数据
   dataReverse(data) {

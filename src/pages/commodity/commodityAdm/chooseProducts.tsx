@@ -8,7 +8,9 @@ import styles from './chooseProducts.less';
 // 请求
 @connect(({ commodity }) => ({ commodity }))
 class CommodityAdm extends React.Component {
+  // 组件完成挂载，此时组件已经显示在页面上。
   componentDidMount() {}
+
 
   state = {
     searchInfo: '',
@@ -100,6 +102,7 @@ class CommodityAdm extends React.Component {
         type: 'commodity/productTemplateList',
         payload: { pageNumber: 0, pageSize: 10, keyword: searchInfo },
       }).then(res => {
+        console.log(res,'获取商品分类')
         this.setState({
           dataSource: res.pageList,
           currentPageNumber: res.pageNumber,
@@ -112,7 +115,7 @@ class CommodityAdm extends React.Component {
   // 分页器
   onChange = e => {
     console.log('触发', this.searchInfo);
-    const { dispatch } = this.props;
+    const { dispatch } = this.props;  
     const currentPage = e.current - 1;
     console.log('触发currentPage_', currentPage);
     dispatch({

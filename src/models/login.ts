@@ -49,6 +49,7 @@ const Model: LoginModelType = {
         const params = getPageQuery();
         console.log('urlParams_', params);
         let { redirect } = params as { redirect: string };
+        console.log(redirect,'登陆成功地址');
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
           if (redirectUrlParams.origin === urlParams.origin) {

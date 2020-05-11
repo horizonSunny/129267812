@@ -29,8 +29,8 @@ class EditForm extends React.Component {
     productType: this.props.commodity.allProductType,
     // 判断点击编辑还是添加
     // editIfadd：this.props.handleNew,
-    
   };
+  
 
   onRef = ref => {
     this.child = ref;
@@ -98,6 +98,7 @@ class EditForm extends React.Component {
     // 不在控制栏显示的控件
     const excludeControls = ['media', 'emoji'];
     const { productType } = this.state;
+    
     const formItemLayout = {
       labelCol: {
         sm: { span: 3 },
@@ -130,7 +131,7 @@ class EditForm extends React.Component {
                   lineHeight: '10px',
                 }}
               >
-                支持PNG、JPG、JPEG，大小控制在300KB内，最多添加8张
+                支持PNG、JPG、JPEG，大小控制在300KB内，最多添加16张
               </div>
             </div>,
           )}
@@ -261,7 +262,7 @@ class EditForm extends React.Component {
               },
             ],
             
-            initialValue: formInit.productType[0], 
+            initialValue: formInit.productType, 
           })(
             <TreeSelect
               style={{ width: '100%' }}
