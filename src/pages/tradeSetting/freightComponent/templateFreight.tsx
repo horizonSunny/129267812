@@ -97,19 +97,19 @@ export default class TemplateFreight extends React.Component {
             &nbsp;
             <InputNumber
               min={1}
-              defaultValue={value.firstNum}
+              value={value.firstNum}
               onChange={event => this.changeTemplateDefault(event, 'firstNum')}
             />
             &nbsp; 件内 &nbsp;
             <InputNumber
               min={1}
-              defaultValue={value.firstPrice}
+              value={value.firstPrice}
               onChange={event => this.changeTemplateDefault(event, 'firstPrice')}
             />
             &nbsp; 元，续件费 &nbsp;
             <InputNumber
               min={1}
-              defaultValue={value.continuePrice}
+              value={value.continuePrice}
               onChange={event => this.changeTemplateDefault(event, 'continuePrice')}
             />
             &nbsp; 元/件
@@ -126,8 +126,8 @@ export default class TemplateFreight extends React.Component {
               <th>操作</th>
             </tr>
             <tbody>
-              {value.areaFreights.map((item, index) => {
-                console.log('item_', item);
+              {this.props.tradeSetting.freightTemplateInfo.areaFreights.map((item, index) => {
+                // console.log('item_', item);
                 return (
                   <tr key={index} className={`${styles.templateContent}`}>
                     <td className={`${styles.templateArea}`}>
@@ -142,21 +142,21 @@ export default class TemplateFreight extends React.Component {
                     <td>
                       <InputNumber
                         min={1}
-                        defaultValue={item.firstNum}
+                        value={item.firstNum}
                         onChange={event => this.changeTemplateArea(event, index, 'firstNum')}
                       />
                     </td>
                     <td>
                       <InputNumber
                         min={1}
-                        defaultValue={item.firstPrice}
+                        value={item.firstPrice}
                         onChange={event => this.changeTemplateArea(event, index, 'firstPrice')}
                       />
                     </td>
                     <td>
                       <InputNumber
                         min={1}
-                        defaultValue={item.continuePrice}
+                        value={item.continuePrice}
                         onChange={event => this.changeTemplateArea(event, index, 'continuePrice')}
                       />
                     </td>
