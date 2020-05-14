@@ -1,6 +1,6 @@
 // import { Table, Divider, Tag, Switch } from 'antd';
 
-  import { Table, Carousel } from 'antd';
+  import { Table, Carousel ,Modal} from 'antd';
 import React from 'react';
 import styles from './Table.less';
 import filterData from './filter';
@@ -18,6 +18,8 @@ const isMapClass = {
 @connect(({ commodity }) => ({ commodity }))
 export default class TableList extends React.Component {
   state = {
+    visible: false,
+    imgSrc:"",
     tabelArr: [],
     columns: [
       {
@@ -29,17 +31,26 @@ export default class TableList extends React.Component {
         dataIndex: 'value',
         render: (text, record) => {
           console.log(record,'图片放大了');
-          
           if (record.name === '商品图') {
             return (
-              <Carousel autoplay afterChange={this.onChangeBig}>
+              <Carousel autoplay>
                 {record.value.map((item, index) => {
                   return (
                     <div key={index} style={{ border: '1px dashed #ddd' }}>
-                      <img src={item} alt="暂无图片" style={{ height: '100%', width: '100%' }} />
+                      <img src={item} alt="暂无图片" onClick={this.showModal} style={{ height: '100%', width: '100%' }}/>
                     </div>
                   );
                 })}
+                <Modal
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    footer={null}
+                    centered = {true}
+                    maskClosable={true}
+                  >
+                    <img style={{width:'100%'}} alt="" onClick={this.handleOk} src={this.state.imgSrc}/>
+                </Modal>
               </Carousel>
             );
           }
@@ -104,10 +115,27 @@ export default class TableList extends React.Component {
   };
 
   // 点击查看商品图放大
-  onChangeBig(){
-    console.log('图片放大了');
-    
-  }
+  showModal = (e) => {;
+    if(e.target.nodeName==="IMG"){ //判断img 节点
+      this.setState({
+        visible:true,
+        imgSrc:e.target.src
+      })
+    }
+  };
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
 
   // 获取处理后的数据
   dataReverse(data) {

@@ -88,19 +88,24 @@ const CommodityModel = {
       const state = yield select(state => state);
       console.log('state_', state);
       const { casThreeId, selectedRowKeys, casInfoThree } = state.commodityClassify;
-      const response = yield call(deleteCategory, {
-        categoryId: casThreeId,
-        productIds: selectedRowKeys,
-      });
-      // 从当前列表中过滤出移除后的选项
-      yield put({
-        type: 'filterRmAfter',
-      });
-      // 清空已经选择的商品
-      yield put({
-        type: 'modifyCommodity',
-        payload: [],
-      });
+      //判断移除分类是否选中
+      if(selectedRowKeys.length == 0){
+        return;
+      }else{
+        const response = yield call(deleteCategory, {
+          categoryId: casThreeId,
+          productIds: selectedRowKeys,
+        });
+        // 从当前列表中过滤出移除后的选项
+        yield put({
+          type: 'filterRmAfter',
+        });
+        // 清空已经选择的商品
+        yield put({
+          type: 'modifyCommodity',
+          payload: [],
+        });
+      }
     },
     // 调换各级分类的位置
     *reverseCasInfo({ payload }, { select, call, put }) {

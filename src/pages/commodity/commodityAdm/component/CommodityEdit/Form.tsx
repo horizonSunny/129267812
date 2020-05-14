@@ -27,6 +27,8 @@ class EditForm extends React.Component {
     formInit: this.props.commodity.productWithId,
     editorState: null,
     productType: this.props.commodity.allProductType,
+
+    
     // 判断点击编辑还是添加
     // editIfadd：this.props.handleNew,
   };
@@ -67,7 +69,7 @@ class EditForm extends React.Component {
       if (params.id) {
         value.productId = this.props.commodity.productWithId.productId;
       }
-      value.productType = [value.productType];
+      value.productType = Array.isArray(value.productType)?value.productType:[value.productType];
       dispatch({
         type: 'commodity/saveProduct',
         payload: value,
