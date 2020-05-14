@@ -4,11 +4,11 @@ import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // 外部引入
 import moment from 'moment';
+import route from 'mock/route';
 import styles from './newSelfDelivery.less';
 import { newArea } from '@/utils/area.js';
 import { filterAreaNameInfo } from '@/utils/filterProperty';
 import { formatDate } from '@/utils/utils';
-import route from 'mock/route';
 // import { filterLabel } from '@/utils/filterProperty';
 // const { Search } = Input;
 const options = newArea();
@@ -33,7 +33,7 @@ class FormSelfDelivery extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
-      if(!err){
+      if (!err) {
         const areaName = filterAreaNameInfo(values.areaData, 'findName');
         const params = {
           tenantName: values.tenantName,
@@ -44,16 +44,16 @@ class FormSelfDelivery extends React.Component {
           area: areaName[2],
           isPick: this.props.selfDelivery.pickUpForm.isPick,
           businessDate: values.hebdomad,
-          businessHours: `${formatDate(values.startTime)}-${formatDate(values.endTime)}`, 
+          businessHours: `${formatDate(values.startTime)}-${formatDate(values.endTime)}`,
         };
         const { dispatch } = this.props;
         if (dispatch) {
           dispatch({
             type: 'selfDelivery/openPickUp',
             payload: params,
-          }).then(result=>{
-            window.history.back(-1)
-          })
+          }).then(result => {
+            window.history.back(-1);
+          });
         }
       }
     });
@@ -109,6 +109,7 @@ class FormSelfDelivery extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { pickUpForm } = this.props.selfDelivery;
+    console.log('lalalalala_2');
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },

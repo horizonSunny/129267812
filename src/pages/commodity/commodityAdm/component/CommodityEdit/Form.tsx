@@ -99,6 +99,8 @@ class EditForm extends React.Component {
   };
 
   render() {
+    console.log('lalalalala2');
+
     const str = window.location.search;
     const type = str.split('?')[1].split('=')[1];
     const { getFieldDecorator } = this.props.form;

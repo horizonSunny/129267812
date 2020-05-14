@@ -17,6 +17,8 @@ export default class SelfDelivery extends React.Component {
     if (dispatch) {
       dispatch({
         type: 'selfDelivery/getPickUp',
+      }).then(() => {
+        console.log('lalalalala_4');
       });
     }
   }
@@ -37,13 +39,13 @@ export default class SelfDelivery extends React.Component {
   toSelfDelivery = () => {
     router.push('/tradeSetting/selfDelivery/newSelfDelivery');
   };
-   // toSelfDelivery = (params,opening) => {
+  // toSelfDelivery = (params,opening) => {
   //   const { dispatch } = this.props;
   //   console.log(opening,'opening');
   //   dispatch({
   //     type: 'selfDelivery/merchantInformation',
   //   }).then(result=>{
-      // router.push('/tradeSetting/selfDelivery/newSelfDelivery');
+  // router.push('/tradeSetting/selfDelivery/newSelfDelivery');
   //   })
   // };
 
@@ -90,13 +92,15 @@ export default class SelfDelivery extends React.Component {
                       <tr>
                         <td> 营业时间</td>
                         <td>
-                          {pickUp.businessDate ? pickUp.businessDate.map((item, index) => {
-                            const length = pickUp.businessDate.length - 1;
-                            if (length !== index) {
-                              return `${item}/`;
-                            }
-                            return item;
-                          }) : '无营业日期'}
+                          {pickUp.businessDate
+                            ? pickUp.businessDate.map((item, index) => {
+                                const length = pickUp.businessDate.length - 1;
+                                if (length !== index) {
+                                  return `${item}/`;
+                                }
+                                return item;
+                              })
+                            : '无营业日期'}
                           &nbsp;&nbsp;
                           {pickUp.businessHours ? pickUp.businessHours : '无营业时间'}
                         </td>
