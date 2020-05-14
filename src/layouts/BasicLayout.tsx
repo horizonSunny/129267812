@@ -12,12 +12,14 @@ import React, { useEffect } from 'react';
 import Link from 'umi/link';
 import { Dispatch } from 'redux';
 import { connect } from 'dva';
-import { Result, Button } from 'antd';
+import { Result, Button, Spin } from 'antd';
 
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
 import { getAuthorityFromRouter } from '@/utils/utils';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
 // 做面包屑的动态配置
 import classfyB from '../utils/classfyBreadcrumb';
 
@@ -146,7 +148,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   const authorized = getAuthorityFromRouter(props.route.routes, location.pathname || '/') || {
     authority: undefined,
   };
+
   return (
+    // <PersistGate persistor={persistStore(window.g_app._store)} loading={<Spin />}>
     <ProLayout
       // logo={logo}
       // menuHeaderRender={(logoDom, titleDom) => (
@@ -184,10 +188,16 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         {children}
       </Authorized>
     </ProLayout>
+    // </PersistGate>
   );
 };
 
 export default connect(({ global, settings }: ConnectState) => ({
   collapsed: global.collapsed,
   settings,
-}))(BasicLayout);
+}))(
+  BasicLayout,
+  // <PersistGate persistor={persistStore(window.g_app._store)} loading={<Spin />}>
+  //   {BasicLayout},
+  // </PersistGate>,
+);

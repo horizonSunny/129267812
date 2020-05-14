@@ -19,6 +19,7 @@ const plugins: IPlugin[] = [
       antd: true,
       dva: {
         hmr: true,
+        dynamicImport: undefined,
       },
       locale: {
         // default false

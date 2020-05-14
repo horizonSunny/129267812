@@ -110,7 +110,7 @@ class QueryForm extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { queryForm, channel } = this.props.businessAdm;
-    console.log('queryForm_', queryForm);
+    // console.log('queryForm_', queryForm);
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },

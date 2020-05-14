@@ -5,6 +5,9 @@ import { stringify } from 'querystring';
 import { ConnectState, ConnectProps } from '@/models/connect';
 import { CurrentUser } from '@/models/user';
 import PageLoading from '@/components/PageLoading';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Spin } from 'antd';
+import { persistStore } from 'redux-persist';
 
 interface SecurityLayoutProps extends ConnectProps {
   loading: boolean;
@@ -46,9 +49,12 @@ class SecurityLayout extends React.Component<SecurityLayoutProps, SecurityLayout
       return <PageLoading />;
     }
     if (!isLogin) {
-      return <Redirect to={`/user/login?${queryString}`}></Redirect>;
+      return <Redirect to={`/user/login?${queryString}`} />;
     }
     return children;
+    // <PersistGate persistor={persistStore(window.g_app._store)} loading={<Spin />}>
+    // {children}
+    // </PersistGate>
   }
 }
 
