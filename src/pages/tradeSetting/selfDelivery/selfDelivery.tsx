@@ -17,8 +17,6 @@ export default class SelfDelivery extends React.Component {
     if (dispatch) {
       dispatch({
         type: 'selfDelivery/getPickUp',
-      }).then(() => {
-        console.log('lalalalala_4');
       });
     }
   }

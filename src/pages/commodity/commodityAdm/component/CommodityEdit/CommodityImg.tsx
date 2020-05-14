@@ -106,6 +106,7 @@ class PicturesWall extends React.Component {
       <div>
         <Icon type="plus" />
         <div className="ant-upload-text">Upload</div>
+        <div>testtesttest</div>
       </div>
     );
     return (
