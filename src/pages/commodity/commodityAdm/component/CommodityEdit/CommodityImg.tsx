@@ -20,12 +20,14 @@ class PicturesWall extends React.Component {
     console.log('productWithId_', this.props.commodity.productWithId);
     this.resetFileList();
   }
+
   state = {
     previewVisible: false,
     previewImage: '',
     previewTitle: '',
     fileList: [],
   };
+
   // 重置state.fileList属性
   resetFileList = () => {
     const imgArr = this.props.commodity.productWithId.productImage;
@@ -68,9 +70,10 @@ class PicturesWall extends React.Component {
     this.setState({ fileList });
     // this.props.onChange(fileList);
   };
+
   // 将传入数组元素位置调换为首,黑科技
   swapArr(itemIndex) {
-    let temp = this.state.fileList[0];
+    const temp = this.state.fileList[0];
     this.state.fileList[0] = this.state.fileList[itemIndex];
     this.state.fileList[itemIndex] = temp;
     console.log('this.state.fileList_', this.state.fileList);
@@ -78,6 +81,7 @@ class PicturesWall extends React.Component {
       fileList: this.state.fileList,
     });
   }
+
   // 删除图片
   deleteImg(itemIndex) {
     this.state.fileList.splice(itemIndex, 1);
@@ -92,7 +96,7 @@ class PicturesWall extends React.Component {
     const _this = this;
     const props = {
       name: 'file',
-      action: serverUrl + '/admin/v1/uploadFile',
+      action: `${serverUrl}/admin/v1/uploadFile`,
       headers: {
         authorization: sessionStorage.getItem('token'),
       },

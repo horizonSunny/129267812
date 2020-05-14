@@ -20,7 +20,7 @@ export default class BannerList extends React.Component {
           pageSize: this.props.banner.pageSize,
         },
       }).then(() => {
-        console.log('banner');
+        console.log('lalala_4');
       });
     }
   }
