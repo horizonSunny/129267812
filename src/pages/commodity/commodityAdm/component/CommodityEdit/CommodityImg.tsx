@@ -24,6 +24,7 @@ class PicturesWall extends React.Component {
   state = {
     previewVisible: false,
     previewImage: '',
+    previewTitle: '',
     fileList: [],
   };
 
@@ -32,6 +33,7 @@ class PicturesWall extends React.Component {
     const imgArr = this.props.commodity.productWithId.productImage;
     const arr = imgArr.map((item, index) => {
       const newObj = new Object();
+      console.log(newObj,'加载图片');
       newObj.url = item;
       newObj.uid = index;
       return newObj;
@@ -57,10 +59,12 @@ class PicturesWall extends React.Component {
     this.setState({
       previewImage: file.url || file.preview,
       previewVisible: true,
+      previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
     });
   };
 
   handleChange = ({ fileList, file, event }) => {
+    console.log('上传');
     console.log('file_', file);
     console.log('fileList_', fileList);
     this.setState({ fileList });
@@ -101,7 +105,7 @@ class PicturesWall extends React.Component {
   };
 
   render() {
-    const { previewVisible, previewImage, fileList } = this.state;
+    const { previewVisible, previewImage, fileList, previewTitle } = this.state;
     const uploadButton = (
       <div>
         <Icon type="plus" />

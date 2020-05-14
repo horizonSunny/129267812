@@ -21,11 +21,11 @@ const route = [
         routes: [
           {
             path: '/',
-            redirect: '/businessAdm/enter',
+            redirect: '/dashboard/dashboard',
           },
           {
             path: '/index',
-            redirect: '/businessAdm/enter',
+            redirect: '/dashboard/dashboard',
           },
           {
             path: '/commodityAdm',
@@ -154,6 +154,17 @@ const route = [
           //   component: './Admin',
           //   authority: ['admin'],
           // },
+          // 欢迎页
+          {
+            path: '/dashboard',
+            routes: [
+              {
+                name:'dashboard',
+                path:'/dashboard/dashboard',
+                component: './dashboard/dashboard.tsx',
+              }
+            ]
+          },
           {
             component: './404',
           },

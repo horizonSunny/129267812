@@ -66,6 +66,8 @@ export default class CasCommodity extends React.Component {
   // 移除选中的药物
   removeCom() {
     const { dispatch } = this.props;
+    console.log(this.props,'this.props先进点击移除的地方吗');
+    
     if (dispatch) {
       dispatch({
         type: 'commodityClassify/removeCommodity',

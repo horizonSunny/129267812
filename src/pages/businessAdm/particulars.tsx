@@ -30,6 +30,7 @@ class Particulars extends Component {
 
   render() {
     const { currentRecord } = this.props.businessAdm;
+    
     return (
       <PageHeaderWrapper>
         <div className={styles.container}>
