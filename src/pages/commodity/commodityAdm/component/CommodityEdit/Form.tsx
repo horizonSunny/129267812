@@ -1,14 +1,4 @@
-import {
-  Form,
-  Input,
-  Select,
-  Radio,
-  Button,
-  TreeSelect,
-  InputNumber,
-  Switch,
-  Cascader,
-} from 'antd';
+import { Form, Input, Select, Radio, Button, TreeSelect, InputNumber, Switch,Cascader } from 'antd';
 import React from 'react';
 import styles from './Form.less';
 import LabelInfo from '../../../../../components/Label/label';
@@ -42,6 +32,7 @@ class EditForm extends React.Component {
     // 判断点击编辑还是添加
     // editIfadd：this.props.handleNew,
   };
+  
 
   onRef = ref => {
     this.child = ref;
@@ -101,17 +92,15 @@ class EditForm extends React.Component {
   };
 
   render() {
-    console.log('lalalalala2');
-
-    const str = window.location.search;
-    const type = str.split('?')[1].split('=')[1];
+    let str = window.location.search;
+    let type = str.split('?')[1].split('=')[1];
     const { getFieldDecorator } = this.props.form;
     const { formInit, isFirstpage } = this.state;
     const { editorState } = this.state;
     // 不在控制栏显示的控件
     const excludeControls = ['media', 'emoji'];
     const { productType } = this.state;
-
+    
     const formItemLayout = {
       labelCol: {
         sm: { span: 3 },
@@ -122,7 +111,7 @@ class EditForm extends React.Component {
         xxl: { span: 15 },
       },
     };
-    const labelCast = filterLabel(this.props.commodity.allProductType);
+    const labelCast = filterLabel(this.props.commodity.allProductType)
     return (
       <Form className={styles.main} {...formItemLayout} onSubmit={this.handleSubmit}>
         <Form.Item label="商品图">
@@ -149,7 +138,7 @@ class EditForm extends React.Component {
             </div>,
           )}
         </Form.Item>
-        <Form.Item label="商品品牌">
+        <Form.Item label="商品品牌"> 
           {getFieldDecorator('productBrand', {
             rules: [
               {
@@ -158,7 +147,7 @@ class EditForm extends React.Component {
               },
             ],
             initialValue: formInit.productBrand,
-          })(<Input disabled={type === '1'} />)}
+          })(<Input disabled={type === '1'}/>)}
         </Form.Item>
         <Form.Item label="通用名">
           {getFieldDecorator('productCommonName', {
@@ -169,7 +158,7 @@ class EditForm extends React.Component {
               },
             ],
             initialValue: formInit.productCommonName,
-          })(<Input disabled={type === '1'} />)}
+          })(<Input disabled={type === '1'}/>)}
         </Form.Item>
         <Form.Item label="是否处方药">
           {getFieldDecorator('isMp', {
@@ -209,7 +198,7 @@ class EditForm extends React.Component {
               <Radio value={2} disabled={type === '1'}>
                 <LabelInfo
                   text="Rx"
-                  classInfo={Object.assign(
+                  classInfo={Object.assign( 
                     {
                       border: '1px solid red',
                       color: 'red',
@@ -242,7 +231,7 @@ class EditForm extends React.Component {
               },
             ],
             initialValue: formInit.approvalNumber,
-          })(<Input disabled={type === '1'} />)}
+          })(<Input disabled={type === '1'}/>)}
         </Form.Item>
         <Form.Item label="包装规格">
           {getFieldDecorator('productSpecif', {
@@ -253,7 +242,7 @@ class EditForm extends React.Component {
               },
             ],
             initialValue: formInit.productSpecif,
-          })(<Input disabled={type === '1'} />)}
+          })(<Input disabled={type === '1'}/>)}
         </Form.Item>
         <Form.Item label="有效期">
           {getFieldDecorator('productExpire', {
@@ -264,7 +253,7 @@ class EditForm extends React.Component {
               },
             ],
             initialValue: formInit.productExpire,
-          })(<Input disabled={type === '1'} />)}
+          })(<Input disabled={type === '1'}/>)}
         </Form.Item>
         <Form.Item label="商品类别">
           {getFieldDecorator('productType', {
@@ -274,8 +263,8 @@ class EditForm extends React.Component {
                 message: '请选择商品类别',
               },
             ],
-
-            initialValue: formInit.productType,
+            
+            initialValue: formInit.productType, 
           })(
             <TreeSelect
               style={{ width: '100%' }}
@@ -302,7 +291,7 @@ class EditForm extends React.Component {
               },
             ],
             initialValue: formInit.productDesc,
-          })(<Input.TextArea disabled={type === '1'} />)}
+          })(<Input.TextArea disabled={type === '1'}/>)}
         </Form.Item>
         <Form.Item label="生产企业">
           {getFieldDecorator('manufacturer', {
@@ -313,7 +302,7 @@ class EditForm extends React.Component {
               },
             ],
             initialValue: formInit.manufacturer,
-          })(<Input disabled={type === '1'} />)}
+          })(<Input disabled={type === '1'}/>)}
         </Form.Item>
         <Form.Item label="剂型/型号">
           {getFieldDecorator('productModel', {
@@ -324,19 +313,19 @@ class EditForm extends React.Component {
               },
             ],
             initialValue: formInit.productModel,
-          })(<Input disabled={type === '1'} />)}
+          })(<Input disabled={type === '1'}/>)}
         </Form.Item>
         <Form.Item label="英文名">
           {getFieldDecorator('englishName', {
             rules: [],
             initialValue: formInit.englishName ? formInit.englishName : '',
-          })(<Input disabled={type === '1'} />)}
+          })(<Input disabled={type === '1'}/>)}
         </Form.Item>
         <Form.Item label="汉语拼音">
           {getFieldDecorator('pinyin', {
             rules: [],
             initialValue: formInit.pinyin ? formInit.pinyin : '',
-          })(<Input disabled={type === '1'} />)}
+          })(<Input disabled={type === '1'}/>)}
         </Form.Item>
         <Form.Item label="说明书">
           {getFieldDecorator('productSpec', {
