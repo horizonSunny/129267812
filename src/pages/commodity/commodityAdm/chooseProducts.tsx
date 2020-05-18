@@ -208,6 +208,7 @@ class CommodityAdm extends React.Component {
           }}
           onChange={this.onChange}
           dataSource={state.dataSource}
+          // rowKey={state.productId}/>
         />
       </PageHeaderWrapper>
     );

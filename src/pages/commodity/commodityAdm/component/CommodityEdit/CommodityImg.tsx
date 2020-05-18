@@ -125,7 +125,7 @@ class PicturesWall extends React.Component {
       <div className={styles.main}>
         <span className={styles.imgPosition}>
           {fileList.map((item, index) => (
-            <span className={styles.imageShade}>
+            <span key={index} className={styles.imageShade}>
               <Icon
                 type="close-circle"
                 theme="filled"
