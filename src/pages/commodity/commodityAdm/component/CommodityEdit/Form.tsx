@@ -34,11 +34,8 @@ const isMapClass = {
 @connect(({ commodity }) => ({ commodity }))
 class EditForm extends React.Component {
   state = {
-    formInit: this.props.commodity.productWithId,
     editorState: null,
-    productType: this.props.commodity.allProductType,
 
-    
     // 判断点击编辑还是添加
     // editIfadd：this.props.handleNew,
   };
@@ -78,7 +75,9 @@ class EditForm extends React.Component {
       if (params.id) {
         value.productId = this.props.commodity.productWithId.productId;
       }
-      value.productType = Array.isArray(value.productType)?value.productType:[value.productType];
+      value.productType = Array.isArray(value.productType)
+        ? value.productType
+        : [value.productType];
       dispatch({
         type: 'commodity/saveProduct',
         payload: value,
@@ -106,11 +105,13 @@ class EditForm extends React.Component {
     const str = window.location.search;
     const type = str.split('?')[1].split('=')[1];
     const { getFieldDecorator } = this.props.form;
-    const { formInit, isFirstpage } = this.state;
+    const { isFirstpage } = this.state;
+    const productType = this.props.commodity.allProductType;
+    const formInit = this.props.commodity.productWithId;
     const { editorState } = this.state;
     // 不在控制栏显示的控件
     const excludeControls = ['media', 'emoji'];
-    const { productType } = this.state;
+    // const { productType } = this.state;
 
     const formItemLayout = {
       labelCol: {
@@ -338,33 +339,35 @@ class EditForm extends React.Component {
             initialValue: formInit.pinyin ? formInit.pinyin : '',
           })(<Input disabled={type === '1'} />)}
         </Form.Item>
-        <Form.Item label="说明书">
-          {getFieldDecorator('productSpec', {
-            validateTrigger: 'onBlur',
-            rules: [
-              {
-                required: true,
-                validator: (_, value, callback) => {
-                  if (value.isEmpty()) {
-                    callback('请输入正文内容');
-                  } else {
-                    callback();
-                  }
+        {(formInit.productSpec || type === '2') && (
+          <Form.Item label="说明书">
+            {getFieldDecorator('productSpec', {
+              validateTrigger: 'onBlur',
+              rules: [
+                {
+                  required: true,
+                  validator: (_, value, callback) => {
+                    if (value.isEmpty()) {
+                      callback('请输入正文内容');
+                    } else {
+                      callback();
+                    }
+                  },
                 },
-              },
-            ],
-            initialValue: BraftEditor.createEditorState(formInit.productSpec),
-          })(
-            <BraftEditor
-              style={{ border: '1px solid #d1d1d1', borderRadius: 5 }}
-              placeholder="请输入正文内容"
-              value={editorState}
-              onChange={this.handleEditorChange}
-              excludeControls={excludeControls}
-              disabled={type === '1'}
-            />,
-          )}
-        </Form.Item>
+              ],
+              initialValue: BraftEditor.createEditorState(formInit.productSpec),
+            })(
+              <BraftEditor
+                style={{ border: '1px solid #d1d1d1', borderRadius: 5 }}
+                placeholder="请输入正文内容"
+                value={editorState}
+                onChange={this.handleEditorChange}
+                excludeControls={excludeControls}
+                disabled={type === '1'}
+              />,
+            )}
+          </Form.Item>
+        )}
         <Form.Item
           wrapperCol={{
             xs: { span: 24, offset: 0 },

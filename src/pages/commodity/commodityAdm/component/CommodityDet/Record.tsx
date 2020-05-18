@@ -18,18 +18,18 @@ const columns = [
 export default class TableList extends React.Component {
   componentDidMount() {}
 
-  state = {
-    data: this.props.commodity.productLog,
-  };
-
   render() {
-    const { state } = this;
-    const dataInfo = state.data.map(item => {
-      return {
-        operation: item.operation,
-        operateInfo: `${item.optTime}  ${item.operator}`,
-      };
-    });
+    const data = this.props.commodity.productLog;
+    let dataInfo;
+    if (Array.isArray(data)) {
+      dataInfo = data.map(item => {
+        return {
+          operation: item.operation,
+          operateInfo: `${item.optTime}  ${item.operator}`,
+        };
+      });
+    }
+
     return (
       <div className={styles.main}>
         <a href="javascript:void(0);" className={styles.aInfo}>

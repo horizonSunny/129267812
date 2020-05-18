@@ -39,12 +39,13 @@ export default class TableList extends React.Component {
   }
 
   state = {
-    data: this.props.commodity.productWithId,
+    // data: this.props.commodity.productWithId,
     getPickUp: null,
   };
 
   render() {
-    const { data, getPickUp } = this.state;
+    const { getPickUp } = this.state;
+    const data = this.props.commodity.productWithId;
     // 配送方式
     const freightTemplates = [];
     let ordinaryTemplate = null;
@@ -52,15 +53,17 @@ export default class TableList extends React.Component {
     if (getPickUp) {
       freightTemplates.push('自提');
     }
-    data.freightTemplates.forEach(item => {
-      if (item.templateType === 2) {
-        urgentTemplate = item.templateName;
-        freightTemplates.push('加急快递');
-      } else {
-        ordinaryTemplate = item.templateName;
-        freightTemplates.push('普通快递');
-      }
-    });
+    if (data && data.freightTemplates) {
+      data.freightTemplates.forEach(item => {
+        if (item.templateType === 2) {
+          urgentTemplate = item.templateName;
+          freightTemplates.push('加急快递');
+        } else {
+          ordinaryTemplate = item.templateName;
+          freightTemplates.push('普通快递');
+        }
+      });
+    }
     const dataInfo = [
       { operation: '价格', operateInfo: `${data.price} 元` },
       { operation: '库存', operateInfo: `${data.stock} 件` },

@@ -24,11 +24,15 @@ function beforeUpload(file) {
 class BannerItem extends React.Component {
   state = {
     loading: false,
-    imageUrl: this.props.banner.categoryItem.image,
+    imageUrl: '',
     value: '',
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.setState({
+      imageUrl: this.props.banner.categoryItem ? this.props.banner.categoryItem.image : '',
+    });
+  }
 
   // 上传图片变化
   handleChange = ({ fileList, file, event }) => {
@@ -107,7 +111,9 @@ class BannerItem extends React.Component {
         <Form {...formItemLayout} onSubmit={this.handleSubmit}>
           <Form.Item label="名称">
             {getFieldDecorator('bannerName', {
-              initialValue: this.props.banner.categoryItem.bannerName,
+              initialValue: this.props.banner.categoryItem
+                ? this.props.banner.categoryItem.bannerName
+                : '',
               rules: [
                 {
                   required: true,
@@ -118,7 +124,9 @@ class BannerItem extends React.Component {
           </Form.Item>
           <Form.Item label="跳转链接">
             {getFieldDecorator('redirectUrl', {
-              initialValue: this.props.banner.categoryItem.redirectUrl,
+              initialValue: this.props.banner.categoryItem
+                ? this.props.banner.categoryItem.redirectUrl
+                : '',
               rules: [
                 {
                   message: '请输入跳转链接!',

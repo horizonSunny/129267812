@@ -52,8 +52,8 @@ const CommodityModel = {
       urgentTemplate: '',
       hasSelectTemplate: [],
     },
-    productLog: {},
-    allProductType: {},
+    productLog: [],
+    allProductType: [],
     // 代表商品是0-已下架,1-出售中，2-已售罄
     productListStatus: tabStatus,
     // 商品三个状态分别的sort排序方式,0-已下架,1-出售中，2-已售罄

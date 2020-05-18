@@ -43,12 +43,13 @@ function Tags(props) {
 class FindItem extends React.Component {
   state = {
     loading: false,
-    tags: this.props.operTool.categoryItem.categorys,
-    imageUrl: this.props.operTool.categoryItem.image,
+    tags: [],
+    imageUrl: '',
     value: '',
   };
 
   componentDidMount() {
+    console.log('componentDidMount');
     const { dispatch } = this.props;
     if (dispatch) {
       dispatch({
@@ -67,6 +68,22 @@ class FindItem extends React.Component {
         });
       });
     }
+    this.setState({
+      tags: this.props.operTool.categoryItem ? this.props.operTool.categoryItem.categorys : [],
+      imageUrl: this.props.operTool.categoryItem ? this.props.operTool.categoryItem.image : '',
+    });
+  }
+
+  componentWillReceiveProps() {
+    console.log('componentWillReceiveProps');
+
+    // if (this.state.tags.length !== 0 && this.imageUrl) {
+    // } else {
+    //   this.setState({
+    //     tags: this.props.operTool.categoryItem ? this.props.operTool.categoryItem.categorys : [],
+    //     imageUrl: this.props.operTool.categoryItem ? this.props.operTool.categoryItem.image : '',
+    //   });
+    // }
   }
 
   // 上传图片变化
@@ -225,7 +242,9 @@ class FindItem extends React.Component {
           </Form.Item>
           <Form.Item label="分类名称">
             {getFieldDecorator('cateName', {
-              initialValue: this.props.operTool.categoryItem.quickCategoryName,
+              initialValue: this.props.operTool.categoryItem
+                ? this.props.operTool.categoryItem.quickCategoryName
+                : '',
               rules: [
                 {
                   required: true,
@@ -236,7 +255,9 @@ class FindItem extends React.Component {
           </Form.Item>
           <Form.Item label="关联商品分类">
             {getFieldDecorator('cateClassify', {
-              initialValue: this.props.operTool.categoryItem.quickCategoryName,
+              initialValue: this.props.operTool.categoryItem
+                ? this.props.operTool.categoryItem.quickCategoryName
+                : '',
               rules: [
                 {
                   required: true,

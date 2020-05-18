@@ -15,6 +15,12 @@ function getBase64(file) {
 
 @connect(({ commodity }) => ({ commodity }))
 class PicturesWall extends React.Component {
+  componentWillReceiveProps() {
+    this.props.onRef(this);
+    console.log('productWithId_', this.props.commodity.productWithId);
+    this.resetFileList();
+  }
+
   componentDidMount() {
     this.props.onRef(this);
     console.log('productWithId_', this.props.commodity.productWithId);
@@ -30,10 +36,13 @@ class PicturesWall extends React.Component {
 
   // 重置state.fileList属性
   resetFileList = () => {
-    const imgArr = this.props.commodity.productWithId.productImage;
+    const imgArr =
+      this.props.commodity.productWithId && this.props.commodity.productWithId.productImage
+        ? this.props.commodity.productWithId.productImage
+        : [];
     const arr = imgArr.map((item, index) => {
       const newObj = new Object();
-      console.log(newObj,'加载图片');
+      console.log(newObj, '加载图片');
       newObj.url = item;
       newObj.uid = index;
       return newObj;
@@ -110,7 +119,6 @@ class PicturesWall extends React.Component {
       <div>
         <Icon type="plus" />
         <div className="ant-upload-text">Upload</div>
-        <div>testtesttest</div>
       </div>
     );
     return (
