@@ -214,6 +214,23 @@ class QueryForm extends Component {
             </Form.Item>
           </Col>
         </Row>
+        {/* 商户-h5后台0.2 */}
+        <Row gutter={24}>
+          <Col span={8}>
+            <Form.Item {...formItemLayout} label="买家id">
+              {getFieldDecorator('productCommonName', {
+                initialValue: queryForm.productCommonName,
+              })(<Input placeholder="请输入买家id" />)}
+            </Form.Item>
+          </Col>
+          <Col span={10}>
+            <Form.Item {...formItemLayout} label="收货人手机号">
+              {getFieldDecorator('orderNo', {
+                initialValue: queryForm.orderNo,
+              })(<Input placeholder="请输入手机号" />)}
+            </Form.Item>
+          </Col>
+        </Row>
         <Row>
           <Col span={8} offset={16} style={{ textAlign: 'center' }}>
             <Button type="primary" htmlType="submit">
