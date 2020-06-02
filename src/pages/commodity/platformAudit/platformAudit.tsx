@@ -9,23 +9,23 @@ import SearchForm from './component/platformAudit/SearchForm';
 import TableList from './component/platformAudit/TableList';
 
 // 请求
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ platformAudit }) => ({ platformAudit }))
 export default class PlatformAudit extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    // const searchParams = filterProperty(this.props.commodity.searchInfo);
+    // const searchParams = filterProperty(this.props.platformAudit.searchInfo);
     dispatch({
-      type: 'commodity/getProductType',
+      type: 'platformAudit/getProductType',
     });
     dispatch({
-      type: 'commodity/getList',
+      type: 'platformAudit/getList',
     });
   }
 
   // componentWillReceiveProps() {
   //   const { dispatch } = this.props;
   //   dispatch({
-  //     type: 'commodity/getProductType',
+  //     type: 'platformAudit/getProductType',
   //     payload: { code: 'productType' },
   //   });
   // }

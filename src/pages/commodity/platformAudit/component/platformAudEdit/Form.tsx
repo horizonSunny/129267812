@@ -12,7 +12,7 @@ import {
 import React from 'react';
 import styles from './Form.less';
 import LabelInfo from '../../../../../components/Label/label';
-import CommodityImg from './CommodityImg';
+import platformAuditImg from './platformAuditImg';
 import router from 'umi/router';
 // 引入富文本编辑器
 import BraftEditor from 'braft-editor';
@@ -31,7 +31,7 @@ const isMapClass = {
   fontSize: '10px',
 };
 
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ platformAudit }) => ({ platformAudit }))
 class EditForm extends React.Component {
   state = {
     editorState: null,
@@ -68,18 +68,18 @@ class EditForm extends React.Component {
     if (validateValue) {
       // console.log('location_', routerParams(location.search));
       const params = routerParams(location.search);
-      const typeInfo = params.id ? 'commodity/editProduct' : 'commodity/newProduct';
+      const typeInfo = params.id ? 'platformAudit/editProduct' : 'platformAudit/newProduct';
       // 判断是不是编辑
       const value = this.props.form.getFieldsValue();
       value.productSpec = value.productSpec.toHTML();
       if (params.id) {
-        value.productId = this.props.commodity.productWithId.productId;
+        value.productId = this.props.platformAudit.productWithId.productId;
       }
       value.productType = Array.isArray(value.productType)
         ? value.productType
         : [value.productType];
       dispatch({
-        type: 'commodity/saveProduct',
+        type: 'platformAudit/saveProduct',
         payload: value,
       });
       // .then(() => {
@@ -104,8 +104,8 @@ class EditForm extends React.Component {
     const type = str.split('?')[1].split('=')[1];
     const { getFieldDecorator } = this.props.form;
     const { isFirstpage } = this.state;
-    const productType = this.props.commodity.allProductType;
-    const formInit = this.props.commodity.productWithId;
+    const productType = this.props.platformAudit.allProductType;
+    const formInit = this.props.platformAudit.productWithId;
     const { editorState } = this.state;
     // 不在控制栏显示的控件
     const excludeControls = ['media', 'emoji'];
@@ -121,7 +121,7 @@ class EditForm extends React.Component {
         xxl: { span: 15 },
       },
     };
-    const labelCast = filterLabel(this.props.commodity.allProductType);
+    const labelCast = filterLabel(this.props.platformAudit.allProductType);
     return (
       <Form className={styles.main} {...formItemLayout} onSubmit={this.handleSubmit}>
         <Form.Item label="商品图">
@@ -135,7 +135,7 @@ class EditForm extends React.Component {
             initialValue: formInit.productImage,
           })(
             <div>
-              <CommodityImg onRef={this.onRef} />
+              <platformAuditImg onRef={this.onRef} />
               <div
                 style={{
                   fontSize: '12px',

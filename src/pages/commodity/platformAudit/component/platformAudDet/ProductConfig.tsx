@@ -22,7 +22,7 @@ const templateInfo = {
   urgentTemplate: '加急快递模版',
   recommandStatus: '是否推荐商品',
 };
-@connect(({ commodity, selfDelivery }) => ({ commodity, selfDelivery }))
+@connect(({ platformAudit, selfDelivery }) => ({ platformAudit, selfDelivery }))
 export default class TableList extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -39,13 +39,13 @@ export default class TableList extends React.Component {
   }
 
   state = {
-    // data: this.props.commodity.productWithId,
+    // data: this.props.platformAudit.productWithId,
     getPickUp: null,
   };
 
   render() {
     const { getPickUp } = this.state;
-    const data = this.props.commodity.productWithId;
+    const data = this.props.platformAudit.productWithId;
     // 配送方式
     const freightTemplates = [];
     let ordinaryTemplate = null;

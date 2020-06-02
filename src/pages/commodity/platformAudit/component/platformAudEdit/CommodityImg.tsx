@@ -1,6 +1,6 @@
 import { Upload, Icon, Modal } from 'antd';
 import React from 'react';
-import styles from './CommodityImg.less';
+import styles from './platformAuditImg.less';
 import { connect } from 'dva';
 import { serverUrl } from '@/utils/request';
 
@@ -13,17 +13,17 @@ function getBase64(file) {
   });
 }
 
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ platformAudit }) => ({ platformAudit }))
 class PicturesWall extends React.Component {
   componentWillReceiveProps() {
     this.props.onRef(this);
-    console.log('productWithId_', this.props.commodity.productWithId);
+    console.log('productWithId_', this.props.platformAudit.productWithId);
     this.resetFileList();
   }
 
   componentDidMount() {
     this.props.onRef(this);
-    console.log('productWithId_', this.props.commodity.productWithId);
+    console.log('productWithId_', this.props.platformAudit.productWithId);
     this.resetFileList();
   }
 
@@ -37,8 +37,8 @@ class PicturesWall extends React.Component {
   // 重置state.fileList属性
   resetFileList = () => {
     const imgArr =
-      this.props.commodity.productWithId && this.props.commodity.productWithId.productImage
-        ? this.props.commodity.productWithId.productImage
+      this.props.platformAudit.productWithId && this.props.platformAudit.productWithId.productImage
+        ? this.props.platformAudit.productWithId.productImage
         : [];
     const arr = imgArr.map((item, index) => {
       const newObj = new Object();

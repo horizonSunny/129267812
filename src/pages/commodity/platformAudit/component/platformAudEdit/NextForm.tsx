@@ -8,21 +8,20 @@ import { connect } from 'dva';
 import { callbackify } from 'util';
 import routerParams from '@/utils/routerParams';
 import Item from 'antd/lib/list/Item';
-import CommodityImg from './CommodityImg';
+import platformAuditImg from './platformAuditImg';
 import LabelInfo from '../../../../../components/Label/label';
 import styles from './Form.less';
 import Login from '@/pages/user/login/components/Login';
 
 const { Option } = Select;
 
-@connect(({ commodity, tradeSetting }) => ({ commodity, tradeSetting }))
+@connect(({ platformAudit, tradeSetting }) => ({ platformAudit, tradeSetting }))
 class NextForm extends React.Component {
   state = {
-    formInit: this.props.commodity.productWithId,
+    formInit: this.props.platformAudit.productWithId,
   };
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   handleSubmit = e => {
     e.preventDefault();
@@ -40,19 +39,19 @@ class NextForm extends React.Component {
     // if (validateValue) {
     //   console.log('location_', routerParams(location.search));
     //   const params = routerParams(location.search);
-    //   const typeInfo = params.id ? 'commodity/editProduct' : 'commodity/newProduct';
+    //   const typeInfo = params.id ? 'platformAudit/editProduct' : 'platformAudit/newProduct';
     //   // 判断是不是编辑
     //   const value = this.props.form.getFieldsValue();
     //   value.productSpec = value.productSpec.toHTML();
     //   if (params.id) {
-    //     value.productId = this.props.commodity.productWithId.productId;
+    //     value.productId = this.props.platformAudit.productWithId.productId;
     //   }
     //   value.productType = [value.productType];
     //   // dispatch({
     //   //   type: typeInfo,
     //   //   payload: value,
     //   // }).then(() => {
-    //   //   // router.push('/commodityAdm/management');
+    //   //   // router.push('/platformAuditAdm/management');
     //   // });
     // }
   };
@@ -67,7 +66,7 @@ class NextForm extends React.Component {
       stock: getFieldValue('stock'),
     };
     dispatch({
-      type: 'commodity/saveProduct',
+      type: 'platformAudit/saveProduct',
       payload: params,
     });
     // console.log('params_', params);
@@ -77,10 +76,10 @@ class NextForm extends React.Component {
   checkboxChange = value => {
     console.log('value_', value);
     const { dispatch } = this.props;
-    const { productDeliveryTemplate } = this.props.commodity;
+    const { productDeliveryTemplate } = this.props.platformAudit;
     productDeliveryTemplate.hasSelectTemplate = value;
     dispatch({
-      type: 'commodity/setProductDeliveryTemplate',
+      type: 'platformAudit/setProductDeliveryTemplate',
       payload: productDeliveryTemplate,
     });
   };
@@ -90,13 +89,13 @@ class NextForm extends React.Component {
     const templateInfo = freightList.pageList.find(item => {
       return item.freightTemplateId === value;
     });
-    const { productDeliveryTemplate } = this.props.commodity;
+    const { productDeliveryTemplate } = this.props.platformAudit;
     productDeliveryTemplate[name] = templateInfo;
     console.log('name_', name, '_value_', value);
     console.log('productDeliveryTemplate_', productDeliveryTemplate);
     const { dispatch } = this.props;
     dispatch({
-      type: 'commodity/setProductDeliveryTemplate',
+      type: 'platformAudit/setProductDeliveryTemplate',
       payload: productDeliveryTemplate,
     });
   };
@@ -104,12 +103,12 @@ class NextForm extends React.Component {
   // 保存是否上下架
   saveForm = isShelf => {
     const { dispatch } = this.props;
-    const { productWithId } = this.props.commodity;
+    const { productWithId } = this.props.platformAudit;
     const {
       ordinaryTemplate,
       urgentTemplate,
       hasSelectTemplate,
-    } = this.props.commodity.productDeliveryTemplate;
+    } = this.props.platformAudit.productDeliveryTemplate;
     // 对全部模版进行一个校验
     const freightTemplateIds = [];
     if (ordinaryTemplate && hasSelectTemplate.indexOf(1) > -1) {
@@ -131,21 +130,21 @@ class NextForm extends React.Component {
         };
         // 依据路由来判断是不是编辑
         const paramsInfo = routerParams(location.search);
-        const typeInfo = paramsInfo.id ? 'commodity/editProduct' : 'commodity/newProduct';
+        const typeInfo = paramsInfo.id ? 'platformAudit/editProduct' : 'platformAudit/newProduct';
         const _this = this;
         async function saveProduct() {
           await dispatch({
-            type: 'commodity/saveProduct',
+            type: 'platformAudit/saveProduct',
             payload: params,
           });
-          const productInfo = _this.props.commodity.productWithId;
+          const productInfo = _this.props.platformAudit.productWithId;
           console.log('params_', params);
           console.log('productInfo_', productInfo);
           await dispatch({
             type: typeInfo,
             payload: productInfo,
           });
-          router.push('/commodityAdm/management');
+          router.push('/platformAuditAdm/management');
         }
         saveProduct();
       }
@@ -158,7 +157,7 @@ class NextForm extends React.Component {
       ordinaryTemplate,
       urgentTemplate,
       hasSelectTemplate,
-    } = this.props.commodity.productDeliveryTemplate;
+    } = this.props.platformAudit.productDeliveryTemplate;
     if (hasSelectTemplate.length === 0) {
       callback('请选择运费模版');
     }
@@ -175,8 +174,8 @@ class NextForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { formInit } = this.state;
-    const { productDeliveryTemplate } = this.props.commodity;
-    
+    const { productDeliveryTemplate } = this.props.platformAudit;
+
     // 不在控制栏显示的控件
     const formItemLayout = {
       labelCol: {
@@ -209,14 +208,14 @@ class NextForm extends React.Component {
     const limitDecimals = (value: string | number): string => {
       const reg = /^(\-)*(\d+)\.(\d\d).*$/;
       console.log(value);
-      if(typeof value === 'string') {
-          return !isNaN(Number(value)) ? value.replace(reg, '$1$2.$3') : ''
-      } else if (typeof value === 'number') {
-          return !isNaN(value) ? String(value).replace(reg, '$1$2.$3') : ''
-      } else {
-          return ''
+      if (typeof value === 'string') {
+        return !isNaN(Number(value)) ? value.replace(reg, '$1$2.$3') : '';
       }
-  };
+      if (typeof value === 'number') {
+        return !isNaN(value) ? String(value).replace(reg, '$1$2.$3') : '';
+      }
+      return '';
+    };
     return (
       <div>
         <Form className={styles.main} {...formItemLayout} onSubmit={this.commitSubmit}>
@@ -229,7 +228,15 @@ class NextForm extends React.Component {
                 },
               ],
               initialValue: formInit.price ? formInit.price : '',
-            })(<InputNumber min={0} style={{ width: '90%' }} step={0.00} formatter={limitDecimals} parser={limitDecimals}/>)}
+            })(
+              <InputNumber
+                min={0}
+                style={{ width: '90%' }}
+                step={0.0}
+                formatter={limitDecimals}
+                parser={limitDecimals}
+              />,
+            )}
             <span>&nbsp;&nbsp;元</span>
           </Form.Item>
           <Form.Item label="库存">
@@ -292,7 +299,7 @@ class NextForm extends React.Component {
                     })}
                   </Select>
                 </Checkbox>
-              </Checkbox.Group>
+              </Checkbox.Group>,
             )}
           </Form.Item>
           <Form.Item label="是否推荐产品">

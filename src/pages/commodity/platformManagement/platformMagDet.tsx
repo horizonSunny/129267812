@@ -10,13 +10,13 @@ import ProductConfig from './component/platformMagDet/ProductConfig';
 
 const { Title } = Typography;
 
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ platformManagement }) => ({ platformManagement }))
 export default class PlatformMagDet extends React.Component {
   handleEdit = params => {
-    router.push({
-      pathname: '/commodityAdm/management/edit',
-      query: { id: params.productId },
-    });
+    // router.push({
+    //   pathname: '/platformManagementAdm/management/edit',
+    //   query: { id: params.productId },
+    // });
   };
 
   handleBack() {
@@ -24,8 +24,8 @@ export default class PlatformMagDet extends React.Component {
   }
 
   render() {
-    const { productWithId } = this.props.commodity;
-    // const commodity = this.props.commodity.product.productSku;
+    const { productWithId } = this.props.platformManagement;
+    // const platformManagement = this.props.platformManagement.product.productSku;
     return (
       <PageHeaderWrapper className={styles.main}>
         <div className={styles.contentWrap}>
@@ -38,7 +38,7 @@ export default class PlatformMagDet extends React.Component {
           <RecordList />
           {/* <div className={`${styles.operationIn}`} />
         <div className={`${styles.operation}`}>
-          <Button type="primary" onClick={this.handleEdit.bind(this, this.props.commodity.product)}>
+          <Button type="primary" onClick={this.handleEdit.bind(this, this.props.platformManagement.product)}>
             编辑
           </Button>
           <Button icon="left" className={`${styles.back}`} onClick={this.handleBack}>

@@ -9,23 +9,23 @@ import SearchForm from './component/platformManagement/SearchForm';
 import TableList from './component/platformManagement/TableList';
 
 // 请求
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ platformManagement }) => ({ platformManagement }))
 export default class PlatformManagement extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    // const searchParams = filterProperty(this.props.commodity.searchInfo);
+    // const searchParams = filterProperty(this.props.platformManagement.searchInfo);
     dispatch({
-      type: 'commodity/getProductType',
+      type: 'platformManagement/getProductType',
     });
     dispatch({
-      type: 'commodity/getList',
+      type: 'platformManagement/getList',
     });
   }
 
   // componentWillReceiveProps() {
   //   const { dispatch } = this.props;
   //   dispatch({
-  //     type: 'commodity/getProductType',
+  //     type: 'platformManagement/getProductType',
   //     payload: { code: 'productType' },
   //   });
   // }

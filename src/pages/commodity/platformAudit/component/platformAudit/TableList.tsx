@@ -1,15 +1,14 @@
-import { Table, Divider, Tabs, Switch, Modal } from 'antd';
+import { Table, Divider, Switch, Modal } from 'antd';
 import React from 'react';
 import router from 'umi/router';
 import { connect } from 'dva';
 import styles from './TableList.less';
 
-const { TabPane } = Tabs;
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ platformAudit }) => ({ platformAudit }))
 export default class TableList extends React.Component {
   // cons
   state = {
-    data: this.props.commodity.productList.pageList,
+    data: this.props.platformAudit.productList.pageList,
     searchInfo: this.props.searchInfo,
     visible: false,
     switchRecord: {},
@@ -18,7 +17,7 @@ export default class TableList extends React.Component {
   };
 
   onChange = (pagination, filters, sorter) => {
-    const { tabelConditions, productListStatus } = this.props.commodity;
+    const { tabelConditions, productListStatus } = this.props.platformAudit;
     tabelConditions[productListStatus].currentPage = pagination.current;
     if (sorter.field === 'sales') {
       tabelConditions[productListStatus].saleOrder = sorter.order;
@@ -30,11 +29,11 @@ export default class TableList extends React.Component {
     const { dispatch } = this.props;
     async function tableChange() {
       await dispatch({
-        type: 'commodity/setTabelConditions',
+        type: 'platformAudit/setTabelConditions',
         payload: tabelConditions,
       });
       await dispatch({
-        type: 'commodity/getList',
+        type: 'platformAudit/getList',
       });
     }
     tableChange();
@@ -58,7 +57,7 @@ export default class TableList extends React.Component {
     console.log(dispatch, '111111');
     console.log('operate_111111', operate);
     dispatch({
-      type: 'commodity/getProduct',
+      type: 'platformAudit/getProduct',
       payload: {
         id: params.productId,
       },
@@ -66,8 +65,8 @@ export default class TableList extends React.Component {
       router.push({
         pathname:
           operate === 'detail'
-            ? '/commodityAdm/management/particulars'
-            : '/commodityAdm/management/edit',
+            ? '/platformAuditAdm/management/particulars'
+            : '/platformAuditAdm/management/edit',
         query: { id: params.productId },
       });
     });
@@ -79,13 +78,13 @@ export default class TableList extends React.Component {
     const { dispatch } = this.props;
     async function deleteProductInfo() {
       await dispatch({
-        type: 'commodity/deletProduct',
+        type: 'platformAudit/deletProduct',
         payload: {
           productIds: [record.productId],
         },
       });
       await dispatch({
-        type: 'commodity/getList',
+        type: 'platformAudit/getList',
       });
     }
     deleteProductInfo();
@@ -100,13 +99,13 @@ export default class TableList extends React.Component {
 
   handleOk = e => {
     const { dispatch } = this.props;
-    const dataInfo = this.props.commodity.productList.pageList;
+    const dataInfo = this.props.platformAudit.productList.pageList;
     for (let item = 0; item < dataInfo.length; item++) {
       if (dataInfo[item].productId === this.state.switchRecord.productId) {
         // dataInfo[item]['isShelf'] = this.state.switchRecord['isShelf'] === 0 ? 1 : 0;
         const info = this.state.switchRecord.isShelf === 0 ? 1 : 0;
         dispatch({
-          type: 'commodity/shelveProduct',
+          type: 'platformAudit/shelveProduct',
           payload: {
             productIds: [this.state.switchRecord.productId],
             status: info,
@@ -117,7 +116,7 @@ export default class TableList extends React.Component {
             // 这边好像dispatch什么都可以;
             dataInfo[item].isShelf = this.state.switchRecord.isShelf === 0 ? 1 : 0;
             dispatch({
-              type: 'commodity/resetList',
+              type: 'platformAudit/resetList',
               payload: dataInfo,
             });
           } else {
@@ -137,39 +136,22 @@ export default class TableList extends React.Component {
     });
   };
 
-  // 切换位置
-  setTabChange = currentTab => {
-    console.log('currentTab_', currentTab);
-    const { dispatch } = this.props;
-    async function tabChange() {
-      await dispatch({
-        type: 'commodity/resetStatus',
-        payload: {
-          productListStatus: currentTab,
-        },
-      });
-      await dispatch({
-        type: 'commodity/getList',
-      });
-    }
-    tabChange();
-  };
-
-  // 获取二维码
-  // generateQR = record => {
+  // // 切换位置
+  // setTabChange = currentTab => {
+  //   console.log('currentTab_', currentTab);
   //   const { dispatch } = this.props;
-  //   dispatch({
-  //     type: 'commodity/generateQR',
-  //     payload: {
-  //       productId: record.productId,
-  //     },
-  //   }).then(res => {
-  //     console.log('data_', res);
-  //     this.setState({
-  //       qrVisible: true,
-  //       qrImg: res,
+  //   async function tabChange() {
+  //     await dispatch({
+  //       type: 'platformAudit/resetStatus',
+  //       payload: {
+  //         productListStatus: currentTab,
+  //       },
   //     });
-  //   });
+  //     await dispatch({
+  //       type: 'platformAudit/getList',
+  //     });
+  //   }
+  //   tabChange();
   // };
 
   qrhandleCancel = e => {
@@ -179,9 +161,22 @@ export default class TableList extends React.Component {
     });
   };
 
+  // 全选选中
+  onSelectChange = selectedRowKeys => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    // this.setState({ selectedRowKeys });
+    const { dispatch } = this.props;
+    // if (dispatch) {
+    //   dispatch({
+    //     type: 'businessAdm/modifyplatformAudit',
+    //     payload: selectedRowKeys,
+    //   });
+    // }
+  };
+
   render() {
     const { state } = this;
-    const { productList, productListStatus, tabelConditions } = this.props.commodity;
+    const { productList, productListStatus, tabelConditions } = this.props.platformAudit;
     console.log('tabelConditions_', tabelConditions);
     console.log('productList_', productList);
     const columns = [
@@ -217,8 +212,9 @@ export default class TableList extends React.Component {
         key: 'stock',
         dataIndex: 'stock',
         sorter: true,
-        sortOrder: this.props.commodity.tabelConditions[this.props.commodity.productListStatus]
-          .stockOrder,
+        sortOrder: this.props.platformAudit.tabelConditions[
+          this.props.platformAudit.productListStatus
+        ].stockOrder,
         render: text => <a>{text}</a>,
       },
       {
@@ -226,8 +222,9 @@ export default class TableList extends React.Component {
         key: 'sales',
         dataIndex: 'sales',
         sorter: true,
-        sortOrder: this.props.commodity.tabelConditions[this.props.commodity.productListStatus]
-          .saleOrder,
+        sortOrder: this.props.platformAudit.tabelConditions[
+          this.props.platformAudit.productListStatus
+        ].saleOrder,
         render: text => <a>{text}</a>,
       },
       {
@@ -259,60 +256,31 @@ export default class TableList extends React.Component {
         ),
       },
     ];
+    // const { businessAdm } = this.props;
+    // // 这里必须用状态管理中的数据,要是this.state会留存上一次的数据
+    // const { selectedRowKeys } = businessAdm;
+    const rowSelection = {
+      // selectedRowKeys,
+      selectedRowKeys: [],
+      onChange: this.onSelectChange,
+    };
     return (
-      <Tabs
-        defaultActiveKey={`${productListStatus}`}
-        onChange={this.setTabChange}
-        className={styles.main}
-      >
-        <TabPane tab="出售中" key="1">
-          <Table
-            {...this.state}
-            columns={columns}
-            dataSource={productList.pageList}
-            onChange={this.onChange}
-            pagination={{
-              current: tabelConditions[productListStatus].currentPage,
-              position: 'bottom',
-              pageSize: tabelConditions[productListStatus].pageSize,
-              total: productList.totalElements,
-            }}
-            // rowSelection={rowSelection}
-            scroll={{ x: 1200 }}
-          />
-        </TabPane>
-        <TabPane tab="已售罄" key="2">
-          <Table
-            {...this.state}
-            className={styles.main}
-            columns={columns}
-            dataSource={productList.pageList}
-            onChange={this.onChange}
-            pagination={{
-              current: tabelConditions[productListStatus].currentPage,
-              position: 'bottom',
-              pageSize: tabelConditions[productListStatus].pageSize,
-              total: productList.totalElements,
-            }}
-            scroll={{ x: 1200 }}
-          />
-        </TabPane>
-        <TabPane tab="已下架" key="0">
-          <Table
-            {...this.state}
-            className={styles.main}
-            columns={columns}
-            dataSource={productList.pageList}
-            onChange={this.onChange}
-            pagination={{
-              current: tabelConditions[productListStatus].currentPage,
-              position: 'bottom',
-              pageSize: tabelConditions[productListStatus].pageSize,
-              total: productList.totalElements,
-            }}
-            scroll={{ x: 1200 }}
-          />
-        </TabPane>
+      <div className={styles.main}>
+        <Table
+          {...this.state}
+          columns={columns}
+          dataSource={productList.pageList}
+          onChange={this.onChange}
+          rowSelection={rowSelection}
+          pagination={{
+            current: tabelConditions[productListStatus].currentPage,
+            position: 'bottom',
+            pageSize: tabelConditions[productListStatus].pageSize,
+            total: productList.totalElements,
+          }}
+          // rowSelection={rowSelection}
+          scroll={{ x: 1200 }}
+        />
         <Modal
           title="产品上下架"
           visible={this.state.visible}
@@ -321,23 +289,7 @@ export default class TableList extends React.Component {
         >
           <h3>确定{this.state.switchRecord.isShelf === 0 ? '上架' : '下架'}该产品</h3>
         </Modal>
-        {/* 二维码展示 */}
-        <Modal
-          key="qrModal"
-          footer={null}
-          visible={this.state.qrVisible}
-          onCancel={this.qrhandleCancel}
-        >
-          <div
-            style={{
-              width: '400px',
-              height: '400px',
-            }}
-          >
-            <img src={this.state.qrImg} height="400" width="400" alt="未查询到二维码信息" />
-          </div>
-        </Modal>
-      </Tabs>
+      </div>
     );
   }
 }

@@ -9,12 +9,12 @@ import filterProperty from '@/utils/filterProperty';
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ platformManagement }) => ({ platformManagement }))
 class AdvancedSearchForm extends React.Component {
   state = {
     expand: false,
     sellingStatus: null,
-    // productType: this.props.commodity.allProductType,
+    // productType: this.props.platformManagement.allProductType,
     selectedRowKeys: [],
   };
 
@@ -51,11 +51,11 @@ class AdvancedSearchForm extends React.Component {
 
       async function search() {
         await dispatch({
-          type: 'commodity/saveSearchForm',
+          type: 'platformManagement/saveSearchForm',
           payload: searchInfo,
         });
         await dispatch({
-          type: 'commodity/getList',
+          type: 'platformManagement/getList',
         });
       }
       search();
@@ -69,13 +69,13 @@ class AdvancedSearchForm extends React.Component {
     // 保留tab
     const { dispatch } = this.props;
     dispatch({
-      type: 'commodity/resetForm',
+      type: 'platformManagement/resetForm',
     });
   };
 
   // 新增产品
   handleNew = () => {
-    router.push('/commodityAdm/management/chooseProducts');
+    // router.push('/platformManagementAdm/management/chooseProducts');
   };
 
   render() {
@@ -83,7 +83,7 @@ class AdvancedSearchForm extends React.Component {
     const rangeConfig = {
       rules: [{ type: 'array', message: 'Please select time!' }],
     };
-    const { allProductType, searchForm } = this.props.commodity;
+    const { allProductType, searchForm } = this.props.platformManagement;
     console.log(searchForm, '2222222');
     const productType = allProductType;
     return (

@@ -5,7 +5,7 @@ import styles from './platformAudEdit.less';
 import Form from './component/platformAudEdit/Form';
 import NextForm from './component/platformAudEdit/NextForm';
 
-@connect(({ commodity, tradeSetting }) => ({ commodity, tradeSetting }))
+@connect(({ platformAudit, tradeSetting }) => ({ platformAudit, tradeSetting }))
 export default class PlatformAudEdit extends React.Component {
   state = {
     isFirstForm: true,

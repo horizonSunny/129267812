@@ -10,13 +10,13 @@ import ProductConfig from './component/platformAudDet/ProductConfig';
 
 const { Title } = Typography;
 
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ platformAudit }) => ({ platformAudit }))
 export default class PlatformAudDet extends React.Component {
   handleEdit = params => {
-    router.push({
-      pathname: '/commodityAdm/management/edit',
-      query: { id: params.productId },
-    });
+    // router.push({
+    //   pathname: '/platformAuditAdm/management/edit',
+    //   query: { id: params.productId },
+    // });
   };
 
   handleBack() {
@@ -24,8 +24,8 @@ export default class PlatformAudDet extends React.Component {
   }
 
   render() {
-    const { productWithId } = this.props.commodity;
-    // const commodity = this.props.commodity.product.productSku;
+    const { productWithId } = this.props.platformAudit;
+    // const platformAudit = this.props.platformAudit.product.productSku;
     return (
       <PageHeaderWrapper className={styles.main}>
         <div className={styles.contentWrap}>
@@ -38,7 +38,7 @@ export default class PlatformAudDet extends React.Component {
           <RecordList />
           {/* <div className={`${styles.operationIn}`} />
         <div className={`${styles.operation}`}>
-          <Button type="primary" onClick={this.handleEdit.bind(this, this.props.commodity.product)}>
+          <Button type="primary" onClick={this.handleEdit.bind(this, this.props.platformAudit.product)}>
             编辑
           </Button>
           <Button icon="left" className={`${styles.back}`} onClick={this.handleBack}>

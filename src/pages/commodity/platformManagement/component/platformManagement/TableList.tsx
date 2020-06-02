@@ -4,11 +4,11 @@ import router from 'umi/router';
 import { connect } from 'dva';
 import styles from './TableList.less';
 
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ platformManagement }) => ({ platformManagement }))
 export default class TableList extends React.Component {
   // cons
   state = {
-    data: this.props.commodity.productList.pageList,
+    data: this.props.platformManagement.productList.pageList,
     searchInfo: this.props.searchInfo,
     visible: false,
     switchRecord: {},
@@ -17,7 +17,7 @@ export default class TableList extends React.Component {
   };
 
   onChange = (pagination, filters, sorter) => {
-    const { tabelConditions, productListStatus } = this.props.commodity;
+    const { tabelConditions, productListStatus } = this.props.platformManagement;
     tabelConditions[productListStatus].currentPage = pagination.current;
     if (sorter.field === 'sales') {
       tabelConditions[productListStatus].saleOrder = sorter.order;
@@ -29,11 +29,11 @@ export default class TableList extends React.Component {
     const { dispatch } = this.props;
     async function tableChange() {
       await dispatch({
-        type: 'commodity/setTabelConditions',
+        type: 'platformManagement/setTabelConditions',
         payload: tabelConditions,
       });
       await dispatch({
-        type: 'commodity/getList',
+        type: 'platformManagement/getList',
       });
     }
     tableChange();
@@ -57,7 +57,7 @@ export default class TableList extends React.Component {
     console.log(dispatch, '111111');
     console.log('operate_111111', operate);
     dispatch({
-      type: 'commodity/getProduct',
+      type: 'platformManagement/getProduct',
       payload: {
         id: params.productId,
       },
@@ -65,8 +65,8 @@ export default class TableList extends React.Component {
       router.push({
         pathname:
           operate === 'detail'
-            ? '/commodityAdm/management/particulars'
-            : '/commodityAdm/management/edit',
+            ? '/platformManagementAdm/management/particulars'
+            : '/platformManagementAdm/management/edit',
         query: { id: params.productId },
       });
     });
@@ -78,13 +78,13 @@ export default class TableList extends React.Component {
     const { dispatch } = this.props;
     async function deleteProductInfo() {
       await dispatch({
-        type: 'commodity/deletProduct',
+        type: 'platformManagement/deletProduct',
         payload: {
           productIds: [record.productId],
         },
       });
       await dispatch({
-        type: 'commodity/getList',
+        type: 'platformManagement/getList',
       });
     }
     deleteProductInfo();
@@ -99,13 +99,13 @@ export default class TableList extends React.Component {
 
   handleOk = e => {
     const { dispatch } = this.props;
-    const dataInfo = this.props.commodity.productList.pageList;
+    const dataInfo = this.props.platformManagement.productList.pageList;
     for (let item = 0; item < dataInfo.length; item++) {
       if (dataInfo[item].productId === this.state.switchRecord.productId) {
         // dataInfo[item]['isShelf'] = this.state.switchRecord['isShelf'] === 0 ? 1 : 0;
         const info = this.state.switchRecord.isShelf === 0 ? 1 : 0;
         dispatch({
-          type: 'commodity/shelveProduct',
+          type: 'platformManagement/shelveProduct',
           payload: {
             productIds: [this.state.switchRecord.productId],
             status: info,
@@ -116,7 +116,7 @@ export default class TableList extends React.Component {
             // 这边好像dispatch什么都可以;
             dataInfo[item].isShelf = this.state.switchRecord.isShelf === 0 ? 1 : 0;
             dispatch({
-              type: 'commodity/resetList',
+              type: 'platformManagement/resetList',
               payload: dataInfo,
             });
           } else {
@@ -142,13 +142,13 @@ export default class TableList extends React.Component {
   //   const { dispatch } = this.props;
   //   async function tabChange() {
   //     await dispatch({
-  //       type: 'commodity/resetStatus',
+  //       type: 'platformManagement/resetStatus',
   //       payload: {
   //         productListStatus: currentTab,
   //       },
   //     });
   //     await dispatch({
-  //       type: 'commodity/getList',
+  //       type: 'platformManagement/getList',
   //     });
   //   }
   //   tabChange();
@@ -168,7 +168,7 @@ export default class TableList extends React.Component {
     const { dispatch } = this.props;
     // if (dispatch) {
     //   dispatch({
-    //     type: 'businessAdm/modifyCommodity',
+    //     type: 'businessAdm/modifyplatformManagement',
     //     payload: selectedRowKeys,
     //   });
     // }
@@ -176,7 +176,7 @@ export default class TableList extends React.Component {
 
   render() {
     const { state } = this;
-    const { productList, productListStatus, tabelConditions } = this.props.commodity;
+    const { productList, productListStatus, tabelConditions } = this.props.platformManagement;
     console.log('tabelConditions_', tabelConditions);
     console.log('productList_', productList);
     const columns = [
@@ -212,8 +212,9 @@ export default class TableList extends React.Component {
         key: 'stock',
         dataIndex: 'stock',
         sorter: true,
-        sortOrder: this.props.commodity.tabelConditions[this.props.commodity.productListStatus]
-          .stockOrder,
+        sortOrder: this.props.platformManagement.tabelConditions[
+          this.props.platformManagement.productListStatus
+        ].stockOrder,
         render: text => <a>{text}</a>,
       },
       {
@@ -221,8 +222,9 @@ export default class TableList extends React.Component {
         key: 'sales',
         dataIndex: 'sales',
         sorter: true,
-        sortOrder: this.props.commodity.tabelConditions[this.props.commodity.productListStatus]
-          .saleOrder,
+        sortOrder: this.props.platformManagement.tabelConditions[
+          this.props.platformManagement.productListStatus
+        ].saleOrder,
         render: text => <a>{text}</a>,
       },
       {

@@ -14,12 +14,12 @@ const columns = [
     dataIndex: 'operateInfo',
   },
 ];
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ platformAudit }) => ({ platformAudit }))
 export default class TableList extends React.Component {
   componentDidMount() {}
 
   render() {
-    const data = this.props.commodity.productLog;
+    const data = this.props.platformAudit.productLog;
     let dataInfo;
     if (Array.isArray(data)) {
       dataInfo = data.map(item => {
