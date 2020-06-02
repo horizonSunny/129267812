@@ -64,33 +64,33 @@ const route = [
               {
                 path: 'platformManagement',
                 name: '平台商品管理',
-                component: './commodity/commodityAdm/CommodityAdm.tsx',
+                component: './commodity/platformManagement/platformManagement.tsx',
               },
               // 商户-H5后台0.2 平台商品管理／查看详情
               {
                 path: 'platformManagement/particulars',
                 name: '查看详情',
-                component: './commodity/commodityAdm/CommodityDet.tsx',
+                component: './commodity/platformManagement/platformMagDet.tsx',
                 hideInMenu: true,
               },
               // 商户-H5后台0.2 平台商品审核
               {
                 path: 'platformAudit',
                 name: '平台商品审核',
-                component: './commodity/commodityAdm/CommodityAdm.tsx',
+                component: './commodity/platformAudit/platformAudit.tsx',
               },
               // 商户-H5后台0.2 平台商品审核/审核编辑
               {
                 path: 'platformAudit/edit',
                 name: '审核资料编辑',
-                component: './commodity/commodityAdm/CommodityDet.tsx',
+                component: './commodity/platformAudit/platformAudEdit.tsx',
                 hideInMenu: true,
               },
               // 商户-H5后台0.2 平台商品审核/审核资料
               {
                 path: 'platformAudit/particulars',
                 name: '审核资料',
-                component: './commodity/commodityAdm/CommodityDet.tsx',
+                component: './commodity/platformAudit/platformAudDet.tsx',
                 hideInMenu: true,
               },
             ],
