@@ -34,7 +34,7 @@ const route = [
             routes: [
               {
                 path: 'management',
-                name: '商品列表',
+                name: '商城商品管理',
                 component: './commodity/commodityAdm/CommodityAdm.tsx',
               },
               {
@@ -159,11 +159,11 @@ const route = [
             path: '/dashboard',
             routes: [
               {
-                name:'dashboard',
-                path:'/dashboard/dashboard',
+                name: 'dashboard',
+                path: '/dashboard/dashboard',
                 component: './dashboard/dashboard.tsx',
-              }
-            ]
+              },
+            ],
           },
           {
             component: './404',

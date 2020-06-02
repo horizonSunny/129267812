@@ -55,7 +55,7 @@ export default class TableList extends React.Component {
   // 请求数据跳转详情页面
   goToNextPage = (params, operate) => {
     const { dispatch } = this.props;
-    console.log(dispatch,'111111');
+    console.log(dispatch, '111111');
     console.log('operate_111111', operate);
     dispatch({
       type: 'commodity/getProduct',
@@ -156,21 +156,21 @@ export default class TableList extends React.Component {
   };
 
   // 获取二维码
-  generateQR = record => {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'commodity/generateQR',
-      payload: {
-        productId: record.productId,
-      },
-    }).then(res => {
-      console.log('data_', res);
-      this.setState({
-        qrVisible: true,
-        qrImg: res,
-      });
-    });
-  };
+  // generateQR = record => {
+  //   const { dispatch } = this.props;
+  //   dispatch({
+  //     type: 'commodity/generateQR',
+  //     payload: {
+  //       productId: record.productId,
+  //     },
+  //   }).then(res => {
+  //     console.log('data_', res);
+  //     this.setState({
+  //       qrVisible: true,
+  //       qrImg: res,
+  //     });
+  //   });
+  // };
 
   qrhandleCancel = e => {
     console.log(e);
@@ -251,7 +251,8 @@ export default class TableList extends React.Component {
             <Divider type="vertical" />
             <a onClick={this.goToNextPage.bind(this, record, 'editor')}>编辑</a>
             <Divider type="vertical" />
-            <a onClick={this.generateQR.bind(this, record)}>生成二维码</a>
+            <a onClick={this.goToNextPage.bind(this, record, 'audit')}>上架平台</a>
+            {/* <a onClick={this.generateQR.bind(this, record)}>生成二维码</a> */}
             <Divider type="vertical" />
             <a onClick={this.deleteProduct.bind(this, record)}>删除</a>
           </span>

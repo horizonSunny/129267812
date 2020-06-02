@@ -84,7 +84,7 @@ class AdvancedSearchForm extends React.Component {
       rules: [{ type: 'array', message: 'Please select time!' }],
     };
     const { allProductType, searchForm } = this.props.commodity;
-    console.log(searchForm,'2222222')
+    console.log(searchForm, '2222222');
     const productType = allProductType;
     return (
       <Form className={styles['ant-advanced-search-form']} onSubmit={this.handleSearch}>
@@ -140,8 +140,8 @@ class AdvancedSearchForm extends React.Component {
                   treeData={productType}
                   onChange={this.onChange}
                   // 设置下拉框的高度，控制个数
-                  dropdownStyle={{ maxHeight: 280}}
-                />
+                  dropdownStyle={{ maxHeight: 280 }}
+                />,
               )}
             </Form.Item>
           </Col>
@@ -155,6 +155,21 @@ class AdvancedSearchForm extends React.Component {
                   <Option value={3}>全部</Option>
                   <Option value={1}>推荐商品</Option>
                   <Option value={0}>非推荐商品</Option>
+                </Select>,
+              )}
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item label="上架平台状态">
+              {getFieldDecorator('recommandStatus', {
+                rules: [],
+                initialValue: searchForm.recommandStatus,
+              })(
+                <Select style={{ width: 120 }}>
+                  <Option value={3}>全部</Option>
+                  <Option value={1}>未上架</Option>
+                  <Option value={0}>上架中</Option>
+                  <Option value={0}>已上架</Option>
                 </Select>,
               )}
             </Form.Item>
