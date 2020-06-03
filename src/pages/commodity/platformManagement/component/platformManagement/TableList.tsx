@@ -63,10 +63,7 @@ export default class TableList extends React.Component {
       },
     }).then(result => {
       router.push({
-        pathname:
-          operate === 'detail'
-            ? '/platformManagementAdm/management/particulars'
-            : '/platformManagementAdm/management/edit',
+        pathname: operate === 'detail' ? '/commodityAdm/platformManagement/particulars' : '',
         query: { id: params.productId },
       });
     });
@@ -248,9 +245,6 @@ export default class TableList extends React.Component {
             <Divider type="vertical" />
             <a onClick={this.goToNextPage.bind(this, record, 'editor')}>编辑</a>
             <Divider type="vertical" />
-            <a onClick={this.goToNextPage.bind(this, record, 'audit')}>上架平台</a>
-            {/* <a onClick={this.generateQR.bind(this, record)}>生成二维码</a> */}
-            <Divider type="vertical" />
             <a onClick={this.deleteProduct.bind(this, record)}>删除</a>
           </span>
         ),
@@ -261,7 +255,7 @@ export default class TableList extends React.Component {
     // const { selectedRowKeys } = businessAdm;
     const rowSelection = {
       // selectedRowKeys,
-      selectedRowKeys: [],
+      selectedRowKeys: [0],
       onChange: this.onSelectChange,
     };
     return (

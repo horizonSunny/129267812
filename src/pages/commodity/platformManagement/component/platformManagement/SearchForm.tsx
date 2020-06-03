@@ -12,10 +12,10 @@ const { Option } = Select;
 @connect(({ platformManagement }) => ({ platformManagement }))
 class AdvancedSearchForm extends React.Component {
   state = {
-    expand: false,
-    sellingStatus: null,
+    // expand: false,
+    // sellingStatus: null,
     // productType: this.props.platformManagement.allProductType,
-    selectedRowKeys: [],
+    // selectedRowKeys: [],
   };
 
   // 查询
