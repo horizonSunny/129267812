@@ -5,6 +5,8 @@ import { connect } from 'dva';
 import router from 'umi/router';
 import styles from './platformMagDet.less';
 import CommodityInfo from './component/platformMagDet/commodityInfo';
+import CommercialMatch from './component/platformMagDet/commercialMatch';
+import OperateRecord from './component/platformMagDet/OperateRecord';
 
 const { Title } = Typography;
 
@@ -28,6 +30,8 @@ export default class PlatformMagDet extends React.Component {
       <PageHeaderWrapper className={styles.main}>
         <div className={styles.contentWrap}>
           <CommodityInfo />
+          <CommercialMatch />
+          <OperateRecord />
           {/* <div className={`${styles.operationIn}`} />
           <div className={`${styles.operation}`}>
           <Button type="primary" onClick={this.handleEdit.bind(this, this.props.platformManagement.product)}>

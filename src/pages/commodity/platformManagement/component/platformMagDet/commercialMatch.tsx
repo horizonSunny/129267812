@@ -2,8 +2,8 @@
 
 import { Table, Carousel, Modal } from 'antd';
 import React from 'react';
-import styles from './Table.less';
-import filterData from './filter';
+import styles from './commercialMatch.less';
+// import filterData from './filter';
 import { connect } from 'dva';
 import LabelInfo from '../../../../../components/Label/label';
 import { filterStatus } from '@/utils/filterProperty';
@@ -15,117 +15,60 @@ const isMapClass = {
   lineHeight: '20px',
   fontSize: '10px',
 };
+// const renderContent = (value, row, index) => {
+//   const obj = {
+//     children: value,
+//     props: {},
+//   };
+//   if (index === 4) {
+//     obj.props.colSpan = 0;
+//   }
+//   return obj;
+// };
 @connect(({ platformManagement }) => ({ platformManagement }))
-export default class TableList extends React.Component {
+export default class CommercialMatch extends React.Component {
   state = {
     visible: false,
     imgSrc: '',
-    tabelArr: [],
-    columns: [
+    tabelArr: [
       {
-        dataIndex: 'name',
-        width: '200px',
+        one: '商品名',
+        two: '999感冒灵',
+        three: '[999] 感冒灵',
       },
       {
-        className: 'column-money',
-        dataIndex: 'value',
-        render: (text, record) => {
-          console.log(record, '图片放大了');
-          if (record.name === '商品图') {
-            return (
-              <Carousel autoplay>
-                {record.value &&
-                  record.value.map((item, index) => {
-                    return (
-                      <div key={index} style={{ border: '1px dashed #ddd' }}>
-                        <img
-                          src={item}
-                          alt="暂无图片"
-                          onClick={this.showModal}
-                          style={{ height: '100%', width: '100%' }}
-                        />
-                      </div>
-                    );
-                  })}
-                <Modal
-                  visible={this.state.visible}
-                  onOk={this.handleOk}
-                  onCancel={this.handleCancel}
-                  footer={null}
-                  centered
-                  maskClosable
-                >
-                  <img
-                    style={{ width: '100%' }}
-                    alt=""
-                    onClick={this.handleOk}
-                    src={this.state.imgSrc}
-                  />
-                </Modal>
-              </Carousel>
-            );
-          }
-          if (record.name === '是否处方药') {
-            let styleInfo;
-            let textInfo;
-            switch (text) {
-              case 0:
-                textInfo = 'otc';
-                styleInfo = Object.assign(
-                  {
-                    border: '1px solid green',
-                    color: 'green',
-                  },
-                  isMapClass,
-                );
-                break;
-              case 1:
-                textInfo = 'otc';
-                styleInfo = Object.assign(
-                  {
-                    border: '1px solid red',
-                    color: 'red',
-                  },
-                  isMapClass,
-                );
-                break;
-              case 2:
-                textInfo = 'Rx';
-                styleInfo = Object.assign(
-                  {
-                    border: '1px solid red',
-                    color: 'red',
-                  },
-                  isMapClass,
-                );
-                break;
-              case 2:
-                textInfo = '其他';
-                styleInfo = Object.assign(
-                  {
-                    border: '1px solid rgb(136,136,136)',
-                    color: 'rgb(136,136,136)',
-                  },
-                  isMapClass,
-                );
-                break;
-              default:
-                break;
-            }
-            return <LabelInfo text={textInfo} classInfo={styleInfo} />;
-          }
-          if (record.name === '商品类别') {
-            return (
-              record.value &&
-              record.value.map(item => {
-                return (
-                  <div>{filterStatus(item, this.props.platformManagement.allProductType)}</div>
-                );
-              })
-            );
-          }
-          return text;
-        },
+        one: '批准文号',
+        two: '医药s21231312',
+        three: '国药准字s21231312',
+      },
+      {
+        one: '包装规格',
+        two: '10g*9袋／盒',
+        three: '10粒*3／盒',
+      },
+      {
+        one: '优惠价格/原价',
+        two: '11.500',
+        three: '123.00',
+      },
+      {
+        one: '优惠件数/库存',
+        two: '0',
+        three: '3',
+      },
+    ],
+    columns: [
+      {
+        title: '数据名称',
+        dataIndex: 'one',
+      },
+      {
+        title: '平台数据',
+        dataIndex: 'two',
+      },
+      {
+        title: '商城数据',
+        dataIndex: 'three',
       },
     ],
   };
@@ -175,11 +118,11 @@ export default class TableList extends React.Component {
 
   // 生命周期
   componentDidMount() {
-    this.dataReverse(this.props.platformManagement.productWithId);
+    // this.dataReverse(this.props.platformManagement.productWithId);
   }
 
   componentWillReceiveProps() {
-    this.dataReverse(this.props.platformManagement.productWithId);
+    // this.dataReverse(this.props.platformManagement.productWithId);
   }
 
   render() {
@@ -190,6 +133,7 @@ export default class TableList extends React.Component {
         columns={state.columns}
         dataSource={state.tabelArr}
         pagination={false}
+        bordered
       />
     );
   }

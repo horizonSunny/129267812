@@ -2,8 +2,8 @@
 
 import { Table, Carousel, Modal } from 'antd';
 import React from 'react';
-import styles from './Table.less';
-import filterData from './filter';
+import styles from './operateRecord.less';
+// import filterData from './filter';
 import { connect } from 'dva';
 import LabelInfo from '../../../../../components/Label/label';
 import { filterStatus } from '@/utils/filterProperty';
@@ -15,68 +15,70 @@ const isMapClass = {
   lineHeight: '20px',
   fontSize: '10px',
 };
+// const renderContent = (value, row, index) => {
+//   const obj = {
+//     children: value,
+//     props: {},
+//   };
+//   if (index === 4) {
+//     obj.props.colSpan = 0;
+//   }
+//   return obj;
+// };
 @connect(({ platformManagement }) => ({ platformManagement }))
-export default class TableList extends React.Component {
+export default class CommercialMatch extends React.Component {
   state = {
     visible: false,
     imgSrc: '',
-    tabelArr: [],
-    columns: [
+    tabelArr: [
       {
-        dataIndex: 'one',
-        width: '200px',
+        one: '商品上架',
+        two: '2019-02-12 12:12:06',
+        three: '商户上架',
+        four: 'hahaha',
       },
       {
-        className: 'two',
-        dataIndex: 'value',
-        render: (text, record) => {
-          console.log(record, '图片放大了');
-          if (record.name === '商品图') {
-            return (
-              <Carousel autoplay>
-                {record.value &&
-                  record.value.map((item, index) => {
-                    return (
-                      <div key={index} style={{ border: '1px dashed #ddd' }}>
-                        <img
-                          src={item}
-                          alt="暂无图片"
-                          onClick={this.showModal}
-                          style={{ height: '100%', width: '100%' }}
-                        />
-                      </div>
-                    );
-                  })}
-                <Modal
-                  visible={this.state.visible}
-                  onOk={this.handleOk}
-                  onCancel={this.handleCancel}
-                  footer={null}
-                  centered
-                  maskClosable
-                >
-                  <img
-                    style={{ width: '100%' }}
-                    alt=""
-                    onClick={this.handleOk}
-                    src={this.state.imgSrc}
-                  />
-                </Modal>
-              </Carousel>
-            );
-          }
-          return text;
-        },
+        one: '商品下架',
+        two: '2019-02-12 12:12:06',
+        three: '商户下架／系统下架',
+        four: 'hahaha',
       },
       {
-        dataIndex: 'three',
-        width: '200px',
+        one: '商品上架',
+        two: '2019-02-12 12:12:06',
+        three: '商户上架',
+        four: 'hahaha',
       },
       {
-        dataIndex: 'four',
-        width: '200px',
+        one: '商品下架',
+        two: '2019-02-12 12:12:06',
+        three: '商户下架／系统下架',
+        four: 'hahaha',
       },
     ],
+    columns: [
+      {
+        title: '操作记录',
+        dataIndex: 'one',
+      },
+      {
+        title: '操作时间',
+        dataIndex: 'two',
+      },
+      {
+        title: '操作人',
+        dataIndex: 'three',
+      },
+      {
+        title: '备注',
+        dataIndex: 'four',
+      },
+    ],
+    pagination: {
+      current: 1,
+      pageSize: 10,
+      total: 100,
+    },
   };
 
   // 点击查看商品图放大
@@ -105,22 +107,22 @@ export default class TableList extends React.Component {
   };
 
   // 获取处理后的数据
-  // dataReverse(data) {
-  //   const arr = [];
-  //   let i = 0;
-  //   for (const item in filterData) {
-  //     const obj = new Object();
-  //     obj.key = i++;
-  //     obj.name = filterData[item];
-  //     obj.value = data[item];
-  //     arr.push(obj);
-  //   }
-  //   console.log('tabelArr_', arr);
-  //   // return arr;
-  //   this.setState({
-  //     tabelArr: arr,
-  //   });
-  // }
+  dataReverse(data) {
+    const arr = [];
+    let i = 0;
+    for (const item in filterData) {
+      const obj = new Object();
+      obj.key = i++;
+      obj.name = filterData[item];
+      obj.value = data[item];
+      arr.push(obj);
+    }
+    console.log('tabelArr_', arr);
+    // return arr;
+    this.setState({
+      tabelArr: arr,
+    });
+  }
 
   // 生命周期
   componentDidMount() {
@@ -138,9 +140,8 @@ export default class TableList extends React.Component {
         className={styles.main}
         columns={state.columns}
         dataSource={state.tabelArr}
-        pagination={false}
+        pagination={state.pagination}
         bordered
-        showHeader={false}
       />
     );
   }
