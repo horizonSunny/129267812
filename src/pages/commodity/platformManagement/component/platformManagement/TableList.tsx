@@ -1,4 +1,4 @@
-import { Table, Divider, Switch, Modal } from 'antd';
+import { Table, Divider, Switch, Modal, Button } from 'antd';
 import React from 'react';
 import router from 'umi/router';
 import { connect } from 'dva';
@@ -266,6 +266,7 @@ export default class TableList extends React.Component {
     };
     return (
       <div className={styles.main}>
+        <div />
         <Table
           {...this.state}
           columns={columns}

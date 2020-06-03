@@ -13,7 +13,6 @@ import TableList from './component/platformManagement/TableList';
 export default class PlatformManagement extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    // const searchParams = filterProperty(this.props.platformManagement.searchInfo);
     dispatch({
       type: 'platformManagement/getProductType',
     });
@@ -30,7 +29,7 @@ export default class PlatformManagement extends React.Component {
   //   });
   // }
   state = {
-    searchInfo: {},
+    // searchInfo: {},
   };
 
   render() {

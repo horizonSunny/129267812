@@ -159,21 +159,6 @@ class AdvancedSearchForm extends React.Component {
               )}
             </Form.Item>
           </Col>
-          <Col span={8}>
-            <Form.Item label="上架平台状态">
-              {getFieldDecorator('recommandStatus', {
-                rules: [],
-                initialValue: searchForm.recommandStatus,
-              })(
-                <Select style={{ width: 120 }}>
-                  <Option value={3}>全部</Option>
-                  <Option value={1}>未上架</Option>
-                  <Option value={0}>上架中</Option>
-                  <Option value={0}>已上架</Option>
-                </Select>,
-              )}
-            </Form.Item>
-          </Col>
           <Col
             span={8}
             style={{

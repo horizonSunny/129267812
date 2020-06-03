@@ -73,11 +73,6 @@ class AdvancedSearchForm extends React.Component {
     });
   };
 
-  // 新增产品
-  handleNew = () => {
-    // router.push('/platformManagementAdm/management/chooseProducts');
-  };
-
   render() {
     const { getFieldDecorator } = this.props.form;
     const rangeConfig = {
@@ -130,7 +125,7 @@ class AdvancedSearchForm extends React.Component {
             }}
           >
             <Form.Item label="商品分类">
-              {getFieldDecorator('status', {
+              {getFieldDecorator('productType', {
                 rules: [],
                 initialValue: searchForm.productType,
               })(
@@ -146,15 +141,18 @@ class AdvancedSearchForm extends React.Component {
             </Form.Item>
           </Col>
           <Col span={8}>
-            <Form.Item label="是否推荐商品">
-              {getFieldDecorator('recommandStatus', {
+            <Form.Item label="售卖状态">
+              {getFieldDecorator('saleStatus', {
                 rules: [],
                 initialValue: searchForm.recommandStatus,
               })(
                 <Select style={{ width: 120 }}>
-                  <Option value={3}>全部</Option>
-                  <Option value={1}>推荐商品</Option>
-                  <Option value={0}>非推荐商品</Option>
+                  <Option value={0}>全部</Option>
+                  <Option value={1}>优惠中</Option>
+                  <Option value={2}>售空下架</Option>
+                  <Option value={3}>禁售</Option>
+                  <Option value={4}>商户下架</Option>
+                  <Option value={5}>商户删除</Option>
                 </Select>,
               )}
             </Form.Item>
@@ -168,7 +166,6 @@ class AdvancedSearchForm extends React.Component {
                 <Select style={{ width: 120 }}>
                   <Option value={3}>全部</Option>
                   <Option value={1}>未上架</Option>
-                  <Option value={0}>上架中</Option>
                   <Option value={0}>已上架</Option>
                 </Select>,
               )}
@@ -189,9 +186,6 @@ class AdvancedSearchForm extends React.Component {
             </Button>
             <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>
               重置
-            </Button>
-            <Button style={{ marginLeft: 8, background: '#F5AB1C' }} onClick={this.handleNew}>
-              + 添加
             </Button>
           </Col>
         </Row>

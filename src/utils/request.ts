@@ -52,12 +52,13 @@ const errorHandler = (error: { response: Response }): Response => {
 const request = extend({
   prefix: 'http://47.103.158.133:8088',
   // prefix: 'http://192.168.10.234:9000',
+  // prefix: 'http://192.168.5.101:9088',
   errorHandler, // 默认错误处理
   // credentials: 'include', // 默认请求是否带上cookie
 });
 export const serverUrl = 'http://47.103.158.133:8088';
 // export const serverUrl = 'http://192.168.10.234:9000';
-
+// export const serverUrl = 'http://192.168.5.101:9088';
 request.interceptors.request.use((url, options) => {
   let headers = {};
   if (!sessionStorage.getItem('token') || url.indexOf('auth/oauth/token') > 0) {
