@@ -4,6 +4,7 @@ import { Card, Typography, Alert, Button } from 'antd';
 import { connect } from 'dva';
 import router from 'umi/router';
 import styles from './platformMagDet.less';
+import CommodityInfo from './component/platformMagDet/commodityInfo';
 
 const { Title } = Typography;
 
@@ -26,6 +27,7 @@ export default class PlatformMagDet extends React.Component {
     return (
       <PageHeaderWrapper className={styles.main}>
         <div className={styles.contentWrap}>
+          <CommodityInfo />
           {/* <div className={`${styles.operationIn}`} />
           <div className={`${styles.operation}`}>
           <Button type="primary" onClick={this.handleEdit.bind(this, this.props.platformManagement.product)}>

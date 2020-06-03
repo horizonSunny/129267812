@@ -15,7 +15,7 @@ const isMapClass = {
   lineHeight: '20px',
   fontSize: '10px',
 };
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ platformManagement }) => ({ platformManagement }))
 export default class TableList extends React.Component {
   state = {
     visible: false,
@@ -23,11 +23,11 @@ export default class TableList extends React.Component {
     tabelArr: [],
     columns: [
       {
-        dataIndex: 'name',
+        dataIndex: 'one',
         width: '200px',
       },
       {
-        className: 'column-money',
+        className: 'two',
         dataIndex: 'value',
         render: (text, record) => {
           console.log(record, '图片放大了');
@@ -65,65 +65,16 @@ export default class TableList extends React.Component {
               </Carousel>
             );
           }
-          if (record.name === '是否处方药') {
-            let styleInfo;
-            let textInfo;
-            switch (text) {
-              case 0:
-                textInfo = 'otc';
-                styleInfo = Object.assign(
-                  {
-                    border: '1px solid green',
-                    color: 'green',
-                  },
-                  isMapClass,
-                );
-                break;
-              case 1:
-                textInfo = 'otc';
-                styleInfo = Object.assign(
-                  {
-                    border: '1px solid red',
-                    color: 'red',
-                  },
-                  isMapClass,
-                );
-                break;
-              case 2:
-                textInfo = 'Rx';
-                styleInfo = Object.assign(
-                  {
-                    border: '1px solid red',
-                    color: 'red',
-                  },
-                  isMapClass,
-                );
-                break;
-              case 2:
-                textInfo = '其他';
-                styleInfo = Object.assign(
-                  {
-                    border: '1px solid rgb(136,136,136)',
-                    color: 'rgb(136,136,136)',
-                  },
-                  isMapClass,
-                );
-                break;
-              default:
-                break;
-            }
-            return <LabelInfo text={textInfo} classInfo={styleInfo} />;
-          }
-          if (record.name === '商品类别') {
-            return (
-              record.value &&
-              record.value.map(item => {
-                return <div>{filterStatus(item, this.props.commodity.allProductType)}</div>;
-              })
-            );
-          }
           return text;
         },
+      },
+      {
+        dataIndex: 'three',
+        width: '200px',
+      },
+      {
+        dataIndex: 'four',
+        width: '200px',
       },
     ],
   };
@@ -154,30 +105,30 @@ export default class TableList extends React.Component {
   };
 
   // 获取处理后的数据
-  dataReverse(data) {
-    const arr = [];
-    let i = 0;
-    for (const item in filterData) {
-      const obj = new Object();
-      obj.key = i++;
-      obj.name = filterData[item];
-      obj.value = data[item];
-      arr.push(obj);
-    }
-    console.log('tabelArr_', arr);
-    // return arr;
-    this.setState({
-      tabelArr: arr,
-    });
-  }
+  // dataReverse(data) {
+  //   const arr = [];
+  //   let i = 0;
+  //   for (const item in filterData) {
+  //     const obj = new Object();
+  //     obj.key = i++;
+  //     obj.name = filterData[item];
+  //     obj.value = data[item];
+  //     arr.push(obj);
+  //   }
+  //   console.log('tabelArr_', arr);
+  //   // return arr;
+  //   this.setState({
+  //     tabelArr: arr,
+  //   });
+  // }
 
   // 生命周期
   componentDidMount() {
-    this.dataReverse(this.props.commodity.productWithId);
+    // this.dataReverse(this.props.platformManagement.productWithId);
   }
 
   componentWillReceiveProps() {
-    this.dataReverse(this.props.commodity.productWithId);
+    // this.dataReverse(this.props.platformManagement.productWithId);
   }
 
   render() {
@@ -188,6 +139,8 @@ export default class TableList extends React.Component {
         columns={state.columns}
         dataSource={state.tabelArr}
         pagination={false}
+        bordered
+        showHeader={false}
       />
     );
   }

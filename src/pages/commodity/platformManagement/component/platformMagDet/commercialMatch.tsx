@@ -15,7 +15,7 @@ const isMapClass = {
   lineHeight: '20px',
   fontSize: '10px',
 };
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ platformManagement }) => ({ platformManagement }))
 export default class TableList extends React.Component {
   state = {
     visible: false,
@@ -118,7 +118,9 @@ export default class TableList extends React.Component {
             return (
               record.value &&
               record.value.map(item => {
-                return <div>{filterStatus(item, this.props.commodity.allProductType)}</div>;
+                return (
+                  <div>{filterStatus(item, this.props.platformManagement.allProductType)}</div>
+                );
               })
             );
           }
@@ -173,11 +175,11 @@ export default class TableList extends React.Component {
 
   // 生命周期
   componentDidMount() {
-    this.dataReverse(this.props.commodity.productWithId);
+    this.dataReverse(this.props.platformManagement.productWithId);
   }
 
   componentWillReceiveProps() {
-    this.dataReverse(this.props.commodity.productWithId);
+    this.dataReverse(this.props.platformManagement.productWithId);
   }
 
   render() {
