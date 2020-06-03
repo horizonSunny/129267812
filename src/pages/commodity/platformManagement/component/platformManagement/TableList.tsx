@@ -266,7 +266,11 @@ export default class TableList extends React.Component {
     };
     return (
       <div className={styles.main}>
-        <div />
+        <div className={`${styles.bulk_operation} ${styles.account}`}>
+          <Button type="primary">批量上架</Button>
+          <Button type="primary">批量下架</Button>
+          <Button type="danger">批量删除</Button>
+        </div>
         <Table
           {...this.state}
           columns={columns}

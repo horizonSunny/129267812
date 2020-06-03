@@ -177,6 +177,7 @@ class AdvancedSearchForm extends React.Component {
               textAlign: 'right',
               position: 'relative',
               top: '5px',
+              marginBottom: '5px',
               left: '-20px',
               float: 'right',
             }}
