@@ -65,8 +65,8 @@ export default class TableList extends React.Component {
       router.push({
         pathname:
           operate === 'detail'
-            ? '/platformAuditAdm/management/particulars'
-            : '/platformAuditAdm/management/edit',
+            ? '/commodityAdm/platformAudit/particulars'
+            : '/commodityAdm/platformAudit/edit',
         query: { id: params.productId },
       });
     });
@@ -161,19 +161,6 @@ export default class TableList extends React.Component {
     });
   };
 
-  // 全选选中
-  onSelectChange = selectedRowKeys => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    // this.setState({ selectedRowKeys });
-    const { dispatch } = this.props;
-    // if (dispatch) {
-    //   dispatch({
-    //     type: 'businessAdm/modifyplatformAudit',
-    //     payload: selectedRowKeys,
-    //   });
-    // }
-  };
-
   render() {
     const { state } = this;
     const { productList, productListStatus, tabelConditions } = this.props.platformAudit;
@@ -246,9 +233,9 @@ export default class TableList extends React.Component {
           <span>
             <a onClick={this.goToNextPage.bind(this, record, 'detail')}>查看</a>
             <Divider type="vertical" />
-            <a onClick={this.goToNextPage.bind(this, record, 'editor')}>编辑</a>
+            <a onClick={this.goToNextPage.bind(this, record, 'editor')}>撤销审核</a>
             <Divider type="vertical" />
-            <a onClick={this.goToNextPage.bind(this, record, 'audit')}>上架平台</a>
+            <a onClick={this.goToNextPage.bind(this, record, 'audit')}>重新提交</a>
             {/* <a onClick={this.generateQR.bind(this, record)}>生成二维码</a> */}
             <Divider type="vertical" />
             <a onClick={this.deleteProduct.bind(this, record)}>删除</a>
@@ -257,13 +244,6 @@ export default class TableList extends React.Component {
       },
     ];
     // const { businessAdm } = this.props;
-    // // 这里必须用状态管理中的数据,要是this.state会留存上一次的数据
-    // const { selectedRowKeys } = businessAdm;
-    const rowSelection = {
-      // selectedRowKeys,
-      selectedRowKeys: [],
-      onChange: this.onSelectChange,
-    };
     return (
       <div className={styles.main}>
         <Table
@@ -271,14 +251,12 @@ export default class TableList extends React.Component {
           columns={columns}
           dataSource={productList.pageList}
           onChange={this.onChange}
-          rowSelection={rowSelection}
           pagination={{
             current: tabelConditions[productListStatus].currentPage,
             position: 'bottom',
             pageSize: tabelConditions[productListStatus].pageSize,
             total: productList.totalElements,
           }}
-          // rowSelection={rowSelection}
           scroll={{ x: 1200 }}
         />
         <Modal

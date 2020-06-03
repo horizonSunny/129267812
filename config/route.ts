@@ -79,7 +79,7 @@ const route = [
                 name: '平台商品审核',
                 component: './commodity/platformAudit/platformAudit.tsx',
               },
-              // 商户-H5后台0.2 平台商品审核/审核编辑
+              // 商户-H5后台0.2 平台商品审核/审核编辑，查看
               {
                 path: 'platformAudit/edit',
                 name: '审核资料编辑',

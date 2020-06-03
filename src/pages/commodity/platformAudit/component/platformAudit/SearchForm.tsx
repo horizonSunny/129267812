@@ -105,11 +105,18 @@ class AdvancedSearchForm extends React.Component {
             </Form.Item>
           </Col>
           <Col span={7} style={{}}>
-            <Form.Item label="商品名">
-              {getFieldDecorator('keyword', {
-                initialValue: searchForm.productCommonName,
+            <Form.Item label="审核状态">
+              {getFieldDecorator('recommandStatus', {
+                initialValue: searchForm.recommandStatus,
                 rules: [],
-              })(<Input placeholder="输入商品名" />)}
+              })(
+                <Select style={{ width: 120 }}>
+                  <Option value={3}>全部</Option>
+                  <Option value={0}>审核中</Option>
+                  <Option value={1}>审核通过</Option>
+                  <Option value={1}>审核驳回</Option>
+                </Select>,
+              )}
             </Form.Item>
           </Col>
           <Col span={6} style={{}}>
@@ -122,56 +129,20 @@ class AdvancedSearchForm extends React.Component {
           </Col>
         </Row>
         <Row gutter={24}>
-          <Col
-            span={8}
-            style={{
-              maxWidth: '500px',
-              background: '@title-background',
-            }}
-          >
-            <Form.Item label="商品分类">
-              {getFieldDecorator('status', {
+          <Col span={6} style={{}}>
+            <Form.Item label="商品名">
+              {getFieldDecorator('approvalNumber', {
                 rules: [],
-                initialValue: searchForm.productType,
-              })(
-                <TreeSelect
-                  allowClear
-                  placeholder="选择商品分类"
-                  treeData={productType}
-                  onChange={this.onChange}
-                  // 设置下拉框的高度，控制个数
-                  dropdownStyle={{ maxHeight: 280 }}
-                />,
-              )}
+                initialValue: searchForm.approvalNumber,
+              })(<Input placeholder="输入商品名" />)}
             </Form.Item>
           </Col>
-          <Col span={8}>
-            <Form.Item label="是否推荐商品">
-              {getFieldDecorator('recommandStatus', {
+          <Col span={6} style={{}}>
+            <Form.Item label="商户名称">
+              {getFieldDecorator('approvalNumber', {
                 rules: [],
-                initialValue: searchForm.recommandStatus,
-              })(
-                <Select style={{ width: 120 }}>
-                  <Option value={3}>全部</Option>
-                  <Option value={1}>推荐商品</Option>
-                  <Option value={0}>非推荐商品</Option>
-                </Select>,
-              )}
-            </Form.Item>
-          </Col>
-          <Col span={8}>
-            <Form.Item label="上架平台状态">
-              {getFieldDecorator('recommandStatus', {
-                rules: [],
-                initialValue: searchForm.recommandStatus,
-              })(
-                <Select style={{ width: 120 }}>
-                  <Option value={3}>全部</Option>
-                  <Option value={1}>未上架</Option>
-                  <Option value={0}>上架中</Option>
-                  <Option value={0}>已上架</Option>
-                </Select>,
-              )}
+                initialValue: searchForm.approvalNumber,
+              })(<Input placeholder="输入商户名称" />)}
             </Form.Item>
           </Col>
           <Col
@@ -184,14 +155,14 @@ class AdvancedSearchForm extends React.Component {
               float: 'right',
             }}
           >
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" onClick={this.handleReset}>
+              发起审核
+            </Button>
+            <Button type="primary" style={{ marginLeft: 8 }} htmlType="submit">
               搜索
             </Button>
             <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>
               重置
-            </Button>
-            <Button style={{ marginLeft: 8, background: '#F5AB1C' }} onClick={this.handleNew}>
-              + 添加
             </Button>
           </Col>
         </Row>
