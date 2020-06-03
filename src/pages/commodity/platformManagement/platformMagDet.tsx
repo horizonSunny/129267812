@@ -4,9 +4,6 @@ import { Card, Typography, Alert, Button } from 'antd';
 import { connect } from 'dva';
 import router from 'umi/router';
 import styles from './platformMagDet.less';
-import TableList from './component/platformMagDet/Table';
-import RecordList from './component/platformMagDet/Record';
-import ProductConfig from './component/platformMagDet/ProductConfig';
 
 const { Title } = Typography;
 
@@ -29,15 +26,8 @@ export default class PlatformMagDet extends React.Component {
     return (
       <PageHeaderWrapper className={styles.main}>
         <div className={styles.contentWrap}>
-          <Title level={4} style={{ border: '0px' }}>
-            商品名称(SKU编号:{productWithId.productSku})
-          </Title>
-          {/* <ProductConfig /> */}
-          <TableList />
-          <ProductConfig />
-          <RecordList />
           {/* <div className={`${styles.operationIn}`} />
-        <div className={`${styles.operation}`}>
+          <div className={`${styles.operation}`}>
           <Button type="primary" onClick={this.handleEdit.bind(this, this.props.platformManagement.product)}>
             编辑
           </Button>
