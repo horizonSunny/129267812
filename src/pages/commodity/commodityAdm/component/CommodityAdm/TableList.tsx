@@ -73,6 +73,19 @@ export default class TableList extends React.Component {
     });
   };
 
+  // 跳转审核相关页面
+  goToAudit = params => {
+    let url;
+    switch (params.platformStatus) {
+      case 1:
+        url = '/commodityAdm/platformAudit/edit';
+        break;
+      default:
+        url = '/commodityAdm/platformAudit/particulars';
+    }
+    console.log('url_', url);
+  };
+
   // 删除商品
   deleteProduct = record => {
     // deletProduct
@@ -251,7 +264,7 @@ export default class TableList extends React.Component {
             <Divider type="vertical" />
             <a onClick={this.goToNextPage.bind(this, record, 'editor')}>编辑</a>
             <Divider type="vertical" />
-            <a onClick={this.goToNextPage.bind(this, record, 'audit')}>上架平台</a>
+            <a onClick={this.goToAudit.bind(this, record)}>入驻平台</a>
             {/* <a onClick={this.generateQR.bind(this, record)}>生成二维码</a> */}
             <Divider type="vertical" />
             <a onClick={this.deleteProduct.bind(this, record)}>删除</a>
