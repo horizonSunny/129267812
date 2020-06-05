@@ -50,13 +50,16 @@ const errorHandler = (error: { response: Response }): Response => {
  * 配置request请求时的默认参数
  */
 const request = extend({
-  prefix: 'http://47.103.158.133:8088',
+  prefix: 'https://result.eolinker.com/F64eRLVad5e677d1ad378b573d89d4591262514a832281f?uri=',
+  // prefix: 'http://47.103.158.133:8088',
   // prefix: 'http://192.168.10.234:9000',
   // prefix: 'http://192.168.5.101:9088',
   errorHandler, // 默认错误处理
   // credentials: 'include', // 默认请求是否带上cookie
 });
-export const serverUrl = 'http://47.103.158.133:8088';
+// export const serverUrl = 'http://47.103.158.133:8088';
+export const serverUrl =
+  'https://result.eolinker.com/F64eRLVad5e677d1ad378b573d89d4591262514a832281f?uri=';
 // export const serverUrl = 'http://192.168.10.234:9000';
 // export const serverUrl = 'http://192.168.5.101:9088';
 request.interceptors.request.use((url, options) => {

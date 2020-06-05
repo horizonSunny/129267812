@@ -39,6 +39,7 @@ const searchFormInfo = {
   productType: '',
   productCommonName: '',
   approvalNumber: '',
+  platformStatus: 0,
 };
 const tabStatus = 1;
 const CommodityModel = {

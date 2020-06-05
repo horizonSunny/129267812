@@ -45,6 +45,7 @@ class AdvancedSearchForm extends React.Component {
         productType: values.status,
         productCommonName: values.keyword,
         approvalNumber: values.approvalNumber,
+        platformStatus: values.platformStatus,
       };
       const searchInfo = filterProperty(searchParams);
       console.log('searchInfo_', searchInfo);
@@ -84,7 +85,6 @@ class AdvancedSearchForm extends React.Component {
       rules: [{ type: 'array', message: 'Please select time!' }],
     };
     const { allProductType, searchForm } = this.props.commodity;
-    console.log(searchForm, '2222222');
     const productType = allProductType;
     return (
       <Form className={styles['ant-advanced-search-form']} onSubmit={this.handleSearch}>
@@ -155,6 +155,21 @@ class AdvancedSearchForm extends React.Component {
                   <Option value={3}>全部</Option>
                   <Option value={1}>推荐商品</Option>
                   <Option value={0}>非推荐商品</Option>
+                </Select>,
+              )}
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item label="入驻平台状态">
+              {getFieldDecorator('platformStatus', {
+                rules: [],
+                initialValue: searchForm.platformStatus,
+              })(
+                <Select style={{ width: 120 }}>
+                  <Option value={0}>全部</Option>
+                  <Option value={1}>未上架</Option>
+                  <Option value={2}>上架中</Option>
+                  <Option value={3}>已上架</Option>
                 </Select>,
               )}
             </Form.Item>
