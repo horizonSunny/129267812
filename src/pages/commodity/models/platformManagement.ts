@@ -211,10 +211,10 @@ const CommodityModel = {
     },
     // 重置按钮重置所有，除了当前tab
     resetForm(state, action) {
-      console.log('tabelConditionsInfo_', tabelConditionsInfo);
+      // console.log('tabelConditionsInfo_', tabelConditionsInfo);
       return {
         ...state,
-        tabelConditions: deepCopy(tabelConditionsInfo),
+        tableFilterInfo: deepCopy(tableFilterInfo),
         searchForm: deepCopy(searchFormInfo),
       };
     },
