@@ -6,13 +6,10 @@ import styles from './TableList.less';
 
 @connect(({ platformManagement }) => ({ platformManagement }))
 export default class TableList extends React.Component {
-  // cons
   state = {
-    data: this.props.platformManagement.productList.pageList,
-    // searchInfo: this.props.searchInfo,
     visible: false,
     switchRecord: {},
-    qrImg: '',
+    selectedRowKeys: [],
   };
 
   onChange = (pagination, filters, sorter) => {
@@ -93,6 +90,7 @@ export default class TableList extends React.Component {
     });
   };
 
+  // 产品上下架
   handleOk = e => {
     const { dispatch } = this.props;
     const dataInfo = this.props.platformManagement.productList.pageList;
@@ -109,7 +107,6 @@ export default class TableList extends React.Component {
         }).then(res => {
           console.log('res_', res);
           if (res) {
-            // 这边好像dispatch什么都可以;
             dataInfo[item].isShelf = this.state.switchRecord.isShelf === 0 ? 1 : 0;
             dispatch({
               type: 'platformManagement/resetList',
@@ -132,35 +129,28 @@ export default class TableList extends React.Component {
     });
   };
 
-  // // 切换位置
-  // setTabChange = currentTab => {
-  //   console.log('currentTab_', currentTab);
-  //   const { dispatch } = this.props;
-  //   async function tabChange() {
-  //     await dispatch({
-  //       type: 'platformManagement/resetStatus',
-  //       payload: {
-  //         productListStatus: currentTab,
-  //       },
-  //     });
-  //     await dispatch({
-  //       type: 'platformManagement/getList',
-  //     });
-  //   }
-  //   tabChange();
-  // };
-
   // 全选选中
   onSelectChange = selectedRowKeys => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
-    // this.setState({ selectedRowKeys });
+    this.setState({ selectedRowKeys });
+  };
+
+  // 批量操作
+  batchOperation = e => {
+    console.log('e_', e.target.innerText);
     const { dispatch } = this.props;
-    // if (dispatch) {
-    //   dispatch({
-    //     type: 'businessAdm/modifyplatformManagement',
-    //     payload: selectedRowKeys,
-    //   });
-    // }
+    switch (e.target.innerText) {
+      case '批量上架':
+        break;
+      case '批量下架':
+        break;
+      case '批量删除':
+        break;
+
+      default:
+        break;
+    }
+    // debugger;
   };
 
   render() {
@@ -236,17 +226,13 @@ export default class TableList extends React.Component {
         ),
       },
     ];
-    // const { businessAdm } = this.props;
-    // // 这里必须用状态管理中的数据,要是this.state会留存上一次的数据
-    // const { selectedRowKeys } = businessAdm;
     const rowSelection = {
-      // selectedRowKeys,
-      selectedRowKeys: [0],
+      selectedRowKeys: this.state.selectedRowKeys,
       onChange: this.onSelectChange,
     };
     return (
       <div className={styles.main}>
-        <div className={`${styles.bulk_operation} ${styles.account}`}>
+        <div className={`${styles.bulk_operation} ${styles.account}`} onClick={this.batchOperation}>
           <Button type="primary">批量上架</Button>
           <Button type="primary">批量下架</Button>
           <Button type="danger">批量删除</Button>
