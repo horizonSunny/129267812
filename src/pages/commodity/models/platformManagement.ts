@@ -40,23 +40,23 @@ const CommodityModel = {
   effects: {
     // 获取商品列表
     *getList({ payload }, { call, put, select }) {
-      const state = yield select(state => state.commodity);
+      const state = yield select(state => state.platformManagement);
       // params包括searchForm的属性,包括根据productListStatus获取的tabelConditionsItem属性
       const params = Object.assign({}, state.searchForm, state.tableFilterInfo);
+      console.log('in_getList_platformManagement', state);
 
-      console.log('in_getList_params', params);
       params.pageNumber = params.currentPage - 1;
       // 过滤掉这个条件
       params.currentPage = '';
       const paramsInfo = filterProperty(params);
       const response = yield call(productList, paramsInfo);
-      yield put({
-        type: 'list',
-        payload: response.data,
-      });
       if (response.code === 1) {
         // 接口调用成功
         // do something...
+        yield put({
+          type: 'list',
+          payload: response.data,
+        });
         return response.data; //  通过return给dispatch返回回调结果！
       }
       // 接口调用失败

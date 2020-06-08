@@ -65,8 +65,9 @@ class AdvancedSearchForm extends React.Component {
 
   handleReset = () => {
     console.log('reset');
+    // 清楚form表单的值
     this.props.form.resetFields();
-    // 保留tab
+    // 只重置form表单
     const { dispatch } = this.props;
     dispatch({
       type: 'platformManagement/resetForm',
@@ -75,9 +76,9 @@ class AdvancedSearchForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const rangeConfig = {
-      rules: [{ type: 'array', message: 'Please select time!' }],
-    };
+    // const rangeConfig = {
+    //   rules: [{ type: 'array', message: 'Please select time!' }],
+    // };
     const { searchForm } = this.props.platformManagement;
     return (
       <Form className={styles['ant-advanced-search-form']} onSubmit={this.handleSearch}>
