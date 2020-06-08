@@ -3,6 +3,8 @@ import React from 'react';
 import router from 'umi/router';
 import { connect } from 'dva';
 import styles from './TableList.less';
+import { tableFilterInfo } from '../../../models/platformManagement';
+import deepCopy from '@/utils/deepCopy';
 
 @connect(({ platformManagement }) => ({ platformManagement }))
 export default class TableList extends React.Component {
@@ -13,21 +15,38 @@ export default class TableList extends React.Component {
   };
 
   onChange = (pagination, filters, sorter) => {
-    // resetTable
     console.log('pagination_', pagination);
-    console.log('filters_', filters);
-    console.log('sorter_', sorter);
-    // const { dispatch } = this.props;
-    // async function tableChange() {
-    //   await dispatch({
-    //     type: 'platformManagement/resetTable',
-    //     payload: tabelConditions,
-    //   });
-    //   await dispatch({
-    //     type: 'platformManagement/getList',
-    //   });
-    // }
-    // tableChange();
+
+    const initialValue = deepCopy(tableFilterInfo);
+    switch (sorter.columnKey) {
+      case 'createTime':
+        initialValue.createTimeOrder = sorter.order;
+        break;
+      case 'preferentialLimit':
+        initialValue.preferentialLimit = sorter.order;
+        break;
+      case 'preferentialQuantity':
+        initialValue.preferentialQuantity = sorter.order;
+        break;
+      case 'salesQuantity':
+        initialValue.salesQuantity = sorter.order;
+        break;
+      default:
+        break;
+    }
+    initialValue.currentPage = pagination.current;
+    initialValue.pageSize = pagination.pageSize;
+    const { dispatch } = this.props;
+    async function tableChange() {
+      await dispatch({
+        type: 'platformManagement/resetTable',
+        payload: initialValue,
+      });
+      await dispatch({
+        type: 'platformManagement/getList',
+      });
+    }
+    tableChange();
   };
 
   // 切换按钮
@@ -189,7 +208,7 @@ export default class TableList extends React.Component {
         key: 'createTime',
         dataIndex: 'createTime',
         sorter: true,
-        sortOrder: 'ascend',
+        sortOrder: tableFilterInfo.createTimeOrder,
         render: text => <a>{text}</a>,
       },
       {
@@ -223,15 +242,29 @@ export default class TableList extends React.Component {
         key: 'preferentialLimit',
         dataIndex: 'preferentialLimit',
         sorter: true,
-        sortOrder: 'ascend',
+        sortOrder: tableFilterInfo.preferentialLimit,
         render: text => <a>{text}</a>,
       },
       {
-        title: '销量',
-        key: 'sales',
-        dataIndex: 'sales',
+        title: '优惠价',
+        key: 'preferentialPrice',
+        dataIndex: 'preferentialPrice',
+        render: text => <a>{text}</a>,
+      },
+      {
+        title: '优惠件数',
+        key: 'preferentialQuantity',
+        dataIndex: 'preferentialQuantity',
         sorter: true,
-        sortOrder: 'ascend',
+        sortOrder: tableFilterInfo.preferentialQuantity,
+        render: text => <a>{text}</a>,
+      },
+      {
+        title: '销售数量',
+        key: 'salesQuantity',
+        dataIndex: 'salesQuantity',
+        sorter: true,
+        sortOrder: tableFilterInfo.salesQuantity,
         render: text => <a>{text}</a>,
       },
       {
@@ -278,12 +311,11 @@ export default class TableList extends React.Component {
           onChange={this.onChange}
           rowSelection={rowSelection}
           pagination={{
-            current: tableFilterInfo.currentPage - 1,
+            current: tableFilterInfo.currentPage,
             position: 'bottom',
             pageSize: tableFilterInfo.pageSize,
             total: productList.totalElements,
           }}
-          // rowSelection={rowSelection}
           scroll={{ x: 1200 }}
         />
         <Modal

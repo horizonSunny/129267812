@@ -12,7 +12,7 @@ import {
 import deepCopy from '@/utils/deepCopy';
 import filterProperty from '@/utils/filterProperty';
 
-const tableFilterInfo = {
+export const tableFilterInfo = {
   currentPage: 1,
   createTimeOrder: undefined,
   preferentialLimit: undefined,
