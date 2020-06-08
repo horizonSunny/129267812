@@ -9,10 +9,9 @@ export default class TableList extends React.Component {
   // cons
   state = {
     data: this.props.platformManagement.productList.pageList,
-    searchInfo: this.props.searchInfo,
+    // searchInfo: this.props.searchInfo,
     visible: false,
     switchRecord: {},
-    qrVisible: false,
     qrImg: '',
   };
 
@@ -26,17 +25,17 @@ export default class TableList extends React.Component {
       tabelConditions[productListStatus].saleOrder = undefined;
       tabelConditions[productListStatus].stockOrder = sorter.order;
     }
-    const { dispatch } = this.props;
-    async function tableChange() {
-      await dispatch({
-        type: 'platformManagement/setTabelConditions',
-        payload: tabelConditions,
-      });
-      await dispatch({
-        type: 'platformManagement/getList',
-      });
-    }
-    tableChange();
+    // const { dispatch } = this.props;
+    // async function tableChange() {
+    //   await dispatch({
+    //     type: 'platformManagement/setTabelConditions',
+    //     payload: tabelConditions,
+    //   });
+    //   await dispatch({
+    //     type: 'platformManagement/getList',
+    //   });
+    // }
+    // tableChange();
   };
 
   // 切换按钮
@@ -151,13 +150,6 @@ export default class TableList extends React.Component {
   //   tabChange();
   // };
 
-  qrhandleCancel = e => {
-    console.log(e);
-    this.setState({
-      qrVisible: false,
-    });
-  };
-
   // 全选选中
   onSelectChange = selectedRowKeys => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
@@ -173,9 +165,7 @@ export default class TableList extends React.Component {
 
   render() {
     const { state } = this;
-    const { productList, productListStatus, tabelConditions } = this.props.platformManagement;
-    console.log('tabelConditions_', tabelConditions);
-    console.log('productList_', productList);
+    const { productList, tableFilterInfo } = this.props.platformManagement;
     const columns = [
       {
         title: 'Sku',
@@ -209,9 +199,7 @@ export default class TableList extends React.Component {
         key: 'stock',
         dataIndex: 'stock',
         sorter: true,
-        sortOrder: this.props.platformManagement.tabelConditions[
-          this.props.platformManagement.productListStatus
-        ].stockOrder,
+        sortOrder: 'ascend',
         render: text => <a>{text}</a>,
       },
       {
@@ -219,9 +207,7 @@ export default class TableList extends React.Component {
         key: 'sales',
         dataIndex: 'sales',
         sorter: true,
-        sortOrder: this.props.platformManagement.tabelConditions[
-          this.props.platformManagement.productListStatus
-        ].saleOrder,
+        sortOrder: 'ascend',
         render: text => <a>{text}</a>,
       },
       {
@@ -272,9 +258,9 @@ export default class TableList extends React.Component {
           onChange={this.onChange}
           rowSelection={rowSelection}
           pagination={{
-            current: tabelConditions[productListStatus].currentPage,
+            current: tableFilterInfo.currentPage - 1,
             position: 'bottom',
-            pageSize: tabelConditions[productListStatus].pageSize,
+            pageSize: tableFilterInfo.pageSize,
             total: productList.totalElements,
           }}
           // rowSelection={rowSelection}

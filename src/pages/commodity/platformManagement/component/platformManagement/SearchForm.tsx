@@ -41,8 +41,8 @@ class AdvancedSearchForm extends React.Component {
       const searchParams = {
         startTime: values['range-picker'][0],
         endTime: values['range-picker'][1],
-        recommandStatus: values.recommandStatus,
-        productType: values.status,
+        putawayStatus: values.putawayStatus,
+        sellStatus: values.sellStatus,
         productCommonName: values.keyword,
         approvalNumber: values.approvalNumber,
       };
@@ -78,9 +78,7 @@ class AdvancedSearchForm extends React.Component {
     const rangeConfig = {
       rules: [{ type: 'array', message: 'Please select time!' }],
     };
-    const { allProductType, searchForm } = this.props.platformManagement;
-    console.log(searchForm, '2222222');
-    const productType = allProductType;
+    const { searchForm } = this.props.platformManagement;
     return (
       <Form className={styles['ant-advanced-search-form']} onSubmit={this.handleSearch}>
         <Row gutter={24}>
@@ -117,34 +115,11 @@ class AdvancedSearchForm extends React.Component {
           </Col>
         </Row>
         <Row gutter={24}>
-          <Col
-            span={8}
-            style={{
-              maxWidth: '500px',
-              background: '@title-background',
-            }}
-          >
-            <Form.Item label="商品分类">
-              {getFieldDecorator('productType', {
-                rules: [],
-                initialValue: searchForm.productType,
-              })(
-                <TreeSelect
-                  allowClear
-                  placeholder="选择商品分类"
-                  treeData={productType}
-                  onChange={this.onChange}
-                  // 设置下拉框的高度，控制个数
-                  dropdownStyle={{ maxHeight: 280 }}
-                />,
-              )}
-            </Form.Item>
-          </Col>
           <Col span={8}>
             <Form.Item label="售卖状态">
-              {getFieldDecorator('saleStatus', {
+              {getFieldDecorator('sellStatus', {
                 rules: [],
-                initialValue: searchForm.recommandStatus,
+                initialValue: searchForm.sellStatus,
               })(
                 <Select style={{ width: 120 }}>
                   <Option value={0}>全部</Option>
@@ -158,15 +133,15 @@ class AdvancedSearchForm extends React.Component {
             </Form.Item>
           </Col>
           <Col span={8}>
-            <Form.Item label="上架平台状态">
-              {getFieldDecorator('recommandStatus', {
+            <Form.Item label="上架状态">
+              {getFieldDecorator('putawayStatus', {
                 rules: [],
-                initialValue: searchForm.recommandStatus,
+                initialValue: searchForm.putawayStatus,
               })(
                 <Select style={{ width: 120 }}>
-                  <Option value={3}>全部</Option>
-                  <Option value={1}>未上架</Option>
-                  <Option value={0}>已上架</Option>
+                  <Option value={0}>全部</Option>
+                  <Option value={1}>已上架</Option>
+                  <Option value={2}>未上架</Option>
                 </Select>,
               )}
             </Form.Item>
