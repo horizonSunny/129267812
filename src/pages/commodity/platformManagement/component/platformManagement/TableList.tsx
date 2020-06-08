@@ -64,8 +64,6 @@ export default class TableList extends React.Component {
   // 请求数据跳转详情页面
   goToNextPage = (params, operate) => {
     const { dispatch } = this.props;
-    console.log(dispatch, '111111');
-    console.log('operate_111111', operate);
     dispatch({
       type: 'platformManagement/getProduct',
       payload: {
@@ -73,7 +71,7 @@ export default class TableList extends React.Component {
       },
     }).then(result => {
       router.push({
-        pathname: operate === 'detail' ? '/commodityAdm/platformManagement/particulars' : '',
+        pathname: '/commodityAdm/platformManagement/particulars',
         query: { id: params.productId },
       });
     });

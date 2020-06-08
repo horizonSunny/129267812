@@ -15,48 +15,9 @@ const isMapClass = {
   lineHeight: '20px',
   fontSize: '10px',
 };
-// const renderContent = (value, row, index) => {
-//   const obj = {
-//     children: value,
-//     props: {},
-//   };
-//   if (index === 4) {
-//     obj.props.colSpan = 0;
-//   }
-//   return obj;
-// };
 @connect(({ platformManagement }) => ({ platformManagement }))
 export default class CommercialMatch extends React.Component {
   state = {
-    visible: false,
-    imgSrc: '',
-    tabelArr: [
-      {
-        one: '商品名',
-        two: '999感冒灵',
-        three: '[999] 感冒灵',
-      },
-      {
-        one: '批准文号',
-        two: '医药s21231312',
-        three: '国药准字s21231312',
-      },
-      {
-        one: '包装规格',
-        two: '10g*9袋／盒',
-        three: '10粒*3／盒',
-      },
-      {
-        one: '优惠价格/原价',
-        two: '11.500',
-        three: '123.00',
-      },
-      {
-        one: '优惠件数/库存',
-        two: '0',
-        three: '3',
-      },
-    ],
     columns: [
       {
         title: '数据名称',
@@ -84,54 +45,41 @@ export default class CommercialMatch extends React.Component {
     }
   };
 
-  handleOk = e => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
-  };
-
-  handleCancel = e => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
-  };
-
-  // 获取处理后的数据
-  dataReverse(data) {
-    const arr = [];
-    let i = 0;
-    for (const item in filterData) {
-      const obj = new Object();
-      obj.key = i++;
-      obj.name = filterData[item];
-      obj.value = data[item];
-      arr.push(obj);
-    }
-    console.log('tabelArr_', arr);
-    // return arr;
-    this.setState({
-      tabelArr: arr,
-    });
-  }
-
-  // 生命周期
-  componentDidMount() {
-    // this.dataReverse(this.props.platformManagement.productWithId);
-  }
-
-  componentWillReceiveProps() {
-    // this.dataReverse(this.props.platformManagement.productWithId);
-  }
-
   render() {
     const { state } = this;
+    const product = this.props.platformManagement.productWithId;
+    const tabelArr = [
+      {
+        one: '商品名',
+        two: product.commercialMatch ? product.commercialMatch.productNameShop : '',
+        three: product.commercialMatch ? product.commercialMatch.productNamePlat : '',
+      },
+      {
+        one: '批准文号',
+        two: product.commercialMatch ? product.commercialMatch.approvalNumShop : '',
+        three: product.commercialMatch ? product.commercialMatch.approvalNumPlat : '',
+      },
+      {
+        one: '包装规格',
+        two: product.commercialMatch ? product.commercialMatch.productSpecifShop : '',
+        three: product.commercialMatch ? product.commercialMatch.productSpecifPlat : '',
+      },
+      {
+        one: '优惠价格/原价',
+        two: product.commercialMatch ? product.commercialMatch.priceShop : '',
+        three: product.commercialMatch ? product.commercialMatch.pricePlat : '',
+      },
+      {
+        one: '优惠件数/库存',
+        two: product.commercialMatch ? product.commercialMatch.numberShop : '',
+        three: product.commercialMatch ? product.commercialMatch.numberPlat : '',
+      },
+    ];
     return (
       <Table
         className={styles.main}
         columns={state.columns}
-        dataSource={state.tabelArr}
+        dataSource={tabelArr}
         pagination={false}
         bordered
       />

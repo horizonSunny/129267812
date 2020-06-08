@@ -7,6 +7,7 @@ import styles from './commodityInfo.less';
 import { connect } from 'dva';
 import LabelInfo from '../../../../../components/Label/label';
 import { filterStatus } from '@/utils/filterProperty';
+import routerParams from '@/utils/routerParams';
 
 const isMapClass = {
   width: '40px',
@@ -30,41 +31,6 @@ export default class CommodityInfo extends React.Component {
   state = {
     visible: false,
     imgSrc: '',
-    tabelArr: [
-      {
-        one: '商品主图',
-        two: [
-          'https://product-img-bucket.oss-cn-shanghai.aliyuncs.com/12573/c8c5a771de288b302a33f8f8460d54ee.jpg',
-          'https://product-img-bucket.oss-cn-shanghai.aliyuncs.com/12573/080c958baf4d85268e1b97d8f225b41b.jpg',
-          'https://product-img-bucket.oss-cn-shanghai.aliyuncs.com/12573/d786a77e526e198750ec5a531d83a71b.jpg',
-          'https://product-img-bucket.oss-cn-shanghai.aliyuncs.com/12573/6406b9daac1246c089bbb85311d2a322.jpg',
-          'https://product-img-bucket.oss-cn-shanghai.aliyuncs.com/12573/8b1cfb3bba88b85e2613b78481e4962f.jpg',
-          'https://product-img-bucket.oss-cn-shanghai.aliyuncs.com/12573/fe6220bfd52236738775526c628d51b2.jpg',
-        ],
-      },
-      {
-        one: '商品编号',
-        two: 'xxxxxxxx',
-        three: '是否处方药',
-        four: 'rx',
-      },
-      {
-        one: '销售数量',
-        two: '118',
-        three: '浏览数量',
-        four: '12322',
-      },
-      {
-        one: '售卖状态',
-        two: '售空下架',
-        three: '创建时间',
-        four: '2020-12-12 21:11:11',
-      },
-      {
-        one: '原链接',
-        two: 'wwww.baidu.com',
-      },
-    ],
     columns: [
       {
         dataIndex: 'one',
@@ -154,6 +120,26 @@ export default class CommodityInfo extends React.Component {
     ],
   };
 
+  componentDidMount() {
+    // console.log('this.props.match.params.id_', routerParams(location.search));
+    // const { id: productId } = routerParams(location.search);
+    // const { dispatch } = this.props;
+    // dispatch({
+    //   type: 'platformManagement/getProductLog',
+    //   payload: {
+    //     pageNumber: 0,
+    //     pageSize: 5,
+    //     productId,
+    //   },
+    // });
+    // dispatch({
+    //   type: 'platformManagement/getProduct',
+    //   payload: {
+    //     productId,
+    //   },
+    // });
+  }
+
   // 点击查看商品图放大
   showModal = e => {
     if (e.target.nodeName === 'IMG') {
@@ -179,40 +165,43 @@ export default class CommodityInfo extends React.Component {
     });
   };
 
-  // 获取处理后的数据
-  dataReverse(data) {
-    const arr = [];
-    let i = 0;
-    for (const item in filterData) {
-      const obj = new Object();
-      obj.key = i++;
-      obj.name = filterData[item];
-      obj.value = data[item];
-      arr.push(obj);
-    }
-    console.log('tabelArr_', arr);
-    // return arr;
-    this.setState({
-      tabelArr: arr,
-    });
-  }
-
-  // 生命周期
-  componentDidMount() {
-    // this.dataReverse(this.props.platformManagement.productWithId);
-  }
-
-  componentWillReceiveProps() {
-    // this.dataReverse(this.props.platformManagement.productWithId);
-  }
-
   render() {
+    // console.log('hahah_', this.props.platformManagement.productWithId.commodityInfo.productImage);
+    const product = this.props.platformManagement.productWithId;
+    const tabelArr = [
+      {
+        one: '商品主图',
+        two: product.commodityInfo ? product.commodityInfo.productImage : [],
+      },
+      {
+        one: '商品编号',
+        two: product.commodityInfo ? product.commodityInfo.productId : '',
+        three: '是否处方药',
+        four: product.commodityInfo ? product.commodityInfo.isMap : '',
+      },
+      {
+        one: '销售数量',
+        two: product.commodityInfo ? product.commodityInfo.salesQuantity : '',
+        three: '浏览数量',
+        four: product.commodityInfo ? product.commodityInfo.views : '',
+      },
+      {
+        one: '售卖状态',
+        two: product.commodityInfo ? product.commodityInfo.sellStatus : '',
+        three: '创建时间',
+        four: product.commodityInfo ? product.commodityInfo.createTime : '',
+      },
+      {
+        one: '原链接',
+        two: product.commodityInfo ? product.commodityInfo.link : '',
+      },
+    ];
     const { state } = this;
     return (
       <Table
         className={styles.main}
         columns={state.columns}
-        dataSource={state.tabelArr}
+        dataSource={tabelArr}
         pagination={false}
         bordered
       />

@@ -3,12 +3,10 @@ import {
   product,
   editorProduct,
   newProduct,
-  productype,
+  platformLog,
   shelve,
-  productTemplateList,
   deletProduct,
-  generateQR,
-} from '@/services/commodity';
+} from '@/services/platformManagement';
 import deepCopy from '@/utils/deepCopy';
 import filterProperty from '@/utils/filterProperty';
 
@@ -36,6 +34,11 @@ const CommodityModel = {
     productLog: [],
     searchForm: deepCopy(searchFormInfo),
     tableFilterInfo: deepCopy(tableFilterInfo),
+    recordPagenation: {
+      pageNumber: 0,
+      pageSize: 5,
+      total: 0,
+    },
   },
   effects: {
     // 获取商品列表
@@ -70,37 +73,14 @@ const CommodityModel = {
         type: 'product',
         payload: response.data,
       });
-      // 同时设置对应运费模版的信息
-      if (response.data && response.data.product) {
-        const { freightTemplates } = response.data.product;
-        console.log('freightTemplates_', freightTemplates);
-        let ordinaryTemplate = null;
-        let urgentTemplate = null;
-        const hasSelectTemplate = [];
-        if (freightTemplates) {
-          freightTemplates.forEach(item => {
-            if (item.templateType === 2) {
-              urgentTemplate = item;
-            } else {
-              ordinaryTemplate = item;
-            }
-          });
-          if (urgentTemplate) {
-            hasSelectTemplate.push(2);
-          }
-          if (ordinaryTemplate) {
-            hasSelectTemplate.push(1);
-          }
-        }
-        yield put({
-          type: 'setProductDeliveryTemplate',
-          payload: {
-            ordinaryTemplate,
-            urgentTemplate,
-            hasSelectTemplate,
-          },
-        });
-      }
+    },
+    // 依据id获取单个商品log信息
+    *getProductLog({ payload }, { call, put }) {
+      const response = yield call(platformLog, payload);
+      yield put({
+        type: 'productLog',
+        payload: response.data,
+      });
     },
     // 新建产品
     *newProduct({ payload }, { call, put }) {
@@ -152,12 +132,20 @@ const CommodityModel = {
     },
     // 获取单个商品
     product(state, action) {
-      console.log('in product');
-
       return {
         ...state,
-        productWithId: action.payload.product,
-        productLog: action.payload.log,
+        productWithId: action.payload,
+      };
+    },
+    productLog(state, action) {
+      return {
+        ...state,
+        productLog: action.payload.pageList,
+        recordPagenation: {
+          pageNumber: action.payload.pageNumber,
+          pageSize: action.payload.pageSize,
+          total: action.payload.totalElements,
+        },
       };
     },
     // 保存单个商品的信息
