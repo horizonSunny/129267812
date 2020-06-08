@@ -132,6 +132,7 @@ const CommodityModel = {
       // do something...
       return false;
     },
+    // 删除商品
     *deletProduct({ payload }, { call }) {
       const response = yield call(deletProduct, payload);
     },
@@ -224,6 +225,15 @@ const CommodityModel = {
       return {
         ...state,
         searchForm: action.payload,
+      };
+    },
+    // 重置table页面的数据，如果传入属性则加上
+    resetTable(state, action) {
+      // const tableInfo = deepCopy(tableFilterInfo);
+      const params = Object.assign({}, state.tableFilterInfo, action.payload);
+      return {
+        ...state,
+        tableFilterInfo: params,
       };
     },
   },

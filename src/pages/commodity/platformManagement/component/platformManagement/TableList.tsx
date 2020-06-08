@@ -13,19 +13,14 @@ export default class TableList extends React.Component {
   };
 
   onChange = (pagination, filters, sorter) => {
-    const { tabelConditions, productListStatus } = this.props.platformManagement;
-    tabelConditions[productListStatus].currentPage = pagination.current;
-    if (sorter.field === 'sales') {
-      tabelConditions[productListStatus].saleOrder = sorter.order;
-      tabelConditions[productListStatus].stockOrder = undefined;
-    } else if (sorter.field === 'stock') {
-      tabelConditions[productListStatus].saleOrder = undefined;
-      tabelConditions[productListStatus].stockOrder = sorter.order;
-    }
+    // resetTable
+    console.log('pagination_', pagination);
+    console.log('filters_', filters);
+    console.log('sorter_', sorter);
     // const { dispatch } = this.props;
     // async function tableChange() {
     //   await dispatch({
-    //     type: 'platformManagement/setTabelConditions',
+    //     type: 'platformManagement/resetTable',
     //     payload: tabelConditions,
     //   });
     //   await dispatch({
@@ -139,16 +134,42 @@ export default class TableList extends React.Component {
   batchOperation = e => {
     console.log('e_', e.target.innerText);
     const { dispatch } = this.props;
-    switch (e.target.innerText) {
-      case '批量上架':
-        break;
-      case '批量下架':
-        break;
-      case '批量删除':
-        break;
-
-      default:
-        break;
+    if (e.target.innerText === '批量上架' || e.target.innerText === '批量下架') {
+      let status;
+      e.target.innerText === '批量上架' ? (status = 1) : (status = 0);
+      dispatch({
+        type: 'platformManagement/shelveProduct',
+        payload: {
+          productIds: this.state.selectedRowKeys,
+          status,
+        },
+      }).then(res => {
+        if (res) {
+          dispatch({
+            type: 'platformManagement/resetTable',
+            payload: {
+              currentPage: 1,
+              pageSize: 10,
+            },
+          });
+          dispatch({
+            type: 'platformManagement/getList',
+          });
+        }
+      });
+    } else if (e.target.innerText === '批量删除') {
+      async function batchDelete() {
+        await dispatch({
+          type: 'platformManagement/deletProduct',
+          payload: {
+            productIds: this.state.selectedRowKeys,
+          },
+        });
+        await dispatch({
+          type: 'platformManagement/getList',
+        });
+      }
+      batchDelete();
     }
     // debugger;
   };
@@ -161,6 +182,14 @@ export default class TableList extends React.Component {
         title: 'Sku',
         dataIndex: 'productSku',
         key: 'productSku',
+        render: text => <a>{text}</a>,
+      },
+      {
+        title: '创建时间',
+        key: 'createTime',
+        dataIndex: 'createTime',
+        sorter: true,
+        sortOrder: 'ascend',
         render: text => <a>{text}</a>,
       },
       {
@@ -179,15 +208,20 @@ export default class TableList extends React.Component {
         dataIndex: 'productSpecif',
       },
       {
-        title: '价格',
-        key: 'price',
-        dataIndex: 'price',
+        title: '商户名称',
+        key: 'merchantName',
+        dataIndex: 'merchantName',
+      },
+      {
+        title: '原价',
+        key: 'originalPrice',
+        dataIndex: 'originalPrice',
         render: text => <a>{text}</a>,
       },
       {
-        title: '库存',
-        key: 'stock',
-        dataIndex: 'stock',
+        title: '优惠额度',
+        key: 'preferentialLimit',
+        dataIndex: 'preferentialLimit',
         sorter: true,
         sortOrder: 'ascend',
         render: text => <a>{text}</a>,
