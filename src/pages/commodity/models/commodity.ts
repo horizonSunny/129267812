@@ -32,7 +32,7 @@ const tabelConditionsInfo = {
     pageSize: 10,
   },
 };
-const searchFormInfo = {
+export const searchFormInfo = {
   startTime: undefined,
   endTime: undefined,
   recommandStatus: 3,

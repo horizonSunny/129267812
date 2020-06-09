@@ -1,15 +1,17 @@
 import { Form, Row, Col, Input, Button, DatePicker, Select, TreeSelect } from 'antd';
 import React from 'react';
-import styles from './SearchForm.less';
 import router from 'umi/router';
 import moment from 'moment';
 import { connect } from 'dva';
+import styles from './SearchForm.less';
 import filterProperty from '@/utils/filterProperty';
+import { searchFormInfo } from '../../../models/commodity';
+import deepCopy from '@/utils/deepCopy';
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
-@connect(({ platformAudit }) => ({ platformAudit }))
+@connect(({ platformAudit, commodity }) => ({ platformAudit, commodity }))
 class AdvancedSearchForm extends React.Component {
   state = {
     // expand: false,
@@ -72,6 +74,18 @@ class AdvancedSearchForm extends React.Component {
     dispatch({
       type: 'platformAudit/resetForm',
     });
+  };
+
+  // 发起审核
+  review = () => {
+    const params = deepCopy(searchFormInfo);
+    params.platformStatus = 1;
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'commodity/saveSearchForm',
+      payload: params,
+    });
+    router.push('/commodityAdm/management');
   };
 
   render() {
@@ -151,7 +165,10 @@ class AdvancedSearchForm extends React.Component {
               float: 'right',
             }}
           >
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" onClick={this.review}>
+              发起审核
+            </Button>
+            <Button style={{ marginLeft: 8 }} type="primary" htmlType="submit">
               搜索
             </Button>
             <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>
