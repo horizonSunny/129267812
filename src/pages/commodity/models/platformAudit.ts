@@ -6,7 +6,7 @@ import {
   platformLog,
   shelve,
   deletProduct,
-} from '@/services/platformManagement';
+} from '@/services/platformAudit';
 import deepCopy from '@/utils/deepCopy';
 import filterProperty from '@/utils/filterProperty';
 
@@ -40,10 +40,10 @@ const CommodityModel = {
   effects: {
     // 获取商品列表
     *getList({ payload }, { call, put, select }) {
-      const state = yield select(state => state.platformManagement);
+      const state = yield select(state => state.platformAudit);
       // params包括searchForm的属性,包括根据productListStatus获取的tabelConditionsItem属性
       const params = Object.assign({}, state.searchForm, state.tableFilterInfo);
-      console.log('in_getList_platformManagement', state);
+      console.log('in_getList_platformAudit', state);
 
       params.pageNumber = params.currentPage - 1;
       // 过滤掉这个条件
