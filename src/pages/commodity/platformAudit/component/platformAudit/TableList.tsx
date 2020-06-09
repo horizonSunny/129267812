@@ -11,7 +11,6 @@ export default class TableList extends React.Component {
   state = {
     visible: false,
     switchRecord: {},
-    selectedRowKeys: [],
   };
 
   onChange = (pagination, filters, sorter) => {
@@ -141,72 +140,22 @@ export default class TableList extends React.Component {
     });
   };
 
-  // 全选选中
-  onSelectChange = selectedRowKeys => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    this.setState({ selectedRowKeys });
-  };
-
-  // 批量操作
-  batchOperation = e => {
-    console.log('e_', e.target.innerText);
-    const { dispatch } = this.props;
-    if (e.target.innerText === '批量上架' || e.target.innerText === '批量下架') {
-      let status;
-      e.target.innerText === '批量上架' ? (status = 1) : (status = 0);
-      dispatch({
-        type: 'platformAudit/shelveProduct',
-        payload: {
-          productIds: this.state.selectedRowKeys,
-          status,
-        },
-      }).then(res => {
-        if (res) {
-          dispatch({
-            type: 'platformAudit/resetTable',
-            payload: {
-              currentPage: 1,
-              pageSize: 10,
-            },
-          });
-          dispatch({
-            type: 'platformAudit/getList',
-          });
-        }
-      });
-    } else if (e.target.innerText === '批量删除') {
-      async function batchDelete() {
-        await dispatch({
-          type: 'platformAudit/deletProduct',
-          payload: {
-            productIds: this.state.selectedRowKeys,
-          },
-        });
-        await dispatch({
-          type: 'platformAudit/getList',
-        });
-      }
-      batchDelete();
-    }
-    // debugger;
-  };
-
   render() {
     const { state } = this;
     const { productList, tableFilterInfo } = this.props.platformAudit;
     const columns = [
       {
-        title: 'Sku',
-        dataIndex: 'productSku',
-        key: 'productSku',
+        title: '审核编号',
+        dataIndex: 'auditNumber',
+        key: 'auditNumber',
         render: text => <a>{text}</a>,
       },
       {
-        title: '创建时间',
-        key: 'createTime',
-        dataIndex: 'createTime',
+        title: '更新时间',
+        key: 'updateTime',
+        dataIndex: 'updateTime',
         sorter: true,
-        sortOrder: tableFilterInfo.createTimeOrder,
+        sortOrder: tableFilterInfo.updateTimeOrder,
         render: text => <a>{text}</a>,
       },
       {
@@ -225,22 +174,14 @@ export default class TableList extends React.Component {
         dataIndex: 'productSpecif',
       },
       {
-        title: '商户名称',
-        key: 'merchantName',
-        dataIndex: 'merchantName',
-      },
-      {
         title: '原价',
-        key: 'originalPrice',
-        dataIndex: 'originalPrice',
-        render: text => <a>{text}</a>,
+        key: 'price',
+        dataIndex: 'price',
       },
       {
         title: '优惠额度',
         key: 'preferentialLimit',
         dataIndex: 'preferentialLimit',
-        sorter: true,
-        sortOrder: tableFilterInfo.preferentialLimit,
         render: text => <a>{text}</a>,
       },
       {
@@ -253,27 +194,7 @@ export default class TableList extends React.Component {
         title: '优惠件数',
         key: 'preferentialQuantity',
         dataIndex: 'preferentialQuantity',
-        sorter: true,
-        sortOrder: tableFilterInfo.preferentialQuantity,
         render: text => <a>{text}</a>,
-      },
-      {
-        title: '销售数量',
-        key: 'salesQuantity',
-        dataIndex: 'salesQuantity',
-        sorter: true,
-        sortOrder: tableFilterInfo.salesQuantity,
-        render: text => <a>{text}</a>,
-      },
-      {
-        title: '上下架',
-        key: 'isShelf',
-        render: record => (
-          <Switch
-            checked={record.isShelf !== 0}
-            onChange={this.onSwitchChange.bind(this, record)}
-          />
-        ),
       },
       {
         title: '操作',
@@ -291,23 +212,13 @@ export default class TableList extends React.Component {
         ),
       },
     ];
-    const rowSelection = {
-      selectedRowKeys: this.state.selectedRowKeys,
-      onChange: this.onSelectChange,
-    };
     return (
       <div className={styles.main}>
-        <div className={`${styles.bulk_operation} ${styles.account}`} onClick={this.batchOperation}>
-          <Button type="primary">批量上架</Button>
-          <Button type="primary">批量下架</Button>
-          <Button type="danger">批量删除</Button>
-        </div>
         <Table
           {...this.state}
           columns={columns}
           dataSource={productList.pageList}
           onChange={this.onChange}
-          rowSelection={rowSelection}
           pagination={{
             current: tableFilterInfo.currentPage,
             position: 'bottom',

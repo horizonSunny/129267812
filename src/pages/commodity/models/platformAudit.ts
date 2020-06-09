@@ -12,10 +12,7 @@ import filterProperty from '@/utils/filterProperty';
 
 export const tableFilterInfo = {
   currentPage: 1,
-  createTimeOrder: undefined,
-  preferentialLimit: undefined,
-  preferentialQuantity: undefined,
-  salesQuantity: undefined,
+  updateTimeOrder: undefined,
   pageSize: 10,
 };
 const searchFormInfo = {
