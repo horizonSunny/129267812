@@ -5,6 +5,7 @@ import { connect } from 'dva';
 import router from 'umi/router';
 import styles from './platformAudDet.less';
 import Product from './component/platformCommon/product';
+import Details from './component/platformAudDet/detail';
 
 const { Title } = Typography;
 
@@ -20,6 +21,7 @@ export default class PlatformAudDet extends React.Component {
     return (
       <PageHeaderWrapper className={styles.main}>
         <Product />
+        <Details />
       </PageHeaderWrapper>
     );
   }
