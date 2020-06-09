@@ -8,8 +8,8 @@ export async function productList(params: Object) {
 }
 // 根据id查询商品信息
 export async function product(params: any) {
-  // return request(`/admin/v1/platformProdDet/${params.id}`);
-  return request('/admin/v1/platformProdDet');
+  // return request(`/admin/v1/product/${params.id}`);
+  return request('/admin/v1/product');
 }
 // 编辑商品
 export async function editorProduct(params: any) {

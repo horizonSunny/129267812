@@ -26,8 +26,8 @@ const CommodityModel = {
   namespace: 'platformAudit',
   state: {
     productList: {},
+    // 依据id查询商品信息
     productWithId: {},
-    productLog: [],
     searchForm: deepCopy(searchFormInfo),
     tableFilterInfo: deepCopy(tableFilterInfo),
     recordPagenation: {

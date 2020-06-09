@@ -5,7 +5,7 @@ import { connect } from 'dva';
 import styles from './TableList.less';
 
 const { TabPane } = Tabs;
-@connect(({ commodity }) => ({ commodity }))
+@connect(({ commodity, platformAudit }) => ({ commodity, platformAudit }))
 export default class TableList extends React.Component {
   // cons
   state = {
@@ -83,13 +83,27 @@ export default class TableList extends React.Component {
       default:
         url = '/commodityAdm/platformAudit/particulars';
     }
-    console.log('url_', url);
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'platformAudit/getProduct',
+      payload: {
+        productId: params.productId,
+      },
+    }).then(() => {
+      router.push({
+        pathname: url,
+        query: { platformStatus: params.platformStatus, productId: params.productId },
+      });
+    });
+    // console.log('url_', url);
+    // console.log('params_', params);
+    // platformAudit
   };
 
   // 删除商品
   deleteProduct = record => {
     // deletProduct
-    const { dispatch } = this.props;
+    const { platformAuditatch } = this.props;
     async function deleteProductInfo() {
       await dispatch({
         type: 'commodity/deletProduct',
