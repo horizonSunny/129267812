@@ -9,12 +9,12 @@ import filterProperty from '@/utils/filterProperty';
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
-@connect(({ platformManagement }) => ({ platformManagement }))
+@connect(({ platformAudit }) => ({ platformAudit }))
 class AdvancedSearchForm extends React.Component {
   state = {
     // expand: false,
     // sellingStatus: null,
-    // productType: this.props.platformManagement.allProductType,
+    // productType: this.props.platformAudit.allProductType,
     // selectedRowKeys: [],
   };
 
@@ -51,11 +51,11 @@ class AdvancedSearchForm extends React.Component {
 
       async function search() {
         await dispatch({
-          type: 'platformManagement/saveSearchForm',
+          type: 'platformAudit/saveSearchForm',
           payload: searchInfo,
         });
         await dispatch({
-          type: 'platformManagement/getList',
+          type: 'platformAudit/getList',
         });
       }
       search();
@@ -70,7 +70,7 @@ class AdvancedSearchForm extends React.Component {
     // 只重置form表单
     const { dispatch } = this.props;
     dispatch({
-      type: 'platformManagement/resetForm',
+      type: 'platformAudit/resetForm',
     });
   };
 
@@ -79,7 +79,7 @@ class AdvancedSearchForm extends React.Component {
     // const rangeConfig = {
     //   rules: [{ type: 'array', message: 'Please select time!' }],
     // };
-    const { searchForm } = this.props.platformManagement;
+    const { searchForm } = this.props.platformAudit;
     return (
       <Form className={styles['ant-advanced-search-form']} onSubmit={this.handleSearch}>
         <Row gutter={24}>

@@ -18,10 +18,10 @@ export const tableFilterInfo = {
 const searchFormInfo = {
   startTime: undefined,
   endTime: undefined,
-  putawayStatus: 0,
-  sellStatus: 0,
+  auditStatus: 0,
   productCommonName: '',
   approvalNumber: '',
+  merchantName: '',
 };
 const CommodityModel = {
   namespace: 'platformAudit',

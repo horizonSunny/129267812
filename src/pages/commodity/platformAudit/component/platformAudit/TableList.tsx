@@ -18,17 +18,8 @@ export default class TableList extends React.Component {
 
     const initialValue = deepCopy(tableFilterInfo);
     switch (sorter.columnKey) {
-      case 'createTime':
-        initialValue.createTimeOrder = sorter.order;
-        break;
-      case 'preferentialLimit':
-        initialValue.preferentialLimit = sorter.order;
-        break;
-      case 'preferentialQuantity':
-        initialValue.preferentialQuantity = sorter.order;
-        break;
-      case 'salesQuantity':
-        initialValue.salesQuantity = sorter.order;
+      case 'updateTime':
+        initialValue.updateTimeOrder = sorter.order;
         break;
       default:
         break;
