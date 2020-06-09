@@ -39,18 +39,6 @@ export default class TableList extends React.Component {
     tableChange();
   };
 
-  // 切换按钮
-  onSwitchChange = record => {
-    this.setState(
-      {
-        switchRecord: record,
-      },
-      () => {
-        this.showModal();
-      },
-    );
-  };
-
   // 请求数据跳转详情页面
   goToNextPage = (params, operate) => {
     const { dispatch } = this.props;
@@ -83,52 +71,6 @@ export default class TableList extends React.Component {
       });
     }
     deleteProductInfo();
-  };
-
-  // 弹窗
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-
-  // 产品上下架
-  handleOk = e => {
-    const { dispatch } = this.props;
-    const dataInfo = this.props.platformAudit.productList.pageList;
-    for (let item = 0; item < dataInfo.length; item++) {
-      if (dataInfo[item].productId === this.state.switchRecord.productId) {
-        // dataInfo[item]['isShelf'] = this.state.switchRecord['isShelf'] === 0 ? 1 : 0;
-        const info = this.state.switchRecord.isShelf === 0 ? 1 : 0;
-        dispatch({
-          type: 'platformAudit/shelveProduct',
-          payload: {
-            productIds: [this.state.switchRecord.productId],
-            status: info,
-          },
-        }).then(res => {
-          console.log('res_', res);
-          if (res) {
-            dataInfo[item].isShelf = this.state.switchRecord.isShelf === 0 ? 1 : 0;
-            dispatch({
-              type: 'platformAudit/resetList',
-              payload: dataInfo,
-            });
-          } else {
-          }
-        });
-      }
-    }
-    this.setState({
-      visible: false,
-    });
-  };
-
-  handleCancel = e => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
   };
 
   render() {
@@ -188,6 +130,18 @@ export default class TableList extends React.Component {
         render: text => <a>{text}</a>,
       },
       {
+        title: '审核状态',
+        key: 'auditStatus',
+        dataIndex: 'auditStatus',
+        render: (text, record) => (
+          <div>
+            {text === 1 && <span>审核通过</span>}
+            {text === 2 && <span>待审核</span>}
+            {text === 3 && <span>审核驳回</span>}
+          </div>
+        ),
+      },
+      {
         title: '操作',
         key: 'action',
         fixed: 'right',
@@ -196,9 +150,16 @@ export default class TableList extends React.Component {
           <span>
             <a onClick={this.goToNextPage.bind(this, record, 'detail')}>查看</a>
             <Divider type="vertical" />
-            <a onClick={this.goToNextPage.bind(this, record, 'editor')}>编辑</a>
-            <Divider type="vertical" />
-            <a onClick={this.deleteProduct.bind(this, record)}>删除</a>
+            {record.auditStatus === 2 && (
+              <a onClick={this.goToNextPage.bind(this, record, 'editor')}>撤销审核</a>
+            )}
+            {record.auditStatus === 3 && (
+              <a onClick={this.deleteProduct.bind(this, record)}>重新提交</a>
+            )}
+            {record.auditStatus === 3 && <Divider type="vertical" />}
+            {(record.auditStatus === 1 || record.auditStatus === 3) && (
+              <a onClick={this.deleteProduct.bind(this, record)}>删除</a>
+            )}
           </span>
         ),
       },
