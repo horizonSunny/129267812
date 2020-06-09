@@ -26,18 +26,6 @@ export async function newProduct(params: any) {
   });
 }
 
-// 获取商品类型的数字字典
-export async function productype(params: Object) {
-  return request('/admin/v1/category/productype');
-}
-
-// 上下架产品
-export async function shelve(params: any) {
-  return request('/admin/v1/product/shelve', {
-    method: 'PUT',
-    data: params,
-  });
-}
 // 删除产品
 export async function deletProduct(params: any) {
   return request('/admin/v1/delete', {
@@ -45,9 +33,10 @@ export async function deletProduct(params: any) {
     data: params,
   });
 }
-// 获取商品log信息
-
-export async function platformLog(params: any) {
-  // return request(`/admin/v1/platformLog/${params.id}`);
-  return request('/admin/v1/platformLog');
+// 重新上架产品
+export async function resubmit(params: any) {
+  return request('/admin/v1/platformAudit', {
+    method: 'PUT',
+    data: params,
+  });
 }

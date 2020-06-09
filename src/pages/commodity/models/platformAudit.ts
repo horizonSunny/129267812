@@ -3,8 +3,7 @@ import {
   product,
   editorProduct,
   newProduct,
-  platformLog,
-  shelve,
+  resubmit,
   deletProduct,
 } from '@/services/platformAudit';
 import deepCopy from '@/utils/deepCopy';
@@ -71,14 +70,6 @@ const CommodityModel = {
         payload: response.data,
       });
     },
-    // 依据id获取单个商品log信息
-    *getProductLog({ payload }, { call, put }) {
-      const response = yield call(platformLog, payload);
-      yield put({
-        type: 'productLog',
-        payload: response.data,
-      });
-    },
     // 新建产品
     *newProduct({ payload }, { call, put }) {
       const response = yield call(newProduct, payload);
@@ -96,22 +87,13 @@ const CommodityModel = {
       //   payload: response.data,
       // });
     },
-    // 上下架产品
-    *shelveProduct({ payload }, { call }) {
-      console.log('in_shelveProduct');
-      const response = yield call(shelve, payload);
-      if (response.code === 1) {
-        // 接口调用成功
-        // do something...
-        return true; //  通过return给dispatch返回回调结果！
-      }
-      // 接口调用失败
-      // do something...
-      return false;
-    },
     // 删除商品
     *deletProduct({ payload }, { call }) {
       const response = yield call(deletProduct, payload);
+    },
+    // 重新提交
+    *resubmit({ payload }, { call }) {
+      const response = yield call(resubmit, payload);
     },
   },
 
@@ -134,17 +116,6 @@ const CommodityModel = {
         productWithId: action.payload,
       };
     },
-    productLog(state, action) {
-      return {
-        ...state,
-        productLog: action.payload.pageList,
-        recordPagenation: {
-          pageNumber: action.payload.pageNumber,
-          pageSize: action.payload.pageSize,
-          total: action.payload.totalElements,
-        },
-      };
-    },
     // 保存单个商品的信息
     saveProduct(state, action) {
       // console.log('in saveProduct_', action.payload);
@@ -163,22 +134,6 @@ const CommodityModel = {
         productWithId: action.payload,
       };
     },
-    // 编辑或者新建产品成功后
-    // successProduct(state, action) {
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //   };
-    // },
-
-    // allProductType(state, action) {
-    //   state.allProductType = action.payload;
-    //   console.log('state.allProductType_', action.payload);
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //   };
-    // },
     // 重置commidityList列表
     resetList(state, action) {
       state.productList.pageList = action.payload;

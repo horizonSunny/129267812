@@ -73,6 +73,9 @@ export default class TableList extends React.Component {
     deleteProductInfo();
   };
 
+  // 重新提交
+  resubmit = record => {};
+
   render() {
     const { state } = this;
     const { productList, tableFilterInfo } = this.props.platformAudit;
@@ -153,9 +156,7 @@ export default class TableList extends React.Component {
             {record.auditStatus === 2 && (
               <a onClick={this.goToNextPage.bind(this, record, 'editor')}>撤销审核</a>
             )}
-            {record.auditStatus === 3 && (
-              <a onClick={this.deleteProduct.bind(this, record)}>重新提交</a>
-            )}
+            {record.auditStatus === 3 && <a onClick={this.resubmit.bind(this, record)}>重新提交</a>}
             {record.auditStatus === 3 && <Divider type="vertical" />}
             {(record.auditStatus === 1 || record.auditStatus === 3) && (
               <a onClick={this.deleteProduct.bind(this, record)}>删除</a>
@@ -179,14 +180,14 @@ export default class TableList extends React.Component {
           }}
           scroll={{ x: 1200 }}
         />
-        <Modal
+        {/* <Modal
           title="产品上下架"
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
           <h3>确定{this.state.switchRecord.isShelf === 0 ? '上架' : '下架'}该产品</h3>
-        </Modal>
+        </Modal> */}
       </div>
     );
   }
