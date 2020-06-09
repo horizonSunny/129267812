@@ -1,36 +1,46 @@
-import { Table, Divider, Switch, Modal } from 'antd';
+import { Table, Divider, Switch, Modal, Button } from 'antd';
 import React from 'react';
 import router from 'umi/router';
 import { connect } from 'dva';
 import styles from './TableList.less';
+import { tableFilterInfo } from '../../../models/platformAudit';
+import deepCopy from '@/utils/deepCopy';
 
 @connect(({ platformAudit }) => ({ platformAudit }))
 export default class TableList extends React.Component {
-  // cons
   state = {
-    data: this.props.platformAudit.productList.pageList,
-    searchInfo: this.props.searchInfo,
     visible: false,
     switchRecord: {},
-    qrVisible: false,
-    qrImg: '',
+    selectedRowKeys: [],
   };
 
   onChange = (pagination, filters, sorter) => {
-    const { tabelConditions, productListStatus } = this.props.platformAudit;
-    tabelConditions[productListStatus].currentPage = pagination.current;
-    if (sorter.field === 'sales') {
-      tabelConditions[productListStatus].saleOrder = sorter.order;
-      tabelConditions[productListStatus].stockOrder = undefined;
-    } else if (sorter.field === 'stock') {
-      tabelConditions[productListStatus].saleOrder = undefined;
-      tabelConditions[productListStatus].stockOrder = sorter.order;
+    console.log('pagination_', pagination);
+
+    const initialValue = deepCopy(tableFilterInfo);
+    switch (sorter.columnKey) {
+      case 'createTime':
+        initialValue.createTimeOrder = sorter.order;
+        break;
+      case 'preferentialLimit':
+        initialValue.preferentialLimit = sorter.order;
+        break;
+      case 'preferentialQuantity':
+        initialValue.preferentialQuantity = sorter.order;
+        break;
+      case 'salesQuantity':
+        initialValue.salesQuantity = sorter.order;
+        break;
+      default:
+        break;
     }
+    initialValue.currentPage = pagination.current;
+    initialValue.pageSize = pagination.pageSize;
     const { dispatch } = this.props;
     async function tableChange() {
       await dispatch({
-        type: 'platformAudit/setTabelConditions',
-        payload: tabelConditions,
+        type: 'platformAudit/resetTable',
+        payload: initialValue,
       });
       await dispatch({
         type: 'platformAudit/getList',
@@ -54,8 +64,6 @@ export default class TableList extends React.Component {
   // 请求数据跳转详情页面
   goToNextPage = (params, operate) => {
     const { dispatch } = this.props;
-    console.log(dispatch, '111111');
-    console.log('operate_111111', operate);
     dispatch({
       type: 'platformAudit/getProduct',
       payload: {
@@ -63,10 +71,7 @@ export default class TableList extends React.Component {
       },
     }).then(result => {
       router.push({
-        pathname:
-          operate === 'detail'
-            ? '/commodityAdm/platformAudit/particulars'
-            : '/commodityAdm/platformAudit/edit',
+        pathname: '/commodityAdm/platformAudit/particulars',
         query: { id: params.productId },
       });
     });
@@ -97,6 +102,7 @@ export default class TableList extends React.Component {
     });
   };
 
+  // 产品上下架
   handleOk = e => {
     const { dispatch } = this.props;
     const dataInfo = this.props.platformAudit.productList.pageList;
@@ -113,7 +119,6 @@ export default class TableList extends React.Component {
         }).then(res => {
           console.log('res_', res);
           if (res) {
-            // 这边好像dispatch什么都可以;
             dataInfo[item].isShelf = this.state.switchRecord.isShelf === 0 ? 1 : 0;
             dispatch({
               type: 'platformAudit/resetList',
@@ -136,41 +141,72 @@ export default class TableList extends React.Component {
     });
   };
 
-  // // 切换位置
-  // setTabChange = currentTab => {
-  //   console.log('currentTab_', currentTab);
-  //   const { dispatch } = this.props;
-  //   async function tabChange() {
-  //     await dispatch({
-  //       type: 'platformAudit/resetStatus',
-  //       payload: {
-  //         productListStatus: currentTab,
-  //       },
-  //     });
-  //     await dispatch({
-  //       type: 'platformAudit/getList',
-  //     });
-  //   }
-  //   tabChange();
-  // };
+  // 全选选中
+  onSelectChange = selectedRowKeys => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    this.setState({ selectedRowKeys });
+  };
 
-  qrhandleCancel = e => {
-    console.log(e);
-    this.setState({
-      qrVisible: false,
-    });
+  // 批量操作
+  batchOperation = e => {
+    console.log('e_', e.target.innerText);
+    const { dispatch } = this.props;
+    if (e.target.innerText === '批量上架' || e.target.innerText === '批量下架') {
+      let status;
+      e.target.innerText === '批量上架' ? (status = 1) : (status = 0);
+      dispatch({
+        type: 'platformAudit/shelveProduct',
+        payload: {
+          productIds: this.state.selectedRowKeys,
+          status,
+        },
+      }).then(res => {
+        if (res) {
+          dispatch({
+            type: 'platformAudit/resetTable',
+            payload: {
+              currentPage: 1,
+              pageSize: 10,
+            },
+          });
+          dispatch({
+            type: 'platformAudit/getList',
+          });
+        }
+      });
+    } else if (e.target.innerText === '批量删除') {
+      async function batchDelete() {
+        await dispatch({
+          type: 'platformAudit/deletProduct',
+          payload: {
+            productIds: this.state.selectedRowKeys,
+          },
+        });
+        await dispatch({
+          type: 'platformAudit/getList',
+        });
+      }
+      batchDelete();
+    }
+    // debugger;
   };
 
   render() {
     const { state } = this;
-    const { productList, productListStatus, tabelConditions } = this.props.platformAudit;
-    console.log('tabelConditions_', tabelConditions);
-    console.log('productList_', productList);
+    const { productList, tableFilterInfo } = this.props.platformAudit;
     const columns = [
       {
         title: 'Sku',
         dataIndex: 'productSku',
         key: 'productSku',
+        render: text => <a>{text}</a>,
+      },
+      {
+        title: '创建时间',
+        key: 'createTime',
+        dataIndex: 'createTime',
+        sorter: true,
+        sortOrder: tableFilterInfo.createTimeOrder,
         render: text => <a>{text}</a>,
       },
       {
@@ -189,29 +225,44 @@ export default class TableList extends React.Component {
         dataIndex: 'productSpecif',
       },
       {
-        title: '价格',
-        key: 'price',
-        dataIndex: 'price',
+        title: '商户名称',
+        key: 'merchantName',
+        dataIndex: 'merchantName',
+      },
+      {
+        title: '原价',
+        key: 'originalPrice',
+        dataIndex: 'originalPrice',
         render: text => <a>{text}</a>,
       },
       {
-        title: '库存',
-        key: 'stock',
-        dataIndex: 'stock',
+        title: '优惠额度',
+        key: 'preferentialLimit',
+        dataIndex: 'preferentialLimit',
         sorter: true,
-        sortOrder: this.props.platformAudit.tabelConditions[
-          this.props.platformAudit.productListStatus
-        ].stockOrder,
+        sortOrder: tableFilterInfo.preferentialLimit,
         render: text => <a>{text}</a>,
       },
       {
-        title: '销量',
-        key: 'sales',
-        dataIndex: 'sales',
+        title: '优惠价',
+        key: 'preferentialPrice',
+        dataIndex: 'preferentialPrice',
+        render: text => <a>{text}</a>,
+      },
+      {
+        title: '优惠件数',
+        key: 'preferentialQuantity',
+        dataIndex: 'preferentialQuantity',
         sorter: true,
-        sortOrder: this.props.platformAudit.tabelConditions[
-          this.props.platformAudit.productListStatus
-        ].saleOrder,
+        sortOrder: tableFilterInfo.preferentialQuantity,
+        render: text => <a>{text}</a>,
+      },
+      {
+        title: '销售数量',
+        key: 'salesQuantity',
+        dataIndex: 'salesQuantity',
+        sorter: true,
+        sortOrder: tableFilterInfo.salesQuantity,
         render: text => <a>{text}</a>,
       },
       {
@@ -233,28 +284,34 @@ export default class TableList extends React.Component {
           <span>
             <a onClick={this.goToNextPage.bind(this, record, 'detail')}>查看</a>
             <Divider type="vertical" />
-            <a onClick={this.goToNextPage.bind(this, record, 'editor')}>撤销审核</a>
-            <Divider type="vertical" />
-            <a onClick={this.goToNextPage.bind(this, record, 'audit')}>重新提交</a>
-            {/* <a onClick={this.generateQR.bind(this, record)}>生成二维码</a> */}
+            <a onClick={this.goToNextPage.bind(this, record, 'editor')}>编辑</a>
             <Divider type="vertical" />
             <a onClick={this.deleteProduct.bind(this, record)}>删除</a>
           </span>
         ),
       },
     ];
-    // const { businessAdm } = this.props;
+    const rowSelection = {
+      selectedRowKeys: this.state.selectedRowKeys,
+      onChange: this.onSelectChange,
+    };
     return (
       <div className={styles.main}>
+        <div className={`${styles.bulk_operation} ${styles.account}`} onClick={this.batchOperation}>
+          <Button type="primary">批量上架</Button>
+          <Button type="primary">批量下架</Button>
+          <Button type="danger">批量删除</Button>
+        </div>
         <Table
           {...this.state}
           columns={columns}
           dataSource={productList.pageList}
           onChange={this.onChange}
+          rowSelection={rowSelection}
           pagination={{
-            current: tabelConditions[productListStatus].currentPage,
+            current: tableFilterInfo.currentPage,
             position: 'bottom',
-            pageSize: tabelConditions[productListStatus].pageSize,
+            pageSize: tableFilterInfo.pageSize,
             total: productList.totalElements,
           }}
           scroll={{ x: 1200 }}

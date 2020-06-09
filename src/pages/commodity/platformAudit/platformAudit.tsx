@@ -13,10 +13,6 @@ import TableList from './component/platformAudit/TableList';
 export default class PlatformAudit extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    // const searchParams = filterProperty(this.props.platformAudit.searchInfo);
-    dispatch({
-      type: 'platformAudit/getProductType',
-    });
     dispatch({
       type: 'platformAudit/getList',
     });

@@ -9,13 +9,13 @@ import filterProperty from '@/utils/filterProperty';
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
-@connect(({ platformAudit }) => ({ platformAudit }))
+@connect(({ platformManagement }) => ({ platformManagement }))
 class AdvancedSearchForm extends React.Component {
   state = {
-    expand: false,
-    sellingStatus: null,
-    // productType: this.props.platformAudit.allProductType,
-    selectedRowKeys: [],
+    // expand: false,
+    // sellingStatus: null,
+    // productType: this.props.platformManagement.allProductType,
+    // selectedRowKeys: [],
   };
 
   // 查询
@@ -41,8 +41,8 @@ class AdvancedSearchForm extends React.Component {
       const searchParams = {
         startTime: values['range-picker'][0],
         endTime: values['range-picker'][1],
-        recommandStatus: values.recommandStatus,
-        productType: values.status,
+        putawayStatus: values.putawayStatus,
+        sellStatus: values.sellStatus,
         productCommonName: values.keyword,
         approvalNumber: values.approvalNumber,
       };
@@ -51,11 +51,11 @@ class AdvancedSearchForm extends React.Component {
 
       async function search() {
         await dispatch({
-          type: 'platformAudit/saveSearchForm',
+          type: 'platformManagement/saveSearchForm',
           payload: searchInfo,
         });
         await dispatch({
-          type: 'platformAudit/getList',
+          type: 'platformManagement/getList',
         });
       }
       search();
@@ -65,27 +65,21 @@ class AdvancedSearchForm extends React.Component {
 
   handleReset = () => {
     console.log('reset');
+    // 清楚form表单的值
     this.props.form.resetFields();
-    // 保留tab
+    // 只重置form表单
     const { dispatch } = this.props;
     dispatch({
-      type: 'platformAudit/resetForm',
+      type: 'platformManagement/resetForm',
     });
-  };
-
-  // 新增产品
-  handleNew = () => {
-    // router.push('/platformAuditAdm/management/chooseProducts');
   };
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const rangeConfig = {
-      rules: [{ type: 'array', message: 'Please select time!' }],
-    };
-    const { allProductType, searchForm } = this.props.platformAudit;
-    console.log(searchForm, '2222222');
-    const productType = allProductType;
+    // const rangeConfig = {
+    //   rules: [{ type: 'array', message: 'Please select time!' }],
+    // };
+    const { searchForm } = this.props.platformManagement;
     return (
       <Form className={styles['ant-advanced-search-form']} onSubmit={this.handleSearch}>
         <Row gutter={24}>
@@ -105,18 +99,11 @@ class AdvancedSearchForm extends React.Component {
             </Form.Item>
           </Col>
           <Col span={7} style={{}}>
-            <Form.Item label="审核状态">
-              {getFieldDecorator('recommandStatus', {
-                initialValue: searchForm.recommandStatus,
+            <Form.Item label="商品名">
+              {getFieldDecorator('keyword', {
+                initialValue: searchForm.productCommonName,
                 rules: [],
-              })(
-                <Select style={{ width: 120 }}>
-                  <Option value={3}>全部</Option>
-                  <Option value={0}>审核中</Option>
-                  <Option value={1}>审核通过</Option>
-                  <Option value={1}>审核驳回</Option>
-                </Select>,
-              )}
+              })(<Input placeholder="输入商品名" />)}
             </Form.Item>
           </Col>
           <Col span={6} style={{}}>
@@ -129,20 +116,35 @@ class AdvancedSearchForm extends React.Component {
           </Col>
         </Row>
         <Row gutter={24}>
-          <Col span={6} style={{}}>
-            <Form.Item label="商品名">
-              {getFieldDecorator('approvalNumber', {
+          <Col span={8}>
+            <Form.Item label="售卖状态">
+              {getFieldDecorator('sellStatus', {
                 rules: [],
-                initialValue: searchForm.approvalNumber,
-              })(<Input placeholder="输入商品名" />)}
+                initialValue: searchForm.sellStatus,
+              })(
+                <Select style={{ width: 120 }}>
+                  <Option value={0}>全部</Option>
+                  <Option value={1}>优惠中</Option>
+                  <Option value={2}>售空下架</Option>
+                  <Option value={3}>禁售</Option>
+                  <Option value={4}>商户下架</Option>
+                  <Option value={5}>商户删除</Option>
+                </Select>,
+              )}
             </Form.Item>
           </Col>
-          <Col span={6} style={{}}>
-            <Form.Item label="商户名称">
-              {getFieldDecorator('approvalNumber', {
+          <Col span={8}>
+            <Form.Item label="上架状态">
+              {getFieldDecorator('putawayStatus', {
                 rules: [],
-                initialValue: searchForm.approvalNumber,
-              })(<Input placeholder="输入商户名称" />)}
+                initialValue: searchForm.putawayStatus,
+              })(
+                <Select style={{ width: 120 }}>
+                  <Option value={0}>全部</Option>
+                  <Option value={1}>已上架</Option>
+                  <Option value={2}>未上架</Option>
+                </Select>,
+              )}
             </Form.Item>
           </Col>
           <Col
@@ -151,14 +153,12 @@ class AdvancedSearchForm extends React.Component {
               textAlign: 'right',
               position: 'relative',
               top: '5px',
+              marginBottom: '5px',
               left: '-20px',
               float: 'right',
             }}
           >
-            <Button type="primary" onClick={this.handleReset}>
-              发起审核
-            </Button>
-            <Button type="primary" style={{ marginLeft: 8 }} htmlType="submit">
+            <Button type="primary" htmlType="submit">
               搜索
             </Button>
             <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>
